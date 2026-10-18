@@ -177,9 +177,9 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .stage>img{height:360px;margin:auto}
 .stage.tw{display:block;height:420px;overflow:hidden}
 .mood{position:relative;aspect-ratio:3/4;width:100%;max-width:100%;background:#efeeec;overflow:hidden;touch-action:auto}
-.mood.ed{touch-action:none}
+.mood.ed{touch-action:pan-y}
 .mood .mi{position:absolute;object-fit:contain;max-width:none;user-select:none;-webkit-user-drag:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.13));pointer-events:none}
-.mood.ed .mi{pointer-events:auto;cursor:grab}
+.mood.ed .mi{pointer-events:auto;cursor:grab;touch-action:pan-y}
 .mood .mi.pk{mix-blend-mode:multiply;filter:none}
 .mood .mx{position:absolute;z-index:40;width:26px;height:26px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);font-size:15px;line-height:1;display:grid;place-items:center;cursor:pointer;padding:0}
 .mood .mi.sel{outline:1px dashed var(--ink);outline-offset:3px}
@@ -833,13 +833,19 @@ function moodPos(i,ks){const o=((S.y.mood||{})[i])||{},seen={},r={};ks.forEach(k
 function mood(ks,i,opt={}){const pos=moodPos(i,ks);return `<div class="mood ${opt.ed?'ed':''} ${opt.mini?'mini':''}" ${opt.ed?`id="mood" data-i="${i}"`:''}>${ks.map((k,j)=>{const [x,y,w,h]=pos[k];return `<img class="mi ${CAT[k].hi?'pk':''} ${opt.ed&&S.msel===k?'sel':''}" data-mi="${k}" src="${CAT[k].hi||CAT[k].cut||src(k)}" alt="${CAT[k].n}" style="left:${x}%;top:${y}%;width:${w}%;height:${h}%;z-index:${j+1}" draggable="false">${opt.ed?`<button class="mx" data-act="mdel" data-i="${i}" data-v="${k}" aria-label="Убрать ${CAT[k].n}" style="left:calc(${x+w}% - 26px);top:${y}%">×</button>`:''}`}).join('')}${opt.own?`<span class="mown">${opt.own}<br>есть у тебя</span>`:''}${opt.mini?'':`<button class="twbtn" data-act="twin" data-v="${i}" aria-label="Посмотреть на двойнике">${TWI}<span>На мне</span></button>`}</div>`}
 function twinSheet(i){const l=LOOKS[i]||[,(S.free||P().free)[0],(S.free||P().free)[1]],back=S.mode==='yana'&&LOOKS[i];
  $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Образ на двойнике"><span class="lbl">|Двойник ${NM().g}|</span><div class="avbox"><img src="${IMG}${AV}" alt="Цифровой двойник"></div><p class="txt">Когда образ утверждён, Яна одевает двойника в эти вещи — фотореалистично, с учётом фигуры и посадки. Мудборд уже готов для этого: каждая вещь — отдельным фото.</p>${back?`<button class="btn line" style="width:100%" data-act="ylook" data-v="${i}">← К образу</button>`:`<button class="btn line" style="width:100%" data-act="close">Закрыть</button>`}</div></div>`}
-function moodDrag(){const b=$('#mood');if(!b)return;const i=+b.dataset.i,P2=new Map();let d=null,pin=null;
+// вещь берётся пальцем только за саму вещь; по пустому полю (и прозрачным краям картинки) страница листается
+const OPQ=new WeakMap();function opaqueAt(im,cx,cy){try{let c=OPQ.get(im);if(!c){c=document.createElement('canvas');const w=im.naturalWidth,h=im.naturalHeight,k=Math.min(1,200/Math.max(w,h));c.width=Math.max(1,Math.round(w*k));c.height=Math.max(1,Math.round(h*k));c.getContext('2d',{willReadFrequently:true}).drawImage(im,0,0,c.width,c.height);OPQ.set(im,c)}
+ const r=im.getBoundingClientRect(),sc=Math.min(r.width/c.width,r.height/c.height),ox=r.left+(r.width-c.width*sc)/2,oy=r.top+(r.height-c.height*sc)/2,x=Math.floor((cx-ox)/sc),y=Math.floor((cy-oy)/sc);if(x<0||y<0||x>=c.width||y>=c.height)return false;
+ const d=c.getContext('2d').getImageData(Math.max(0,x-2),Math.max(0,y-2),5,5).data;for(let i=0;i<d.length;i+=4)if(d[i+3]>40&&!(d[i]>247&&d[i+1]>247&&d[i+2]>247))return true;return false}catch(e){return true}}
+function hitMi(b,cx,cy){const els=document.elementsFromPoint(cx,cy).filter(e=>e.classList&&e.classList.contains('mi')&&b.contains(e));return els.find(e=>opaqueAt(e,cx,cy))||null}
+function moodDrag(){const b=$('#mood');if(!b)return;
+ b.addEventListener('touchstart',e=>{const t=e.touches[0];if(e.touches.length>1||(t&&hitMi(b,t.clientX,t.clientY)))e.preventDefault()},{passive:false});const i=+b.dataset.i,P2=new Map();let d=null,pin=null;
  const save=k=>{const e=b.querySelector(`[data-mi="${k}"]`);if(!e)return;const xb=b.querySelector(`.mx[data-v="${k}"]`);if(xb){xb.style.left=`calc(${parseFloat(e.style.left)+parseFloat(e.style.width)}% - 26px)`;xb.style.top=e.style.top}S.y.mood=S.y.mood||{};S.y.mood[i]=S.y.mood[i]||{};S.y.mood[i][k]=['left','top','width','height'].map(p=>parseFloat(e.style[p]))};
  const sel=()=>S.msel&&b.querySelector(`[data-mi="${S.msel}"]`),dist=()=>{const [a,c]=[...P2.values()];return Math.hypot(a.x-c.x,a.y-c.y)};
  const scale=(e,f,w0,h0,x0,y0)=>{const w=Math.max(10,Math.min(95,w0*f)),h=h0*w/w0;e.style.width=w+'%';e.style.height=h+'%';e.style.left=(x0+(w0-w)/2)+'%';e.style.top=(y0+(h0-h)/2)+'%'};
  b.addEventListener('pointerdown',e=>{if(e.target.closest('.mx,.twbtn'))return;P2.set(e.pointerId,{x:e.clientX,y:e.clientY});b.setPointerCapture(e.pointerId);const se=sel();
   if(P2.size===2&&se){d=null;pin={e:se,d0:dist()||1,w0:parseFloat(se.style.width),h0:parseFloat(se.style.height),x0:parseFloat(se.style.left),y0:parseFloat(se.style.top)};e.preventDefault();return}
-  const t=e.target.closest('[data-mi]');if(!t||P2.size>1)return;S.msel=t.dataset.mi;b.querySelectorAll('.mi').forEach(q=>q.classList.toggle('sel',q===t));t.style.zIndex=20;
+  const t=e.pointerType==='mouse'?e.target.closest('[data-mi]'):hitMi(b,e.clientX,e.clientY);if(!t||P2.size>1)return;S.msel=t.dataset.mi;b.querySelectorAll('.mi').forEach(q=>q.classList.toggle('sel',q===t));t.style.zIndex=20;
   const r=b.getBoundingClientRect();d={t,r,x0:e.clientX,y0:e.clientY,l:parseFloat(t.style.left),tp:parseFloat(t.style.top)};e.preventDefault()});
  b.addEventListener('pointermove',e=>{if(!P2.has(e.pointerId))return;P2.set(e.pointerId,{x:e.clientX,y:e.clientY});
   if(pin&&P2.size===2){scale(pin.e,dist()/pin.d0,pin.w0,pin.h0,pin.x0,pin.y0);return}
