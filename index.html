@@ -48,7 +48,7 @@ img{display:block;max-width:100%}
 .steps-nav span.cur{color:var(--ink);font-weight:500;box-shadow:0 1px 0 var(--ink)}
 .n{font-variant-numeric:tabular-nums}
 .n::before{content:"|"}.n::after{content:"| "}
-.free{display:inline-block;border:1px solid var(--ink);padding:2px 6px;font-size:10px;letter-spacing:.06em}
+.free{display:inline-block;border:1px solid var(--ink);padding:3px 6px;font-size:10px;letter-spacing:.06em}
 
 /* типографика */
 .logo{font-family:var(--f-logo);font-weight:400;text-transform:uppercase;letter-spacing:-.06em;line-height:.8;margin:0}
@@ -65,10 +65,10 @@ img{display:block;max-width:100%}
 
 /* выбор */
 .list{border-top:1px solid var(--hair)}
-.opt{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;padding:13px 0;border-bottom:1px solid var(--hair);transition:padding .25s}
+.opt{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;padding:13px 0;border-bottom:1px solid var(--hair)}
 .opt small{display:block;color:var(--mute);font-size:10.5px;margin-top:3px;letter-spacing:.04em}
 .opt .mk{width:9px;height:9px;border:1px solid var(--ink);flex:none;transition:background .2s,transform .3s}
-.opt[aria-pressed="true"]{font-weight:500;padding-left:8px}
+.opt[aria-pressed="true"]{font-weight:500}
 .opt[aria-pressed="true"] .mk{background:var(--ink);transform:rotate(45deg)}
 .opt .pr{font-variant-numeric:tabular-nums;white-space:nowrap}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
@@ -86,15 +86,16 @@ img{display:block;max-width:100%}
 .it .nm{font-size:10.5px;line-height:1.3;letter-spacing:.03em;overflow-wrap:anywhere}
 .it .pr{font-size:11px;font-variant-numeric:tabular-nums}
 .it .sz{font-size:10px;color:var(--mute);text-transform:none;letter-spacing:0;line-height:1.35}
-.badge{position:absolute;left:0;top:0;background:var(--ink);color:var(--paper);font-size:9.5px;padding:2px 5px;letter-spacing:.04em;z-index:1}
+.badge{position:absolute;left:0;top:0;background:var(--ink);color:var(--paper);font-size:10px;padding:3px 6px;letter-spacing:.06em;z-index:1}
 .badge.wait{background:var(--paper);color:var(--ink);border:1px solid var(--ink)}
 .banner{border:1px solid var(--ink);padding:12px 14px;display:flex;flex-direction:column;gap:5px;font-size:11.5px;line-height:1.4}
 .banner b{font-weight:500}
 .rvg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.rv{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:9.5px;line-height:1.25;border:1px solid var(--soft);padding:6px 4px;min-width:0;overflow-wrap:anywhere;transition:border-color .2s,background .2s}
+.rv{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;font-size:10.5px;line-height:1.25;border:1px solid var(--soft);padding:6px 4px;min-width:0;overflow-wrap:anywhere;transition:border-color .2s,background .2s}
 .rv img{height:66px;object-fit:contain}
 .rv[aria-pressed="true"]{border-color:var(--ink);background:var(--fog)}
 .rv[aria-pressed="true"]::after{content:"не моё";font-size:9px;background:var(--ink);color:var(--paper);padding:1px 5px;margin-top:2px}
+.buy{font-size:10.5px;letter-spacing:.06em;text-decoration:underline;text-underline-offset:3px;padding:2px 0;margin-top:2px}
 .plus{width:24px;height:24px;display:grid;place-items:center;font-size:17px;font-weight:300;transition:transform .35s cubic-bezier(.3,1.6,.5,1),background .2s,color .2s}
 .plus[aria-pressed="true"]{transform:rotate(45deg);background:var(--ink);color:var(--paper)}
 
@@ -116,7 +117,7 @@ img{display:block;max-width:100%}
 
 /* фигура, рост, цвета */
 .figs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
-.fig{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 0;font-size:9.5px;letter-spacing:.02em;text-align:center;border-bottom:1px solid transparent;overflow-wrap:anywhere;min-width:0;transition:border-color .2s}
+.fig{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 0;font-size:10px;letter-spacing:.02em;text-align:center;border-bottom:1px solid transparent;hyphens:manual;min-width:0;transition:border-color .2s}
 .fig svg{width:30px;height:52px;color:#c7c7c7;transition:color .25s}
 .fig[aria-pressed="true"]{border-color:var(--ink);font-weight:500}
 .fig[aria-pressed="true"] svg{color:var(--ink)}
@@ -124,12 +125,12 @@ img{display:block;max-width:100%}
 .range input{flex:1;accent-color:var(--ink);height:1px}
 .range output{font-size:15px;min-width:64px;text-align:right;font-variant-numeric:tabular-nums}
 .sws{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px 8px}
-.swb{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:9.5px;letter-spacing:.03em}
+.swb{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10.5px;letter-spacing:.03em}
 .sw{width:30px;height:30px;border:1px solid #d6d6d6;position:relative;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
 .sw[data-s="love"]{outline:1px solid var(--ink);outline-offset:3px;transform:scale(1.08)}
 .sw[data-s="never"]::after{content:"";position:absolute;inset:-4px;background:linear-gradient(135deg,transparent calc(50% - .5px),var(--ink) calc(50% - .5px) calc(50% + .5px),transparent calc(50% + .5px))}
 textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);padding:8px 0;resize:vertical;text-transform:none;font-size:13px;background:transparent}
-.check{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:11.5px}
+.check{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-size:12.5px;line-height:1.45}.check span{text-transform:none;letter-spacing:0}.check b{font-weight:500}
 .check input{accent-color:var(--ink);width:16px;height:16px;margin:0;flex:none}
 
 /* фото */
@@ -190,7 +191,7 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .hsug img{width:100%;aspect-ratio:3/4;object-fit:contain;background:#fff}
 .hsug span{font-size:10px;line-height:1.25;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .hsug b{font-weight:400;font-size:10.5px}
-.hsug small{font-size:9.5px;color:var(--mute);line-height:1.25}
+.hsug small{font-size:10.5px;color:var(--mute);line-height:1.25}
 .msz{display:flex;gap:6px;align-items:center;justify-content:space-between}
 .stage.tw .avw{position:absolute;left:50%;top:10px;bottom:10px;aspect-ratio:360/950;transform:translateX(-50%)}
 .stage.tw .av{width:100%;height:100%;display:block;max-width:none}
@@ -253,19 +254,19 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .req:hover{padding-left:6px}
 .req img{width:40px;height:66px;object-fit:cover;object-position:top;background:var(--fog)}
 .req .t{flex:1;font-size:12px}.req .t small{display:block;color:var(--mute);font-size:10.5px;margin-top:2px}
-.st{font-size:10px;border:1px solid var(--ink);padding:3px 6px;white-space:nowrap}
+.st{font-size:10px;letter-spacing:.06em;border:1px solid var(--ink);padding:3px 6px;white-space:nowrap}
 .st.new{background:var(--alert);border-color:var(--alert);color:#fff}.st.done{background:#1f7a3a;border-color:#1f7a3a;color:#fff}
 .pics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .pic{display:flex;flex-direction:column;gap:5px;align-items:stretch;text-align:center;font-size:10.5px;min-width:0;border:1px solid var(--soft);padding:0 0 7px;transition:border-color .2s}
 .pic .im{display:block;width:100%;aspect-ratio:1/1;background-color:#fff;background-repeat:no-repeat}
-.pic svg{width:100%;aspect-ratio:1/1;color:#bdbdbd;transition:color .2s}
+.pic svg{width:100%;aspect-ratio:1/1;color:#7a7a7a;padding:10%;box-sizing:border-box;transition:color .2s}
 .pic[aria-pressed="true"]{border-color:var(--ink);outline:1px solid var(--ink);outline-offset:-2px;font-weight:500}
 .pic[aria-pressed="true"] svg{color:var(--ink)}
 .szc{display:flex;flex-wrap:wrap;gap:4px}.szc button{border:1px solid #cfcfcf;padding:5px 7px;font-size:10.5px;min-width:30px}.szc button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .zoomph{display:grid;grid-template-columns:1fr 1fr;gap:6px}.zoomph img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;background:var(--fog)}.zoomph.one{grid-template-columns:1fr}
 .ymg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.ymg .y{position:relative;aspect-ratio:3/4;background:var(--fog)}.ymg .y img{width:100%;height:100%;object-fit:cover}.ymg .y button{position:absolute;right:3px;top:3px;width:24px;height:24px;background:var(--paper);display:grid;place-items:center}
 .ymrow{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}.ymrow img{flex:none;width:62%;aspect-ratio:3/4;object-fit:cover;scroll-snap-align:start;background:var(--fog)}
-.salebd{position:absolute;left:6px;bottom:6px;background:var(--alert);color:#fff;font-size:9.5px;letter-spacing:.06em;padding:2px 5px}
+.salebd{position:absolute;left:6px;bottom:6px;background:var(--alert);color:#fff;font-size:10px;letter-spacing:.06em;padding:3px 6px}
 .ctabs .saletab{color:var(--alert)}
 .sheet .in::before{content:"";display:block;width:40px;height:4px;border-radius:2px;background:#d6d6d6;margin:-8px auto 0;flex:none}
 .duo.one{grid-template-columns:1fr}.duo.one>*{width:78%;margin:0 auto}
@@ -283,11 +284,11 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .cc{display:flex;flex-direction:column;gap:3px;min-width:0;position:relative}
 .cc .ph{position:relative;aspect-ratio:3/4;background-color:var(--fog);background-repeat:no-repeat;overflow:hidden;display:block;width:100%;padding:0}
 .cc .ph img{width:100%;height:100%;object-fit:cover;max-height:none;transform:none}
-.cc .bn{font-size:9.5px;letter-spacing:.1em;color:var(--mute);margin-top:4px}
+.cc .bn{font-size:10px;letter-spacing:.1em;color:var(--mute);margin-top:4px}
 .cc .nm{font-size:11px;line-height:1.3;text-transform:none;letter-spacing:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .cc .pr{font-size:11px}.cc .pr s{color:var(--mute);margin-right:5px}
-.cc .szs{font-size:9px;color:var(--mute);letter-spacing:.04em}
-.cc .add{position:absolute;right:6px;top:6px;width:30px;height:30px;background:var(--paper);display:grid;place-items:center;font-size:18px;font-weight:300}
+.cc .szs{font-size:10.5px;color:var(--mute);letter-spacing:.04em}
+.cc .add{position:absolute;right:6px;top:6px;width:30px;height:30px;background:var(--paper);border:1px solid var(--ink);display:grid;place-items:center;font-size:14px}.cc .add svg{width:16px;height:16px}
 .cc .add[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
 .search{display:flex;gap:8px;align-items:center;border-bottom:1px solid var(--ink);padding:6px 0}
 .search input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:13px;outline:none;color:var(--ink);text-transform:none}
@@ -315,7 +316,7 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .vibe[aria-pressed=true] b::after{content:' ✓'}
 .icard .iname{font-family:var(--f-logo);font-size:36px;line-height:1.02;text-transform:uppercase;font-weight:400;letter-spacing:-.01em}
 .icard .txt{max-width:30ch}
-.icard.hasph{justify-content:flex-start;padding:0 0 14px;gap:6px;overflow:hidden}.icard .iph{width:100%;height:270px;object-fit:contain;background:var(--fog);max-height:none}.icard.hasph .iname{font-size:24px}.icard.hasph .txt{font-size:12px;line-height:1.35}.icard .icr{font-size:8.5px;color:var(--mute);letter-spacing:.02em;padding:0 10px}
+.icard.hasph{justify-content:flex-start;padding:0 0 14px;gap:6px;overflow:hidden}.icard .iph{width:100%;height:270px;object-fit:contain;background:var(--fog);max-height:none}.icard.hasph .iname{font-size:24px}.icard.hasph .txt{font-size:12px;line-height:1.35}.icard .icr{font-size:10px;color:var(--mute);letter-spacing:.02em;padding:0 10px}
 .isz{display:flex;gap:5px;flex-wrap:wrap}.isz span{border:1px solid var(--ink);padding:4px 7px;font-size:10.5px}.isz span.off{border-color:#d0d0d0;color:#b5b5b5;text-decoration:line-through}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:6px}.duo>*{aspect-ratio:3/4;background:var(--fog);width:100%;object-fit:cover;background-size:cover;background-repeat:no-repeat}.duo .cut{object-fit:contain;padding:10px}
 .lvoice{font-size:10px;border:1px solid var(--ink);padding:2px 7px;margin-left:8px;white-space:nowrap}
@@ -358,9 +359,9 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .formula button+button{border-left:1px solid var(--ink)}
 .formula b{font-family:var(--f-logo);font-weight:400;font-size:26px;line-height:1}
 .formula button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-.drop{position:absolute;left:0;bottom:0;background:var(--alert);color:var(--paper);font-size:9.5px;padding:2px 5px;z-index:1;animation:pop .35s cubic-bezier(.3,1.6,.5,1)}
+.drop{position:absolute;left:0;bottom:0;background:var(--alert);color:var(--paper);font-size:10px;padding:3px 6px;letter-spacing:.06em;z-index:1;animation:pop .35s cubic-bezier(.3,1.6,.5,1)}
 .old{text-decoration:line-through;color:var(--mute);margin-right:5px}
-.fit{display:flex;width:100%;border:1px solid var(--soft);font-size:9.5px;margin-top:2px}
+.fit{display:flex;width:100%;border:1px solid var(--soft);font-size:10.5px;margin-top:2px}
 .fit button{flex:1;padding:5px 2px;color:var(--mute);transition:background .2s,color .2s}
 .fit button+button{border-left:1px solid var(--soft)}
 .fit button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
@@ -560,7 +561,7 @@ const PR={
   deck:['p38d2933d','pe4b3cae2','p98a9ef8f',{p:0},'pea1ffe62','p08af947e','pbde227cd',{p:1},'p9ecf726d','p75e8f5d1','p62f7bd0d',{p:2},'p1635b00c','p13130003','pbf931f2b',{p:3}],
   pairs:[{ax:'Силуэт',o:[['pf3b25175','Приталенное'],['p16a93ff7','Свободное']]},{ax:'Длина',o:[['pbf62f50f','Мини'],['pb82e5fb3','Макси']]},{ax:'Фактура',o:[['p896a19c6','Кожа, плотное'],['pcc432786','Мягкий трикотаж']]},{ax:'Цвет',o:[['p102a270f','Монохром'],['pab32b2ca','Глубокий цвет']]}],
   axes:{'Силуэт':'Приталенное','Длина':'Макси','Фактура':'Кожа, плотное','Цвет':'Монохром'},drop:{p6e3b70c7:1000},dropMsg:'Стёганая куртка подешевела на 1 000 ₽ — сегодня в Lime',
-  figs:[['hour','Песочные часы',10.5,4.5,10.5],['pear','Груша',7,5.5,12],['apple','Яблоко',9.5,9.5,8.5],['rect','Прямоугольник',8.5,8,8.5],['tri','Треугольник',12,7,7]],
+  figs:[['hour','Песочные часы',10.5,4.5,10.5],['pear','Груша',7,5.5,12],['apple','Яблоко',9.5,9.5,8.5],['rect','Прямо­угольник',8.5,8,8.5],['tri','Треугольник',12,7,7]],
   h:[148,190,168],size:'M',sizes:['XS','S','M','L','XL','XXL'],shoe:'38',shoes:['35','36','37','38','39','40','41','42'],fig:'hour',accent:['Талию'],accents:['Талию','Ноги','Плечи','Грудь','Руки','Шею'],hides:['Живот','Бёдра','Руки','Плечи','Грудь','Икры'],
   week:['Офис','Город','Вечер, свидания','Дома, удалёнка','Поездки','С детьми','Мероприятия'],office:[['Строгий','Костюм, рубашка, закрытые плечи, без джинсов'],['Расслабленный','Smart casual: трикотаж, джинсы с жакетом, лоферы'],['Творческий','Можно всё — главное, стильно']],
   base:['Чёрные джинсы','Белая рубашка','Лоферы'],bases:['Чёрные джинсы','Синие джинсы','Чёрные брюки','Белая рубашка','Белая футболка','Пиджак','Тренч','Пальто','Кожаная куртка','Трикотажное платье','Кеды','Лоферы','Ботильоны','Сумка через плечо'],
@@ -668,7 +669,7 @@ const JT=n=>{n=(n||'').toLowerCase();const t=JEANT.find(z=>z[1].test(n));return 
 const JEANO={f:['Клёш','Прямые','Широкие','Бананы','Мом','Скинни','Бэгги'],m:['Прямые','Свободные','Зауженные','Широкие','Бэгги']};
 const TEXT=[['Хлопок',/хлоп/],['Трикотаж',/трикотаж|вязан|рубчик|джемпер|свитер|кардиган/],['Шерсть, кашемир',/шерст|кашемир|мохер|альпак/],['Твид, букле',/твид|букле/],['Кожа',/кож/],['Замша',/замш/],['Деним',/деним|джинс/],['Вельвет, бархат',/вельвет|бархат/],['Шёлк, сатин',/шелк|шёлк|сатин/],['Лён',/л[её]н(\s|$)|льнян/]];
 function jeanSvg(t){const L={'Прямые':[[9,5],[20,5],[19.5,57],[11,57]],'Клёш':[[9,5],[20,5],[18.5,33],[20,57],[6.5,57],[11,33]],'Широкие':[[8,5],[20,5],[20.5,57],[4.5,57]],'Бананы':[[8,5],[20,5],[19,40],[17.5,57],[11.5,57],[6,30]],'Мом':[[9,3],[20,3],[19,57],[12.5,57],[8.5,25]],'Скинни':[[9,5],[20,5],[18.5,57],[14,57],[11,30]],'Бэгги':[[6.5,5],[20,5],[20.5,57],[3.5,57]],'Зауженные':[[9,5],[20,5],[18.5,57],[13,57]],'Свободные':[[8,5],[20,5],[20,57],[6.5,57]]}[t]||[[9,5],[20,5],[19.5,57],[11,57]];
- const pts=a=>a.map(p=>p.join(',')).join(' '),mir=a=>a.map(([x,y])=>[40-x,y]);return `<svg viewBox="0 0 40 60" aria-hidden="true"><rect x="${L[0][0]}" y="${L[0][1]-2.5}" width="${40-2*L[0][0]}" height="3" fill="currentColor"/><polygon fill="currentColor" points="${pts(L)}"/><polygon fill="currentColor" points="${pts(mir(L))}"/></svg>`}
+ const pts=a=>a.map(p=>p.join(',')).join(' '),mir=a=>a.map(([x,y])=>[40-x,y]);return `<svg viewBox="0 0 40 60" aria-hidden="true"><rect x="${L[0][0]}" y="${L[0][1]-2.5}" width="${40-2*L[0][0]}" height="3" fill="currentColor"/><polygon fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" points="${pts(L)}"/><polygon fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" points="${pts(mir(L))}"/></svg>`}
 const PREFIMG={};function prefPic(kind,label){const key=S.g+kind+label;if(PREFIMG[key]!==undefined)return PREFIMG[key];if(!POOL||!Object.keys(POOL).length)return null;
  const re=kind==='shoes'?(SHOET.find(z=>z[0]===label)||[])[1]:(TEXT.find(z=>z[0]===label)||[])[1];if(!re)return PREFIMG[key]=null;
  const l=Object.values(POOL).filter(x=>x.g===S.g&&HI[x.i]&&(kind!=='shoes'||x.c==='обувь'&&SHT(x.n)===label&&!/мех|утепл|тапоч|овчин/.test(x.n.toLowerCase()))&&(kind!=='tex'||re.test(x.n.toLowerCase())&&x.c!=='обувь'&&!/под кож|принт|полоск|клетк/.test(x.n.toLowerCase())&&!/бел|молоч|экрю|сливоч|кремов|айвори|ванил/.test((x.l||'').toLowerCase())));if(!l.length)return PREFIMG[key]=null;
@@ -887,7 +888,7 @@ function render(){
  else if(c==='photo'){p=[`<span class="lbl">|Шаг 2 · Двойник| <span class="free">бесплатно</span></span>`,`<h2 class="ttl">Два фото</h2>`,
   `<div class="ups">${[['full','Полный рост','в рост, анфас'],['face','Лицо','крупно, без очков']].map(([k,t,s])=>`<label class="up" for="f_${k}">${S.photo[k]?`<img src="${S.photo[k]}" alt="${t}"><span class="ok">${t} ✓</span>`:`<span class="pl">+</span><span>${t}</span><span class="lbl">${s}</span>`}<input id="f_${k}" type="file" accept="image/*" hidden data-photo="${k}"></label>`).join('')}</div>`,
   `<div class="list">${['Дневной свет, без зеркала — попроси сфотографировать',P().photoTip,'Фото видит только Яна. Хранится в России, удаляется через 30 дней, на нём не учат ИИ'].map(t=>`<div class="opt" style="cursor:default"><span style="text-transform:none;font-size:12.5px">${t}</span></div>`).join('')}</div>`,
-  `<label class="check" for="hero"><input id="hero" type="checkbox" ${S.hero?'checked':''} data-hero="1"><span>Можно показать мои образы в блоге Яны — рубрика «${G('Героиня','Герой')} недели». Без галочки — никому и никогда</span></label>`,
+  `<label class="check" for="hero"><input id="hero" type="checkbox" ${S.hero?'checked':''} data-hero="1"><span><b>Можно показать мои образы в блоге Яны</b> — рубрика «${G('Героиня','Герой')} недели». Без галочки — никому и никогда</span></label>`,
   `<button class="tag" data-act="sample">Подставить пример</button>`];bar(nav(S.photo.full&&S.photo.face,'Создать двойника'))}
  else if(c==='twin'){p=[`<span class="lbl">|Шаг 3 · Это ты?|</span>`,`<h2 class="ttl">Это ты?</h2>`,
   `<div class="avbox">${S.avatarOk?`<img src="${IMG}${AV}" alt="Твой цифровой двойник">`:`<i class="scan"></i><span class="lbl">Строим двойника…</span>`}</div>`,
@@ -929,7 +930,7 @@ function render(){
   `<div class="list">${TIERS.map(([k,t,s,pr])=>`<button class="opt" data-act="set" data-k="tier" data-v="${k}" aria-pressed="${S.tier===k}"><span>${t}<small>${s}</small></span><span class="pr">${rub(pr)}</span></button>`).join('')}</div>`,
   `<div class="honest"><b>Гарантия Яны</b><span class="txt">Две правки входят в цену, на каждую отвечаю за 12 часов. Двойника доводим, пока не будет похож.</span></div>`,
   `<div class="slots"><span>Твоё место</span>${slotsBar()}<b style="font-weight:500">${S.slots.taken+1} из ${S.slots.total}</b></div>`,
-  `<label class="check" for="club"><input id="club" type="checkbox" ${S.club?'checked':''} data-club="1"><span>Клуб 590 ₽/мес: 3 раза в неделю в бот — 3 готовых образа в каждой ценовой категории из новых коллекций со ссылками на магазины. Плюс распродажи, спецпредложения и мои ежедневные находки. Отключить — одной кнопкой</span></label>`,
+  `<label class="check" for="club"><input id="club" type="checkbox" ${S.club?'checked':''} data-club="1"><span><b>Клуб 590 ₽/мес.</b> 3 раза в неделю в бот — 3 готовых образа в каждой ценовой категории из новых коллекций со ссылками на магазины. Плюс распродажи, спецпредложения и мои ежедневные находки. Отключить — одной кнопкой</span></label>`,
   `<span class="lbl">Цены — пример · СБП или карта через ЮKassa · чек на почту · подписки без твоей галочки нет</span>`];
   bar(nav(true,`Оплатить ${rub(tr.at(3)+(S.club?590:0))}`))}
  else if(c==='status'){const rd=S.capReady;p=[`<span class="lbl">|Заявка 014 · оплачено ✓|</span>`,`<h2 class="ttl">${rd?'Капсула готова':'Яна собирает твою капсулу'}</h2>`,
@@ -957,7 +958,7 @@ function render(){
   `<button class="switch" data-act="watch" aria-pressed="${S.watch}"><span>Следить за ценами<small>Напишем в Telegram, когда вещь из капсулы подешевеет</small></span><i></i></button>`,
   `<div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--hair);padding-bottom:8px"><span>${S.bta==='all'?'Все вещи':RN[S.bta]} · ${list.length}</span><span class="viewsw">Вид ${[1,2,3].map(cc=>`<button data-act="cols" data-v="${cc}" aria-pressed="${S.cols===cc}">${cc}</button>`).join('')}</span></div>`,
   `<div class="grid" style="--cols:${S.cols}">${list.map(k=>{const r=ROLE[k]||'b',d=S.watch&&DROP[k],bd=pend&&pend.items.includes(k)?'<span class="badge wait">ждёт замены</span>':rv.newKeys.includes(k)?'<span class="badge">новое</span>':'';
-    return `<div class="it"><div class="ph">${bd}<span class="role ${r}" title="${RN[r]}">${RS[r]}</span>${d?`<span class="drop">−${rub(d)}</span>`:''}<img src="${src(k)}" alt="${CAT[k].n}"></div><span class="nm">${CAT[k].n}</span><span class="pr">${d?`<span class="old">${rub(CAT[k].p)}</span>`:''}${rub(price(k))}</span><span class="lbl" style="font-size:9.5px">${CAT[k].s} · ${RN[r]}</span>${S.cols<3?(()=>{const ls=LOOKS.map((l,j)=>l[1].includes(k)?n2(j+1):null).filter(Boolean);return ls.length?`<span class="lbl" style="font-size:9.5px">В образах: ${ls.join(' · ')}</span>`:''})():''}${S.cols<3&&CAT[k].sz?`<span class="sz">Размер от Яны: ${CAT[k].sz}</span>`:''}${S.cols<3?`<div class="fit">${[['ok',G('Купила','Купил')+' · село'],['no','Не село']].map(([f,t])=>`<button data-act="fit" data-v="${k}" data-f="${f}" aria-pressed="${S.fit[k]===f}">${t}</button>`).join('')}</div>`:''}<button class="plus" data-act="toast" data-v="Откроем ${CAT[k].s}" aria-label="Купить ${CAT[k].n}">+</button></div>`}).join('')}</div>`,
+    return `<div class="it"><div class="ph">${bd}<span class="role ${r}" title="${RN[r]}">${RS[r]}</span>${d?`<span class="drop">−${rub(d)}</span>`:''}<img src="${src(k)}" alt="${CAT[k].n}"></div><span class="nm">${CAT[k].n}</span><span class="pr">${d?`<span class="old">${rub(CAT[k].p)}</span>`:''}${rub(price(k))}</span><span class="lbl" style="font-size:10.5px">${CAT[k].s} · ${RN[r]}</span>${S.cols<3?(()=>{const ls=LOOKS.map((l,j)=>l[1].includes(k)?n2(j+1):null).filter(Boolean);return ls.length?`<span class="lbl" style="font-size:10.5px">В образах: ${ls.join(' · ')}</span>`:''})():''}${S.cols<3&&CAT[k].sz?`<span class="sz">Размер от Яны: ${CAT[k].sz}</span>`:''}${S.cols<3?`<div class="fit">${[['ok',G('Купила','Купил')+' · село'],['no','Не село']].map(([f,t])=>`<button data-act="fit" data-v="${k}" data-f="${f}" aria-pressed="${S.fit[k]===f}">${t}</button>`).join('')}</div>`:''}<button class="buy" data-act="toast" data-v="Откроем ${CAT[k].s}" aria-label="Купить ${CAT[k].n}">В магазин ↗</button></div>`}).join('')}</div>`,
   `<div class="sum"><div><span>Если купить всё</span><b class="n" style="font-weight:500">${rub(tot)}</b></div><div><span>Из твоего шкафа</span><b>${S.base.length} ${plural(S.base.length,'вещь','вещи','вещей')}</b></div><div><span>Правок осталось</span><b>${rv.left} из 2</b></div></div>`,
   `<span class="lbl">Покупать ничего не обязательно. Отметь, как село, — размеры от Яны станут точнее</span>`)}
   else{const A=S.ask;
@@ -1025,7 +1026,7 @@ function cfList(skipCat){const g=CF.g||S.g,q=CF.q.trim().toLowerCase();let l=CAT
 const SORTS=[['pop','По порядку'],['cheap','Дешевле'],['dear','Дороже'],['sale','Скидки']];
 function catResults(){const l=cfList(),on=new Set(S.board.layers.map(z=>z.id));
  return `<div class="frow"><span>${l.length} ${plural(l.length,'вещь','вещи','вещей')}</span><span class="viewsw">Вид ${[2,3].map(cc=>`<button data-act="ccols" data-v="${cc}" aria-pressed="${CF.cols===cc}">${cc}</button>`).join('')}</span></div>
- <div class="cards" style="--cols:${CF.cols}">${l.slice(0,CF.lim).map(x=>`<div class="cc"><button class="ph" data-act="cit" data-v="${x.id}" aria-label="${x.n}" style="${sprBg(x)}">${x.o&&x.o>x.p?`<span class="salebd">Sale −${Math.round((1-x.p/x.o)*100)}%</span>`:''}</button>${S.cfor!=null?`<button class="swp" data-act="crepl" data-v="${x.id}">Заменить</button>`:S.lookFor!=null?`<button class="swp" data-act="clook" data-v="${x.id}">В образ ${n2(S.lookFor+1)}</button>`:''}${x.cx?`<button class="add" data-act="cadd" data-v="${x.id}" aria-pressed="${on.has(x.id)}" aria-label="На двойника">${on.has(x.id)?'✓':'+'}</button>`:''}<span class="bn">${BRN[x.b]||x.b}</span><span class="nm">${x.n}</span><span class="pr">${x.o?`<s>${rub(x.o)}</s>`:''}${rub(x.p)}</span>${CF.cols<3&&x.sz.length?`<span class="szs">${x.sz.slice(0,7).join(' ')}</span>`:''}</div>`).join('')}</div>
+ <div class="cards" style="--cols:${CF.cols}">${l.slice(0,CF.lim).map(x=>`<div class="cc"><button class="ph" data-act="cit" data-v="${x.id}" aria-label="${x.n}" style="${sprBg(x)}">${x.o&&x.o>x.p?`<span class="salebd">Sale −${Math.round((1-x.p/x.o)*100)}%</span>`:''}</button>${S.cfor!=null?`<button class="swp" data-act="crepl" data-v="${x.id}">Заменить</button>`:S.lookFor!=null?`<button class="swp" data-act="clook" data-v="${x.id}">В образ ${n2(S.lookFor+1)}</button>`:''}${x.cx?`<button class="add" data-act="cadd" data-v="${x.id}" aria-pressed="${on.has(x.id)}" aria-label="На двойника">${on.has(x.id)?'✓':TWI}</button>`:''}<span class="bn">${BRN[x.b]||x.b}${x.col?` · ${x.col}`:''}</span><span class="nm">${x.n}</span><span class="pr">${x.o?`<s>${rub(x.o)}</s>`:''}${rub(x.p)}</span>${CF.cols<3&&x.sz.length?`<span class="szs">${x.sz.slice(0,7).join(' ')}</span>`:''}</div>`).join('')}</div>
  ${l.length>CF.lim?`<button class="btn line" style="width:100%" data-act="cmore">Показать ещё · ${l.length-CF.lim}</button>`:''}
  ${!l.length?(()=>{const q=CF.q.trim().toLowerCase(),n=q?CATL.filter(x=>x.g===(CF.g||S.g)&&q.split(/\s+/).every(w=>(SYN[w]||[w]).some(v=>x.q.includes(v)))).length:0;return `<p class="txt" style="color:var(--mute)">Ничего не нашлось с этими фильтрами.${n?` Без фильтров по «${CF.q}» есть ${n}.`:''}</p>${n?`<button class="btn line" style="width:100%" data-act="cfr2">Снять фильтры, оставить поиск</button>`:''}`})():''}`}
 const CAP=()=>S.budget;
