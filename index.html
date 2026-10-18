@@ -206,6 +206,7 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .dnd .av{width:100%;height:100%;display:block;max-width:none;pointer-events:none}
 .dnd .ly{position:absolute;transform:translate(-50%,0);height:auto;max-width:none;cursor:grab;touch-action:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}
 .dnd .ly.snap{transition:left .25s cubic-bezier(.2,.8,.2,1),top .25s cubic-bezier(.2,.8,.2,1)}
+.dnd{flex-shrink:0}.cutbox{display:flex;flex-direction:column;gap:8px;flex-shrink:0}.cutprev{flex-shrink:0;background:#efeeec;height:240px;display:flex;align-items:center;justify-content:center;padding:12px}.cutprev img{max-height:100%;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 6px rgba(0,0,0,.15))}
 .dnd .tray{position:absolute;right:8px;bottom:8px;width:88px;height:112px;background:var(--paper);border:1px dashed var(--ink);display:flex;align-items:center;justify-content:center;padding:4px}
 .dnd .tray img{max-width:100%;max-height:100%;object-fit:contain;cursor:grab;touch-action:none}
 .dnd .hint{position:absolute;left:10px;top:10px;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);max-width:46%}
@@ -1187,7 +1188,7 @@ function ySel(k){const c=CAT[k];if(c.szSel)return c.szSel;const av=c.szs||P().ys
  if(!sel.length&&w.length)sel.push(av.includes(w[0])?w[0]:av[Math.min(av.length-1,Math.floor(av.length/2))]);if(!sel.length)sel.push(av[0]);c.szSel=sel.slice(0,2);c.sz=c.szSel.join(' / ');return c.szSel}
 function zoomSheet(){const ph=[S.photo.full||IMG+AV,S.photo.face||(FACE?IMG+FACE:null)].filter(Boolean);
  $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Фото клиента"><span class="lbl">|${NM().age} · фото из анкеты|</span><div class="zoomph ${ph.length<2?'one':''}">${ph.map(u=>`<img src="${u}" alt="Фото клиента">`).join('')}</div><button class="btn line" style="width:100%" data-act="close">Закрыть</button></div></div>`}
-function doPick(i,v){const old=S.y.items[i];ROLE[v]=ROLE[old]||'b';S.y.items[i]=v;S.y.ok[v]=true;delete S.y.ok[old];LOOKS.forEach(l=>{const j=l[1].indexOf(old);if(j>-1)l[1][j]=v});if(S.rev.pending&&S.rev.pending.items.includes(old))S.rev.pending.repl[old]=v;toast('Заменено: '+CAT[v].n)}
+function doPick(i,v){autoCut(v).then(()=>{const o=$('#overlay [aria-label="Вещь на двойнике"]');if(o&&S.y.items.includes(v)){itemSheet(v);$('#overlay .sheet').classList.add('re')}});const old=S.y.items[i];ROLE[v]=ROLE[old]||'b';S.y.items[i]=v;S.y.ok[v]=true;delete S.y.ok[old];LOOKS.forEach(l=>{const j=l[1].indexOf(old);if(j>-1)l[1][j]=v});if(S.rev.pending&&S.rev.pending.items.includes(old))S.rev.pending.repl[old]=v;toast('Заменено: '+CAT[v].n)}
 function swapSheet(i){const k=S.y.items[i],c0=CAT[k],kd=KIND(c0.n,c0.cc),cc=c0.cc||'',tot=S.y.items.reduce((a,q)=>a+CAT[q].p,0),left=CAP()-(tot-c0.p),bad=S.rev.pending?S.rev.pending.items:[],want=wantSz(k);
  const okSz=z=>!z||!z.length||!want.length||want.some(w=>[w,...((SZMAP[S.g]||{})[w]||[])].some(m=>z.includes(m)));
  const sameC=x=>kd!=='bottom'||x.cc===cc||(/джинс|брюк/.test(cc)&&/джинс|брюк/.test(x.cc||''));
@@ -1244,9 +1245,27 @@ function lookSheet0(i){setTimeout(moodDrag,0);const [t,ks,own]=LOOKS[i],ok=!!S.y
  <span class="lbl">Нажми на вещь — она войдёт в образ или выйдет из него. В бою двойник перегенерируется под новый состав, здесь меняется раскладка. До 4 вещей</span>
  <div class="yacts" style="width:auto"><button data-act="ylookok" data-v="${i}" aria-pressed="${ok}">${ok?'✓ Согласован':'Согласовать'}</button><button data-act="toast" data-v="Перегенерируем образ">↻ Перегенерировать</button></div>
  <button class="btn line" style="width:100%" data-act="close">Закрыть</button></div></div>`}
+// ---------- вырезка вещи в браузере: заливка фона от краёв (фото на ровном светлом фоне) ----------
+const CUTTOL=[22,34,14,48];
+async function cutBg(u,try_){const im=await new Promise((ok,no)=>{const i=new Image();if(/^https?:/.test(u))i.crossOrigin='anonymous';i.onload=()=>ok(i);i.onerror=no;i.src=u});
+ const k=Math.min(1,900/Math.max(im.naturalWidth,im.naturalHeight)),W=Math.round(im.naturalWidth*k),H=Math.round(im.naturalHeight*k),c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(im,0,0,W,H);
+ const D=g.getImageData(0,0,W,H),d=D.data,tol=CUTTOL[try_%CUTTOL.length];
+ const bs=[];for(let x=0;x<W;x+=3){bs.push((0*W+x)*4,((H-1)*W+x)*4)}for(let y=0;y<H;y+=3){bs.push((y*W)*4,(y*W+W-1)*4)}
+ const med=j=>{const a=bs.map(o=>d[o+j]).sort((p,q)=>p-q);return a[a.length>>1]},bg=[med(0),med(1),med(2)];
+ const dist=o=>Math.max(Math.abs(d[o]-bg[0]),Math.abs(d[o+1]-bg[1]),Math.abs(d[o+2]-bg[2]));
+ const seen=new Uint8Array(W*H),q=[];for(let x=0;x<W;x++){q.push(x,(H-1)*W+x)}for(let y=0;y<H;y++){q.push(y*W,y*W+W-1)}
+ while(q.length){const p=q.pop();if(seen[p])continue;if(dist(p*4)>tol)continue;seen[p]=1;const x=p%W,y=(p/W)|0;if(x>0)q.push(p-1);if(x<W-1)q.push(p+1);if(y>0)q.push(p-W);if(y<H-1)q.push(p+W)}
+ let x0=W,y0=H,x1=-1,y1=-1;for(let p=0;p<W*H;p++){const o=p*4;if(seen[p]){d[o+3]=0;continue}
+  const x=p%W,y=(p/W)|0,edge=(x>0&&seen[p-1])||(x<W-1&&seen[p+1])||(y>0&&seen[p-W])||(y<H-1&&seen[p+W]);if(edge){const t=dist(o);if(t<tol*2)d[o+3]=Math.round(255*Math.min(1,(t-tol)/tol+.35))}
+  if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
+ if(x1<0)throw new Error('empty');g.putImageData(D,0,0);const o=document.createElement('canvas');o.width=x1-x0+1;o.height=y1-y0+1;o.getContext('2d').drawImage(c,x0,y0,o.width,o.height,0,0,o.width,o.height);return o.toDataURL('image/png')}
+async function autoCut(k){if(!CAT[k]||CAT[k].cut)return;try{CAT[k].cut=await cutBg(CAT[k].img||src(k),0);CAT[k]._uc=1;CUTTRY[k]=0;persist()}catch(e){}}
+let CUTTRY={};async function cutItem(k){const n=CUTTRY[k]=(CUTTRY[k]??-1)+1,box=$('#cutbox');if(box)box.innerHTML='<span class="lbl">Вырезаем…</span>';
+ try{const u=await cutBg(CAT[k].img||src(k),n);CAT[k]._cut=u;if(box)box.innerHTML=`<div class="cutprev"><img src="${u}" alt="Вырезанная вещь"></div><div class="yacts" style="width:auto"><button data-act="cutok" data-v="${k}">Нормально</button><button data-act="cutagain" data-v="${k}">Ещё раз</button></div><span class="lbl">Попытка ${n+1} · если остался фон или съело край — «Ещё раз»</span>`}
+ catch(e){if(box)box.innerHTML=`<span class="lbl" style="color:var(--alert)">Магазин не даёт обработать это фото в браузере — вырежем на сервере. Пока можно показать образ без двойника</span>`}}
 function itemSheet(k){const y=S.y,i=y.items.indexOf(k);
  $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Вещь на двойнике"><span class="lbl">|${CAT[k].n} · ${CAT[k].s}|</span>
- <div class="dnd" id="dnd"><div class="avw" id="dav"><img class="av" src="${IMG}${AV}" alt="Двойник"></div>${CAT[k].cut?`<div class="tray"><img id="dit" src="${CAT[k].cut}" alt="${CAT[k].n}" draggable="false"></div>`:`<div class="tray"><img src="${src(k)}" alt=""></div>`}</div><span class="lbl dhint" id="dhint">${CAT[k].cut?'Перетащи вещь из рамки на модель':'Эту вещь Яна покажет на двойнике, когда образ утверждён'}</span>
+ <div class="dnd" id="dnd"><div class="avw" id="dav"><img class="av" src="${IMG}${AV}" alt="Двойник"></div>${CAT[k].cut?`<div class="tray"><img id="dit" src="${CAT[k].cut}" alt="${CAT[k].n}" draggable="false"></div>`:`<div class="tray"><img src="${src(k)}" alt=""></div>`}</div><span class="lbl dhint" id="dhint">${CAT[k].cut?'Перетащи вещь из рамки на модель':'У этой вещи нет вырезки — её не положить на двойника. Вырежи её кнопкой ниже'}</span>${CAT[k].cut?(CAT[k]._uc?`<div id="cutbox" class="cutbox"><button class="btn line" data-act="cutagain" data-v="${k}">✂ Вырезано автоматически · вырезать ещё раз</button></div>`:''):`<div id="cutbox" class="cutbox"><button class="btn" data-act="cutit" data-v="${k}">✂ Вырезать вещь</button></div>`}
  <div class="sum"><div><span>Цена</span><b>${rub(CAT[k].p)}</b></div><div><span>Роль</span><b>${RN[ROLE[k]||'b']}</b></div>${CAT[k].sz?`<div><span>Размер от Яны</span><b style="text-transform:none">${CAT[k].sz}</b></div>`:''}</div>
  <span class="lbl">Бесплатная примерка поверх двойника. Фотореалистичная — когда образ утверждён</span>
  <div class="yacts" style="width:auto"><button data-act="ok" data-v="${k}" aria-pressed="${!!y.ok[k]}">${y.ok[k]?'✓ Да':'Да'}</button><button data-act="swap" data-v="${i}">Заменить</button></div>
@@ -1402,7 +1421,9 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'toast':toast(v);return;
  case'openreq':if(v!=='0'){toast('В демо открыта только заявка '+NM().g);return}S.y.open=0;break;
  case'closereq':S.y.open=null;S.y.sent=false;S.y.stage='items';break;
- case'ok':S.y.ok[v]=!S.y.ok[v];if(S.y.ok[v])ySel(v);break;
+ case'ok':S.y.ok[v]=!S.y.ok[v];if(S.y.ok[v])ySel(v);if($('#overlay [aria-label="Вещь на двойнике"]')){S.still=true;const sy=scrollY;render();scrollTo(0,sy);itemSheet(v);$('#overlay .sheet').classList.add('re');return}break;
+ case'cutit':case'cutagain':cutItem(v);return;
+ case'cutok':CAT[v].cut=CAT[v]._cut;CAT[v]._uc=1;delete CAT[v]._cut;toast('Вырезано — перетащи вещь на модель');itemSheet(v);$('#overlay .sheet').classList.add('re');return;
  case'allok':S.y.items.forEach(k=>S.y.ok[k]=true);break;
  case'swap':swapSheet(+v);return;
  case'catalog':{S.cfor=+t.dataset.i;S.cforOpen=S.y.open;S.y.open=null;S.yv='cat';const k=S.y.items[S.cfor];CF.g='';CF.c=CAT[k].cc||'all';{const tot=S.y.items.reduce((a,q)=>a+CAT[q].p,0),left=CAP()-(tot-CAT[k].p);CF.pmax=Math.max(0,left)}{const kd=KIND(CAT[k].n,CAT[k].cc);CF.szs=kd==='shoes'?[String(S.shoe)]:[...new Set(wantSz(k).flatMap(z=>(SZMAP[S.g]||{})[z]||[z]))]}CF.br=[];CF.q='';if(!CATL)loadCat();$('#overlay').innerHTML='';break}
@@ -1480,13 +1501,13 @@ document.addEventListener('change',e=>{
 // ---------- сохранение прогресса: перезагрузка страницы не сбрасывает путь ----------
 const STK='yana_capsule_state_v1',CAT0=new Set(Object.keys(CAT));let stT=null,stOn=false;
 function persist(){if(!stOn)return;clearTimeout(stT);stT=setTimeout(()=>{try{const keys=new Set([...S.y.items,...LOOKS.flatMap(l=>l[1]),...DECK.filter(x=>typeof x==='string'),...S.swipe.like,...S.swipe.no,...((S.free||[])[0]||[])]),cat={};
- keys.forEach(k=>{const c=CAT[k];if(!c)return;const o={...c};delete o.img;delete o.hi;delete o.cut;cat[k]=o});
+ keys.forEach(k=>{const c=CAT[k];if(!c)return;const o={...c};delete o.img;delete o.hi;delete o.cut;delete o._cut;if(c._uc)o.cut=c.cut;cat[k]=o});
  const d={v:1,S,DECK,SINGLES,LOOKS,ROLE,cat,CF,sy:scrollY},js=JSON.stringify(d);try{localStorage.setItem(STK,js)}catch(e){const d2=JSON.parse(js);d2.S.photo={full:null,face:null};d2.S.own=[];localStorage.setItem(STK,JSON.stringify(d2))}}catch(e){}},300)}
 async function restore(){let d=null;try{d=JSON.parse(localStorage.getItem(STK)||'null')}catch(e){}if(!d||d.v!==1||!d.S)return false;RESTORING=true;
  try{setG(d.S.g||'f');Object.assign(S,d.S);S.menu=false;DECK=d.DECK;SINGLES=d.SINGLES;LOOKS.length=0;d.LOOKS.forEach(l=>LOOKS.push(l));Object.assign(ROLE,d.ROLE||{});RSY=d.sy||0;if(d.CF)Object.assign(CF,d.CF);
   const reg=[];Object.entries(d.cat||{}).forEach(([k,o])=>{if(CAT0.has(k)&&CAT[k])Object.assign(CAT[k],o);else{CAT[k]=o;if(o._r)reg.push([k,o])}});
   if(reg.length){$('#app').innerHTML=hdr()+'<div class="restoring"><span class="logo">Yana</span><i></i><span class="lbl">Возвращаемся туда, где остановились</span></div>';await loadPool();if(reg.some(r=>r[1]._r==='A'))await loadCat();if(reg.some(r=>r[1]._r==='D'))await loadDeck();
-   await Promise.all(reg.map(async([k,o])=>{delete CAT[k].img;try{await (o._r==='P'?regP(k):o._r==='D'?regD(k):regA(k))}catch(e){}if(CAT[k])Object.assign(CAT[k],{sz:o.sz,szSel:o.szSel})}))}
+   await Promise.all(reg.map(async([k,o])=>{delete CAT[k].img;try{await (o._r==='P'?regP(k):o._r==='D'?regD(k):regA(k))}catch(e){}if(CAT[k]){Object.assign(CAT[k],{sz:o.sz,szSel:o.szSel});if(o._uc&&o.cut)Object.assign(CAT[k],{cut:o.cut,_uc:1})}}))}
   RESTORING=false;return true}catch(e){try{localStorage.removeItem(STK)}catch(_){}location.reload();return true}}
 document.addEventListener('click',()=>persist(),true);document.addEventListener('input',()=>persist(),true);addEventListener('pagehide',()=>{clearTimeout(stT);stOn&&(stT=null,persist())});
 let RSY=0;restore().catch(()=>{}).then(()=>{RESTORING=false;stOn=true;render();if(RSY)setTimeout(()=>scrollTo(0,RSY),60)});
