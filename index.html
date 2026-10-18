@@ -104,7 +104,7 @@ img{display:block;max-width:100%}
 .card{position:absolute;inset:0 18px;background:var(--paper);border:1px solid var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px;touch-action:pan-y;user-select:none;cursor:grab;transition:transform .3s cubic-bezier(.2,.7,.2,1),opacity .3s}
 .card.under{transform:translateY(10px) scale(.96);border-color:var(--soft);z-index:0}
 .card.top{z-index:1}
-.card img{max-height:300px;pointer-events:none;max-width:100%;object-fit:contain}
+.card img{height:300px;width:100%;pointer-events:none;max-width:100%;object-fit:contain}
 .card .nm{font-size:12px}
 .stamp{position:absolute;top:18px;font-size:13px;font-weight:500;letter-spacing:.1em;border:1px solid var(--ink);padding:4px 8px;opacity:0;transition:opacity .15s}
 .stamp.yes{left:18px}.stamp.no{right:18px}
@@ -183,7 +183,7 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .mood .mi.pk{mix-blend-mode:multiply;filter:none}
 .mood .mx{position:absolute;z-index:40;width:26px;height:26px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);font-size:15px;line-height:1;display:grid;place-items:center;cursor:pointer;padding:0}
 .mood .mi.sel{outline:1px dashed var(--ink);outline-offset:3px}
-.mood .twbtn{position:absolute;right:10px;bottom:10px;width:42px;height:42px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);display:grid;place-items:center;z-index:30;cursor:pointer}
+.mood .twbtn{position:absolute;right:10px;bottom:10px;height:40px;padding:0 12px 0 9px;border:1px solid var(--ink);background:var(--paper);color:var(--ink);display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;z-index:30;cursor:pointer}.mood .twbtn svg{width:18px;height:18px}.mood.mini .twbtn span{display:none}.mood.mini .twbtn{padding:0;width:28px;height:28px;justify-content:center}
 .mood .mown{position:absolute;left:10px;bottom:10px;font-size:9.5px;border:1px dashed var(--ink);background:var(--paper);padding:4px 6px;line-height:1.25;z-index:30}
 .mood.mini{width:62px;flex:none;align-self:flex-start}
 .mood.mini .mi{filter:none}
@@ -378,7 +378,7 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .pair button{border:1px solid var(--ink);padding:14px 8px;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:11.5px;transition:background .2s,transform .12s}
 .pair button:hover{background:var(--fog)}
 .pair button:active{transform:scale(.97)}
-.pair img{height:210px;object-fit:contain}
+.pair img{width:100%;height:210px;object-fit:contain}
 .axes{border-top:1px solid var(--hair)}
 .axes div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--hair);font-size:11.5px}
 .axes b{font-weight:500;text-align:right}
@@ -674,10 +674,12 @@ const JEANO={f:['Клёш','Прямые','Широкие','Бананы','Мо�
 const TEXT=[['Хлопок',/хлоп/],['Трикотаж',/трикотаж|вязан|рубчик|джемпер|свитер|кардиган/],['Шерсть, кашемир',/шерст|кашемир|мохер|альпак/],['Твид, букле',/твид|букле/],['Кожа',/кож/],['Замша',/замш/],['Деним',/деним|джинс/],['Вельвет, бархат',/вельвет|бархат/],['Шёлк, сатин',/шелк|шёлк|сатин/],['Лён',/л[её]н(\s|$)|льнян/]];
 function jeanSvg(t){const L={'Прямые':[[9,5],[20,5],[19.5,57],[11,57]],'Клёш':[[9,5],[20,5],[18.5,33],[20,57],[6.5,57],[11,33]],'Широкие':[[8,5],[20,5],[20.5,57],[4.5,57]],'Бананы':[[8,5],[20,5],[19,40],[17.5,57],[11.5,57],[6,30]],'Мом':[[9,3],[20,3],[19,57],[12.5,57],[8.5,25]],'Скинни':[[9,5],[20,5],[18.5,57],[14,57],[11,30]],'Бэгги':[[6.5,5],[20,5],[20.5,57],[3.5,57]],'Зауженные':[[9,5],[20,5],[18.5,57],[13,57]],'Свободные':[[8,5],[20,5],[20,57],[6.5,57]]}[t]||[[9,5],[20,5],[19.5,57],[11,57]];
  const pts=a=>a.map(p=>p.join(',')).join(' '),mir=a=>a.map(([x,y])=>[40-x,y]);return `<svg viewBox="0 0 40 60" aria-hidden="true"><rect x="${L[0][0]}" y="${L[0][1]-2.5}" width="${40-2*L[0][0]}" height="3" fill="currentColor"/><polygon fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" points="${pts(L)}"/><polygon fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" points="${pts(mir(L))}"/></svg>`}
+const PREFPICK={f:{'Туфли':'fd4a6fb24c','Ботинки':'f068d26906','Кроссовки':'f0c97e011d','Ботильоны':'f95b0b2d06','Ботфорты':'f088679826','Кожа':'fdc9d7ef50','Шёлк, сатин':'f155fc5882'},m:{'Туфли':'f5c3b865b4','Ботинки':'fac6474e02','Кроссовки':'f83536903d','Кожа':'fdc9d7ef50','Шёлк, сатин':'f155fc5882'}};
 const PREFIMG={};function prefPic(kind,label){const key=S.g+kind+label;if(PREFIMG[key]!==undefined)return PREFIMG[key];if(!POOL||!Object.keys(POOL).length)return null;
+ const pk=(PREFPICK[S.g]||{})[label],px0=pk&&Object.values(POOL).find(x=>x.i===pk&&HI[x.i]);if(px0){const [sh,k]=HI[px0.i];if(kind==='shoes')return PREFIMG[key]='TRIM:'+sh+':'+k;const cx=k%6,cy=Math.floor(k/6),z=3,qx=(cx*z+(z-1)/2)/(6*z-1)*100,qy=(cy*z+(z-1)/2)/(6*z-1)*100;return PREFIMG[key]=`background-image:url(cat/h2/${pad3(sh)}.webp);background-size:${600*z}% ${600*z*4/3}%;background-position:${qx}% ${qy}%`}
  const re=kind==='shoes'?(SHOET.find(z=>z[0]===label)||[])[1]:(TEXT.find(z=>z[0]===label)||[])[1];if(!re)return PREFIMG[key]=null;
  const l=Object.values(POOL).filter(x=>x.g===S.g&&HI[x.i]&&(kind!=='shoes'||x.c==='обувь'&&SHT(x.n)===label&&!/мех|утепл|тапоч|овчин/.test(x.n.toLowerCase()))&&(kind!=='tex'||re.test(x.n.toLowerCase())&&x.c!=='обувь'&&!/под кож|принт|полоск|клетк/.test(x.n.toLowerCase())&&!/бел|молоч|экрю|сливоч|кремов|айвори|ванил/.test((x.l||'').toLowerCase())));if(!l.length)return PREFIMG[key]=null;
- const x=l[Math.floor(l.length/3)],[sh,k]=HI[x.i],cx=k%6,cy=Math.floor(k/6),z=kind==='tex'?3:1.15,px=(cx*z+(z-1)/2)/(6*z-1)*100,py=(cy*z+(z-1)/2)/(6*z-1)*100;
+ const x=l[Math.floor(l.length/3)],[sh,k]=HI[x.i];if(kind==='shoes')return PREFIMG[key]='TRIM:'+sh+':'+k;const cx=k%6,cy=Math.floor(k/6),z=kind==='tex'?3:1.15,px=(cx*z+(z-1)/2)/(6*z-1)*100,py=(cy*z+(z-1)/2)/(6*z-1)*100;
  return PREFIMG[key]=`background-image:url(cat/h2/${pad3(sh)}.webp);background-size:${600*z}% ${600*z*4/3}%;background-position:${px}% ${py}%`}
 const vibeTags=()=>(S.vibe||[]).flatMap(k=>(VIBES[S.g].find(v=>v[0]===k)||[,,,[]])[3]);
 
@@ -821,7 +823,7 @@ function twin(ks){return `<div class="avw"><img class="av" src="${IMG}${AV}" alt
 const MSLOT={vest:[2,2,50,40],top:[2,2,50,40],top2:[50,2,46,34],outer:[46,24,52,46],jacket:[46,24,52,46],bottom:[4,40,44,58],dress:[4,3,46,90],shoes:[52,72,44,26],bag:[66,3,30,22]};
 const TWI=`<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="6" r="3.2"/><path d="M6 21v-5.5A4.5 4.5 0 0 1 10.5 11h3a4.5 4.5 0 0 1 4.5 4.5V21"/></svg>`;
 function moodPos(i,ks){const o=((S.y.mood||{})[i])||{},seen={},r={};ks.forEach(k=>{let kd=KIND(CAT[k].n,CAT[k].cc);if(kd==='vest')kd='top';if(kd==='top'&&seen.top)kd='top2';if(kd==='shoes'&&seen.shoes)kd='top2';if((kd==='outer'||kd==='jacket')&&(seen.outer||seen.jacket))kd='top2';seen[kd]=1;r[k]=o[k]||MSLOT[kd]||MSLOT.top2});return r}
-function mood(ks,i,opt={}){const pos=moodPos(i,ks);return `<div class="mood ${opt.ed?'ed':''} ${opt.mini?'mini':''}" ${opt.ed?`id="mood" data-i="${i}"`:''}>${ks.map((k,j)=>{const [x,y,w,h]=pos[k];return `<img class="mi ${CAT[k].hi?'pk':''} ${opt.ed&&S.msel===k?'sel':''}" data-mi="${k}" src="${CAT[k].hi||CAT[k].cut||src(k)}" alt="${CAT[k].n}" style="left:${x}%;top:${y}%;width:${w}%;height:${h}%;z-index:${j+1}" draggable="false">${opt.ed?`<button class="mx" data-act="mdel" data-i="${i}" data-v="${k}" aria-label="Убрать ${CAT[k].n}" style="left:calc(${x+w}% - 26px);top:${y}%">×</button>`:''}`}).join('')}${opt.own?`<span class="mown">${opt.own}<br>есть у тебя</span>`:''}${opt.mini?'':`<button class="twbtn" data-act="twin" data-v="${i}" aria-label="Посмотреть на двойнике">${TWI}</button>`}</div>`}
+function mood(ks,i,opt={}){const pos=moodPos(i,ks);return `<div class="mood ${opt.ed?'ed':''} ${opt.mini?'mini':''}" ${opt.ed?`id="mood" data-i="${i}"`:''}>${ks.map((k,j)=>{const [x,y,w,h]=pos[k];return `<img class="mi ${CAT[k].hi?'pk':''} ${opt.ed&&S.msel===k?'sel':''}" data-mi="${k}" src="${CAT[k].hi||CAT[k].cut||src(k)}" alt="${CAT[k].n}" style="left:${x}%;top:${y}%;width:${w}%;height:${h}%;z-index:${j+1}" draggable="false">${opt.ed?`<button class="mx" data-act="mdel" data-i="${i}" data-v="${k}" aria-label="Убрать ${CAT[k].n}" style="left:calc(${x+w}% - 26px);top:${y}%">×</button>`:''}`}).join('')}${opt.own?`<span class="mown">${opt.own}<br>есть у тебя</span>`:''}${opt.mini?'':`<button class="twbtn" data-act="twin" data-v="${i}" aria-label="Посмотреть на двойнике">${TWI}<span>На мне</span></button>`}</div>`}
 function twinSheet(i){const l=LOOKS[i]||[,(S.free||P().free)[0],(S.free||P().free)[1]],back=S.mode==='yana'&&LOOKS[i];
  $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Образ на двойнике"><span class="lbl">|Двойник ${NM().g}|</span><div class="avbox"><img src="${IMG}${AV}" alt="Цифровой двойник"></div><p class="txt">Когда образ утверждён, Яна одевает двойника в эти вещи — фотореалистично, с учётом фигуры и посадки. Мудборд уже готов для этого: каждая вещь — отдельным фото.</p>${back?`<button class="btn line" style="width:100%" data-act="ylook" data-v="${i}">← К образу</button>`:`<button class="btn line" style="width:100%" data-act="close">Закрыть</button>`}</div></div>`}
 function moodDrag(){const b=$('#mood');if(!b)return;const i=+b.dataset.i,P2=new Map();let d=null,pin=null;
@@ -838,7 +840,7 @@ function moodDrag(){const b=$('#mood');if(!b)return;const i=+b.dataset.i,P2=new 
  const up=e=>{P2.delete(e.pointerId);if(P2.size)return;if(d)save(d.t.dataset.mi);if(pin)save(pin.e.dataset.mi);d=null;pin=null};b.addEventListener('pointerup',up);b.addEventListener('pointercancel',up);
  b.addEventListener('wheel',e=>{const se=sel();if(!se)return;e.preventDefault();scale(se,e.deltaY<0?1.06:.94,parseFloat(se.style.width),parseFloat(se.style.height),parseFloat(se.style.left),parseFloat(se.style.top));save(S.msel)},{passive:false});
  window._msz=f=>{const se=sel();if(!se){toast('Сначала коснись вещи');return}scale(se,f,parseFloat(se.style.width),parseFloat(se.style.height),parseFloat(se.style.left),parseFloat(se.style.top));save(S.msel)}}
-function stage(ks,own,i,noShare){const vt=S.votes[i],on=ks.filter(k=>CAT[k]&&CAT[k].cut),off=ks.filter(k=>CAT[k]&&!CAT[k].cut);return `<div class="stage tw">${twin(on)}${off.length||own?`<div class="col">${off.map(k=>`<img src="${src(k)}" alt="${CAT[k].n}">`).join('')}${own?`<span class="own">${own}<br>есть у тебя</span>`:''}</div>`:''}${noShare?'':`<button class="share" data-act="story" data-v="${i}">↗ В сторис</button>`}${vt&&!noShare?`<span class="votes">♥ ${vt[0]} · ✕ ${vt[1]}</span>`:''}</div>`}
+function stage(ks,own,i,noShare){const vt=S.votes[i],on=ks.filter(k=>CAT[k]&&CAT[k].cut),off=ks.filter(k=>CAT[k]&&!CAT[k].cut);return `<div class="stage tw">${twin(on)}${off.length||own?`<div class="col">${off.map(k=>`<img src="${src(k)}" alt="${CAT[k].n}">`).join('')}${own?`<span class="own">${own}<br>есть у тебя</span>`:''}</div>`:''}${noShare?'':`<button class="share" data-act="story" data-v="${i}">↗︎ В сторис</button>`}${vt&&!noShare?`<span class="votes">♥ ${vt[0]} · ✕ ${vt[1]}</span>`:''}</div>`}
 
 function render(){
  clearInterval(timerId);clearInterval(reelId);
@@ -885,7 +887,7 @@ function render(){
  else if(c==='prefs'){if(!POOL)loadPool().then(()=>{if(cur()==='prefs'&&S.mode==='client'){S.still=true;render()}});const pf=S.pref,cnt=pf.shoes.length+pf.jeans.length+pf.tex.length;
   const pic=(k,v,body)=>`<button class="pic" data-act="pref" data-k="${k}" data-v="${v}" aria-pressed="${pf[k].includes(v)}">${body}<span>${v}</span></button>`;
   p=[`<span class="lbl">|Шаг 1 · Детали вкуса| <span class="free">бесплатно</span></span>`,`<h2 class="ttl">Что ты носишь на самом деле</h2>`,`<p class="txt">Можно несколько в каждом блоке. Яна подберёт обувь и джинсы именно такого типа, а не «что-нибудь».</p>`,
-   `<div class="q"><span class="lbl">|Обувь · какую носишь|</span><div class="pics">${SHOEO[S.g].map(v=>{const st=prefPic('shoes',v);return pic('shoes',v,st?`<span class="im" style="${st}"></span>`:`<span class="im"></span>`)}).join('')}</div></div>`,
+   `<div class="q"><span class="lbl">|Обувь · какую носишь|</span><div class="pics">${SHOEO[S.g].map(v=>{const st=prefPic('shoes',v);return pic('shoes',v,st?`<span class="im" data-trim="${st.slice(5)}"></span>`:`<span class="im"></span>`)}).join('')}</div></div>`,
    `<div class="q"><span class="lbl">|${G('Джинсы и брюки · какой крой нравится','Джинсы и брюки · какой крой нравится')}|</span><div class="pics">${JEANO[S.g].map(v=>pic('jeans',v,jeanSvg(v))).join('')}</div></div>`,
    `<div class="q"><span class="lbl">|Фактуры · что приятно носить|</span><div class="pics">${TEXT.filter(([v])=>!(AW&&v==='Лён')).map(([v])=>{const st=prefPic('tex',v);return pic('tex',v,`<span class="im" style="${st||''}"></span>`)}).join('')}</div></div>`,
    `<div class="q"><span class="lbl">|Цвета · 1 нажатие — люблю, 2 — никогда, 3 — сброс|</span><div class="sws">${COLORS.map(([cc,nm])=>`<div class="swb"><button class="sw" data-act="col" data-v="${cc}" data-s="${S.colors[cc]||''}" style="background:${cc}" aria-label="${nm}"></button>${nm}</div>`).join('')}</div></div>`];
@@ -905,7 +907,7 @@ function render(){
   `<p class="quote">${S.freeq||P().freeq}</p>`,
   ymBlock('Ещё образы Яны в твоём стиле'),
   `<p class="txt">Это образ из коллекции, которую Яна заранее собрала под твой вкус. Всю капсулу она соберёт лично — под твою фигуру, неделю, шкаф и бюджет.</p>`];
-  bar(`<button class="btn line" data-act="story" data-v="0">↗</button><button class="btn" data-act="next">Хочу всю капсулу</button>`)}
+  bar(`<button class="btn line" data-act="story" data-v="0">↗︎</button><button class="btn" data-act="next">Хочу всю капсулу</button>`)}
  else if(c==='params'){p=[paidNav(),`<h2 class="ttl">Параметры</h2>`,
   `<div class="q"><span class="lbl">|Рост|</span><div class="range"><input id="h" type="range" min="${P().h[0]}" max="${P().h[1]}" value="${S.height}" aria-label="Рост"><output id="ho">${S.height} см</output></div></div>`,
   `<div class="q"><span class="lbl">|Размер верха · можно два, если между|</span><div class="tags">${P().sizes.map(v=>`<button class="tag" data-act="tsz" data-v="${v}" aria-pressed="${S.sizes.includes(v)}">${v}</button>`).join('')}</div></div>`,
@@ -964,7 +966,7 @@ function render(){
   `<button class="switch" data-act="watch" aria-pressed="${S.watch}"><span>Следить за ценами<small>Напишем в Telegram, когда вещь из капсулы подешевеет</small></span><i></i></button>`,
   `<div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--hair);padding-bottom:8px"><span>${S.bta==='all'?'Все вещи':RN[S.bta]} · ${list.length}</span><span class="viewsw">Вид ${[1,2,3].map(cc=>`<button data-act="cols" data-v="${cc}" aria-pressed="${S.cols===cc}">${cc}</button>`).join('')}</span></div>`,
   `<div class="grid" style="--cols:${S.cols}">${list.map(k=>{const r=ROLE[k]||'b',d=S.watch&&DROP[k],bd=pend&&pend.items.includes(k)?'<span class="badge wait">ждёт замены</span>':rv.newKeys.includes(k)?'<span class="badge">новое</span>':'';
-    return `<div class="it"><div class="ph">${bd}<span class="role ${r}" title="${RN[r]}">${RS[r]}</span>${d?`<span class="drop">−${rub(d)}</span>`:''}<img src="${src(k)}" alt="${CAT[k].n}"></div><span class="nm">${CAT[k].n}</span><span class="pr">${d?`<span class="old">${rub(CAT[k].p)}</span>`:''}${rub(price(k))}</span><span class="lbl" style="font-size:10.5px">${CAT[k].s} · ${RN[r]}</span>${S.cols<3?(()=>{const ls=LOOKS.map((l,j)=>l[1].includes(k)?n2(j+1):null).filter(Boolean);return ls.length?`<span class="lbl" style="font-size:10.5px">В образах: ${ls.join(' · ')}</span>`:''})():''}${S.cols<3&&CAT[k].sz?`<span class="sz">Размер от Яны: ${CAT[k].sz}</span>`:''}${S.cols<3?`<div class="fit">${[['ok',G('Купила','Купил')+' · село'],['no','Не село']].map(([f,t])=>`<button data-act="fit" data-v="${k}" data-f="${f}" aria-pressed="${S.fit[k]===f}">${t}</button>`).join('')}</div>`:''}<button class="buy" data-act="toast" data-v="Откроем ${CAT[k].s}" aria-label="Купить ${CAT[k].n}">В магазин ↗</button></div>`}).join('')}</div>`,
+    return `<div class="it"><div class="ph">${bd}<span class="role ${r}" title="${RN[r]}">${RS[r]}</span>${d?`<span class="drop">−${rub(d)}</span>`:''}<img src="${src(k)}" alt="${CAT[k].n}"></div><span class="nm">${CAT[k].n}</span><span class="pr">${d?`<span class="old">${rub(CAT[k].p)}</span>`:''}${rub(price(k))}</span><span class="lbl" style="font-size:10.5px">${CAT[k].s} · ${RN[r]}</span>${S.cols<3?(()=>{const ls=LOOKS.map((l,j)=>l[1].includes(k)?n2(j+1):null).filter(Boolean);return ls.length?`<span class="lbl" style="font-size:10.5px">В образах: ${ls.join(' · ')}</span>`:''})():''}${S.cols<3&&CAT[k].sz?`<span class="sz">Размер от Яны: ${CAT[k].sz}</span>`:''}${S.cols<3?`<div class="fit">${[['ok',G('Купила','Купил')+' · село'],['no','Не село']].map(([f,t])=>`<button data-act="fit" data-v="${k}" data-f="${f}" aria-pressed="${S.fit[k]===f}">${t}</button>`).join('')}</div>`:''}<button class="buy" data-act="toast" data-v="Откроем ${CAT[k].s}" aria-label="Купить ${CAT[k].n}">В магазин ↗︎</button></div>`}).join('')}</div>`,
   `<div class="sum"><div><span>Если купить всё</span><b class="n" style="font-weight:500">${rub(tot)}</b></div><div><span>Из твоего шкафа</span><b>${S.base.length} ${plural(S.base.length,'вещь','вещи','вещей')}</b></div><div><span>Правок осталось</span><b>${rv.left} из 2</b></div></div>`,
   `<span class="lbl">Покупать ничего не обязательно. Отметь, как село, — размеры от Яны станут точнее</span>`)}
   else{const A=S.ask;
@@ -978,9 +980,9 @@ function render(){
     else if(A.status==='done')p.push(`<div class="verdict"><span class="lbl">|Яна отвечает|</span><b>${A.answer}</b>${A.note?`<span class="txt">«${A.note}»</span>`:''}</div>`,
      `<div class="tags">${A.answer!=='Не бери'?`<button class="tag" data-act="toast" data-v="Откроем ${CAT[A.item].s}">Купить</button>`:''}<button class="tag" data-act="askreset">Спросить про другую вещь</button></div>`);
     else p.push(`<div class="tags"><button class="tag" data-act="askyana" style="background:var(--ink);color:var(--paper)">Спросить Яну</button><button class="tag" data-act="askreset">Другая вещь</button></div>`)}}
-  bar(pend?`<button class="btn line" disabled>Ждём Яну</button><button class="btn" data-act="story" data-v="${S.look}">↗ Поделиться образом</button>`
-   :rv.left?`<button class="btn line" data-act="rev">Правка · ${rv.left}</button><button class="btn" data-act="story" data-v="${S.look}">↗ Поделиться образом</button>`
-   :`<button class="btn line" data-act="toast" data-v="Откроем чат с Яной в Telegram">Написать Яне</button><button class="btn" data-act="story" data-v="${S.look}">↗ Поделиться образом</button>`)}
+  bar(pend?`<button class="btn line" disabled>Ждём Яну</button><button class="btn" data-act="story" data-v="${S.look}">↗︎ Поделиться образом</button>`
+   :rv.left?`<button class="btn line" data-act="rev">Правка · ${rv.left}</button><button class="btn" data-act="story" data-v="${S.look}">↗︎ Поделиться образом</button>`
+   :`<button class="btn line" data-act="toast" data-v="Откроем чат с Яной в Telegram">Написать Яне</button><button class="btn" data-act="story" data-v="${S.look}">↗︎ Поделиться образом</button>`)}
  a.innerHTML=hdr()+scr(p);
  if(c==='status'){const end=Date.now()+86399000;const tick=()=>{const e=$('#timer');if(!e)return;const s=Math.max(0,Math.floor((end-Date.now())/1000));e.textContent=[Math.floor(s/3600),Math.floor(s%3600/60),s%60].map(n2).join(':')};tick();timerId=setInterval(tick,1000)}
  const lk=$('#looks');if(lk)lk.addEventListener('scroll',()=>{const i=Math.round(lk.scrollLeft/(lk.firstElementChild.offsetWidth+10));if(i!==S.look){S.look=i;document.querySelectorAll('#dots i').forEach((d,j)=>d.classList.toggle('on',j===i))}},{passive:true});
@@ -1018,6 +1020,17 @@ const BRN={};let CUT={};const pad3=n=>String(n).padStart(3,'0');
 async function loadCat(){if(CATL)return;try{const [l,c,c2]=await Promise.all([fetch('cat/full.json').then(r=>r.json()),fetch('cat/cut.json').then(r=>r.json()).catch(()=>({})),fetch('cat/cut2.json').then(r=>r.json()).catch(()=>({}))]);CUT=c;Object.entries(c2).forEach(([k,v])=>CUT[k]=[v[0],v[1],1]);
  CATL=l.map(x=>({id:x.i,b:x.b,g:x.g,c:x.c,n:x.n,p:x.p,o:x.o,sz:x.z||[],all:x.a||[],col:x.l,comp:x.m,d:'',u:x.u,s:x.s,k:x.k,im:x.im||'',cx:CUT[x.i]?1:0,q:(x.n+' '+x.b+' '+(x.l||'')+' '+x.c).toLowerCase()}))}catch(e){CATL=[]}S.still=true;render();if(!POOL)loadPool().then(()=>render())}
 const sprBg=x=>x.im?`background-image:url('${x.im.replace(/'/g,'%27')}');background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#fff`:HI&&HI[x.id]?`background-image:url(cat/h2/${pad3(HI[x.id][0])}.webp);background-size:600% 600%;background-position:${(HI[x.id][1]%6)*20}% ${Math.floor(HI[x.id][1]/6)*20}%;background-color:#fff`:`background-image:url(cat/v/${pad3(x.s)}.webp);background-size:1000% 2000%;background-position:${(x.k%10)*100/9}% ${Math.floor(x.k/10)*100/19}%`;
+// ---------- автообрезка белых полей у фото вещи: по центру, целиком ----------
+const TRC={};function trimDraw(im,sx,sy,sw,sh,asp){const c=document.createElement('canvas');c.width=sw;c.height=sh;const x=c.getContext('2d',{willReadFrequently:true});x.fillStyle='#fff';x.fillRect(0,0,sw,sh);x.drawImage(im,sx,sy,sw,sh,0,0,sw,sh);let d;try{d=x.getImageData(0,0,sw,sh).data}catch(e){return null}
+ let x0=sw,y0=sh,x1=-1,y1=-1;for(let y=0;y<sh;y+=2)for(let i=0;i<sw;i+=2){const o=(y*sw+i)*4;if(Math.min(d[o],d[o+1],d[o+2])<232){if(i<x0)x0=i;if(i>x1)x1=i;if(y<y0)y0=y;if(y>y1)y1=y}}
+ if(x1<0)return null;const bw=x1-x0+2,bh=y1-y0+2,W=520,H=Math.round(W/asp),pad=.07,k=Math.min(W*(1-2*pad)/bw,H*(1-2*pad)/bh),o=document.createElement('canvas');o.width=W;o.height=H;const g=o.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);g.drawImage(c,x0,y0,bw,bh,(W-bw*k)/2,(H-bh*k)/2,bw*k,bh*k);return o.toDataURL('image/jpeg',.9)}
+async function trimEl(e){if(e.dataset.tr)return;e.dataset.tr=1;try{
+ if(e.dataset.trim){const [sh,k]=e.dataset.trim.split(':').map(Number),key='s'+sh+':'+k;if(!TRC[key]){const im=await loadImg(`cat/h2/${pad3(sh)}.webp`),tw=im.width/6,th=im.height/6;TRC[key]=trimDraw(im,(k%6)*tw,Math.floor(k/6)*th,tw,th,1)}
+  if(TRC[key])e.style.cssText=`background-image:url(${TRC[key]});background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#fff`;return}
+ const u=e.getAttribute('src')||'';if(!/^(img|cat)\//.test(u))return;const r=e.getBoundingClientRect(),asp=r.width&&r.height?r.width/r.height:.75,key=u+'@'+asp.toFixed(2);
+ if(!TRC[key]){const im=await loadImg(u);TRC[key]=trimDraw(im,0,0,im.naturalWidth,im.naturalHeight,asp)}if(TRC[key])e.src=TRC[key]}catch(err){}}
+const TRSEL='.pics .im[data-trim],.pair img,.card img:not(.iph),.exrow .xc img:not([src^="icons"]),.exgrid img';
+new MutationObserver(()=>{document.querySelectorAll(TRSEL).forEach(e=>{if(!e.dataset.tr){if(e.tagName==='IMG'&&!e.complete)e.addEventListener('load',()=>trimEl(e),{once:true});else trimEl(e)}})}).observe(document.documentElement,{childList:true,subtree:true});
 const IMC={};const loadImg=u=>IMC[u]||(IMC[u]=new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=u}));
 async function cell(u,k,cw,ch,n,png){const i=await loadImg(u);const c=document.createElement('canvas');c.width=cw;c.height=ch;const g=c.getContext('2d');g.drawImage(i,(k%n)*cw,Math.floor(k/n)*ch,cw,ch,0,0,cw,ch);
  if(!png)return c.toDataURL('image/jpeg',.94);const d=g.getImageData(0,0,cw,ch).data;let x0=cw,y0=ch,x1=0,y1=0;for(let y=0;y<ch;y++)for(let x=0;x<cw;x++)if(d[(y*cw+x)*4+3]>40){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
@@ -1069,7 +1082,7 @@ function citSheet(id){const x=CATL.find(z=>z.id===id),on=S.board.layers.some(z=>
  <div class="q"><span class="lbl">|Размеры · есть в наличии|</span><div class="isz">${(x.all.length?x.all:x.sz).map(z=>`<span class="${x.sz.includes(z)?'':'off'}">${z}</span>`).join('')||'<span>один размер</span>'}</div></div>
  ${x.comp?`<div class="q"><span class="lbl">|Состав|</span><p class="txt" style="text-transform:none">${x.comp}</p></div>`:''}
  ${x.d?`<p class="txt" style="text-transform:none;color:var(--mute)">${x.d}</p>`:''}
- <a class="lbl" href="${affU(x.b,x.u)}" target="_blank" rel="noopener" style="text-decoration:underline">Открыть в магазине ↗</a>
+ <a class="lbl" href="${affU(x.b,x.u)}" target="_blank" rel="noopener" style="text-decoration:underline">Открыть в магазине ↗︎</a>
  <div class="yacts" style="width:auto">${forK?`<button data-act="crepl" data-v="${id}">Заменить «${CAT[forK].n.toLowerCase()}»</button>`:`<button data-act="ccap" data-v="${id}" aria-pressed="${inCap}">${inCap?'✓ В капсуле':'В капсулу '+NM().g}</button>`}${x.cx?`<button data-act="cadd" data-v="${id}" aria-pressed="${on}">${on?'✓ На двойнике':'На двойника'}</button>`:''}</div>
  <button class="btn line" style="width:100%" data-act="close">Закрыть</button></div></div>`;
  if(x.cx)regA(id).then(c=>{const e=$('#cutpv');if(e&&c&&c.cut)e.src=c.cut})}
@@ -1227,7 +1240,7 @@ function lookAdd(l,v){const sg=SLOTG(v);for(let j=l.length-1;j>=0;j--){const o=S
 function viewSheet(k){const c=CAT[k],inCap=S.y.items.includes(k),liked=S.swipe.like.includes(k);
  $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="${c.n}"><span class="lbl">|${liked?G('Ей понравилось','Ему понравилось'):G('Ей не понравилось','Ему не понравилось')} · ${c.s||''}|</span>
  <div style="background:#fff;display:grid;place-items:center;aspect-ratio:3/4;max-height:56vh"><img src="${c.hi||src(k)}" alt="${c.n}" style="max-width:100%;max-height:100%;object-fit:contain"></div>
- <h2 class="ttl" style="font-size:24px">${c.n}</h2><div class="frow"><span style="font-size:15px">${rub(c.p)}</span>${c.u?`<a class="lbl" href="${affU(c.s,c.u)}" target="_blank" rel="noopener" style="text-decoration:underline">В магазине ↗</a>`:''}</div>
+ <h2 class="ttl" style="font-size:24px">${c.n}</h2><div class="frow"><span style="font-size:15px">${rub(c.p)}</span>${c.u?`<a class="lbl" href="${affU(c.s,c.u)}" target="_blank" rel="noopener" style="text-decoration:underline">В магазине ↗︎</a>`:''}</div>
  <div class="yacts" style="width:auto"><button data-act="ccap" data-v="${k}" aria-pressed="${inCap}">${inCap?'✓ В капсуле':'В капсулу '+NM().g}</button>${c.cut?`<button data-act="cadd" data-v="${k}">На двойника</button>`:''}</div>
  <button class="btn line" style="width:100%" data-act="close">Закрыть</button></div></div>`}
 function revSheet(){const n=3-S.rev.left,ok=REV.items.length||REV.note.trim();
@@ -1275,7 +1288,7 @@ function exSheet(n){const pp=P(),dk=pp.deck.filter(x=>typeof x==='string'&&CAT[x
   ['Честное зеркало: фигуру не «стройним», лицо не меняем','Не похоже — переделаем, пока не будет похоже','Фото видит только Яна, удаляется через 30 дней']],
  ['Первый образ в подарок','По твоему тесту Яна собирает один образ целиком и показывает на тебе. Это бесплатно — чтобы ты поняла, как она чувствует твой стиль.'.replace('поняла',G('поняла','понял')),
   (()=>{const ex=S.g==='m'?null:{p224b3c23:[14,6,34,34],p6e3b70c7:[38,0,54,56],pb1c8672a:[10,44,42,54],p75e8f5d1:[53,56,24,20],p672a579e:[52,79,24,10]},ks=ex?Object.keys(ex).filter(k=>CAT[k]):L0[1];if(ex){S.y.mood=S.y.mood||{};S.y.mood.ex=ex}return mood(ks,ex?'ex':0,{own:ex?null:L0[2]})})(),
-  ['Вещи из магазинов твоего бюджета, с ценами','Нажми на иконку человечка — образ на двойнике','Понравится — Яна соберёт всю капсулу']],
+  ['Вещи из магазинов твоего бюджета, с ценами','Кнопка «На мне» — тот же образ на твоём двойнике','Понравится — Яна соберёт всю капсулу']],
  ['Капсула 8–10 вещей','Вещи, которые сочетаются между собой: из них складываются 6 образов на твою неделю. У каждой — размер от Яны и ссылка на магазин.',
   `<div class="exgrid">${items.map(k=>`<div class="xc"><span class="role ${ROLE[k]||'b'}">${RS[ROLE[k]||'b']}</span><img src="${src(k)}" alt="${CAT[k].n}"></div>`).join('')}</div><span class="lbl">Б — база, носится годами · Т — тренд сезона · А — акцент, делает образ твоим</span>`,
   ['Твои вещи из шкафа тоже идут в образы — докупать только недостающее','Сумма под твой бюджет, покупать ничего не обязательно','Две правки входят в цену']],
