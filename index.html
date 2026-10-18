@@ -770,6 +770,7 @@ async function genCore(){const g=S.g,key=genKey(),like=S.swipe.like,no=S.swipe.n
   if(pf.tex.length&&TEXT.some(([t,r])=>pf.tex.includes(t)&&r.test(n)))v+=8;
   const bt=BTIER[S.budget];if(bt&&bt.includes(x.b||''))v+=10;
   v+=figSc(x.n);
+  {const z=(POOL[x.id]||{}).z;if(z&&z.length&&kd!=='bag'){const w=kd==='shoes'?[String(S.shoe)]:kd==='bottom'?S.bsizes:kd==='dress'?[...S.sizes,...S.bsizes]:S.sizes;if(w.length&&!w.some(q=>[q,...((SZMAP[S.g]||{})[q]||[])].some(m=>z.includes(m))))v-=60}}
   if(base.some(b=>b.length>3&&n.startsWith(b)))v-=18;return v};
  const S2=C.map(x=>({...x,v:sc(x)}));
  const shT=used=>used.filter(u=>KIND((CAT[u]||POOL[u]||{}).n,(CAT[u]||{}).cc||(POOL[u]||{}).c)==='shoes').map(u=>SHT((CAT[u]||POOL[u]).n));
