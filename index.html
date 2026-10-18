@@ -225,6 +225,8 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .sum.rq div b{text-transform:none;max-width:62%}
 .taste button{font-size:10.5px;border:1px solid var(--ink);padding:3px 6px;background:none;text-align:left;cursor:pointer}
 .taste button.no{border-color:#c9c9c9;color:#a5a5a5;text-decoration:line-through}
+.bbar{position:sticky;top:calc(56px + env(safe-area-inset-top,0px));z-index:8;background:var(--paper);display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:9px 0 11px;border-bottom:1px solid var(--ink);font-size:11.5px;margin:0 0 4px}.bbar b{font-weight:500;font-size:15px;font-variant-numeric:tabular-nums}.bbar .bl{margin-left:auto;color:var(--mute);font-size:11px}.bbar i{position:absolute;left:0;bottom:-1px;height:3px;background:var(--ink);transition:width .4s}.bbar.over .bl{color:var(--alert)}.bbar.over i{background:var(--alert)}.bbar .bd{font-size:11px;padding:2px 6px;background:var(--ink);color:var(--paper);animation:pop .35s}.bbar.ch b{animation:bflash 1.2s}@keyframes bflash{0%{background:#f3e9a8}100%{background:transparent}}
+.sheet .bbar{top:-18px;margin:-18px -16px 10px;padding:12px 16px 12px}
 .budg{display:flex;flex-direction:column;gap:6px;border:1px solid var(--ink);padding:10px 12px;font-size:11.5px}
 .budg .bar{height:4px;background:var(--hair);position:relative}
 .budg .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--ink)}
@@ -325,7 +327,7 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .lvoice{font-size:10px;border:1px solid var(--ink);padding:2px 7px;margin-left:8px;white-space:nowrap}
 .lrow{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--hair)}
 .lrow img{width:44px;height:70px;object-fit:cover;object-position:top;background:var(--fog)}
-.lrow .t{flex:1;min-width:0;font-size:11.5px}.lrow .t small{display:block;color:var(--mute);font-size:10px;margin-top:2px;text-transform:none}
+.lrow .t{flex:1;min-width:0;font-size:11.5px}.lrow .lt{display:flex;justify-content:space-between;gap:8px;align-items:baseline}.lrow .lp{font-weight:500;font-variant-numeric:tabular-nums;white-space:nowrap}.capsum{display:flex;align-items:baseline;gap:10px;padding:10px 0;border-bottom:1px solid var(--hair);font-size:12px}.capsum b{font-weight:500;font-size:15px;font-variant-numeric:tabular-nums}.capsum .lbl{margin-left:auto;text-align:right}.lrow .t small{display:block;color:var(--mute);font-size:10px;margin-top:2px;text-transform:none}
 .lrow .yacts{width:auto;margin:0}.lrow .yacts button{padding:7px 10px}
 .rec{display:flex;align-items:center;gap:12px;border:1px solid var(--ink);padding:12px}
 .rec .dot{width:12px;height:12px;border-radius:50%;background:var(--alert);flex:none}
@@ -710,7 +712,7 @@ function cands0(g){const a=Object.keys(CAT).filter(k=>k[0]==='p'&&CAT[k].g===g).
  return a.concat(Object.values(POOL||{}).filter(x=>x.g===g).map(x=>({id:x.i,n:x.n,p:x.p,cc:x.c,t:x.t,r:x.r,b:x.b,col:hexOf(x.l)})))}
 async function regP(id){if(CAT[id]&&CAT[id].cut)return CAT[id];const x=POOL&&POOL[id];if(!x)return CAT[id];let cut=null;try{cut=await cell(`cat/${x.x[2]?'y':'x'}/${pad3(x.x[0])}.webp`,x.x[1],240,320,5,1)}catch(e){}
  let hi=null;if(HI[id]){try{hi=await cell(`cat/h2/${pad3(HI[id][0])}.webp`,HI[id][1],600,800,6)}catch(e){}}
- CAT[id]={g:x.g,n:x.n,s:x.b||'Lime',p:x.p,c:CGROUP[x.c]||'верх',cc:x.c,t:x.t,sz:'',szs:x.z&&x.z.length?x.z:null,img:hi||cut,hi,cut,u:x.u};if(!ROLE[id])ROLE[id]='b';return CAT[id]}
+ CAT[id]={_r:'P',g:x.g,n:x.n,s:x.b||'Lime',p:x.p,c:CGROUP[x.c]||'верх',cc:x.c,t:x.t,sz:'',szs:x.z&&x.z.length?x.z:null,img:hi||cut,hi,cut,u:x.u};if(!ROLE[id])ROLE[id]='b';return CAT[id]}
 const wpick=(arr,w)=>{const tot=arr.reduce((a,x)=>a+w(x),0);let r=Math.random()*tot;for(const x of arr){r-=w(x);if(r<=0)return x}return arr[arr.length-1]};
 let DECKP=null;function newDeck(){return DECKP||(DECKP=deckCore().finally(()=>DECKP=null))}
 async function deckCore(){const g=S.g;S.deckReady=false;await loadPool();if(g!==S.g)return;const C=cands(g),used=[],names=new Set();
@@ -806,6 +808,7 @@ const plural=(n,a,b,c)=>n%10===1&&n%100!==11?a:n%10>=2&&n%10<=4&&(n%100<10||n%10
 let REV={items:[],note:''};
 const ICR={"shayk": "Ondine Goat · CC BY-SA 4.0 · Wikimedia Commons", "zendaya": "PhilipRomano · CC BY-SA 4.0 · Wikimedia Commons", "hailey": "Kevin Paul · CC BY 4.0 · Wikimedia Commons", "cbk": "John Mathew Smith &amp; www.celebrity-photos.com from Laurel · CC BY-SA 2.0 · Wikimedia Commons", "elordi": "JoshPopov · CC BY 4.0 · Wikimedia Commons", "gosling": "Raph_PH · CC BY 2.0 · Wikimedia Commons", "statham": "MTV International · CC BY 3.0 · Wikimedia Commons", "chalamet": "Harald Krichel · CC BY-SA 4.0 · Wikimedia Commons"};
 const src=k=>(CAT[k]&&CAT[k].img)||IMG+k+'.jpg';
+const lookSum=ks=>ks.reduce((a,k)=>a+(CAT[k]?price(k):0),0),capSum=()=>S.y.items.reduce((a,k)=>a+(CAT[k]?price(k):0),0);
 const price=k=>S.watch&&DROP[k]?CAT[k].p-DROP[k]:CAT[k].p;
 const axes=()=>Object.keys(S.swipe.axes||{}).length?S.swipe.axes:DEMO_AXES;
 function slotsBar(){const{taken,total}=S.slots;return `<span class="bars">${Array.from({length:total},(_,i)=>`<i class="${i<taken?'':'free'}"></i>`).join('')}</span>`}
@@ -843,7 +846,7 @@ function moodDrag(){const b=$('#mood');if(!b)return;const i=+b.dataset.i,P2=new 
  window._msz=f=>{const se=sel();if(!se){toast('Сначала коснись вещи');return}scale(se,f,parseFloat(se.style.width),parseFloat(se.style.height),parseFloat(se.style.left),parseFloat(se.style.top));save(S.msel)}}
 function stage(ks,own,i,noShare){const vt=S.votes[i],on=ks.filter(k=>CAT[k]&&CAT[k].cut),off=ks.filter(k=>CAT[k]&&!CAT[k].cut);return `<div class="stage tw">${twin(on)}${off.length||own?`<div class="col">${off.map(k=>`<img src="${src(k)}" alt="${CAT[k].n}">`).join('')}${own?`<span class="own">${own}<br>есть у тебя</span>`:''}</div>`:''}${noShare?'':`<button class="share" data-act="story" data-v="${i}">↗︎ В сторис</button>`}${vt&&!noShare?`<span class="votes">♥ ${vt[0]} · ✕ ${vt[1]}</span>`:''}</div>`}
 
-function render(){
+function render(){persist();
  clearInterval(timerId);clearInterval(reelId);
  const a=$('#app');a.classList.toggle('still',S.still);S.still=false;$('#overlay').innerHTML=S.menu?menu():'';
  if(S.mode==='yana'){a.innerHTML=hdr()+yana();boardDrag();return}
@@ -1000,7 +1003,7 @@ function vote(v){const card=$('#card');const k=DECK.at(S.swipe.pos);if(!card||ca
  setTimeout(()=>{if(typeof k==='object'&&k.ic!=null)S.swipe.icons[P().icons[k.ic][0]]=v;else (v==='yes'?S.swipe.like:S.swipe.no).push(k);S.swipe.pos++;S.still=S.swipe.pos<DECK.length;render()},260)}
 
 function menu(){const names=['Начало','Стиль','Тест вкуса','Детали вкуса','Фото','Двойник','Первый образ',...PAID,'Статус','Капсула'];return `<div class="menu"><div class="in">${names.map((t,i)=>`<button data-act="goto" data-v="${i}" ${i===S.i?'aria-current="step"':''}><span class="n">${n2(i)}</span>${t}</button>`).join('')}
- <button data-act="g" data-v="${S.g==='m'?'f':'m'}" style="margin-top:24px"><span class="n">⇄</span>${S.g==='m'?'Для неё':'Для него'}</button><button data-act="gift"><span class="n">♥</span>Подарить капсулу</button><button data-act="mode" data-v="yana"><span class="n">→</span>Кабинет Яны</button></div></div>`}
+ <button data-act="g" data-v="${S.g==='m'?'f':'m'}" style="margin-top:24px"><span class="n">⇄</span>${S.g==='m'?'Для неё':'Для него'}</button><button data-act="gift"><span class="n">♥</span>Подарить капсулу</button><button data-act="mode" data-v="yana"><span class="n">→</span>Кабинет Яны</button><button data-act="resetdemo"><span class="n">↺</span>Начать заново</button></div></div>`}
 
 let YM={};const YDB=()=>new Promise((ok,no)=>{try{const r=indexedDB.open('yana_mood',1);r.onupgradeneeded=()=>r.result.createObjectStore('m');r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)}catch(e){no(e)}});
 function ymSave(){YDB().then(db=>db.transaction('m','readwrite').objectStore('m').put(YM,'all')).catch(()=>{})}
@@ -1038,7 +1041,7 @@ async function cell(u,k,cw,ch,n,png){const i=await loadImg(u);const c=document.c
  if(x1<=x0)return c.toDataURL('image/png');const t=document.createElement('canvas');t.width=x1-x0+1;t.height=y1-y0+1;t.getContext('2d').drawImage(c,x0,y0,t.width,t.height,0,0,t.width,t.height);return t.toDataURL('image/png')}
 async function regA(id){if(CAT[id]&&CAT[id].img)return CAT[id];const x=CATL&&CATL.find(z=>z.id===id);if(!x)return CAT[id];
  await loadPool();const img=x.im?x.im:HI[id]?await cell(`cat/h2/${pad3(HI[id][0])}.webp`,HI[id][1],600,800,6):await cell(`cat/v/${pad3(x.s)}.webp`,x.k,270,360,10);let cut=null;if(CUT[id]){const [si,k,dy]=CUT[id];try{cut=await cell(`cat/${dy?'y':'x'}/${pad3(si)}.webp`,k,240,320,5,1)}catch(e){}}
- CAT[id]={g:x.g,n:x.n,s:x.b,p:x.p,c:CGROUP[x.c]||'верх',cc:x.c,t:[],sz:'',szs:x.sz.length?x.sz:null,img,cut,u:x.u};if(!ROLE[id])ROLE[id]='b';return CAT[id]}
+ CAT[id]={_r:'A',g:x.g,n:x.n,s:x.b,p:x.p,c:CGROUP[x.c]||'верх',cc:x.c,t:[],sz:'',szs:x.sz.length?x.sz:null,img,cut,u:x.u};if(!ROLE[id])ROLE[id]='b';return CAT[id]}
 function reg(id){return CAT[id]}
 const SYN0=[['тренч','плащ'],['пиджак','блейзер','жакет'],['кеды','кроссовк','сникер'],['свитер','джемпер','пуловер'],['худи','толстовк'],['пуховик','куртк'],['туфли','лофер','дерби'],['водолазк','гольф'],['брюки','штаны','чинос'],['ботинки','ботильон','челси']],SYN={};SYN0.forEach(g=>g.forEach(w=>SYN[w]=g));
 function cfList(skipCat){const g=CF.g||S.g,q=CF.q.trim().toLowerCase();let l=CATL.filter(x=>x.g===g&&(skipCat||CF.c==='all'||x.c===CF.c||q)&&(!CF.br.length||CF.br.includes(x.b))&&(!CF.pmax||x.p<=CF.pmax)&&(!CF.szs.length||CF.szs.some(z=>x.sz.includes(z)))&&(!CF.sale||x.o)&&(!q||q.split(/\s+/).every(w=>(SYN[w]||[w]).some(v=>x.q.includes(v)))));
@@ -1051,6 +1054,8 @@ function catResults(){const l=cfList(),on=new Set(S.board.layers.map(z=>z.id));
  ${!l.length?(()=>{const q=CF.q.trim().toLowerCase(),n=q?CATL.filter(x=>x.g===(CF.g||S.g)&&q.split(/\s+/).every(w=>(SYN[w]||[w]).some(v=>x.q.includes(v)))).length:0;return `<p class="txt" style="color:var(--mute)">Ничего не нашлось с этими фильтрами.${n?` Без фильтров по «${CF.q}» есть ${n}.`:''}</p>${n?`<button class="btn line" style="width:100%" data-act="cfr2">Снять фильтры, оставить поиск</button>`:''}`})():''}`}
 const CAP=()=>S.budget;
 const SZMAP={f:{XS:['XS','XS/S','40','42'],S:['S','XS/S','42','44'],M:['M','M/L','44','46'],L:['L','M/L','46','48'],XL:['XL','48','50'],XXL:['XXL','50','52']},m:{S:['S','46'],M:['M','M/L','48'],L:['L','M/L','50'],XL:['XL','52'],XXL:['XXL','54']}};
+let BPREV=null;function budgBar(){const tot=S.y.items.reduce((a,k)=>a+(CAT[k]?CAT[k].p:0),0),cap=CAP(),ch=BPREV!=null&&BPREV!==tot,d=tot-(BPREV??tot);BPREV=tot;
+ return `<div class="bbar ${tot>cap?'over':''} ${ch?'ch':''}"><span>Капсула · ${S.y.items.length} ${plural(S.y.items.length,"вещь","вещи","вещей")}</span><b>${rub(tot)}</b>${ch?`<span class="bd">${d>0?'+':'−'}${rub(Math.abs(d))}</span>`:''}<span class="bl">${tot>cap?'перебор '+rub(tot-cap):'из '+rub(cap)+' · осталось '+rub(cap-tot)}</span><i style="width:${Math.min(100,tot/cap*100)}%"></i></div>`}
 function budgBox(){const tot=S.y.items.reduce((a,k)=>a+(CAT[k]?CAT[k].p:0),0),forK=S.cfor!=null?S.y.items[S.cfor]:null,base=forK?tot-CAT[forK].p:tot,cap=CAP(),left=cap-base;
  return `<div class="budg ${tot>cap?'over':''}"><div class="frow" style="margin:0"><span>Капсула ${NM().g}: <b>${rub(tot)}</b> из ${rub(cap)}</span><span>${forK?'на замену до '+rub(Math.max(0,left)):tot>cap?'перебор '+rub(tot-cap):'осталось '+rub(cap-tot)}</span></div><div class="bar"><i style="width:${Math.min(100,tot/cap*100)}%"></i></div></div>`}
 function catView(){if(!CATL){loadCat();bar(null);return scr([ynav(),`<h2 class="ttl">Каталог</h2>`,`<p class="lbl">Загружаем вещи магазинов…</p>`])}
@@ -1129,7 +1134,7 @@ function yana(){const y=S.y;clearInterval(recId);
   `<span class="lbl">Открой заявку ${NM().g} — там согласование</span>`])}
  if(y.open==='ask')return askView();
  const tot=y.items.reduce((s,k)=>s+CAT[k].p,0),done=y.items.filter(k=>y.ok[k]).length,b=S.budget,cap=b,over=tot>cap,lk=S.swipe.like.length?S.swipe.like:P().deck.filter(x=>typeof x==='string').slice(0,5),nk=S.swipe.no.length?S.swipe.no:P().deck.filter(x=>typeof x==='string').slice(9,12);
- const head=`<button class="tag" data-act="closereq">← Заявки</button>
+ const head=budgBar()+`<button class="tag" data-act="closereq">← Заявки</button>
   <div style="display:flex;gap:12px;align-items:flex-end;margin-top:16px"><button data-act="zoom" aria-label="Увеличить фото" style="position:relative;flex:none"><img src="${S.photo.full||IMG+AV}" alt="Фото клиента" style="width:62px;height:118px;object-fit:cover;object-position:top;background:var(--fog)"><span style="position:absolute;right:2px;bottom:2px;background:var(--paper);font-size:11px;padding:0 3px">⤢</span></button><div style="flex:1;min-width:0"><h2 class="ttl">${NM().age}</h2><span class="lbl">Демо-${G('клиентка','клиент')}: имя и возраст в рабочей версии — из анкеты</span></div></div>
   <div class="sum rq" style="margin-top:12px">${[['Рост',S.height+' см'],['Размер верха',S.sizes.join(' / ')],['Размер низа',S.bsizes.join(' / ')],['Размер обуви',S.shoe],['Обувь',S.pref.shoes.join(', ')],['Крой джинсов',S.pref.jeans.join(', ')],['Фактуры',S.pref.tex.join(', ')],['Цвета — люблю',COLORS.filter(c=>S.colors[c[0]]==='love').map(c=>c[1]).join(', ')],['Цвета — никогда',COLORS.filter(c=>S.colors[c[0]]==='never').map(c=>c[1]).join(', ')],['Фигура',FIGS.find(x=>x.at(0)===S.fig).at(1)],['Подчеркнуть',S.accent.join(', ')],['Скрыть',S.hide.join(', ')],['Бюджет капсулы',S.budget>=200000?'от 150 000 ₽':'до '+rub(S.budget)],['Неделя',S.week.join(', ')],['Офис',S.week.includes('Офис')?S.office:''],['Стиль',(S.vibe||[]).map(k=>(VIBES[S.g].find(v=>v[0]===k)||[])[1]).join(', ')],['Уже есть в шкафу',S.base.join(', ')],['Свои фото вещей',S.own.length?S.own.length+' шт.':''],['Показ в блоге',S.hero?'согласна':'']].filter(r=>r[1]).map(([a,b])=>`<div><span>${a}</span><b>${b}</b></div>`).join('')}</div>
   <div class="q" style="margin-top:14px"><span class="lbl">|Тест вкуса|</span><div class="taste">${Object.entries(axes()).map(([a,b])=>`<span style="background:var(--ink);color:var(--paper)">${a}: ${b}</span>`).join('')}${lk.map(k=>`<button data-act="tview" data-v="${k}">${CAT[k].n}</button>`).join('')}${nk.map(k=>`<button class="no" data-act="tview" data-v="${k}">${CAT[k].n}</button>`).join('')}${Object.entries(S.swipe.icons||{}).map(([n,v])=>`<span class="${v==='yes'?'':'no'}">${v==='yes'?'♥ ':''}${n}</span>`).join('')}</div></div>`;
@@ -1206,7 +1211,7 @@ const NEU2=['#111110','#f2efe8','#8a8f96','#c8b39a','#25365c','#5a3b2a'],colOf=k
 function lookSheet(i){const pv=$('#overlay .sheet .in'),st=pv?pv.scrollTop:0,re=!!pv&&pv.dataset.look===String(i);lookSheet0(i);const sh=$('#overlay .sheet'),inn=$('#overlay .sheet .in');if(!inn)return;inn.dataset.look=i;if(re){sh.classList.add('re');inn.scrollTop=st}}
 function lookSheet0(i){setTimeout(moodDrag,0);const [t,ks,own]=LOOKS[i],ok=!!S.y.looksOk[i],n=LOOKS.length,y=S.y,rec=y.lrec===i,v=y.lookVoice[i];clearInterval(recId);
  if(rec)recId=setInterval(()=>{y.lookVoice[i]=(y.lookVoice[i]||0)+1;const e=$('#lrect');if(e)e.textContent='0:'+n2(y.lookVoice[i])},1000);
- $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Образ"><div style="display:flex;justify-content:space-between;align-items:center"><span class="lbl">|Образ ${n2(i+1)} из ${n} · ${t}|</span><span class="viewsw"><button data-act="ylook" data-v="${(i+n-1)%n}" aria-label="Предыдущий">‹</button><button data-act="ylook" data-v="${(i+1)%n}" aria-label="Следующий">›</button></span></div>
+ $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Образ">${budgBar()}<div style="display:flex;justify-content:space-between;align-items:center"><span class="lbl">|Образ ${n2(i+1)} из ${n} · ${t}|</span><span class="viewsw"><button data-act="ylook" data-v="${(i+n-1)%n}" aria-label="Предыдущий">‹</button><button data-act="ylook" data-v="${(i+1)%n}" aria-label="Следующий">›</button></span></div>
  <div class="look solo">${mood(ks,i,{ed:1,own})}</div>
  <div class="msz"><span class="lbl">Тяни вещь пальцем · разведи два пальца — больше</span><span class="viewsw"><button data-act="msz" data-v="0.9" aria-label="Меньше">−</button><button data-act="msz" data-v="1.1" aria-label="Больше">+</button><button data-act="mreset" data-v="${i}" aria-label="Разложить заново">↺</button></span></div>
  <div class="q"><span class="lbl">|Добавить вещь · нажми — ляжет на мудборд|</span><div class="lk">${y.items.map(k=>`<button data-act="lkitem" data-i="${i}" data-v="${k}" aria-pressed="${ks.includes(k)}" title="${CAT[k].n}" aria-label="${CAT[k].n}"><img src="${src(k)}" alt=""></button>`).join('')}</div><button class="btn line" style="width:100%;margin-top:8px" data-act="lkcat" data-v="${i}">+ Из каталога</button></div>
@@ -1339,6 +1344,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'copy':{const tx='https://yana.style/v/014';try{navigator.clipboard.writeText(tx).then(()=>toast('Ссылка скопирована'),()=>toast('Выдели ссылку и скопируй'))}catch(_){toast('Выдели ссылку и скопируй')}return}
  case'gift':S.menu=false;render();giftSheet();return;
  case'ex':exSheet(+v);return;
+ case'resetdemo':try{localStorage.removeItem(STK)}catch(e){}location.reload();return;
  case'exgo':$('#overlay').innerHTML='';S.i=SEQ.indexOf('vibe');break;
  case'giftier':S.gift.tier=v;giftSheet();return;
  case'giftocc':S.gift.occ=v;giftSheet();return;
@@ -1419,7 +1425,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'msz':if(window._msz)window._msz(+v);return;
  case'mreset':if(S.y.mood)delete S.y.mood[+v];S.msel=null;lookSheet(+v);return;
  case'bgen':toast('В рабочей версии здесь одна генерация на двойнике ≈1,5 кредита (~7 ₽). В прототипе — без генерации');return;
- case'lkitem':{const i=+t.dataset.i,l=LOOKS[i],j=l[1].indexOf(v);if(j>-1)l[1].splice(j,1);else lookAdd(l[1],v);delete S.y.looksOk[i];if(!S.y.why[i])S.y.stale=Object.assign(S.y.stale||{},{[i]:1});lookSheet(i);return}
+ case'lkitem':{const i=+t.dataset.i,l=LOOKS[i],j=l[1].indexOf(v),b0=lookSum(l[1]),was=[...l[1]];setTimeout(()=>{const gone=was.filter(k=>!l[1].includes(k)&&k!==v);toast(j>-1?'Убрано из образа':gone.length?'Заменено в образе: '+CAT[gone[0]].n.toLowerCase():'Добавлено в образ')},0);if(j>-1)l[1].splice(j,1);else lookAdd(l[1],v);delete S.y.looksOk[i];if(!S.y.why[i])S.y.stale=Object.assign(S.y.stale||{},{[i]:1});lookSheet(i);return}
  case'lkown':{const i=+t.dataset.i,l=LOOKS[i];l[2]=l[2]===v?undefined:v;delete S.y.looksOk[i];lookSheet(i);return}
  case'lrec':{const i=+v;if(S.y.lrec===i){S.y.lrec=null;toast('Голосовое к образу сохранено')}else{S.y.lrec=i;S.y.lookVoice[i]=0}lookSheet(i);return}
  case'ylookok':S.y.looksOk[v]?delete S.y.looksOk[v]:S.y.looksOk[v]=true;lookSheet(+v);return;
@@ -1451,5 +1457,17 @@ document.addEventListener('change',e=>{
 (()=>{let el=null,y0=0,dy=0;document.addEventListener('touchstart',e=>{const inn=e.target.closest('.sheet .in');el=null;if(!inn||inn.scrollTop>2||e.target.closest('.mood,.dnd,.board,input,textarea,select,.hsug,.lk,.ymrow,.ctabs'))return;el=inn;y0=e.touches[0].clientY;dy=0},{passive:true});
  document.addEventListener('touchmove',e=>{if(!el)return;dy=e.touches[0].clientY-y0;if(dy<=0||el.scrollTop>2){if(el.scrollTop>2)el=null;dy=0;return}el.style.transition='none';el.style.transform=`translateY(${dy}px)`;if(dy>6&&e.cancelable)e.preventDefault()},{passive:false});
  document.addEventListener('touchend',()=>{if(!el)return;const x=el;el=null;x.style.transition='transform .22s';if(dy>90){x.style.transform='translateY(110%)';setTimeout(()=>{const c=document.querySelector('#overlay .sheet .btn[data-act=close]');if(c)c.click();else{$('#overlay').innerHTML='';S.still=true;render()}},180)}else x.style.transform='';dy=0})})();
-render();
+// ---------- сохранение прогресса: перезагрузка страницы не сбрасывает путь ----------
+const STK='yana_capsule_state_v1',CAT0=new Set(Object.keys(CAT));let stT=null,stOn=false;
+function persist(){if(!stOn)return;clearTimeout(stT);stT=setTimeout(()=>{try{const keys=new Set([...S.y.items,...LOOKS.flatMap(l=>l[1]),...DECK.filter(x=>typeof x==='string'),...S.swipe.like,...S.swipe.no,...((S.free||[])[0]||[])]),cat={};
+ keys.forEach(k=>{const c=CAT[k];if(!c)return;const o={...c};delete o.img;delete o.hi;delete o.cut;cat[k]=o});
+ const d={v:1,S,DECK,SINGLES,LOOKS,ROLE,cat,CF},js=JSON.stringify(d);try{localStorage.setItem(STK,js)}catch(e){const d2=JSON.parse(js);d2.S.photo={full:null,face:null};d2.S.own=[];localStorage.setItem(STK,JSON.stringify(d2))}}catch(e){}},300)}
+async function restore(){let d=null;try{d=JSON.parse(localStorage.getItem(STK)||'null')}catch(e){}if(!d||d.v!==1||!d.S)return false;
+ try{setG(d.S.g||'f');Object.assign(S,d.S);S.menu=false;DECK=d.DECK;SINGLES=d.SINGLES;LOOKS.length=0;d.LOOKS.forEach(l=>LOOKS.push(l));Object.assign(ROLE,d.ROLE||{});if(d.CF)Object.assign(CF,d.CF);
+  const reg=[];Object.entries(d.cat||{}).forEach(([k,o])=>{if(CAT0.has(k)&&CAT[k])Object.assign(CAT[k],o);else{CAT[k]=o;if(o._r)reg.push([k,o])}});
+  if(reg.length){$('#app').innerHTML='<div style="padding:40vh 16px 0;text-align:center" class="lbl">Возвращаем тебя туда, где ты была…</div>';await loadPool();if(reg.some(r=>r[1]._r==='A'))await loadCat();
+   for(const [k,o] of reg){delete CAT[k].img;try{await (o._r==='P'?regP(k):regA(k))}catch(e){}if(CAT[k])Object.assign(CAT[k],{sz:o.sz,szSel:o.szSel})}}
+  return true}catch(e){try{localStorage.removeItem(STK)}catch(_){}location.reload();return true}}
+document.addEventListener('click',()=>persist(),true);document.addEventListener('input',()=>persist(),true);addEventListener('pagehide',()=>{clearTimeout(stT);stOn&&(stT=null,persist())});
+restore().then(()=>{stOn=true;render()});
 </script>
