@@ -335,6 +335,7 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .taste span.no{border-color:#c9c9c9;color:#a5a5a5;text-decoration:line-through}
 
 /* шторка, сторис, тост */
+.sheet.re,.sheet.re .in{animation:none!important}
 .sheet{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.25);display:flex;align-items:flex-end;justify-content:center;animation:fadeIn .2s}
 .sheet .in{background:var(--paper);width:100%;max-width:492px;max-height:92%;overflow:auto;padding:18px max(16px,env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));animation:up .35s cubic-bezier(.2,.7,.2,1);display:flex;flex-direction:column;gap:14px}
 @keyframes up{from{transform:translateY(100%)}}
@@ -1202,7 +1203,8 @@ const NEU2=['#111110','#f2efe8','#8a8f96','#c8b39a','#25365c','#5a3b2a'],colOf=k
   ${tops.length?`<p class="txt">Стиль «${(S.vibe||[]).map(k=>(VIBES[g].find(v=>v[0]===k)||[])[1]).join(' + ')}» у стилистов чаще всего держат: ${tops.join(', ')}.</p>`:''}
   ${rows.map(([t,l,others])=>`<span class="lbl">${t}</span><div class="hsug">${l.map(x=>`<button data-act="hadd" data-i="${i}" data-v="${x.id}" aria-label="${x.n}"><img data-hs="${x.id}" alt=""><span>${x.n}</span><b>${rub(x.p)}</b><small>${why(x,others)}</small></button>`).join('')}</div>`).join('')}
   <span class="lbl">Обучено на 4 477 образах стилистов Lamoda, гайде Яны «Цвета, которые не ссорятся» и курсе по типам фигур (Джованнис, Ри, Зелепухин)</span></div>`}
-function lookSheet(i){setTimeout(moodDrag,0);const [t,ks,own]=LOOKS[i],ok=!!S.y.looksOk[i],n=LOOKS.length,y=S.y,rec=y.lrec===i,v=y.lookVoice[i];clearInterval(recId);
+function lookSheet(i){const pv=$('#overlay .sheet .in'),st=pv?pv.scrollTop:0,re=!!pv&&pv.dataset.look===String(i);lookSheet0(i);const sh=$('#overlay .sheet'),inn=$('#overlay .sheet .in');if(!inn)return;inn.dataset.look=i;if(re){sh.classList.add('re');inn.scrollTop=st}}
+function lookSheet0(i){setTimeout(moodDrag,0);const [t,ks,own]=LOOKS[i],ok=!!S.y.looksOk[i],n=LOOKS.length,y=S.y,rec=y.lrec===i,v=y.lookVoice[i];clearInterval(recId);
  if(rec)recId=setInterval(()=>{y.lookVoice[i]=(y.lookVoice[i]||0)+1;const e=$('#lrect');if(e)e.textContent='0:'+n2(y.lookVoice[i])},1000);
  $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Образ"><div style="display:flex;justify-content:space-between;align-items:center"><span class="lbl">|Образ ${n2(i+1)} из ${n} · ${t}|</span><span class="viewsw"><button data-act="ylook" data-v="${(i+n-1)%n}" aria-label="Предыдущий">‹</button><button data-act="ylook" data-v="${(i+1)%n}" aria-label="Следующий">›</button></span></div>
  <div class="look solo">${mood(ks,i,{ed:1,own})}</div>
