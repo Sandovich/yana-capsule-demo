@@ -717,10 +717,11 @@ async function regP(id){if(CAT[id]&&CAT[id].cut)return CAT[id];const x=POOL&&POO
  CAT[id]={_r:'P',g:x.g,n:x.n,s:x.b||'Lime',p:x.p,c:CGROUP[x.c]||'верх',cc:x.c,t:x.t,sz:'',szs:x.z&&x.z.length?x.z:null,img:hi||cut,hi,cut,u:x.u};if(!ROLE[id])ROLE[id]='b';return CAT[id]}
 const wpick=(arr,w)=>{const tot=arr.reduce((a,x)=>a+w(x),0);let r=Math.random()*tot;for(const x of arr){r-=w(x);if(r<=0)return x}return arr[arr.length-1]};
 let DECKP=null;function newDeck(){return DECKP||(DECKP=deckCore().finally(()=>DECKP=null))}
-async function deckCore(){const g=S.g;S.deckReady=false;await loadPool();if(g!==S.g)return;const C=cands(g),used=[],names=new Set();
+async function deckCore(){const g=S.g;S.deckReady=false;await loadPool();if(g!==S.g)return;const C=cands(g),used=[],names=new Set();let SEEN=[];try{SEEN=JSON.parse(localStorage.getItem('yana_seen')||'[]')}catch(e){}const seen=new Set(SEEN);
  const plan=g==='f'?['outer','top','bottom','jacket','top','shoes','bottom','shoes']:['outer','top','bottom','jacket','top','shoes','bottom','shoes'],NEU=['#111110','#f2efe8','#8a8f96','#c8b39a','#25365c','#5a3b2a'],PRN=/принт|клетк|полоск|горош|горох|леопард|узор|жаккард|цветоч|пайет|блест/;
  for(const kd of plan){const ust=used.filter(u=>{const q=C.find(z=>z.id===u);return q&&KIND(q.n,q.cc)==='shoes'}).map(u=>SHT(C.find(z=>z.id===u).n));let l=C.filter(x=>KIND(x.n,x.cc)===kd&&!used.includes(x.id)&&!names.has(x.n)&&!(kd==='shoes'&&ust.includes(SHT(x.n))));if(!l.length)l=C.filter(x=>!used.includes(x.id)&&!names.has(x.n));if(!l.length)break;
-  const vt=vibeTags(),hasV=(S.vibe||[]).length,x=wpick(l,z=>Math.exp(.5*seasonSc(z.n))*(z.col&&NEU.includes(z.col)?1.6:.7)*(PRN.test(z.n.toLowerCase())?.4:1)*(hasV?Math.exp(2*styleSc(z.n,g))*(1+z.t.filter(t=>vt.includes(t)).length)*Math.exp(.12*z.r):Math.exp(.35*z.r)));used.push(x.id);names.add(x.n)}
+  const vt=vibeTags(),hasV=(S.vibe||[]).length,x=wpick(l,z=>Math.exp(.5*seasonSc(z.n))*(z.col&&NEU.includes(z.col)?1.6:.7)*(PRN.test(z.n.toLowerCase())?.4:1)*(seen.has(z.id)?.12:1)*(hasV?Math.exp(2*styleSc(z.n,g))*(1+z.t.filter(t=>vt.includes(t)).length)*Math.exp(.12*z.r):Math.exp(.35*z.r)));used.push(x.id);names.add(x.n)}
+ try{localStorage.setItem('yana_seen',JSON.stringify([...used,...SEEN].slice(0,120)))}catch(e){}
  await Promise.all(used.map(regP));if(g!==S.g)return;
  const pr=PR[g],pairs=pr.deck.filter(z=>typeof z==='object');const it=used.filter(k=>CAT[k]&&CAT[k].img);DECK=[it[0],it[1],{ic:0},it[2],pairs[0],it[3],{ic:1},it[4],it[5],{ic:2},pairs[1],it[6],{ic:3},it[7]].filter(Boolean);SINGLES=DECK.filter(x=>typeof x==='string').length;S.deckReady=true;if(cur()==='swipe'&&S.mode==='client'){S.still=true;render()}}
 
@@ -1339,8 +1340,8 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'next':if(cur()==='vibe'){S.deckReady=false;newDeck()}if(cur()==='colors')S.wish=($('#wish')||{}).value||'';if(cur()==='pay')S.slots.taken=Math.min(S.slots.total,S.slots.taken+1);S.i=Math.min(SEQ.length-1,S.i+1);break;
  case'back':S.i=Math.max(0,S.i-1);break;
  case'vote':vote(v);return;
- case'vibe':{const a=S.vibe||(S.vibe=[]),j=a.indexOf(v);if(j>-1)a.splice(j,1);else{if(a.length>=3)a.shift();a.push(v)}S.still=true;break}
- case'reswipe':S.swipe={pos:0,like:[],no:[],axes:{},icons:{}};break;
+ case'vibe':{S.deckReady=false;S.genFor=null;S.swipe={pos:0,like:[],no:[],axes:{},icons:{}};const a=S.vibe||(S.vibe=[]),j=a.indexOf(v);if(j>-1)a.splice(j,1);else{if(a.length>=3)a.shift();a.push(v)}S.still=true;break}
+ case'reswipe':S.swipe={pos:0,like:[],no:[],axes:{},icons:{}};S.deckReady=false;S.genFor=null;break;
  case'pair':{const e=DECK.at(S.swipe.pos),pr=PAIRS.at(e.p);S.swipe.axes=S.swipe.axes||{};S.swipe.axes[pr.ax]=pr.o.at(+v).at(1);S.swipe.pos++;break}
  case'ctab':S.ctab=v;break;
  case'bta':S.bta=v;break;
