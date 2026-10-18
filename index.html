@@ -743,7 +743,9 @@ const FIGR={
 const figKeys=()=>[S.fig,...(S.hide||[]).map(z=>'h:'+z),...(S.accent||[]).map(z=>'a:'+z)].filter(k=>FIGR[k]);
 function figHits(n){n=(n||'').toLowerCase();const out=[];figKeys().forEach(k=>FIGR[k].forEach(([re,sc,lbl])=>{if(re.test(n))out.push([sc,lbl,k])}));return out}
 const figSc=n=>Math.max(-20,Math.min(20,figHits(n).reduce((a,h)=>a+h[0],0)));
-function figWhy(ks){for(const k of ks){const h=figHits(CAT[k].n).filter(z=>z[0]>0)[0];if(h)return `${CAT[k].n} ${h[1]} — под твою фигуру.`}return ''}
+const PLW=/^(брюки|джинсы|лоферы|сапоги|кеды|кроссовки|туфли|ботинки|ботильоны|балетки|мюли|сабо|мокасины|шорты|легинсы|ботфорты|полусапоги|слипоны|дерби|челси|джоггеры|чиносы|слаксы|бермуды|капри|казаки|угги|\S+(ые|ие))$/i;
+const plV=(n,lbl)=>PLW.test((n||'').split(' ')[0])?lbl.replace(/^(не )?(\S+?)(ет|ит)(\s|$)/,(m,ne,st,e,sp)=>(ne||'')+st+(e==='ит'?'ят':/[жшчщ]$/.test(st)?'ут':'ют')+sp):lbl;
+function figWhy(ks,seen){for(const k of ks){if(seen&&seen.has(k))continue;const h=figHits(CAT[k].n).filter(z=>z[0]>0)[0];if(h){if(seen)seen.add(k);return `${CAT[k].n} ${plV(CAT[k].n,h[1])} — под твою фигуру.`}}return ''}
 const FIGN={hour:'песочные часы',pear:'нижний тип (треугольник)',apple:'круг',rect:'прямоугольник',tri:'верхний тип (перевёрнутый треугольник)',oval:'овал',big:'крупный',slim:'худощавый'};
 const BTIER={30000:['Sela','Befree','Re','Maag'],50000:['Befree','Zarina','Love Republic','MadeMan'],80000:['Lime','Love Republic'],120000:['Lime','12 Storeez','2Mood','Idol']};
 function genKey(){return JSON.stringify([S.vibe,S.g,S.swipe.like,S.swipe.no,S.swipe.icons,S.week,S.office,S.budget,S.colors,S.accent,S.base,S.sizes,S.bsizes,S.pref])}
@@ -780,10 +782,10 @@ async function genCore(){const g=S.g,key=genKey(),like=S.swipe.like,no=S.swipe.n
  const COL={};C.forEach(x=>COL[x.id]=x.col),NEU=['#111110','#f2efe8','#8a8f96','#c8b39a','#25365c'],prn=k=>/принт|клетк|полоск|горош|горох|леопард|узор|жаккард|цветоч/.test(CAT[k].n.toLowerCase());
  const fit=(a,b)=>{if(!a||!b)return 0;const ca=COL[a],cb=COL[b];let v=shoeFit(a,b)+shoeFit(b,a);if(ca&&cb)v+=NEU.includes(ca)||NEU.includes(cb)?2:ca===cb?1:-4;if(prn(a)&&prn(b))v-=4;const ta=CAT[a].t||[],tb=CAT[b].t||[];v+=ta.filter(t=>tb.includes(t)).length+pairSc(CAT[a].n,CAT[b].n,g)*3+(ycSame(ca,cb)?3:0);if((ta.includes('Спорт-шик')&&tb.includes('Классика'))||(tb.includes('Спорт-шик')&&ta.includes('Классика')))v-=2;return v};
  const used={},best=(list,with_)=>list.slice().sort((p,q)=>(with_.reduce((s,w)=>s+fit(q,w),0)-(used[q]||0)*1.5)-(with_.reduce((s,w)=>s+fit(p,w),0)-(used[p]||0)*1.5))[0];
- const occ=P().looks.map(l=>l[0]),looks=[],why=[];
+ const occ=P().looks.map(l=>l[0]),looks=[],why=[],fseen=new Set();
  for(let i=0;i<6;i++){let ks;if(dress&&i===3)ks=[dress];else{const tp=tops[i%Math.max(1,tops.length)],bt=bots.length?best(bots,[tp]):null;ks=[tp,bt].filter(Boolean)}
   ks.forEach(k=>used[k]=(used[k]||0)+1);const isVest=ks.some(k=>KIND(CAT[k].n,CAT[k].cc)==='vest'),outs2=isVest?outs.filter(k=>KIND(CAT[k].n,CAT[k].cc)==='outer'):outs;if(outs2.length&&[0,1,2,5].includes(i)){const o=best(outs2,ks);ks.push(o);used[o]=(used[o]||0)+1}if(shoesL.length){const sh=best(shoesL,ks);ks.forEach((o,j)=>{if(shoeFit(sh,o)>=0)return;const kd=KIND(CAT[o].n,CAT[o].cc),pool2=kd==='bottom'?bots:kd==='top'||kd==='vest'?tops:outs.filter(z=>KIND(CAT[z].n,CAT[z].cc)===kd),alt=pool2.filter(z=>z!==o&&!ks.includes(z)&&shoeFit(sh,z)>=0);if(alt.length)ks[j]=best(alt,ks.filter(z=>z!==o));else if(kd==='outer'||kd==='jacket')ks[j]=null});ks=ks.filter(Boolean);ks.push(sh);used[sh]=(used[sh]||0)+1}ks=[...new Set(ks)].slice(0,5);looks.push([occ[i],ks]);
-  const t=st[i%st.length]||'Минимализм',a=CAT[ks[0]],b=ks[1]&&CAT[ks[1]];const fw=figWhy(ks);why.push([HOOKS[g][i],`${a?a.n:''}${b?' и '+b.n.toLowerCase():''} — ${REASON[t]||'просто и точно'}.${fw?' '+fw:''}${shoes&&ks.includes(shoes)?' '+CAT[shoes].n+' держат образ целиком.':''}`])}
+  const t=st[i%st.length]||'Минимализм',a=CAT[ks[0]],b=ks[1]&&CAT[ks[1]];const fw=figWhy(ks,fseen);why.push([HOOKS[g][i],`${a?a.n:''}${b?' и '+b.n.toLowerCase():''} — ${REASON[t]||'просто и точно'}.${fw?' '+fw:''}${shoes&&ks.includes(shoes)?' '+CAT[shoes].n+' держат образ целиком.':''}`])}
  items.forEach(k=>{delete CAT[k].szSel;delete CAT[k].sz});S.y.items=items;S.y.ok={};S.y.looksOk={};S.y.why={};S.genWhy=why;LOOKS.length=0;looks.forEach(l=>LOOKS.push(l));
  items.forEach((k,i)=>ROLE[k]=['outer','jacket'].includes(KIND(CAT[k].n,CAT[k].cc))&&i<2?'a':i===2||i===5?'t':'b');
  const f0=looks[0][1];S.free=[f0,null];S.freeq=`«${f0.map((k,j)=>j?CAT[k].n.toLowerCase():CAT[k].n).join(', ').replace(/, ([^,]*)$/,' и $1')} — это ты на работе, только ${G('собранная','собранный')}». — Яна`;
