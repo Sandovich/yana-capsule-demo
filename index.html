@@ -871,9 +871,9 @@ function render(){
     `<div class="pair">${pr.o.map(([kk,l],j)=>`<button data-act="pair" data-v="${j}"><img src="${src(kk)}" alt=""><span>${l}</span></button>`).join('')}</div>`,
     `<span class="lbl" style="text-align:center">${n2(sw.pos+1)} / ${DECK.length} · выбери одно</span>`)}
    bar(null)}
-  else{const t=styles();p.push(`<p class="big-txt">${t.join(' и ').toLowerCase()} — это твоё. Понравилось ${sw.like.length} из ${SINGLES}.</p>`,
-    `<div class="axes">${PAIRS.map(pr=>`<div><span>${pr.ax}</span><b>${(sw.axes||{})[pr.ax]||'—'}</b></div>`).join('')}${Object.keys(sw.icons||{}).length?`<div><span>Иконы</span><b>${Object.entries(sw.icons).filter(e=>e[1]==='yes').map(e=>e[0]).join(', ')||'—'}</b></div>`:''}</div>`,
-    `<div class="grid" style="--cols:4">${sw.like.map(k=>`<div class="it"><div class="ph"><img src="${src(k)}" alt="${CAT[k].n}"></div></div>`).join('')}</div>`,
+  else{const t=styles();p.push(`<p class="big-txt">${t.join(' и ').toLowerCase()} — это твоё. Вещей понравилось ${sw.like.length} из ${SINGLES}${Object.keys(sw.icons||{}).length?`, икон — ${Object.values(sw.icons).filter(v=>v==='yes').length} из ${Object.keys(sw.icons).length}`:''}.</p>`,
+    `<div class="axes">${PAIRS.filter(pr=>(sw.axes||{})[pr.ax]).map(pr=>`<div><span>${pr.ax}</span><b>${sw.axes[pr.ax]}</b></div>`).join('')}${Object.keys(sw.icons||{}).length?`<div><span>Иконы</span><b>${Object.entries(sw.icons).filter(e=>e[1]==='yes').map(e=>e[0]).join(', ')||'—'}</b></div>`:''}</div>`,
+    `<div class="grid" style="--cols:4">${[...sw.like.map(k=>[src(k),CAT[k].n,'']),...PAIRS.map(pr=>{const o=pr.o.find(z=>z[1]===(sw.axes||{})[pr.ax]);return o&&[src(o[0]),o[1],pr.ax]}).filter(Boolean),...P().icons.map((ic,j)=>(sw.icons||{})[ic[0]]==='yes'&&P().iconPh[j]&&['icons/'+P().iconPh[j]+'.jpg',ic[0],'Икона']).filter(Boolean)].map(([im,n,t])=>`<div class="it"><div class="ph"><img src="${im}" alt="${n}"></div><span class="nm">${t?t+' · ':''}${n}</span></div>`).join('')}</div>`,
     `<p class="txt">Яна увидит и то, что тебе понравилось, и то, что нет. Так она не пришлёт «не твоё».</p>`);
    bar(`<button class="btn line" data-act="reswipe">↺</button><button class="btn" data-act="next">Создать моего двойника</button>`)}}
  else if(c==='prefs'){if(!POOL)loadPool().then(()=>{if(cur()==='prefs'&&S.mode==='client'){S.still=true;render()}});const pf=S.pref,cnt=pf.shoes.length+pf.jeans.length+pf.tex.length;
@@ -985,7 +985,7 @@ function drag(card){let x0=null,dx=0;
  card.addEventListener('pointermove',e=>{if(x0===null)return;dx=e.clientX-x0;card.style.transform=`translateX(${dx}px) rotate(${dx/18}deg)`;card.querySelector('.yes').style.opacity=Math.max(0,dx/90);card.querySelector('.no').style.opacity=Math.max(0,-dx/90)});
  const end=()=>{if(x0===null)return;x0=null;card.style.transition='';if(Math.abs(dx)>90)vote(dx>0?'yes':'no');else{card.style.transform='';card.querySelectorAll('.stamp').forEach(s=>s.style.opacity=0)}dx=0};
  card.addEventListener('pointerup',end);card.addEventListener('pointercancel',end)}
-function vote(v){const card=$('#card');const k=DECK.at(S.swipe.pos);if(!card)return;
+function vote(v){const card=$('#card');const k=DECK.at(S.swipe.pos);if(!card||card.dataset.gone)return;card.dataset.gone=1;
  card.style.transform=`translateX(${v==='yes'?520:-520}px) rotate(${v==='yes'?24:-24}deg)`;card.style.opacity='0';
  setTimeout(()=>{if(typeof k==='object'&&k.ic!=null)S.swipe.icons[P().icons[k.ic][0]]=v;else (v==='yes'?S.swipe.like:S.swipe.no).push(k);S.swipe.pos++;S.still=S.swipe.pos<DECK.length;render()},260)}
 
