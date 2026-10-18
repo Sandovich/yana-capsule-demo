@@ -396,6 +396,7 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .reel .prog i{flex:1;height:2px;background:rgba(0,0,0,.14)}
 .reel .prog i.on{background:var(--ink)}
 .reel .wm{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:8.5px;letter-spacing:.12em;z-index:3}
+.giftb{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;width:100%;text-align:left;border:1px solid var(--ink);background:var(--fog);padding:16px;transition:background .2s,transform .12s}.giftb:active{transform:scale(.99)}.giftb .gl{font-family:var(--f-logo);font-size:30px;line-height:1;letter-spacing:-.04em;text-transform:uppercase;border-right:1px solid var(--ink);padding-right:14px;align-self:stretch;display:flex;align-items:center}.giftb .gt{display:flex;flex-direction:column;gap:5px;min-width:0}.giftb b{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase}.giftb .gt>span{font-size:12px;line-height:1.4;text-transform:none;letter-spacing:0}.giftb .gc{font-size:11px!important;letter-spacing:.06em!important;text-transform:uppercase!important;text-decoration:underline;text-underline-offset:3px}
 .cert{border:1px solid var(--ink);padding:22px 16px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;background:var(--fog)}
 .cert .logo{font-size:58px}
 .cert .who{font-family:var(--f-logo);text-transform:none;font-size:21px;line-height:1.2}
@@ -847,10 +848,10 @@ function render(){
    `<div class="hero"><h1 class="logo">Yana</h1><img src="${IMG}${AV}" alt="Пример цифрового двойника в образе"></div>`,
    `<p class="big-txt">Это можешь быть ты — в образе, который собрала стилист, а не алгоритм.</p>`,
    `<p class="txt">${G('Загружаешь два фото — появляется твой двойник. Честный: без «постройнения», по твоему росту и размеру. Яна сама решает, что на нём будет.','Два фото и пять вопросов — дальше всё делает Яна. Ты получаешь список: что купить, какой размер, где. По магазинам ходить не надо.')}</p>`,
+   giftBox('Подарить капсулу','Одежду дарить страшно — не угадаешь размер. Здесь угадывать не надо: '+G('она сама','тот, кому даришь, сам')+' загрузит фото, Яна соберёт капсулу.','Сертификат на год · от 2 490 ₽'),
    `<div class="howto">${[['Тест вкуса — 20 карточек, одна минута',1],['Твой двойник по двум фото',1],['Первый образ от Яны на тебе',1],['Капсула: 8–10 вещей, 6 образов, размеры',0],['Голосовое от Яны — почему именно так',0]].map(([t,f],i)=>`<div><span class="n">${n2(i+1)}</span>${t}${f?'<span class="free">бесплатно</span>':''}</div>`).join('')}</div>`,
    `<div class="q"><div class="slots"><span>Мест на этой неделе</span>${slotsBar()}<b style="font-weight:500">${S.slots.total-S.slots.taken} из ${S.slots.total}</b></div><span class="lbl">Яна смотрит каждую капсулу сама — поэтому мест мало</span></div>`,
-   `<span class="lbl">Капсула от 2 490 ₽ · готово до 24 часов · правка — до 12 часов</span>`,
-   `<div class="list"><button class="opt" data-act="gift"><span>Подарить капсулу<small>Сертификат — подруге, маме, мужу</small></span><span>→</span></button></div>`];
+   `<span class="lbl">Капсула от 2 490 ₽ · готово до 24 часов · правка — до 12 часов</span>`];
   bar(`<button class="btn" data-act="next">Начать бесплатно</button>`)}
  else if(c==='vibe'){const V=VIBES[S.g],sel=S.vibe||[];p=[`<span class="lbl">|Шаг 1 · Стиль| <span class="free">бесплатно</span></span>`,`<h2 class="ttl">Какой стиль тебе сейчас ближе?</h2>`,`<p class="txt">Выбери до трёх. Это не навсегда — просто с чего начать.</p>`,
   `<div class="vibes">${V.map(([k,t,d])=>`<button class="vibe" data-act="vibe" data-v="${k}" aria-pressed="${sel.includes(k)}"><img src="styles/${S.g}_${k}.jpg" alt="${t}" loading="lazy"><b>${t}</b><span>${d}</span></button>`).join('')}</div>`,
@@ -950,7 +951,8 @@ function render(){
   `<div><div class="looks" id="looks">${LOOKS.map(([t,ks,own],i)=>`<div class="look"><div style="display:flex;justify-content:space-between;font-size:11px"><span><span class="n">${n2(i+1)}</span>${t}${S.y.lookVoice[i]?`<button class="lvoice" data-act="toast" data-v="Голосовое Яны к образу ${n2(i+1)}">▶ 0:${n2(S.y.lookVoice[i])}</button>`:''}</span><span class="lbl">${ks.reduce((s,k)=>s+price(k),0).toLocaleString('ru-RU')} ₽</span></div>${mood(ks,i,{own})}${(()=>{const w=S.y.why[i]||(S.genWhy||[])[i]||P().why[i];return w?`<p class="why"><b>${w[0]}</b>${w[1]}</p>`:''})()}</div>`).join('')}</div>
    <div class="dots" id="dots" style="margin-top:12px">${LOOKS.map((_,i)=>`<i class="${i===S.look?'on':''}"></i>`).join('')}</div></div>`,
   ymBlock('Образы Яны в твоём стиле'),
-  `<div class="tools"><button class="tool" data-act="reel"><span>▶ Переодевашка</span><small>Рилс из твоих 6 образов — монтаж бесплатно</small></button><button class="tool" data-act="friend"><span>${G('Спросить подругу','Спросить друга')}</span><small>Ссылка без регистрации: ♥ или ✕ на каждый образ</small></button></div>`);
+  `<div class="tools"><button class="tool" data-act="reel"><span>▶ Переодевашка</span><small>Рилс из твоих 6 образов — монтаж бесплатно</small></button><button class="tool" data-act="friend"><span>${G('Спросить подругу','Спросить друга')}</span><small>Ссылка без регистрации: ♥ или ✕ на каждый образ</small></button></div>`,
+  giftBox(G('Подари такую же','Подари такую же'),G('Подруге, маме, сестре — она пройдёт тот же путь: тест, двойник и капсула от Яны под её фигуру и бюджет.','Жене, маме, сестре или другу — пройдут тот же путь: тест, двойник и капсула от Яны под свою фигуру и бюджет.'),'Сертификат на год · от 2 490 ₽'));
   else if(tab==='items'){const icats=[...new Set(items.map(k=>CAT[k].c))],ic=S.icat&&icats.includes(S.icat)?S.icat:'all',list=items.filter(k=>(S.bta==='all'||(ROLE[k]||'b')===S.bta)&&(ic==='all'||CAT[k].c===ic));p.push(
   `<nav class="ctabs" aria-label="Тип вещи">${[['all','Все'],...icats.map(c=>[c,c])].map(([k,t])=>`<button data-act="icat" data-v="${k}" aria-pressed="${ic===k}">${t}<span class="c">${k==='all'?items.length:items.filter(x=>CAT[x].c===k).length}</span></button>`).join('')}</nav>`,
   `<div class="formula">${[['all','Всё',items.length],['b','База',cnt.b],['t','Тренд',cnt.t],['a','Акцент',cnt.a]].map(([k,t,n])=>`<button data-act="bta" data-v="${k}" aria-pressed="${S.bta===k}"><b>${n}</b>${t}</button>`).join('')}</div>`,
@@ -1258,6 +1260,7 @@ function friendSheet(){const i=S.fi,l=LOOKS.at(i),vt=S.votes[i]||[0,0];
  <div class="sbtns"><button class="sbtn" data-act="fvote" data-v="0" aria-label="Не нравится">✕</button><button class="sbtn" data-act="fvote" data-v="1" aria-label="Нравится">♥</button></div>
  <span class="lbl" style="text-align:center">Без регистрации · внизу у ${G('подруги','друга')} кнопка «Собери свою капсулу»</span>
  <button class="btn line" data-act="close">Готово</button></div></div>`}
+const giftBox=(h,t,cta)=>`<button class="giftb" data-act="gift"><span class="gl">Yana</span><span class="gt"><b>${h}</b><span>${t}</span><span class="gc">${cta} →</span></span></button>`;
 function giftSheet(){const g=S.gift,tr=TIERS.find(x=>x.at(0)===g.tier),esc=t=>t.replace(/[<>&"]/g,'');
  $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Подарить капсулу"><span class="lbl">|Подарок|</span><h2 class="ttl" style="font-size:28px">Подарить капсулу</h2>
  <div class="gseg">${[['f','Ей'],['m','Ему']].map(([k,t])=>`<button data-act="giftg" data-v="${k}" aria-pressed="${g.g===k}">${t}</button>`).join('')}</div>
