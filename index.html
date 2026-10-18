@@ -1333,7 +1333,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  if(a==='close'&&e.target!==t&&!t.matches('button'))return;
  switch(a){
  case'menu':S.menu=!S.menu;break;
- case'goto':S.menu=false;S.i=+v;if(S.i>SEQ.indexOf('vibe')&&!(S.vibe||[]).length)S.vibe=[VIBES[S.g][0][0]];break;
+ case'goto':S.menu=false;S.mode='client';$('#overlay').innerHTML='';S.i=+v;if(S.i>SEQ.indexOf('vibe')&&!(S.vibe||[]).length)S.vibe=[VIBES[S.g][0][0]];break;
  case'g_menu':break;
  case'mode':S.mode=v;S.menu=false;S.playing=false;if(v==='client')bar(null);break;
  case'next':if(cur()==='vibe'){S.deckReady=false;newDeck()}if(cur()==='colors')S.wish=($('#wish')||{}).value||'';if(cur()==='pay')S.slots.taken=Math.min(S.slots.total,S.slots.taken+1);S.i=Math.min(SEQ.length-1,S.i+1);break;
