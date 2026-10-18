@@ -204,8 +204,9 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .dnd .avw{position:absolute;left:46%;top:2%;height:96%;aspect-ratio:360/950;transform:translateX(-50%);transition:outline-color .15s}
 .dnd .avw.over{outline:2px dashed var(--ink);outline-offset:-2px}
 .dnd .av{width:100%;height:100%;display:block;max-width:none;pointer-events:none}
-.dnd .ly{position:absolute;transform:translate(-50%,0);height:auto;max-width:none;cursor:grab;touch-action:none;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}
+.dnd .ly{position:absolute;transform:translate3d(-50%,0,0);height:auto;max-width:none;cursor:grab;touch-action:none;will-change:left,top,width;backface-visibility:hidden;filter:drop-shadow(0 2px 3px rgba(0,0,0,.18))}.dnd .ly.mv{filter:none}.dnd{isolation:isolate;transform:translateZ(0)}
 .dnd .ly.snap{transition:left .25s cubic-bezier(.2,.8,.2,1),top .25s cubic-bezier(.2,.8,.2,1)}
+.dszb .viewsw button{width:40px;height:40px;border:1px solid var(--ink);font-size:20px;color:var(--ink);display:inline-grid;place-items:center}.dszb .viewsw{display:flex;gap:8px}
 .dnd{flex-shrink:0}.cutbox{display:flex;flex-direction:column;gap:8px;flex-shrink:0}.cutprev{flex-shrink:0;background:#efeeec;height:240px;display:flex;align-items:center;justify-content:center;padding:12px}.cutprev img{max-height:100%;max-width:100%;object-fit:contain;filter:drop-shadow(0 4px 6px rgba(0,0,0,.15))}
 .dnd .tray{position:absolute;right:8px;bottom:8px;width:88px;height:112px;background:var(--paper);border:1px dashed var(--ink);display:flex;align-items:center;justify-content:center;padding:4px}
 .dnd .tray img{max-width:100%;max-height:100%;object-fit:contain;cursor:grab;touch-action:none}
@@ -1265,22 +1266,23 @@ let CUTTRY={};async function cutItem(k){const n=CUTTRY[k]=(CUTTRY[k]??-1)+1,box=
  catch(e){if(box)box.innerHTML=`<span class="lbl" style="color:var(--alert)">Магазин не даёт обработать это фото в браузере — вырежем на сервере. Пока можно показать образ без двойника</span>`}}
 function itemSheet(k){const y=S.y,i=y.items.indexOf(k);
  $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Вещь на двойнике"><span class="lbl">|${CAT[k].n} · ${CAT[k].s}|</span>
- <div class="dnd" id="dnd"><div class="avw" id="dav"><img class="av" src="${IMG}${AV}" alt="Двойник"></div>${CAT[k].cut?`<div class="tray"><img id="dit" src="${CAT[k].cut}" alt="${CAT[k].n}" draggable="false"></div>`:`<div class="tray"><img src="${src(k)}" alt=""></div>`}</div><span class="lbl dhint" id="dhint">${CAT[k].cut?'Перетащи вещь из рамки на модель':'У этой вещи нет вырезки — её не положить на двойника. Вырежи её кнопкой ниже'}</span>${CAT[k].cut?(CAT[k]._uc?`<div id="cutbox" class="cutbox"><button class="btn line" data-act="cutagain" data-v="${k}">✂ Вырезано автоматически · вырезать ещё раз</button></div>`:''):`<div id="cutbox" class="cutbox"><button class="btn" data-act="cutit" data-v="${k}">✂ Вырезать вещь</button></div>`}
+ <div class="dnd" id="dnd"><div class="avw" id="dav"><img class="av" src="${IMG}${AV}" alt="Двойник"></div>${CAT[k].cut?`<div class="tray"><img id="dit" src="${CAT[k].cut}" alt="${CAT[k].n}" draggable="false"></div>`:`<div class="tray"><img src="${src(k)}" alt=""></div>`}</div>${CAT[k].cut?`<div class="msz dszb"><span class="lbl">Размер вещи · или разведи два пальца</span><span class="viewsw"><button data-act="dsz" data-v="0.9" aria-label="Меньше">−</button><button data-act="dsz" data-v="1.1" aria-label="Больше">+</button></span></div>`:''}<span class="lbl dhint" id="dhint">${CAT[k].cut?'Перетащи вещь из рамки на модель':'У этой вещи нет вырезки — её не положить на двойника. Вырежи её кнопкой ниже'}</span>${CAT[k].cut?(CAT[k]._uc?`<div id="cutbox" class="cutbox"><button class="btn line" data-act="cutagain" data-v="${k}">✂ Вырезано автоматически · вырезать ещё раз</button></div>`:''):`<div id="cutbox" class="cutbox"><button class="btn" data-act="cutit" data-v="${k}">✂ Вырезать вещь</button></div>`}
  <div class="sum"><div><span>Цена</span><b>${rub(CAT[k].p)}</b></div><div><span>Роль</span><b>${RN[ROLE[k]||'b']}</b></div>${CAT[k].sz?`<div><span>Размер от Яны</span><b style="text-transform:none">${CAT[k].sz}</b></div>`:''}</div>
  <span class="lbl">Бесплатная примерка поверх двойника. Фотореалистичная — когда образ утверждён</span>
  <div class="yacts" style="width:auto"><button data-act="ok" data-v="${k}" aria-pressed="${!!y.ok[k]}">${y.ok[k]?'✓ Да':'Да'}</button><button data-act="swap" data-v="${i}">Заменить</button></div>
  <button class="btn line" style="width:100%" data-act="close">Закрыть</button></div></div>`;if(CAT[k].cut)dnd(k)}
-function dnd(k){const box=$('#dnd'),av=$('#dav'),it=$('#dit'),a=AN(k);let d=null,pl=null;
+function dnd(k){const box=$('#dnd'),av=$('#dav'),it=$('#dit'),a=AN(k);let d=null,pl=null,pin=null;const PT=new Map();
+ const zoom=f=>{if(!pl)return;const w=Math.max(12,Math.min(140,parseFloat(pl.style.width)*f));pl.style.width=w+'%'};window.__dz=zoom;
  const put=(x,y,snap)=>{if(!pl){pl=document.createElement('img');pl.className='ly';pl.src=CAT[k].cut;pl.alt=CAT[k].n;pl.draggable=false;pl.style.width=a[2]+'%';pl.style.zIndex=a[3];av.appendChild(pl);it.parentNode.style.visibility='hidden';$('#dhint').textContent='На модели. Двигай пальцем, чтобы поправить'}
   pl.classList.toggle('snap',!!snap);pl.style.left=x+'%';pl.style.top=y+'%'};
  const inside=(e,r)=>e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom;
- box.addEventListener('pointerdown',e=>{const t=e.target;if(t!==it&&t!==pl)return;e.preventDefault();const r=av.getBoundingClientRect();
+ box.addEventListener('pointerdown',e=>{PT.set(e.pointerId,{x:e.clientX,y:e.clientY});if(PT.size===2&&pl){const [p1,p2]=[...PT.values()];pin={d0:Math.hypot(p1.x-p2.x,p1.y-p2.y)||1,w0:parseFloat(pl.style.width)};d=null;pl.classList.add('mv');box.setPointerCapture(e.pointerId);e.preventDefault();return}const t=e.target;if(t!==it&&t!==pl)return;e.preventDefault();const r=av.getBoundingClientRect();if(pl)pl.classList.add('mv');
   if(t===it){const g=it.cloneNode();g.className='ghost';const ir=it.getBoundingClientRect();g.style.width=ir.width*1.6+'px';g.style.left=ir.left+'px';g.style.top=ir.top+'px';document.body.appendChild(g);d={g,ox:ir.width*.8,oy:ir.height*.5,r,x0:e.clientX,y0:e.clientY,m:0}}
   else d={r,x0:e.clientX,y0:e.clientY,px:parseFloat(pl.style.left),py:parseFloat(pl.style.top)};box.setPointerCapture(e.pointerId)});
- box.addEventListener('pointermove',e=>{if(!d)return;if(d.g){d.m=Math.max(d.m,Math.hypot(e.clientX-d.x0,e.clientY-d.y0));d.g.style.left=(e.clientX-d.ox)+'px';d.g.style.top=(e.clientY-d.oy)+'px';av.classList.toggle('over',inside(e,d.r))}
+ box.addEventListener('pointermove',e=>{if(PT.has(e.pointerId))PT.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pin&&PT.size===2){const [p1,p2]=[...PT.values()];pl.style.width=Math.max(12,Math.min(140,pin.w0*Math.hypot(p1.x-p2.x,p1.y-p2.y)/pin.d0))+'%';return}if(!d)return;if(d.g){d.m=Math.max(d.m,Math.hypot(e.clientX-d.x0,e.clientY-d.y0));d.g.style.left=(e.clientX-d.ox)+'px';d.g.style.top=(e.clientY-d.oy)+'px';av.classList.toggle('over',inside(e,d.r))}
   else put(d.px+(e.clientX-d.x0)/d.r.width*100,d.py+(e.clientY-d.y0)/d.r.height*100)});
- const end=e=>{if(!d)return;if(d.g){d.g.remove();av.classList.remove('over');if(inside(e,d.r)||d.m<6){put((e.clientX-d.r.left)/d.r.width*100,(e.clientY-d.r.top)/d.r.height*100);requestAnimationFrame(()=>requestAnimationFrame(()=>put(a[0],a[1],1)))}}d=null};
- box.addEventListener('pointerup',end);box.addEventListener('pointercancel',e=>{if(d&&d.g)d.g.remove();av.classList.remove('over');d=null})}
+ const end=e=>{PT.delete(e.pointerId);if(pin){if(PT.size<2){pin=null;if(pl)pl.classList.remove('mv')}return}if(pl)pl.classList.remove('mv');if(!d)return;if(d.g){d.g.remove();av.classList.remove('over');if(inside(e,d.r)||d.m<6){put((e.clientX-d.r.left)/d.r.width*100,(e.clientY-d.r.top)/d.r.height*100);requestAnimationFrame(()=>requestAnimationFrame(()=>put(a[0],a[1],1)))}}d=null};
+ box.addEventListener('pointerup',end);box.addEventListener('pointercancel',e=>{PT.delete(e.pointerId);pin=null;if(pl)pl.classList.remove('mv');if(d&&d.g)d.g.remove();av.classList.remove('over');d=null})}
 const SLOTG=k=>{const kd=KIND(CAT[k].n,CAT[k].cc);return kd==='vest'||kd==='top'?'base':kd==='outer'||kd==='jacket'?'layer':kd==='dress'?'dress':kd};
 function lookAdd(l,v){const sg=SLOTG(v);for(let j=l.length-1;j>=0;j--){const o=SLOTG(l[j]);if(o===sg||(sg==='dress'&&(o==='base'||o==='bottom'))||((sg==='base'||sg==='bottom')&&o==='dress')||(sg==='layer'&&o==='base'&&KIND(CAT[l[j]].n,CAT[l[j]].cc)==='vest'&&KIND(CAT[v].n,CAT[v].cc)==='jacket'))l.splice(j,1)}l.push(v)}
 function viewSheet(k){const c=CAT[k],inCap=S.y.items.includes(k),liked=S.swipe.like.includes(k);
@@ -1423,6 +1425,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'closereq':S.y.open=null;S.y.sent=false;S.y.stage='items';break;
  case'ok':S.y.ok[v]=!S.y.ok[v];if(S.y.ok[v])ySel(v);if($('#overlay [aria-label="Вещь на двойнике"]')){S.still=true;const sy=scrollY;render();scrollTo(0,sy);itemSheet(v);$('#overlay .sheet').classList.add('re');return}break;
  case'cutit':case'cutagain':cutItem(v);return;
+ case'dsz':if(window.__dz)window.__dz(+v);return;
  case'cutok':CAT[v].cut=CAT[v]._cut;CAT[v]._uc=1;delete CAT[v]._cut;toast('Вырезано — перетащи вещь на модель');itemSheet(v);$('#overlay .sheet').classList.add('re');return;
  case'allok':S.y.items.forEach(k=>S.y.ok[k]=true);break;
  case'swap':swapSheet(+v);return;
