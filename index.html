@@ -421,6 +421,67 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .stepper span{min-width:26px;text-align:center;font-variant-numeric:tabular-nums}
 .verdict{border:1px solid var(--ink);padding:14px;display:flex;flex-direction:column;gap:6px;animation:rise .4s both}
 .verdict b{font-family:var(--f-logo);font-weight:400;font-size:30px;line-height:1;text-transform:none}
+
+/* ---------- ДЕСКТОП (кабинет Яны, ≥1280px, стиль «студия») ---------- */
+@media (min-width:1280px){
+body.desk{padding:0;overflow:hidden;--fog:#f5f5f3;--soft:#e4e4e0}
+body.desk .app{max-width:none;padding:0;min-height:100vh}body.desk #bar{display:none}body.desk .hdr,body.desk .note,body.desk .ynav{display:none}
+body.desk .sheet{align-items:center}body.desk .sheet .in{max-width:600px;max-height:88vh}body.desk .sheet .in::before{display:none}
+.dtop{height:56px;display:flex;align-items:center;gap:22px;padding:0 20px;border-bottom:1px solid var(--soft);background:#fff}
+.dlogo{font:400 26px var(--f-logo);text-transform:none;letter-spacing:0}
+.dtop nav{display:flex;gap:20px;height:56px}.dtop nav button{color:var(--mute);font-size:12px;border-bottom:1px solid transparent;margin-bottom:-1px}.dtop nav button[aria-pressed="true"]{color:var(--ink);font-weight:500;border-color:var(--ink)}
+.dtop .sp{flex:1}.dme{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:11px}
+.dbtn{border:1px solid var(--ink);padding:8px 12px;font-size:10.5px;letter-spacing:.08em;background:#fff;white-space:nowrap;transition:background .15s,color .15s}.dbtn.p{background:var(--ink);color:#fff}.dbtn:hover{background:var(--fog)}.dbtn.p:hover{background:#222}.dbtn:disabled{opacity:.35;cursor:default}.dbtn[aria-pressed="true"]{background:var(--ink);color:#fff}.dbtn.rec{background:var(--alert);border-color:var(--alert);color:#fff}
+.dwrap{display:grid;grid-template-columns:minmax(620px,52%) 1fr;height:calc(100vh - 56px)}
+.dwork{display:flex;flex-direction:column;min-width:0;overflow:auto;background:#fff;border-right:1px solid var(--soft);scrollbar-width:thin}
+.dwork.list{padding:0}.dwork.list .scr{padding:16px 24px 40px;max-width:720px}
+.dside{display:flex;flex-direction:column;min-width:0;background:var(--fog);overflow:hidden}
+.dsc{flex:1;overflow:auto;scrollbar-width:thin;padding:0 16px 40px}.dsc .scr{gap:14px;padding-top:12px}.dsc .budg{display:none}.dsc .banner{background:#fff}
+.dsc .search,.dsc .gseg{background:#fff;border:1px solid #d6d6d2;padding-left:10px;padding-right:10px}.dsc .gseg{padding:0}.dsc .ctabs{border-color:var(--soft)}
+.dsc .cards{--cols:3!important;gap:14px 12px}.dsc .cc{background:#fff;border:1px solid #e9e9e6;padding:0 0 8px}.dsc .cc .ph{background-color:#fff}.dsc .cc .bn,.dsc .cc .nm,.dsc .cc .pr,.dsc .cc .szs{padding:0 8px}.dsc .cc .add{right:8px;top:8px}
+.dsc .cc .add{display:none}.dsc .cc[draggable]{cursor:grab}.dsc .cc.drg{outline:1px dashed var(--ink);outline-offset:3px;opacity:.6}
+.dact{position:absolute;left:1px;right:1px;top:1px;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:8px;opacity:0;transition:opacity .15s;background:linear-gradient(transparent 45%,rgba(255,255,255,.9));pointer-events:none}
+.cc:hover .dact{opacity:1;pointer-events:auto}.dact button{border:1px solid var(--ink);background:#fff;padding:6px 0;font-size:10px;letter-spacing:.08em}.dact button:first-child{background:var(--ink);color:#fff}
+.dbudg{padding:14px 16px 10px;background:var(--fog)}.dbudg .dlh b{font:400 24px var(--f-logo);text-transform:none;letter-spacing:0}.dbudg .bar{height:3px;background:var(--soft);margin:8px 0 6px;position:relative}.dbudg .bar i{position:absolute;inset:0 auto 0 0;background:var(--ink)}.dbudg.over .bar i{background:var(--alert)}
+.dlh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:11.5px}
+.dtabs{display:flex;gap:22px;padding:0 16px;border-bottom:1px solid var(--soft);font-size:12px;background:var(--fog)}.dtabs button{padding:10px 0 9px;color:var(--mute);border-bottom:1px solid transparent;margin-bottom:-1px}.dtabs button[aria-pressed="true"]{color:var(--ink);font-weight:500;border-color:var(--ink)}.dtabs button i{font-style:normal;color:#a5a5a5;margin-left:4px;font-size:10px}
+.dcl{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--soft)}
+.dface{width:46px;height:46px;border-radius:50%;overflow:hidden;flex:none;background:var(--fog)}.dface img{width:100%;height:100%;object-fit:cover;object-position:top}.dface.big{width:72px;height:110px;border-radius:0}
+.dnm{flex:1;min-width:0}.dname{font:400 24px var(--f-logo);text-transform:none;letter-spacing:0}.dst{border:1px solid var(--ink);padding:2px 7px;font-size:9.5px;margin-left:10px;vertical-align:middle}
+.dmeta{display:flex;flex-wrap:wrap;gap:3px 12px;font-size:10.5px;color:var(--mute);margin-top:3px;white-space:nowrap;text-transform:uppercase}.dmeta b{font-weight:400;color:var(--ink)}
+.dacts{display:flex;gap:6px;flex:none}
+.dtools{display:flex;align-items:center;gap:10px;padding:10px 20px;border-bottom:1px solid var(--soft);font-size:11px;flex-wrap:wrap}
+.dseg{display:flex;border:1px solid var(--ink)}.dseg button{padding:6px 14px;font-size:10.5px;letter-spacing:.08em}.dseg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.dlooks{display:flex;border:1px solid var(--ink)}.dlooks button{width:40px;height:30px;border-right:1px solid var(--ink);font-size:10.5px}.dlooks button:last-child{border:0}.dlooks button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.dlt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dcomp{position:relative;display:grid;grid-template-columns:auto 1fr;align-items:start;gap:24px;padding:20px 24px 34px;background:#fff}
+.dcomp.dover{outline:2px dashed var(--ink);outline-offset:-6px}
+.dav{height:min(56vh,520px);aspect-ratio:3/4;display:block;position:sticky;top:0}.dav img{height:min(56vh,520px);width:100%;object-fit:contain;display:block;max-width:none}
+.dslots{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;min-width:0}
+.dslot{aspect-ratio:3/4;position:relative;border:1px dashed #b5b5b0;background:#fff;display:grid;place-items:center;color:#b5b5b0;font-size:22px;width:100%;padding:0}
+.dslot.f{border:1px solid var(--soft)}.dslot.dover{border-color:var(--ink);background:var(--fog)}
+.dslot .dsim{width:100%;height:100%;display:block;padding:0}.dslot .dsim img{width:100%;height:100%;object-fit:contain;display:block}
+.dslot .dk{position:absolute;left:6px;top:6px;font-size:9px;letter-spacing:.08em;color:var(--mute);background:#fff;padding:1px 4px;pointer-events:none}
+.dslot .dx{position:absolute;right:4px;top:4px;width:20px;height:20px;background:#fff;border:1px solid var(--soft);font-size:12px;line-height:1;display:grid;place-items:center;opacity:0;transition:opacity .15s}.dslot:hover .dx{opacity:1}
+.dhint{position:absolute;left:24px;bottom:8px;max-width:calc(100% - 48px);font-size:10px;color:var(--mute);line-height:1.5;max-width:420px}.dcomp.on .dhint{position:static;display:block;margin-top:6px}.dsc h2.ttl{font-size:22px}.dsc .dsc-hide{display:none}
+.dcomp.on{display:block;padding:12px 24px 34px}.dcomp.on .stage.tw{height:min(62vh,600px);background:#fff}
+.dunder{display:flex;gap:24px;padding:14px 20px;border-top:1px solid var(--soft);align-items:flex-start;background:#fff;position:relative;z-index:1}
+.dlist{flex:1;min-width:0}.dli{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--soft);font-size:11px}.dli img{width:30px;height:40px;object-fit:contain;background:#fff;border:1px solid var(--soft);flex:none}.dli span{flex:1;min-width:0}.dli small{display:block;font-size:10px;color:var(--mute);letter-spacing:.06em}.dli b{font-weight:400}
+.dbtns{display:flex;flex-direction:column;gap:6px;width:260px;flex:none}.dbtns .dbtn{padding:10px 12px}
+.dstrip{padding:12px 20px 16px;border-top:1px solid var(--soft)}.drow{display:flex;gap:12px;overflow:auto;scrollbar-width:thin;margin-top:10px;padding-bottom:4px}
+.dlk{flex:none;width:150px;text-align:left;border:1px solid var(--soft);padding:4px;background:#fff}.dlk[aria-pressed="true"]{border-color:var(--ink);outline:1px solid var(--ink)}.dlk .mood.mini{width:100%;aspect-ratio:1;height:auto}.dlk>span{display:block;font-size:10.5px;margin-top:6px;padding:0 2px 2px}
+.dpad{padding:16px 0 40px}.dph{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.dcap{display:flex;flex-direction:column;min-height:100%}
+.dit{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:10px 12px;margin:0 0 8px;background:#fff;border:1px solid #e9e9e6;font-size:11px;cursor:grab}.dit.ok{border-left:3px solid var(--ink)}.dit.need{border-color:var(--alert)}
+.dit .dth{width:52px;height:70px;background:#fff;padding:0}.dit .dth img{width:100%;height:100%;object-fit:contain}
+.dit .dn{line-height:1.3;min-width:0}.dit .dn small{display:block;font-size:10px;color:var(--mute);margin-top:2px;letter-spacing:.06em;text-transform:none}.dit .dn small a{color:inherit}
+.dit .dr{display:flex;flex-direction:column;align-items:flex-end;gap:5px}.dit .dr b{font-weight:400}
+.dit .szs{display:flex;gap:3px;flex-wrap:wrap;justify-content:flex-end;max-width:220px}.dit .szs button{border:1px solid var(--soft);padding:1px 5px;font-size:9.5px}.dit .szs button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.dit .ops{display:flex;gap:4px}.dit .ops button{border:1px solid var(--ink);padding:3px 7px;font-size:9.5px;letter-spacing:.06em}.dit .ops button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.dcapf{margin-top:auto;padding:12px 0 0;position:sticky;bottom:0;background:var(--fog)}
+.dmsg{background:#fff;border:1px solid #e9e9e6;padding:12px;margin-bottom:8px;font-size:11.5px}.dmsg b{font-weight:500}.dmsg p{margin:6px 0;text-transform:none;letter-spacing:0;font-size:12.5px;line-height:1.45}
+}
+@media (min-width:1700px){.dwrap{grid-template-columns:minmax(760px,52%) 1fr}.dslots{grid-template-columns:repeat(3,170px)}.dsc .cards{--cols:4!important}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
@@ -872,7 +933,8 @@ function stage(ks,own,i,noShare){const vt=S.votes[i],on=ks.filter(k=>CAT[k]&&CAT
 let RESTORING=false;function render(){if(RESTORING)return;persist();
  clearInterval(timerId);clearInterval(reelId);
  const a=$('#app');a.classList.toggle('still',S.still);S.still=false;$('#overlay').innerHTML=S.menu?menu():'';
- if(S.mode==='yana'){a.innerHTML=hdr()+yana();boardDrag();return}
+ if(S.mode==='yana'){document.body.classList.toggle('desk',DESK());if(DESK()){const sc=$('.dsc'),sw=$('.dwork'),st=[sc?sc.scrollTop:0,sw?sw.scrollTop:0];a.innerHTML=deskView();bar(null);const sc2=$('.dsc'),sw2=$('.dwork');if(sc2&&st[0])sc2.scrollTop=st[0];if(sw2&&st[1])sw2.scrollTop=st[1];return}a.innerHTML=hdr()+yana();boardDrag();return}
+ document.body.classList.remove('desk');
  const c=cur();let p=[];
  if(['free','status','capsule'].includes(c)&&!S.y.sent&&S.genFor!==genKey()){if(!GENP)genCapsule().then(()=>{S.still=true;render()});a.innerHTML=hdr()+scr([`<span class="lbl">|Яна собирает образы под твои ответы…|</span>`,`<div class="avbox"><i class="scan"></i></div>`]);bar(null);return}
  if(c==='land'){
@@ -1072,7 +1134,7 @@ function cfList(skipCat){const g=CF.g||S.g,q=CF.q.trim().toLowerCase();let l=CAT
 const SORTS=[['pop','По порядку'],['cheap','Дешевле'],['dear','Дороже'],['sale','Скидки']];
 function catResults(){const l=cfList(),on=new Set(S.board.layers.map(z=>z.id));
  return `<div class="frow"><span>${l.length} ${plural(l.length,'вещь','вещи','вещей')}</span><span class="viewsw">Вид ${[2,3].map(cc=>`<button data-act="ccols" data-v="${cc}" aria-pressed="${CF.cols===cc}">${cc}</button>`).join('')}</span></div>
- <div class="cards" style="--cols:${CF.cols}">${l.slice(0,CF.lim).map(x=>`<div class="cc"><button class="ph" data-act="cit" data-v="${x.id}" aria-label="${x.n}" style="${sprBg(x)}">${x.o&&x.o>x.p?`<span class="salebd">Sale −${Math.round((1-x.p/x.o)*100)}%</span>`:''}</button>${S.cfor!=null?`<button class="swp" data-act="crepl" data-v="${x.id}">Заменить</button>`:S.lookFor!=null?`<button class="swp" data-act="clook" data-v="${x.id}">В образ ${n2(S.lookFor+1)}</button>`:''}${x.cx?`<button class="add" data-act="cadd" data-v="${x.id}" aria-pressed="${on.has(x.id)}" aria-label="На двойника">${on.has(x.id)?'✓':TWI}</button>`:''}<span class="bn">${BRN[x.b]||x.b}${x.col?` · ${x.col}`:''}</span><span class="nm">${x.n}</span><span class="pr">${x.o?`<s>${rub(x.o)}</s>`:''}${rub(x.p)}</span>${CF.cols<3&&x.sz.length?`<span class="szs">${x.sz.slice(0,7).join(' ')}</span>`:''}</div>`).join('')}</div>
+ <div class="cards" style="--cols:${CF.cols}">${l.slice(0,CF.lim).map(x=>`<div class="cc" ${DESK()?`draggable="true" data-drag="${x.id}"`:''}><button class="ph" data-act="cit" data-v="${x.id}" aria-label="${x.n}" style="${sprBg(x)}">${x.o&&x.o>x.p?`<span class="salebd">Sale −${Math.round((1-x.p/x.o)*100)}%</span>`:''}</button>${S.cfor!=null?`<button class="swp" data-act="crepl" data-v="${x.id}">Заменить</button>`:S.lookFor!=null?`<button class="swp" data-act="clook" data-v="${x.id}">В образ ${n2(S.lookFor+1)}</button>`:''}${x.cx?`<button class="add" data-act="cadd" data-v="${x.id}" aria-pressed="${on.has(x.id)}" aria-label="На двойника">${on.has(x.id)?'✓':TWI}</button>`:''}${DESK()&&S.cfor==null&&S.lookFor==null?`<div class="dact"><button data-act="dlook" data-v="${x.id}">В образ ${n2((S.dl||0)+1)}</button><button data-act="ccap" data-v="${x.id}">${S.y.items.includes(x.id)?'✓ В капсуле':'В капсулу'}</button></div>`:''}<span class="bn">${BRN[x.b]||x.b}${x.col?` · ${x.col}`:''}</span><span class="nm">${x.n}</span><span class="pr">${x.o?`<s>${rub(x.o)}</s>`:''}${rub(x.p)}</span>${CF.cols<3&&x.sz.length?`<span class="szs">${x.sz.slice(0,7).join(' ')}</span>`:''}</div>`).join('')}</div>
  ${l.length>CF.lim?`<button class="btn line" style="width:100%" data-act="cmore">Показать ещё · ${l.length-CF.lim}</button>`:''}
  ${!l.length?(()=>{const q=CF.q.trim().toLowerCase(),n=q?CATL.filter(x=>x.g===(CF.g||S.g)&&q.split(/\s+/).every(w=>(SYN[w]||[w]).some(v=>x.q.includes(v)))).length:0;return `<p class="txt" style="color:var(--mute)">Ничего не нашлось с этими фильтрами.${n?` Без фильтров по «${CF.q}» есть ${n}.`:''}</p>${n?`<button class="btn line" style="width:100%" data-act="cfr2">Снять фильтры, оставить поиск</button>`:''}`})():''}`}
 const CAP=()=>S.budget;
@@ -1151,6 +1213,72 @@ function boardDrag(){const b=$('#board');if(!b)return;let d=null,pin=null;const 
   if(!d)return;d.z.x=Math.max(-20,Math.min(120,d.zx+(e.clientX-d.x0)/d.r.width*100));d.z.y=Math.max(-10,Math.min(100,d.zy+(e.clientY-d.y0)/d.r.height*100));d.t.style.left=d.z.x+'%';d.t.style.top=d.z.y+'%'});
  const up=e=>{P.delete(e.pointerId);if(P.size)return;if(d||pin){d=null;pin=null;S.still=true;const sy=window.scrollY;render();window.scrollTo(0,sy)}};b.addEventListener('pointerup',up);b.addEventListener('pointercancel',up);
  b.addEventListener('wheel',e=>{const z=selZ();if(!z)return;e.preventDefault();setW(z,z.w*(e.deltaY<0?1.06:0.94));clearTimeout(b._wt);b._wt=setTimeout(()=>{S.still=true;const sy=window.scrollY;render();window.scrollTo(0,sy)},350)},{passive:false})}
+// ---------- ДЕСКТОП: кабинет Яны на широком экране ----------
+const DESK=()=>S.mode==='yana'&&matchMedia('(min-width:1280px)').matches;
+const DSLOTS=[['layer','Верхняя одежда','верхняя одежда'],['base','Верх','трикотаж'],['bottom','Низ','брюки'],['shoes','Обувь','обувь'],['bag','Сумка','сумки'],['acc','Аксессуар','аксессуары']];
+const dGroup=k=>{const g=SLOTG(k);return ['layer','base','bottom','dress','shoes','bag'].includes(g)?g:'acc'};
+function dSlots(ks){const by={};ks.forEach(k=>{if(!CAT[k])return;(by[dGroup(k)]=by[dGroup(k)]||[]).push(k)});const hasD=!!by.dress;const out=[];
+ DSLOTS.forEach(([g,t,c])=>{if(hasD&&(g==='base'||g==='bottom')){if(g==='base')out.push(['dress','Платье','платья',by.dress||[]]);return}out.push([g,t,c,by[g]||[]])});
+ for(let i=0;i<(S.dx||0);i++)out.push(['acc','Ещё','аксессуары',[]]);return out}
+function dChips(){const fg=(typeof FIGS!=='undefined'&&FIGS.find(x=>x.at(0)===S.fig))||null,vb=(S.vibe||[]).map(k=>(VIBES[S.g].find(v=>v[0]===k)||[])[1]).filter(Boolean).join(', ');
+ return [['Рост',S.height+' см'],['Верх',S.sizes.join('/')],['Низ',S.bsizes.join('/')],['Обувь',S.shoe],['Фигура',fg?fg.at(1):'—'],['Бюджет',S.budget>=200000?'от 150 000 ₽':'до '+rub(S.budget)],['Стиль',vb||'—']].filter(([a,b])=>b&&b!=='—').map(([a,b])=>`<span>${a} <b>${b}</b></span>`).join('')}
+function dStatus(){return S.y.sent?`Отправлено${S.rev.ver>1?' · версия '+S.rev.ver:''}`:S.rev.pending?`Правка ${S.rev.pending.n} · 11 ч`:'Новая · 21 ч'}
+function dWork(){const y=S.y,i=Math.min(S.dl||0,LOOKS.length-1);S.dl=i;const L=LOOKS[i]||['',[]],ks=L[1].filter(k=>CAT[k]),sl=dSlots(ks),tot=lookSum(ks),v=y.lookVoice[i],rec=y.lrec===i;
+ clearInterval(recId);if(rec)recId=setInterval(()=>{y.lookVoice[i]=(y.lookVoice[i]||0)+1;const e=$('#dvt');if(e)e.textContent='0:'+n2(y.lookVoice[i])},1000);
+ const strip=`<div class="dcl"><button class="dface" data-act="zoom" aria-label="Фото клиента"><img src="${S.photo.face||(FACE?IMG+FACE:S.photo.full||IMG+AV)}" alt=""></button><div class="dnm"><div><span class="dname">${NM().age}</span><span class="dst">${dStatus()}</span></div><div class="dmeta">${dChips()}</div></div><div class="dacts"><button class="dbtn" data-act="dt" data-v="anq">Анкета</button><button class="dbtn" data-act="closereq">← Заявки</button></div></div>`;
+ const tools=`<div class="dtools"><div class="dseg"><button data-act="dm" data-v="side" aria-pressed="${(S.dm||'side')==='side'}">Рядом</button><button data-act="dm" data-v="on" aria-pressed="${S.dm==='on'}">На модели</button></div>
+  <div class="dlooks">${LOOKS.map((l,j)=>`<button data-act="dl" data-v="${j}" aria-pressed="${j===i}" title="${l[0]}">${n2(j+1)}${y.looksOk[j]?' ✓':''}</button>`).join('')}</div><span class="lbl dlt">${L[0]||''}</span>
+  <button class="dbtn" data-act="dslotadd">+ Слот</button></div>`;
+ const canvas=(S.dm==='on')
+  ?`<div class="dcomp on" data-drop="look"><div class="stage tw">${twin(ks.filter(k=>CAT[k].cut))}</div><span class="dhint">Наложение вырезок — черновик. Вещи без вырезки тут не показываются.</span></div>`
+  :`<div class="dcomp" data-drop="look"><div class="dav"><img src="${S.photo.full||IMG+AV}" alt="Двойник ${NM().g}"></div><div class="dslots" style="--n:${sl.length>6?3:sl.length>4?3:2}">${sl.map(([g,t,c,arr])=>arr.length?arr.map(k=>`<div class="dslot f" data-drop="look" title="${CAT[k].n}"><button class="dsim" data-act="yitem" data-v="${k}" aria-label="${CAT[k].n}"><img src="${src(k)}" alt="" draggable="false"></button><span class="dk">${t}</span><button class="dx" data-act="ddel" data-v="${k}" aria-label="Убрать из образа">×</button></div>`).join(''):`<button class="dslot e" data-act="dslot" data-v="${c}" data-drop="look"><span class="dk">${t}</span>+</button>`).join('')}</div><span class="dhint">Кадр целиком — модель слева, вещи справа — уходит в Nano Banana как есть. Тяни вещи из каталога в слоты.</span></div>`;
+ const under=`<div class="dunder"><div class="dlist"><div class="dlh"><span>Вещи образа ${n2(i+1)}</span><span class="lbl">Итого · <b>${rub(tot)}</b></span></div>${ks.map(k=>`<div class="dli"><img src="${src(k)}" alt=""><span>${CAT[k].n}<small>${CAT[k].s} · ${CAT[k].sz||ySel(k).join(' / ')}</small></span><b>${rub(price(k))}</b></div>`).join('')||'<span class="lbl">Образ пустой — перетащи вещи из каталога</span>'}</div>
+  <div class="dbtns"><button class="dbtn p" data-act="dgen">Сгенерировать фото · Nano Banana</button><button class="dbtn" data-act="dframe">Скачать кадр</button><button class="dbtn" data-act="lookok" data-v="${i}" aria-pressed="${!!y.looksOk[i]}">${y.looksOk[i]?'✓ Образ готов':'Образ готов'}</button>
+   <button class="dbtn ${rec?'rec':''}" data-act="dlrec" data-v="${i}">${rec?'■ Стоп':v?'↻ Голосовое':'● Голосовое'}</button><span class="lbl" id="dvt">${rec||v?'0:'+n2(v||0):''}</span></div></div>`;
+ const strip2=`<div class="dstrip"><div class="dlh"><span>Образы ${NM().d} · ${Object.keys(y.looksOk).length}/${LOOKS.length}</span><span class="lbl">${y.voice?'Голосовое к капсуле 0:'+n2(y.voice):'Голосовое к капсуле — во вкладке «Капсула»'}</span></div><div class="drow">${LOOKS.map((l,j)=>`<button class="dlk" data-act="dl" data-v="${j}" aria-pressed="${j===i}">${mood(l[1].filter(k=>CAT[k]),j,{mini:1})}<span>${n2(j+1)} · ${l[0]}${y.looksOk[j]?' ✓':''}</span></button>`).join('')}</div></div>`;
+ return strip+tools+canvas+under+strip2}
+function dAnketa(){const rows=[['Рост',S.height+' см'],['Размер верха',S.sizes.join(' / ')],['Размер низа',S.bsizes.join(' / ')],['Размер обуви',S.shoe],['Обувь',(S.pref.shoes||[]).join(', ')],['Крой джинсов',(S.pref.jeans||[]).join(', ')],['Фактуры',(S.pref.tex||[]).join(', ')],['Цвета — люблю',COLORS.filter(c=>S.colors[c[0]]==='love').map(c=>c[1]).join(', ')],['Цвета — никогда',COLORS.filter(c=>S.colors[c[0]]==='never').map(c=>c[1]).join(', ')],['Подчеркнуть',(S.accent||[]).join(', ')],['Скрыть',(S.hide||[]).join(', ')],['Бюджет',S.budget>=200000?'от 150 000 ₽':'до '+rub(S.budget)],['Неделя',(S.week||[]).join(', ')],['Офис',S.office||'—'],['Повод',S.occasion||'—'],['Стиль',(S.vibe||[]).map(k=>(VIBES[S.g].find(v=>v[0]===k)||[])[1]).filter(Boolean).join(', ')]];
+ const lk=S.swipe.like.length?S.swipe.like:[],nk=S.swipe.no;
+ return `<div class="dpad"><div class="dph"><button class="dface big" data-act="zoom" aria-label="Фото"><img src="${S.photo.full||IMG+AV}" alt=""></button><div><h2 class="ttl" style="font-size:28px">${NM().age}</h2><span class="lbl">Фото из анкеты · нажми, чтобы увеличить</span></div></div>
+ <div class="sum rq">${rows.map(([a,b])=>`<div><span>${a}</span><b>${b||'—'}</b></div>`).join('')}</div>
+ <div class="q" style="padding:12px 0"><span class="lbl">|Тест вкуса|</span><div class="taste">${Object.entries(axes()).map(([a,b])=>`<span style="background:var(--ink);color:var(--paper)">${a}: ${b}</span>`).join('')}${lk.map(k=>CAT[k]?`<button data-act="tview" data-v="${k}">${CAT[k].n}</button>`:'').join('')}${nk.map(k=>CAT[k]?`<button class="no" data-act="tview" data-v="${k}">${CAT[k].n}</button>`:'').join('')}${Object.entries(S.swipe.icons||{}).map(([n,v])=>`<span class="${v==='yes'?'':'no'}">${v==='yes'?'♥ ':''}${n}</span>`).join('')}</div></div></div>`}
+function dCapsule(){const y=S.y,tot=capSum(),done=y.items.filter(k=>y.ok[k]).length,lo=Object.keys(y.looksOk).length,ready=lo>=LOOKS.length&&y.voice>0;
+ if(y.sent)return `<div class="dpad"><div class="done-mark">✓</div><h2 class="ttl" style="text-align:center;font-size:26px">Отправлено ${NM().d}${S.rev.ver>1?' · версия '+S.rev.ver:''}</h2><p class="txt" style="text-align:center">${S.rev.ver>1?G('Она','Он')+' увидит новые вещи и обновлённые образы.':'Шесть образов, размеры и твоё голосовое.'}</p><button class="dbtn" data-act="closereq" style="margin:12px auto 0;display:block">К заявкам</button></div>`;
+ const pd=S.rev.pending;
+ return `<div class="dcap">${pd?`<div class="banner" style="margin:12px 16px 0"><b>Правка ${pd.n} от ${NM().g}</b>${pd.note?`<span class="txt">«${pd.note}»</span>`:''}<span>${pd.items.length?`Заменить: ${pd.items.filter(k=>!pd.repl[k]).length} из ${pd.items.length}`:'Вещей не отметила — ответь по комментарию'}</span></div>`:''}
+ <div class="dlh" style="padding:12px 16px 6px"><span>Черновик · ${done}/${y.items.length} ✓</span><span class="lbl">${(()=>{const c={b:0,t:0,a:0};y.items.forEach(k=>c[ROLE[k]||'b']++);return `${c.b} база · ${c.t} тренд · ${c.a} акцент`})()}</span></div>
+ ${y.items.map((k,i)=>{const c=CAT[k],need=pd&&pd.items.includes(k)&&!pd.repl[k];return `<div class="dit ${y.ok[k]?'ok':''} ${need?'need':''}" draggable="true" data-drag="${k}"><button class="dth" data-act="yitem" data-v="${k}" aria-label="${c.n}"><img src="${src(k)}" alt=""></button><span class="dn">${c.n}<small>${c.s} · ${c.cc||''}${c.u?` · <a href="${affU(c.s,c.u)}" target="_blank" rel="noopener">наличие ↗︎</a>`:''}</small>${need?`<small style="color:var(--alert)">${NM().n} просит замену</small>`:''}</span><span class="dr"><b>${rub(price(k))}</b><span class="szs">${(c.szs||P().ysizes).slice(0,8).map(z=>`<button data-act="ysz" data-k="${k}" data-v="${z}" aria-pressed="${ySel(k).includes(z)}">${z}</button>`).join('')}</span><span class="ops"><button data-act="swap" data-v="${i}">Заменить</button><button data-act="dok" data-v="${k}" aria-pressed="${!!y.ok[k]}">${y.ok[k]?'✓':'ок?'}</button></span></span></div>`}).join('')}
+ <div class="dcapf"><div class="rec ${y.rec?'on':''}" style="margin:0 0 10px"><i class="dot"></i><span style="flex:1">${y.rec?'Запись…':y.voice?'Голосовое к капсуле записано':'Голосовое к капсуле для '+NM().g}</span><span class="lbl" id="rect">0:${n2(y.voice)}</span><button class="tag" data-act="rec">${y.rec?'Стоп':y.voice?'Перезаписать':'Записать'}</button></div>
+  ${pd?`<button class="dbtn p" data-act="revdone" ${pd.items.some(k=>!pd.repl[k])?'disabled':''} style="width:100%">Отправить версию ${S.rev.ver+1}</button>`:`<button class="dbtn p" data-act="send" ${ready?'':'disabled'} style="width:100%">${ready?'Отправить '+NM().d:lo<LOOKS.length?`Отметь образы готовыми · ${lo}/${LOOKS.length}`:'Сначала голосовое к капсуле'}</button>`}</div></div>`}
+function dMsgs(){const pd=S.rev.pending,a=S.ask;const items=[];if(pd)items.push([`Правка ${pd.n} от ${NM().g}`,pd.note?`«${pd.note}»`:'Отметила вещи на замену без комментария',pd.items.map(k=>CAT[k]?CAT[k].n:'').filter(Boolean).join(', ')]);
+ if(a.status)items.push([`${NM().n} · перед покупкой`,`${CAT[a.item].n} · ${rub(CAT[a.item].p)} · ${CAT[a.item].s}`,a.status==='wait'?'Ждёт ответа':'Отвечено']);
+ if(S.fit&&Object.keys(S.fit).length)items.push(['Посадка по вещам',Object.entries(S.fit).map(([k,f])=>`${CAT[k]?CAT[k].n:k}: ${f}`).join(' · '),'']);
+ return `<div class="dpad">${items.length?items.map(([h,t,m])=>`<div class="dmsg"><b>${h}</b><p>${t}</p>${m?`<span class="lbl">${m}</span>`:''}</div>`).join(''):'<span class="lbl">Сообщений пока нет. Правки и вопросы клиентки появятся здесь.</span>'}${a.status?`<button class="dbtn" data-act="openask" style="margin-top:12px">Открыть вопрос</button>`:''}</div>`}
+function dReqs(){const y=S.y;return `<div class="dpad">${yana()}</div>`}
+function deskView(){const y=S.y,open=y.open===0,dt=S.dt||'cat';if(y.open===0&&!y.sent&&S.genFor!==genKey()){if(!GENP)genCapsule().then(()=>{S.still=true;render()});return `<div class="desk"><div class="dpad"><span class="lbl">|Собираем капсулу по ответам клиента…|</span></div></div>`}
+ const top=`<header class="dtop"><span class="dlogo">Yana</span><span class="lbl">Кабинет</span><nav><button data-act="dnav" data-v="req" aria-pressed="${(S.yv||'req')==='req'||open}">Заявки<span class="cnt">${1+P().reqs.length}</span></button><button data-act="dnav" data-v="ym" aria-pressed="${S.yv==='ym'&&!open}">Мои образы</button><button data-act="dnav" data-v="cat" aria-pressed="${S.yv==='cat'&&!open}">Каталог</button></nav><span class="sp"></span>
+  <span class="lbl">Прототип · вещи, цены, двойник и голос — примеры</span><button class="dbtn" data-act="mode" data-v="client">Глазами ${G('клиентки','клиента')} ↗︎</button><button class="dbtn" data-act="resetdemo" title="Начать заново">↺</button><span class="dme">Я</span></header>`;
+ const tot=capSum(),cap=CAP();
+ const side=open?`<aside class="dside"><div class="dbudg ${tot>cap?'over':''}"><div class="dlh"><span>Капсула ${NM().g} · ${y.items.length} ${plural(y.items.length,'вещь','вещи','вещей')}</span><b>${rub(tot)}</b></div><div class="bar"><i style="width:${Math.min(100,tot/cap*100)}%"></i></div><div class="dlh lbl"><span>из ${rub(cap)}</span><span>${tot>cap?'перебор '+rub(tot-cap):'осталось '+rub(cap-tot)}</span></div></div>
+  <nav class="dtabs">${[['cat','Каталог'],['cap','Капсула',y.items.length],['anq','Анкета'],['msg','Сообщения',(S.rev.pending?1:0)+(S.ask.status==='wait'?1:0)]].map(([k,t,n])=>`<button data-act="dt" data-v="${k}" aria-pressed="${dt===k}">${t}${n?`<i>${n}</i>`:''}</button>`).join('')}</nav>
+  <div class="dsc">${dt==='cat'?catView():dt==='cap'?dCapsule():dt==='anq'?dAnketa():dMsgs()}</div></aside>`
+  :`<aside class="dside"><nav class="dtabs"><button aria-pressed="true">Каталог</button></nav><div class="dsc">${catView()}</div></aside>`;
+ const work=open&&y.open!=='ask'?dWork():yana();
+ return top+`<div class="dwrap"><section class="dwork ${open?'':'list'}">${work}</section>${side}</div>`}
+async function dLookAdd(id){const i=S.dl||0;await regA(id);if(!CAT[id]){toast('Не удалось загрузить вещь');return}if(!S.y.items.includes(id)){if(S.y.items.length>=10){toast('В капсуле уже 10 вещей — убери одну');return}S.y.items.push(id);S.y.ok[id]=true}
+ lookAdd(LOOKS[i][1],id);delete S.y.looksOk[i];if(!S.y.why[i])S.y.stale=Object.assign(S.y.stale||{},{[i]:1});autoCut(id).catch(()=>{});S.still=true;render();toast('В образ '+n2(i+1)+': '+CAT[id].n)}
+async function dFrame(){const i=S.dl||0,ks=(LOOKS[i]||['',[]])[1].filter(k=>CAT[k]),W=1800,H=1200,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);
+ try{const av=await loadImg(S.photo.full||IMG+AV);const h=H-120,w=h*av.naturalWidth/av.naturalHeight;g.drawImage(av,60,60,w,h);
+  const x0=60+w+80,cols=3,cw=Math.floor((W-x0-60-(cols-1)*24)/cols),ch=Math.floor(cw*4/3);let n=0;
+  for(const k of ks){const u=src(k);let im;try{im=await loadImg(u)}catch(e){continue}const x=x0+(n%cols)*(cw+24),y=60+Math.floor(n/cols)*(ch+24);const r=Math.min(cw/im.naturalWidth,ch/im.naturalHeight),iw=im.naturalWidth*r,ih=im.naturalHeight*r;g.drawImage(im,x+(cw-iw)/2,y+(ch-ih)/2,iw,ih);g.strokeStyle='#e4e4e0';g.strokeRect(x+.5,y+.5,cw-1,ch-1);n++}
+  const blob=await new Promise((ok,no)=>{try{c.toBlob(b=>b?ok(b):no(new Error('blob')),'image/png')}catch(e){no(e)}});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`yana_${NM().n}_look${n2(i+1)}.png`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);toast('Кадр сохранён: модель + '+n+' '+plural(n,'вещь','вещи','вещей'))}
+ catch(e){toast('Не удалось собрать кадр: фото вещей из магазинов не отдаются браузеру. Сделаем на сервере.')}}
+let DK=matchMedia('(min-width:1280px)').matches;addEventListener('resize',()=>{const d=matchMedia('(min-width:1280px)').matches;if(d!==DK&&S.mode==='yana'){S.still=true;render()}DK=d});
+document.addEventListener('dragstart',e=>{const t=e.target.closest&&e.target.closest('[data-drag]');if(!t||!DESK())return;e.dataTransfer.setData('text/plain',t.dataset.drag);e.dataTransfer.effectAllowed='copy';t.classList.add('drg')});
+document.addEventListener('dragend',e=>{document.querySelectorAll('.drg,.dover').forEach(z=>z.classList.remove('drg','dover'))});
+document.addEventListener('dragover',e=>{const t=e.target.closest&&e.target.closest('[data-drop]');if(!t)return;e.preventDefault();e.dataTransfer.dropEffect='copy';t.classList.add('dover')});
+document.addEventListener('dragleave',e=>{const t=e.target.closest&&e.target.closest('[data-drop]');if(t)t.classList.remove('dover')});
+document.addEventListener('drop',e=>{const t=e.target.closest&&e.target.closest('[data-drop]');if(!t)return;e.preventDefault();const id=e.dataTransfer.getData('text/plain');if(id)dLookAdd(id)});
 function yana(){const y=S.y;clearInterval(recId);
  if(y.open===0&&!y.sent&&S.genFor!==genKey()){if(!GENP)genCapsule().then(()=>{S.still=true;render()});return scr([`<span class="lbl">|Собираем капсулу по ответам клиента…|</span>`])}
  if(y.open===null&&S.yv==='ym')return ymView();
@@ -1442,6 +1570,18 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'catcat':catSheet(+t.dataset.i,v);return;
  case'ylook':lookSheet(+v);return;
  case'yitem':itemSheet(v);return;
+ case'dt':S.dt=v;break;
+ case'dl':S.dl=+v;break;
+ case'dm':S.dm=v;break;
+ case'dnav':S.y.open=null;S.yv=v;S.y.stage='items';S.cfor=null;S.lookFor=null;if(v==='cat'&&!CATL)loadCat();break;
+ case'dlook':dLookAdd(v);return;
+ case'dslot':S.dt='cat';CF.c=v;CF.q='';CF.lim=40;if(!CATL)loadCat();break;
+ case'dslotadd':S.dx=(S.dx||0)+1;break;
+ case'ddel':{const i=S.dl||0,l=LOOKS[i][1],j=l.indexOf(v);if(j>-1)l.splice(j,1);delete S.y.looksOk[i];break}
+ case'dok':S.y.ok[v]?delete S.y.ok[v]:S.y.ok[v]=true;break;
+ case'dlrec':{const i=+v;if(S.y.lrec===i){S.y.lrec=null;toast('Голосовое к образу сохранено')}else{S.y.lrec=i;S.y.lookVoice[i]=0}break}
+ case'dgen':toast('Генерацию подключим после теста двойника: нужны 2 фото Яны. Пока — «Скачать кадр» и в Nano Banana вручную.');return;
+ case'dframe':dFrame();return;
  case'yv':if((S.yv||'req')!==v)S.yvPrev=S.yv||'req';S.yv=v;S.y.open=null;S.menu=false;$('#overlay').innerHTML='';if(v==='cat'&&!CATL)loadCat();break;
  case'cfg':CF.g=v;CF.c='all';CF.br=[];CF.szs=[];CF.lim=40;break;
  case'cfc':CF.c=v;CF.lim=40;break;
