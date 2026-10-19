@@ -1364,6 +1364,28 @@ function dCompDrag(){const c=$('#dcomp');if(!c)return;const i=S.dl||0;let d=null
  c.addEventListener('pointerup',up);c.addEventListener('pointercancel',up);
  c.addEventListener('wheel',e=>{const t=e.target.closest('.dmi,.dfr');if(!t)return;e.preventDefault();const w=Math.max(5,Math.min(60,(parseFloat(t.style.width)||15)*(e.deltaY<0?1.06:.94)));t.style.width=w+'%';save(t.dataset.mv,parseFloat(t.style.left),parseFloat(t.style.top),+w.toFixed(2))},{passive:false});
  c.addEventListener('dblclick',e=>{const t=e.target.closest('.dfr');if(!t)return;const o=(S.dfree||{})[i];if(o){delete o[t.dataset.mv];S.still=true;render()}})}
+const WORD={base:'Base layer, worn directly on the body',dress:'Dress, worn directly on the body',bottom:'Bottom',layer:'Outer layer, worn OVER the base layer',shoes:'Shoes',bag:'Bag, held in hand or on the shoulder',acc:'Accessory'};
+const WORDRU={base:'на тело',dress:'платье на тело',bottom:'низ',layer:'верхний слой поверх',shoes:'обувь',bag:'сумка',acc:'аксессуар'};
+const DORD=['base','dress','bottom','layer','shoes','bag','acc'],FORD=['layer','base','dress','bottom','shoes','bag','acc'];
+function dFrameOrder(ks){return ks.slice().sort((x,y)=>FORD.indexOf(dGroup(x))-FORD.indexOf(dGroup(y)))}
+function dPrompt(i){const ks=(LOOKS[i]||['',[]])[1].filter(k=>CAT[k]),fo=dFrameOrder(ks),num=k=>fo.indexOf(k)+1,wo=ks.slice().sort((x,y)=>DORD.indexOf(dGroup(x))-DORD.indexOf(dGroup(y)));
+ const hasB=wo.some(k=>dGroup(k)==='base'),hasL=wo.some(k=>dGroup(k)==='layer'),hasBot=wo.some(k=>dGroup(k)==='bottom');
+ const lines=wo.map((k,j)=>{const g=dGroup(k),c=CAT[k];const W=(S.dwear||{})[i]||{};let how='';if(g==='base'&&hasBot)how=W.tuck==='in'?' Tucked INTO the bottom.':' Worn untucked, over the waistband of the bottom.';if(g==='layer')how=W.open==='closed'?' Fully closed/buttoned.'+(hasB?' Only the collar of the base layer may show.':''):' Worn open'+(hasB?', the base layer visible underneath.':'.');if(g==='bottom'&&hasB)how=W.tuck==='in'?' The base layer is tucked into it.':' Its waistband is covered by the base layer.';if(g==='shoes')how=' Last step.';
+  return `${j+1}. ${WORD[g]} — item ${num(k)} on the board («${c.n}»).${how}`});
+ const en=`Image 1 is a reference board: the woman on the left, numbered clothing items on the right.
+Change only her clothes. Keep her face, hair, skin, body shape and proportions exactly as on the left. Do not slim her or redraw her.
+Dress her in this order, from the body outward:
+${lines.join('\n')}
+Each garment must look exactly like its photo on the board: same color, pattern, texture, length and fit. Nothing else added.
+Full-length photo, plain light studio background, same pose and soft front light.`;
+ const Wr=(S.dwear||{})[i]||{},ru=wo.map((k,j)=>{const g=dGroup(k);return `${j+1}) ${WORDRU[g]}: ${CAT[k].n.toLowerCase()} (№${num(k)} на кадре)${g==='base'&&hasBot?(Wr.tuck==='in'?', заправлен':', навыпуск'):''}${g==='layer'?(Wr.open==='closed'?', застёгнут':', расстёгнут'):''}`}).join(' → ');
+ return {en,ru,n:ks.length,hasB:hasB&&hasBot,hasL}}
+function dGenSheet(){const i=S.dl||0,P0=dPrompt(i);if(!P0.n){toast('Образ пустой — добавь вещи');return}
+ $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Промпт для генерации" style="gap:12px;display:flex;flex-direction:column"><span class="lbl">|Образ ${n2(i+1)} · Nano Banana|</span><h2 class="ttl" style="font-size:26px">Порядок надевания</h2>
+ <p class="txt" style="text-transform:none">${P0.ru}</p>${(()=>{const W=(S.dwear||{})[i]||{};return `<div style="display:flex;gap:10px;flex-wrap:wrap">${P0.hasB?`<div class="dseg"><button data-act="dwear" data-k="tuck" data-v="out" aria-pressed="${W.tuck!=='in'}">Верх навыпуск</button><button data-act="dwear" data-k="tuck" data-v="in" aria-pressed="${W.tuck==='in'}">Заправлен</button></div>`:''}${P0.hasL?`<div class="dseg"><button data-act="dwear" data-k="open" data-v="open" aria-pressed="${W.open!=='closed'}">Верхний слой расстёгнут</button><button data-act="dwear" data-k="open" data-v="closed" aria-pressed="${W.open==='closed'}">Застёгнут</button></div>`:''}</div>`})()}
+ <span class="lbl">Промпт · вставь вместе со «Скачать кадр» (на кадре вещи пронумерованы)</span><textarea id="dprm" readonly style="width:100%;height:230px;font:12px/1.45 ui-monospace,Consolas,monospace;text-transform:none;letter-spacing:0;border:1px solid var(--soft);padding:10px;resize:vertical">${P0.en.replace(/</g,'&lt;')}</textarea>
+ <div style="display:flex;gap:8px"><button class="dbtn p" data-act="dcopy" style="flex:1">Скопировать промпт</button><button class="dbtn" data-act="dframe" style="flex:1">Скачать кадр</button></div>
+ <span class="lbl">Автоматическая генерация включится после теста двойника. Цена и «да» — до каждого запуска.</span><button class="dbtn" data-act="close">Закрыть</button></div></div>`}
 async function dFrame(){const i=S.dl||0,mb=S.dm==='mb',ks=(LOOKS[i]||['',[]])[1].filter(k=>CAT[k]),W=2400,H=1600,M=90,cv=document.createElement('canvas');cv.width=W;cv.height=H;const g=cv.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);
  const fitDraw=(im,x,y,w,h,mul)=>{const r=Math.min(w/im.naturalWidth,h/im.naturalHeight),iw=im.naturalWidth*r,ih=im.naturalHeight*r;g.globalCompositeOperation=mul?'multiply':'source-over';g.drawImage(im,x+(w-iw)/2,y+(h-ih)/2,iw,ih);g.globalCompositeOperation='source-over'};
  const trim=im=>{const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0);const d=x.getImageData(0,0,c.width,c.height).data;let x0=c.width,y0=c.height,x1=-1,y1=-1;
@@ -1371,9 +1393,9 @@ async function dFrame(){const i=S.dl||0,mb=S.dm==='mb',ks=(LOOKS[i]||['',[]])[1]
   if(x1<0)return c;const t=document.createElement('canvas');t.width=x1-x0+2;t.height=y1-y0+2;t.getContext('2d').drawImage(c,x0,y0,t.width,t.height,0,0,t.width,t.height);t.naturalWidth=t.width;t.naturalHeight=t.height;return t};
  try{let n=0;
   if(!mb){const av=trim(await loadImg(S.photo.full||IMG+AV)),mh=H-2*M,mw=Math.min(W*.34,mh*av.naturalWidth/av.naturalHeight);fitDraw(av,M,M,mw,mh);
-   const ORD=['layer','base','dress','bottom','shoes','bag','acc'],ks2=ks.slice().sort((x,y)=>ORD.indexOf(dGroup(x))-ORD.indexOf(dGroup(y)));const ims=[];for(const k of ks2){try{ims.push(trim(await loadImg(src(k))))}catch(e){}}n=ims.length;
+   const ks2=dFrameOrder(ks);const ims=[];for(const k of ks2){try{ims.push(trim(await loadImg(src(k))))}catch(e){}}n=ims.length;
    const x0=M+mw+M,aw=W-x0-M,ah=H-2*M,cols=n<=1?1:n<=4?2:3,rows=Math.max(1,Math.ceil(n/cols)),gap=60,cw=(aw-(cols-1)*gap)/cols,ch=(ah-(rows-1)*gap)/rows,pad=.08;
-   ims.forEach((im,j)=>{const c=j%cols,r=Math.floor(j/cols),inRow=Math.min(cols,n-r*cols),off=(cols-inRow)*(cw+gap)/2;fitDraw(im,x0+off+c*(cw+gap)+cw*pad,M+r*(ch+gap)+ch*pad,cw*(1-2*pad),ch*(1-2*pad),1)})}
+   ims.forEach((im,j)=>{const c=j%cols,r=Math.floor(j/cols),inRow=Math.min(cols,n-r*cols),off=(cols-inRow)*(cw+gap)/2,x=x0+off+c*(cw+gap),y=M+r*(ch+gap);fitDraw(im,x+cw*pad,y+ch*pad,cw*(1-2*pad),ch*(1-2*pad),1);g.fillStyle='#000';g.font='500 34px Inter Tight, Arial, sans-serif';g.fillText(String(j+1),x+6,y+34)})}
   else{const c=$('#dcomp');if(!c){toast('Открой образ');return}const R=c.getBoundingClientRect(),els=[...c.querySelectorAll('.dmodel,.dmi')];let bx0=1e9,by0=1e9,bx1=-1e9,by1=-1e9;const L=[];
    for(const e of els){const r=e.getBoundingClientRect();let im;try{im=await loadImg(e.currentSrc||e.src)}catch(_){continue}const s0=Math.min(r.width/im.naturalWidth,r.height/im.naturalHeight),w=im.naturalWidth*s0,h=im.naturalHeight*s0,x=r.left-R.left+(r.width-w)/2,y=r.top-R.top+(r.height-h)/2;L.push([im,x,y,w,h,!e.matches('.dmodel')]);bx0=Math.min(bx0,x);by0=Math.min(by0,y);bx1=Math.max(bx1,x+w);by1=Math.max(by1,y+h)}
    const bw=bx1-bx0,bh=by1-by0,k=Math.min((W-2*M)/bw,(H-2*M)/bh),ox=(W-bw*k)/2-bx0*k,oy=(H-bh*k)/2-by0*k;L.forEach(([im,x,y,w,h,mul])=>{fitDraw(im,ox+x*k,oy+y*k,w*k,h*k,mul);if(mul)n++})}
@@ -1691,7 +1713,9 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'ddel':{const i=S.dl||0,l=LOOKS[i][1],j=l.indexOf(v);if(j>-1)l.splice(j,1);delete S.y.looksOk[i];break}
  case'dok':S.y.ok[v]?delete S.y.ok[v]:S.y.ok[v]=true;break;
  case'dlrec':{const i=+v;if(S.y.lrec===i){S.y.lrec=null;toast('Голосовое к образу сохранено')}else{S.y.lrec=i;S.y.lookVoice[i]=0}break}
- case'dgen':toast('Генерацию подключим после теста двойника: нужны 2 фото Яны. Пока — «Скачать кадр» и в Nano Banana вручную.');return;
+ case'dgen':dGenSheet();return;
+ case'dwear':{const i=S.dl||0;S.dwear=S.dwear||{};(S.dwear[i]=S.dwear[i]||{})[t.dataset.k]=v;persist();dGenSheet();return}
+ case'dcopy':{const t=$('#dprm');if(t){t.select();(navigator.clipboard?navigator.clipboard.writeText(t.value):Promise.reject()).then(()=>toast('Промпт скопирован'),()=>{document.execCommand('copy');toast('Промпт скопирован')})}return}
  case'dframe':dFrame();return;
  case'yv':if((S.yv||'req')!==v)S.yvPrev=S.yv||'req';S.yv=v;S.y.open=null;S.menu=false;$('#overlay').innerHTML='';if(v==='cat'&&!CATL)loadCat();break;
  case'cfg':CF.g=v;CF.c='all';CF.br=[];CF.szs=[];CF.lim=40;break;
