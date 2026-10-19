@@ -454,10 +454,10 @@ body.desk .sheet{align-items:center}body.desk .sheet .in{max-width:600px;max-hei
 .dseg{display:flex;border:1px solid var(--ink)}.dseg button{padding:6px 14px;font-size:10.5px;letter-spacing:.08em}.dseg button[aria-pressed="true"]{background:var(--ink);color:#fff}
 .dlooks{display:flex;border:1px solid var(--ink)}.dlooks button{width:40px;height:30px;border-right:1px solid var(--ink);font-size:10.5px}.dlooks button:last-child{border:0}.dlooks button[aria-pressed="true"]{background:var(--ink);color:#fff}
 .dlt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dcomp{position:relative;display:grid;grid-template-columns:auto 1fr;align-items:start;gap:24px;padding:20px 24px 34px;background:#fff}
+.dcomp{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr);align-items:start;gap:24px;padding:20px 24px 34px;background:#fff;overflow:hidden}.dwork{overflow-x:hidden}
 .dcomp.dover{outline:2px dashed var(--ink);outline-offset:-6px}
-.dav{height:min(56vh,520px);aspect-ratio:3/4;display:block;position:sticky;top:0}.dav img{height:min(56vh,520px);width:100%;object-fit:contain;display:block;max-width:none}
-.dslots{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;min-width:0}
+.dav{width:clamp(180px,38%,400px);display:block;position:sticky;top:0}.dav img{width:100%;height:auto;max-height:min(60vh,560px);object-fit:contain;object-position:top;display:block;max-width:100%}
+.dslots{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px;min-width:0}
 .dslot{aspect-ratio:3/4;position:relative;border:1px dashed #b5b5b0;background:#fff;display:grid;place-items:center;color:#b5b5b0;font-size:22px;width:100%;padding:0}
 .dslot.f{border:1px solid var(--soft)}.dslot.dover{border-color:var(--ink);background:var(--fog)}
 .dslot .dsim{width:100%;height:100%;display:block;padding:0}.dslot .dsim img{width:100%;height:100%;object-fit:contain;display:block}
@@ -518,6 +518,28 @@ body.cdesk .pics{grid-template-columns:repeat(4,minmax(0,1fr))}
 body.cdesk .look{flex:0 0 46%}
 body.cdesk .avbox{height:560px}
 body.cdesk .steps-nav{font-size:12px;gap:22px}
+}
+
+@media (min-width:1280px){
+body.cdesk #app:not([data-scr="land"]) .scr.split{max-width:none;display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);column-gap:64px;align-items:start;padding-top:8px}
+body.cdesk .shead{position:sticky;top:84px;display:flex;flex-direction:column;gap:18px}
+body.cdesk .shead .ttl{font-size:42px!important}body.cdesk .shead .txt{font-size:14px}
+body.cdesk .shead .steps-nav{flex-direction:column;gap:10px;border-bottom:0;border-left:1px solid var(--hair);padding:0 0 0 14px;overflow:visible}body.cdesk .shead .steps-nav span{padding:0}body.cdesk .shead .steps-nav span.cur{box-shadow:none;text-decoration:underline;text-underline-offset:4px}
+body.cdesk .sbody{display:flex;flex-direction:column;gap:24px;min-width:0}
+body.cdesk .sbody .vibes{grid-template-columns:repeat(3,minmax(0,1fr))}
+body.cdesk .sbody .pics{grid-template-columns:repeat(4,minmax(0,1fr))}
+body.cdesk .sbody .look.solo .mood,body.cdesk .sbody>div>.mood{max-height:72vh}
+}
+@media (min-width:1700px){body.cdesk .sbody .vibes{grid-template-columns:repeat(4,minmax(0,1fr))}body.cdesk .sbody .pics{grid-template-columns:repeat(5,minmax(0,1fr))}}
+
+@media (min-width:1280px){
+body.desk .dwork.list .scr.rlist{max-width:1280px;display:grid;grid-template-columns:minmax(0,1fr) 400px;column-gap:56px;align-items:start}
+body.desk .rmain{display:flex;flex-direction:column;gap:22px;min-width:0}body.desk .rside{display:flex;flex-direction:column;gap:22px;position:sticky;top:16px;background:var(--fog);padding:20px;border:1px solid var(--soft)}
+body.desk .rmain .ttl{font-size:52px}
+body.desk .rmain .req{padding:18px 8px;gap:20px}body.desk .rmain .req:hover{background:var(--fog);padding-left:14px}
+body.desk .rmain .req img{width:72px;height:112px}body.desk .rmain .req .t{font-size:15px}body.desk .rmain .req .t small{font-size:11.5px;margin-top:4px}
+body.desk .rmain .req .st{font-size:11px;padding:6px 10px}
+body.desk .rside .sum div{font-size:11.5px}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
@@ -935,7 +957,11 @@ function hdr(){return `<header class="hdr"><button class="burger" data-act="menu
 function paidNav(){const k=PAID.indexOf({params:'Параметры',week:'Неделя',wardrobe:'Шкаф',budget:'Бюджет',colors:'Пожелания',pay:'Оплата'}[cur()]);
  return `<nav class="steps-nav" aria-label="Шаги">${PAID.map((t,i)=>`<span class="${i<k?'done':''} ${i===k?'cur':''}"><span class="n">${n2(i+1)}</span>${t}</span>`).join('')}</nav>`}
 const nav=(ok=true,label='Далее')=>`<button class="btn line" data-act="back" aria-label="Назад">←</button><button class="btn" data-act="next" ${ok?'':'disabled'}>${label}</button>`;
-function scr(parts){return `<div class="scr">${parts.filter(Boolean).map((p,i)=>`<div style="--i:${i}">${p}</div>`).join('')}</div>`}
+function scr(parts){parts=parts.filter(Boolean);const W=(p,i)=>`<div style="--i:${i}">${p}</div>`;
+ if(S.mode==='yana'&&DESK()&&S.y.open==null&&(S.yv||'req')==='req'){const k=parts.findIndex(x=>x.includes('class="slots"'));if(k>0)return `<div class="scr rlist"><div class="rmain">${parts.slice(0,k).map(W).join('')}</div><aside class="rside">${parts.slice(k).map((p,i)=>W(p,i+k)).join('')}</aside></div>`}
+ if(S.mode==='client'&&matchMedia('(min-width:1280px)').matches&&cur()!=='land'){let n=0;while(n<parts.length&&/^\s*<(span class="lbl|h2 class="ttl|p class="txt|p class="lbl|nav class="steps-nav)/.test(parts[n]))n++;
+  if(n&&n<parts.length)return `<div class="scr split"><aside class="shead">${parts.slice(0,n).map(W).join('')}</aside><div class="sbody">${parts.slice(n).map((p,i)=>W(p,i+n)).join('')}</div></div>`}
+ return `<div class="scr">${parts.map(W).join('')}</div>`}
 function twin(ks){return `<div class="avw"><img class="av" src="${IMG}${AV}" alt="Образ на двойнике">${ks.map(k=>{const a=AN(k);return `<img class="ly" src="${CAT[k].cut}" alt="${CAT[k].n}" style="left:${a[0]}%;top:${a[1]}%;width:${a[2]}%;z-index:${a[3]}" draggable="false">`}).join('')}</div>`}
 
 // ---------- мудборд образа: вещи раскладкой на светлом фоне (как флэтлей), двойник — отдельной кнопкой ----------
@@ -970,7 +996,7 @@ function stage(ks,own,i,noShare){const vt=S.votes[i],on=ks.filter(k=>CAT[k]&&CAT
 let RESTORING=false;function render(){if(RESTORING)return;persist();
  clearInterval(timerId);clearInterval(reelId);
  const a=$('#app');a.classList.toggle('still',S.still);S.still=false;$('#overlay').innerHTML=S.menu?menu():'';
- if(S.mode==='yana'){document.body.classList.toggle('desk',DESK());if(DESK()){const sc=$('.dsc'),sw=$('.dwork'),st=[sc?sc.scrollTop:0,sw?sw.scrollTop:0];a.innerHTML=deskView();bar(null);dCompDrag();const sc2=$('.dsc'),sw2=$('.dwork');if(sc2&&st[0])sc2.scrollTop=st[0];if(sw2&&st[1])sw2.scrollTop=st[1];return}a.innerHTML=hdr()+yana();boardDrag();return}
+ if(S.mode==='yana'){document.body.classList.remove('cdesk');document.body.classList.toggle('desk',DESK());if(DESK()){const sc=$('.dsc'),sw=$('.dwork'),st=[sc?sc.scrollTop:0,sw?sw.scrollTop:0];a.innerHTML=deskView();bar(null);dCompDrag();const sc2=$('.dsc'),sw2=$('.dwork');if(sc2&&st[0])sc2.scrollTop=st[0];if(sw2&&st[1])sw2.scrollTop=st[1];return}a.innerHTML=hdr()+yana();boardDrag();return}
  document.body.classList.remove('desk');document.body.classList.toggle('cdesk',matchMedia('(min-width:1280px)').matches);a.dataset.scr=cur();
  const c=cur();let p=[];
  if(['free','status','capsule'].includes(c)&&!S.y.sent&&S.genFor!==genKey()){if(!GENP)genCapsule().then(()=>{S.still=true;render()});a.innerHTML=hdr()+scr([`<span class="lbl">|Яна собирает образы под твои ответы…|</span>`,`<div class="avbox"><i class="scan"></i></div>`]);bar(null);return}
@@ -1009,7 +1035,7 @@ let RESTORING=false;function render(){if(RESTORING)return;persist();
     `<div class="axes">${PAIRS.filter(pr=>(sw.axes||{})[pr.ax]).map(pr=>`<div><span>${pr.ax}</span><b>${sw.axes[pr.ax]}</b></div>`).join('')}${Object.keys(sw.icons||{}).length?`<div><span>Иконы</span><b>${Object.entries(sw.icons).filter(e=>e[1]==='yes').map(e=>e[0]).join(', ')||'—'}</b></div>`:''}</div>`,
     `<div class="grid" style="--cols:4">${[...sw.like.map(k=>[src(k),CAT[k].n,'']),...PAIRS.map(pr=>{const o=pr.o.find(z=>z[1]===(sw.axes||{})[pr.ax]);return o&&[src(o[0]),o[1],pr.ax]}).filter(Boolean),...P().icons.map((ic,j)=>(sw.icons||{})[ic[0]]==='yes'&&P().iconPh[j]&&['icons/'+P().iconPh[j]+'.jpg',ic[0],'Икона']).filter(Boolean)].map(([im,n,t])=>`<div class="it"><div class="ph"><img src="${im}" alt="${n}"></div><span class="nm">${t?t+' · ':''}${n}</span></div>`).join('')}</div>`,
     `<p class="txt">Яна увидит и то, что тебе понравилось, и то, что нет. Так она не пришлёт «не твоё».</p>`);
-   bar(`<button class="btn line" data-act="reswipe">↺</button><button class="btn" data-act="next">Создать моего двойника</button>`)}}
+   bar(`<button class="btn line" data-act="reswipe">↺</button><button class="btn" data-act="next">Дальше — детали вкуса</button>`)}}
  else if(c==='prefs'){if(!POOL)loadPool().then(()=>{if(cur()==='prefs'&&S.mode==='client'){S.still=true;render()}});const pf=S.pref,cnt=pf.shoes.length+pf.jeans.length+pf.tex.length;
   const pic=(k,v,body)=>`<button class="pic" data-act="pref" data-k="${k}" data-v="${v}" aria-pressed="${pf[k].includes(v)}">${body}<span>${v}</span></button>`;
   p=[`<span class="lbl">|Шаг 1 · Детали вкуса| <span class="free">бесплатно</span></span>`,`<h2 class="ttl">Что ты носишь на самом деле</h2>`,`<p class="txt">Можно несколько в каждом блоке. Яна подберёт обувь и джинсы именно такого типа, а не «что-нибудь».</p>`,
@@ -1017,7 +1043,7 @@ let RESTORING=false;function render(){if(RESTORING)return;persist();
    `<div class="q"><span class="lbl">|${G('Джинсы и брюки · какой крой нравится','Джинсы и брюки · какой крой нравится')}|</span><div class="pics">${JEANO[S.g].map(v=>pic('jeans',v,jeanSvg(v))).join('')}</div></div>`,
    `<div class="q"><span class="lbl">|Фактуры · что приятно носить|</span><div class="pics">${TEXT.filter(([v])=>!(AW&&v==='Лён')).map(([v])=>{const st=prefPic('tex',v);return pic('tex',v,`<span class="im" style="${st||''}"></span>`)}).join('')}</div></div>`,
    `<div class="q"><span class="lbl">|Цвета · 1 нажатие — люблю, 2 — никогда, 3 — сброс|</span><div class="sws">${COLORS.map(([cc,nm])=>`<div class="swb"><button class="sw" data-act="col" data-v="${cc}" data-s="${S.colors[cc]||''}" style="background:${cc}" aria-label="${nm}"></button>${nm}</div>`).join('')}</div></div>`];
-  bar(nav(true,cnt?'Далее':'Пропустить'))}
+  bar(nav(true,cnt?'Дальше — фото для двойника':'Пропустить — к фото для двойника'))}
  else if(c==='photo'){p=[`<span class="lbl">|Шаг 2 · Двойник| <span class="free">бесплатно</span></span>`,`<h2 class="ttl">Два фото</h2>`,
   `<div class="ups">${[['full','Полный рост','в рост, анфас'],['face','Лицо','крупно, без очков']].map(([k,t,s])=>`<label class="up" for="f_${k}">${S.photo[k]?`<img src="${S.photo[k]}" alt="${t}"><span class="ok">${t} ✓</span>`:`<span class="pl">+</span><span>${t}</span><span class="lbl">${s}</span>`}<input id="f_${k}" type="file" accept="image/*" hidden data-photo="${k}"></label>`).join('')}</div>`,
   `<div class="list">${['Дневной свет, без зеркала — попроси сфотографировать',P().photoTip,'Фото видит только Яна. Хранится в России, удаляется через 30 дней, на нём не учат ИИ'].map(t=>`<div class="opt" style="cursor:default"><span style="text-transform:none;font-size:12.5px">${t}</span></div>`).join('')}</div>`,
@@ -1295,7 +1321,7 @@ function dMsgs(){const pd=S.rev.pending,a=S.ask;const items=[];if(pd)items.push(
 function dReqs(){const y=S.y;return `<div class="dpad">${yana()}</div>`}
 function deskView(){const y=S.y;if(S.yv==='cat'||S.yv==='board'){if(y.open==null&&S.cforOpen!=null)y.open=S.cforOpen;if(y.open==null&&(S.cfor!=null||S.lookFor!=null))y.open=0;S.yv='req';S.dt='cat';if(!CATL)loadCat()}const open=y.open===0,dt=S.dt||'cat';if(y.open===0&&!y.sent&&S.genFor!==genKey()){if(!GENP)genCapsule().then(()=>{S.still=true;render()});return `<div class="desk"><div class="dpad"><span class="lbl">|Собираем капсулу по ответам клиента…|</span></div></div>`}
  const top=`<header class="dtop"><button class="dlogo" data-act="dhome" title="На главную">Yana</button><span class="lbl">Кабинет</span><nav><button data-act="dnav" data-v="req" aria-pressed="${(S.yv||'req')==='req'||open}">Заявки<span class="cnt">${1+P().reqs.length}</span></button><button data-act="dnav" data-v="ym" aria-pressed="${S.yv==='ym'&&!open}">Мои образы</button></nav><span class="sp"></span>
-  <span class="lbl">Прототип · вещи, цены, двойник и голос — примеры</span><button class="dbtn" data-act="mode" data-v="client">Глазами ${G('клиентки','клиента')} ↗︎</button><button class="dbtn" data-act="resetdemo" title="Начать заново">↺</button><span class="dme">Я</span></header>`;
+  <span class="lbl">Прототип · вещи, цены, двойник и голос — примеры</span><button class="dbtn" data-act="mode" data-v="client">Глазами ${G('клиентки','клиента')} ↗︎</button><span class="dme">Я</span></header>`;
  const tot=capSum(),cap=CAP();
  const side=open?`<aside class="dside"><div class="dbudg ${tot>cap?'over':''}"><div class="dlh"><span>Капсула ${NM().g} · ${y.items.length} ${plural(y.items.length,'вещь','вещи','вещей')}</span><b>${rub(tot)}</b></div><div class="bar"><i style="width:${Math.min(100,tot/cap*100)}%"></i></div><div class="dlh lbl"><span>из ${rub(cap)}</span><span>${tot>cap?'перебор '+rub(tot-cap):'осталось '+rub(cap-tot)}</span></div></div>
   <nav class="dtabs">${[['cat','Каталог'],['cap','Капсула',y.items.length],['anq','Анкета'],['msg','Сообщения',(S.rev.pending?1:0)+(S.ask.status==='wait'?1:0)]].map(([k,t,n])=>`<button data-act="dt" data-v="${k}" aria-pressed="${dt===k}">${t}${n?`<i>${n}</i>`:''}</button>`).join('')}</nav>
@@ -1721,7 +1747,7 @@ function persist(){if(!stOn)return;clearTimeout(stT);stT=setTimeout(()=>{try{con
 async function restore(){let d=null;try{d=JSON.parse(localStorage.getItem(STK)||'null')}catch(e){}if(!d||d.v!==1||!d.S)return false;RESTORING=true;
  try{setG(d.S.g||'f');Object.assign(S,d.S);S.menu=false;DECK=d.DECK;SINGLES=d.SINGLES;LOOKS.length=0;d.LOOKS.forEach(l=>LOOKS.push(l));Object.assign(ROLE,d.ROLE||{});RSY=d.sy||0;if(d.CF)Object.assign(CF,d.CF);
   const reg=[];Object.entries(d.cat||{}).forEach(([k,o])=>{if(CAT0.has(k)&&CAT[k])Object.assign(CAT[k],o);else{CAT[k]=o;if(o._r)reg.push([k,o])}});
-  if(reg.length){const dk=S.mode==='yana'&&matchMedia('(min-width:1280px)').matches;document.body.classList.toggle('desk',dk);$('#app').innerHTML=(dk?'<header class="dtop"><span class="dlogo">Yana</span><span class="lbl">Кабинет</span></header>':hdr())+'<div class="restoring"><span class="logo">Yana</span><i></i><span class="lbl">Возвращаемся туда, где остановились</span></div>';await loadPool();if(reg.some(r=>r[1]._r==='A'))await loadCat();if(reg.some(r=>r[1]._r==='D'))await loadDeck();
+  if(reg.length){const dk=S.mode==='yana'&&matchMedia('(min-width:1280px)').matches;document.body.classList.toggle('desk',dk);document.body.classList.toggle('cdesk',!dk&&S.mode==='client'&&matchMedia('(min-width:1280px)').matches);$('#app').innerHTML=(dk?'<header class="dtop"><span class="dlogo">Yana</span><span class="lbl">Кабинет</span></header>':hdr())+'<div class="restoring"><span class="logo">Yana</span><i></i><span class="lbl">Возвращаемся туда, где остановились</span></div>';await loadPool();if(reg.some(r=>r[1]._r==='A'))await loadCat();if(reg.some(r=>r[1]._r==='D'))await loadDeck();
    await Promise.all(reg.map(async([k,o])=>{delete CAT[k].img;try{await (o._r==='P'?regP(k):o._r==='D'?regD(k):regA(k))}catch(e){}if(CAT[k]){Object.assign(CAT[k],{sz:o.sz,szSel:o.szSel});if(o._uc&&o.cut)Object.assign(CAT[k],{cut:o.cut,_uc:1})}}))}
   RESTORING=false;return true}catch(e){try{localStorage.removeItem(STK)}catch(_){}location.reload();return true}}
 document.addEventListener('click',()=>persist(),true);document.addEventListener('input',()=>persist(),true);addEventListener('pagehide',()=>{clearTimeout(stT);stOn&&(stT=null,persist())});
