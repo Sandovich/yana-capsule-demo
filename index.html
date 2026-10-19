@@ -636,6 +636,10 @@ body.cdesk #app[data-scr="wardrobe"] .grid{display:grid!important;grid-template-
 body.cdesk #app[data-scr="wardrobe"] .grid>*{width:auto!important;height:auto!important;aspect-ratio:3/4}
 body.cdesk .honest .txt,body.cdesk #app[data-scr="free"] .sbody .txt{max-width:62ch!important}
 }
+
+.board{touch-action:pan-y}.board .ly{touch-action:pan-y}.board .ly.sel{touch-action:none}
+.dnd{touch-action:pan-y}
+.burger{min-width:44px;min-height:44px;margin:-12px 0 -12px -5px;padding:12px 5px}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
@@ -903,11 +907,11 @@ function jeanSvg(t){const L={'Прямые':[[9,5],[20,5],[19.5,57],[11,57]],'К
  const pts=a=>a.map(p=>p.join(',')).join(' '),mir=a=>a.map(([x,y])=>[40-x,y]);return `<svg viewBox="0 0 40 60" aria-hidden="true"><rect x="${L[0][0]}" y="${L[0][1]-2.5}" width="${40-2*L[0][0]}" height="3" fill="currentColor"/><polygon fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" points="${pts(L)}"/><polygon fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" points="${pts(mir(L))}"/></svg>`}
 const PREFPICK={f:{'Туфли':'fd4a6fb24c','Ботинки':'f068d26906','Кроссовки':'f0c97e011d','Ботильоны':'f95b0b2d06','Ботфорты':'f088679826','Кожа':'fdc9d7ef50','Шёлк, сатин':'f155fc5882'},m:{'Туфли':'f5c3b865b4','Ботинки':'fac6474e02','Кроссовки':'f83536903d','Кожа':'fdc9d7ef50','Шёлк, сатин':'f155fc5882'}};
 const PREFIMG={};function prefPic(kind,label){const key=S.g+kind+label;if(PREFIMG[key]!==undefined)return PREFIMG[key];if(!POOL||!Object.keys(POOL).length)return null;
- const pk=(PREFPICK[S.g]||{})[label],px0=pk&&Object.values(POOL).find(x=>x.i===pk&&HI[x.i]);if(px0){const [sh,k]=HI[px0.i];if(kind==='shoes')return PREFIMG[key]='TRIM:'+sh+':'+k;const cx=k%6,cy=Math.floor(k/6),z=3,qx=(cx*z+(z-1)/2)/(6*z-1)*100,qy=(cy*z+(z-1)/2)/(6*z-1)*100;return PREFIMG[key]=`background-image:url(cat/h2/${pad3(sh)}.webp);background-size:${600*z}% ${600*z*4/3}%;background-position:${qx}% ${qy}%`}
+ const pk=(PREFPICK[S.g]||{})[label],px0=pk&&Object.values(POOL).find(x=>x.i===pk&&HI[x.i]);if(px0){const [sh,k]=HI[px0.i];if(kind==='shoes')return PREFIMG[key]='TRIM:'+sh+':'+k;const z=3;return PREFIMG[key]=`background-image:url(cat/h2i/${pad3(sh)}_${k}.webp);background-size:${100*z}% ${100*z*4/3}%;background-position:50% 50%`}
  const re=kind==='shoes'?(SHOET.find(z=>z[0]===label)||[])[1]:(TEXT.find(z=>z[0]===label)||[])[1];if(!re)return PREFIMG[key]=null;
  const l=Object.values(POOL).filter(x=>x.g===S.g&&HI[x.i]&&(kind!=='shoes'||x.c==='обувь'&&SHT(x.n)===label&&!/мех|утепл|тапоч|овчин/.test(x.n.toLowerCase()))&&(kind!=='tex'||re.test(x.n.toLowerCase())&&x.c!=='обувь'&&!/под кож|принт|полоск|клетк/.test(x.n.toLowerCase())&&!/бел|молоч|экрю|сливоч|кремов|айвори|ванил/.test((x.l||'').toLowerCase())));if(!l.length)return PREFIMG[key]=null;
- const x=l[Math.floor(l.length/3)],[sh,k]=HI[x.i];if(kind==='shoes')return PREFIMG[key]='TRIM:'+sh+':'+k;const cx=k%6,cy=Math.floor(k/6),z=kind==='tex'?3:1.15,px=(cx*z+(z-1)/2)/(6*z-1)*100,py=(cy*z+(z-1)/2)/(6*z-1)*100;
- return PREFIMG[key]=`background-image:url(cat/h2/${pad3(sh)}.webp);background-size:${600*z}% ${600*z*4/3}%;background-position:${px}% ${py}%`}
+ const x=l[Math.floor(l.length/3)],[sh,k]=HI[x.i];if(kind==='shoes')return PREFIMG[key]='TRIM:'+sh+':'+k;const z=kind==='tex'?3:1.15;
+ return PREFIMG[key]=`background-image:url(cat/h2i/${pad3(sh)}_${k}.webp);background-size:${100*z}% ${100*z*4/3}%;background-position:50% 50%`}
 const vibeTags=()=>(S.vibe||[]).flatMap(k=>(VIBES[S.g].find(v=>v[0]===k)||[,,,[]])[3]);
 
 // ---------- модель стилей и пар: обучена на 4 477 образах стилистов Lamoda + гайд Яны «Цвета, которые не ссорятся» ----------
@@ -1276,20 +1280,20 @@ const CGROUP={'верхняя одежда':'верхняя одежда','жа�
 const BRN={};let CUT={};const pad3=n=>String(n).padStart(3,'0');
 async function loadCat(){if(CATL)return;try{const [l,c,c2]=await Promise.all([fetch('cat/full.json').then(r=>r.json()),fetch('cat/cut.json').then(r=>r.json()).catch(()=>({})),fetch('cat/cut2.json').then(r=>r.json()).catch(()=>({}))]);CUT=c;Object.entries(c2).forEach(([k,v])=>CUT[k]=[v[0],v[1],1]);
  CATL=l.map(x=>({id:x.i,b:x.b,g:x.g,c:x.c,n:x.n,p:x.p,o:x.o,sz:x.z||[],all:x.a||[],col:x.l,comp:x.m,d:'',u:x.u,s:x.s,k:x.k,im:x.im||'',cx:CUT[x.i]?1:0,q:(x.n+' '+x.b+' '+(x.l||'')+' '+x.c).toLowerCase()}))}catch(e){CATL=[]}S.still=true;render();if(!POOL)loadPool().then(()=>render())}
-const sprBg=x=>x.im?`background-image:url('${x.im.replace(/'/g,'%27')}');background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#fff`:HI&&HI[x.id]?`background-image:url(cat/h2/${pad3(HI[x.id][0])}.webp);background-size:600% 600%;background-position:${(HI[x.id][1]%6)*20}% ${Math.floor(HI[x.id][1]/6)*20}%;background-color:#fff`:`background-image:url(cat/v/${pad3(x.s)}.webp);background-size:1000% 2000%;background-position:${(x.k%10)*100/9}% ${Math.floor(x.k/10)*100/19}%`;
+const sprBg=x=>x.im?`background-image:url('${x.im.replace(/'/g,'%27')}');background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#fff`:HI&&HI[x.id]?`background-image:url(cat/h2i/${pad3(HI[x.id][0])}_${HI[x.id][1]}.webp);background-size:100% 100%;background-position:center;background-color:#fff`:`background-image:url(cat/vi/${pad3(x.s)}_${x.k}.webp);background-size:100% 100%;background-position:center`;
 // ---------- автообрезка белых полей у фото вещи: по центру, целиком ----------
 const TRC={};function trimDraw(im,sx,sy,sw,sh,asp){const c=document.createElement('canvas');c.width=sw;c.height=sh;const x=c.getContext('2d',{willReadFrequently:true});x.fillStyle='#fff';x.fillRect(0,0,sw,sh);x.drawImage(im,sx,sy,sw,sh,0,0,sw,sh);let d;try{d=x.getImageData(0,0,sw,sh).data}catch(e){return null}
  let x0=sw,y0=sh,x1=-1,y1=-1;for(let y=0;y<sh;y+=2)for(let i=0;i<sw;i+=2){const o=(y*sw+i)*4;if(Math.min(d[o],d[o+1],d[o+2])<232){if(i<x0)x0=i;if(i>x1)x1=i;if(y<y0)y0=y;if(y>y1)y1=y}}
  if(x1<0)return null;const bw=x1-x0+2,bh=y1-y0+2,W=520,H=Math.round(W/asp),pad=.07,k=Math.min(W*(1-2*pad)/bw,H*(1-2*pad)/bh),o=document.createElement('canvas');o.width=W;o.height=H;const g=o.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);g.drawImage(c,x0,y0,bw,bh,(W-bw*k)/2,(H-bh*k)/2,bw*k,bh*k);return o.toDataURL('image/jpeg',.9)}
 async function trimEl(e){if(e.dataset.tr)return;e.dataset.tr=1;try{
- if(e.dataset.trim){const [sh,k]=e.dataset.trim.split(':').map(Number),key='s'+sh+':'+k;if(!TRC[key]){const im=await loadImg(`cat/h2/${pad3(sh)}.webp`),tw=im.width/6,th=im.height/6;TRC[key]=trimDraw(im,(k%6)*tw,Math.floor(k/6)*th,tw,th,1)}
+ if(e.dataset.trim){const [sh,k]=e.dataset.trim.split(':').map(Number),key='s'+sh+':'+k;if(!TRC[key]){const im=await loadImg(`cat/h2i/${pad3(sh)}_${k}.webp`);TRC[key]=trimDraw(im,0,0,im.width,im.height,1)}
   if(TRC[key])e.style.cssText=`background-image:url(${TRC[key]});background-size:contain;background-position:center;background-repeat:no-repeat;background-color:#fff`;return}
  const u=e.getAttribute('src')||'';if(!/^(img|cat)\//.test(u))return;const r=e.getBoundingClientRect(),asp=r.width&&r.height?r.width/r.height:.75,key=u+'@'+asp.toFixed(2);
  if(!TRC[key]){const im=await loadImg(u);TRC[key]=trimDraw(im,0,0,im.naturalWidth,im.naturalHeight,asp)}if(TRC[key])e.src=TRC[key]}catch(err){}}
 const TRSEL='.pics .im[data-trim],.pair img,.card img:not(.iph),.exrow .xc img:not([src^="icons"]),.exgrid img';
 new MutationObserver(()=>{document.querySelectorAll(TRSEL).forEach(e=>{if(!e.dataset.tr){if(e.tagName==='IMG'&&!e.complete)e.addEventListener('load',()=>trimEl(e),{once:true});else trimEl(e)}})}).observe(document.documentElement,{childList:true,subtree:true});
 const IMC={};const loadImg=u=>IMC[u]||(IMC[u]=new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=u}));
-async function cell(u,k,cw,ch,n,png){const i=await loadImg(u);const c=document.createElement('canvas');c.width=cw;c.height=ch;const g=c.getContext('2d');g.drawImage(i,(k%n)*cw,Math.floor(k/n)*ch,cw,ch,0,0,cw,ch);
+async function cell(u,k,cw,ch,n,png){const sm=u.match(/^cat\/(h2|v|x|y)\/(\d+)\.webp$/);if(sm)return `cat/${sm[1]}i/${sm[2]}_${k}.webp`;const i=await loadImg(u);const c=document.createElement('canvas');c.width=cw;c.height=ch;const g=c.getContext('2d');g.drawImage(i,(k%n)*cw,Math.floor(k/n)*ch,cw,ch,0,0,cw,ch);
  if(!png)return c.toDataURL('image/jpeg',.94);const d=g.getImageData(0,0,cw,ch).data;let x0=cw,y0=ch,x1=0,y1=0;for(let y=0;y<ch;y++)for(let x=0;x<cw;x++)if(d[(y*cw+x)*4+3]>40){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}
  if(x1<=x0)return c.toDataURL('image/png');const t=document.createElement('canvas');t.width=x1-x0+1;t.height=y1-y0+1;t.getContext('2d').drawImage(c,x0,y0,t.width,t.height,0,0,t.width,t.height);return t.toDataURL('image/png')}
 async function regA(id){if(CAT[id]&&CAT[id].img)return CAT[id];const x=CATL&&CATL.find(z=>z.id===id);if(!x)return CAT[id];
@@ -1362,7 +1366,7 @@ function boardView(){const miss=S.board.layers.filter(z=>!CAT[z.id]);if(miss.len
  const L=[...S.board.layers].sort((a,b)=>a.z-b.z),sel=S.board.layers.find(z=>z.id===S.board.sel),tiles=L.filter(z=>!CAT[z.id].cut),tot=L.reduce((a,z)=>a+CAT[z.id].p,0);
  const bk=`<button class="btn line" data-act="yv" data-v="${S.yvPrev&&S.yvPrev!=='board'?S.yvPrev:'cat'}" aria-label="Назад">←</button>`;bar(L.length?bk+`<button class="btn line" data-act="yv" data-v="cat">+ Вещь</button><button class="btn" data-act="bcap">В капсулу ${NM().g}</button>`:bk+`<button class="btn" data-act="yv" data-v="cat">Выбрать вещи в каталоге</button>`);
  return scr([ynav(),`<h2 class="ttl">Черновик образа</h2>`,
-  `<p class="txt">Вещи ложатся поверх двойника ${NM().g} бесплатно и мгновенно. Тяни пальцем, разводи двумя пальцами — больше или меньше. Платная генерация — один раз, когда образ утверждён.</p>`,
+  `<p class="txt">Вещи ложатся поверх двойника ${NM().g} бесплатно и мгновенно. Коснись вещи — она выделится, тогда тяни пальцем, а двумя пальцами — больше или меньше. По модели страница листается. Платная генерация — один раз, когда образ утверждён.</p>`,
   `<div class="board" id="board"><div class="avw" id="avw"><img class="av" src="${IMG}${AV}" alt="Двойник">${L.filter(z=>CAT[z.id].cut).map(z=>`<img class="ly ${S.board.sel===z.id?'sel':''}" data-ly="${z.id}" src="${CAT[z.id].cut}" alt="${CAT[z.id].n}" style="left:${z.x}%;top:${z.y}%;width:${z.w}%;z-index:${z.z}" draggable="false">`).join('')}</div>${tiles.map((z,i)=>`<img class="tile" data-act="bsel" data-v="${z.id}" src="${CAT[z.id].img}" alt="${CAT[z.id].n}" style="top:${10+i*82}px">`).join('')}${L.length?'':'<span class="hint">Добавь вещи кнопкой «+» в каталоге</span>'}</div>`,
   sel?`<div class="frow"><span style="min-width:0">${CAT[sel.id].n}</span><span class="viewsw"><button data-act="bsz" data-v="-4" aria-label="Меньше">−</button><button data-act="bsz" data-v="4" aria-label="Больше">+</button><button data-act="bz" data-v="1" aria-label="Выше слоем">▲</button><button data-act="bz" data-v="-1" aria-label="Ниже слоем">▼</button><button data-act="bdel" aria-label="Убрать">×</button></span></div>`:'',
   L.length?`<div class="sum">${L.map(z=>`<div><span>${CAT[z.id].n} · ${CAT[z.id].s}</span><b>${rub(CAT[z.id].p)}</b></div>`).join('')}<div><span>Итого образ</span><b>${rub(tot)}</b></div></div>`:'',
@@ -1379,7 +1383,7 @@ function boardDrag(){const b=$('#board');if(!b)return;let d=null,pin=null;const 
  b.addEventListener('pointermove',e=>{if(!P.has(e.pointerId))return;P.set(e.pointerId,{x:e.clientX,y:e.clientY});
   if(pin&&P.size===2){setW(pin.z,pin.w0*dist()/pin.d0);return}
   if(!d)return;d.z.x=Math.max(-20,Math.min(120,d.zx+(e.clientX-d.x0)/d.r.width*100));d.z.y=Math.max(-10,Math.min(100,d.zy+(e.clientY-d.y0)/d.r.height*100));d.t.style.left=d.z.x+'%';d.t.style.top=d.z.y+'%'});
- const up=e=>{P.delete(e.pointerId);if(P.size)return;if(d||pin){d=null;pin=null;S.still=true;const sy=window.scrollY;render();window.scrollTo(0,sy)}};b.addEventListener('pointerup',up);b.addEventListener('pointercancel',up);
+ const up=e=>{P.delete(e.pointerId);if(P.size)return;if(d||pin){d=null;pin=null;S.still=true;const sy=window.scrollY;render();window.scrollTo(0,sy)}};b.addEventListener('pointerup',up);b.addEventListener('pointercancel',e=>{if(d){d.z.x=d.zx;d.z.y=d.zy}up(e)});
  b.addEventListener('wheel',e=>{const z=selZ();if(!z)return;e.preventDefault();setW(z,z.w*(e.deltaY<0?1.06:0.94));clearTimeout(b._wt);b._wt=setTimeout(()=>{S.still=true;const sy=window.scrollY;render();window.scrollTo(0,sy)},350)},{passive:false})}
 // ---------- ДЕСКТОП: кабинет Яны на широком экране ----------
 const DESK=()=>S.mode==='yana'&&matchMedia('(min-width:1280px)').matches;
