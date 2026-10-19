@@ -321,8 +321,11 @@ textarea{width:100%;min-height:76px;border:0;border-bottom:1px solid var(--ink);
 .vibe img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;background:var(--fog)}
 .vibe b{font-weight:500;font-size:13px;padding:6px 10px 0;text-transform:uppercase;letter-spacing:.04em}
 .vibe span{font-size:11.5px;line-height:1.35;color:var(--mute);padding:0 10px}
-.vibe[aria-pressed=true]{border-color:var(--ink);outline:2px solid var(--ink);outline-offset:-2px}
-.vibe[aria-pressed=true] b::after{content:' ✓'}
+.vibe{transition:opacity .2s,filter .2s,background .2s,color .2s;position:relative}.vibe .vph{position:relative;display:block}
+.vibes.has .vibe[aria-pressed=false]{opacity:.5;filter:grayscale(.7)}.vibes.has .vibe[aria-pressed=false]:hover{opacity:.85;filter:none}
+.vibe[aria-pressed=true]{background:var(--ink);color:var(--paper);border-color:var(--ink);outline:3px solid var(--ink);outline-offset:0}
+.vibe[aria-pressed=true] span{color:#cfcfcf}
+.vno{position:absolute;right:8px;top:8px;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:500;box-shadow:0 0 0 2px var(--paper);animation:pop .3s cubic-bezier(.3,1.5,.6,1) both}
 .icard .iname{font-family:var(--f-logo);font-size:36px;line-height:1.02;text-transform:uppercase;font-weight:400;letter-spacing:-.01em}
 .icard .txt{max-width:30ch}
 .icard.hasph{justify-content:flex-start;padding:0 0 14px;gap:6px;overflow:hidden}.icard .iph{width:100%;height:270px;object-fit:contain;background:var(--fog);max-height:none}.icard.hasph .iname{font-size:24px}.icard.hasph .txt{font-size:12px;line-height:1.35}.icard .icr{font-size:10px;color:var(--mute);letter-spacing:.02em;padding:0 10px}
@@ -438,7 +441,7 @@ body.desk .sheet{align-items:center}body.desk .sheet .in{max-width:600px;max-hei
 .dside{display:flex;flex-direction:column;min-width:0;background:var(--fog);overflow:hidden}
 .dsc{flex:1;overflow:auto;scrollbar-width:thin;padding:0 16px 40px}.dsc .scr{gap:14px;padding-top:12px}.dsc .budg{display:none}.dsc .banner{background:#fff}
 .dsc .search,.dsc .gseg{background:#fff;border:1px solid #d6d6d2;padding-left:10px;padding-right:10px}.dsc .gseg{padding:0}.dsc .ctabs{border-color:var(--soft)}
-.dsc .cards{--cols:3!important;gap:14px 12px}.dsc .cc{background:#fff;border:1px solid #e9e9e6;padding:0 0 8px}.dsc .cc .ph{background-color:#fff}.dsc .cc .bn,.dsc .cc .nm,.dsc .cc .pr,.dsc .cc .szs{padding:0 8px}.dsc .cc .add{right:8px;top:8px}
+.dsc .cards{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))!important;gap:14px 12px}.dsc .cc{background:#fff;border:1px solid #e9e9e6;padding:0 0 8px}.dsc .cc .ph{background-color:#fff}.dsc .cc .bn,.dsc .cc .nm,.dsc .cc .pr,.dsc .cc .szs{padding:0 8px}.dsc .cc .add{right:8px;top:8px}
 .dsc .cc .add{display:none}.dsc .cc[draggable]{cursor:grab}.dsc .cc.drg{outline:1px dashed var(--ink);outline-offset:3px;opacity:.6}
 .dact{position:absolute;left:1px;right:1px;top:1px;aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;gap:4px;padding:8px;opacity:0;transition:opacity .15s;background:linear-gradient(transparent 45%,rgba(255,255,255,.9));pointer-events:none}
 .cc:hover .dact{opacity:1}.cc:hover .dact button{pointer-events:auto}.dact button{border:1px solid var(--ink);background:#fff;padding:6px 0;font-size:10px;letter-spacing:.08em}.dact button:first-child{background:var(--ink);color:#fff}
@@ -465,7 +468,7 @@ body.desk .sheet{align-items:center}body.desk .sheet .in{max-width:600px;max-hei
 .dslot .dx{position:absolute;right:4px;top:4px;width:20px;height:20px;background:#fff;border:1px solid var(--soft);font-size:12px;line-height:1;display:grid;place-items:center;opacity:0;transition:opacity .15s}.dslot:hover .dx{opacity:1}
 .dhint{position:absolute;left:24px;bottom:8px;max-width:calc(100% - 48px);font-size:10px;color:var(--mute);line-height:1.5;max-width:420px}.dcomp.on .dhint{position:static;display:block;margin-top:6px}.dsc h2.ttl{font-size:22px}.dsc .dsc-hide{display:none}
 .dcomp.mb{display:block;height:min(64vh,620px);min-height:440px;padding:0;overflow:hidden}.dcomp,.dunder,.dstrip,.dcl,.dtools,.dhint2{flex:none}
-.dmodel{position:absolute;left:1%;top:3%;height:94%;width:auto;max-width:none;pointer-events:none;user-select:none}
+.dmodel{position:absolute;left:7%;top:3%;height:94%;width:auto;max-width:none;pointer-events:none;user-select:none}
 .dmi,.dfr{position:absolute;transform:translate(-50%,0);height:auto;max-width:none;mix-blend-mode:multiply;cursor:grab;user-select:none;-webkit-user-drag:none;touch-action:none;z-index:3}
 .dmi:hover,.dfr:hover{outline:1px dashed #b5b5b0;outline-offset:2px}.dmi.dragging,.dfr.dragging{cursor:grabbing;z-index:20;outline:1px dashed var(--ink);filter:drop-shadow(0 8px 14px rgba(0,0,0,.18))}
 .dsim img{cursor:grab}.dslot.out{border:1px dashed #d6d6d2;color:var(--mute);font-size:10px;letter-spacing:.06em;line-height:1.6}.dslot.out:hover{border-color:var(--ink);color:var(--ink)}
@@ -550,6 +553,50 @@ body.cdesk .shead .ttl{font-size:40px!important}
 }
 @media (min-width:1700px){body.cdesk #app:not([data-scr="land"]) .scr.split{grid-template-columns:fit-content(380px) minmax(0,900px)}body.cdesk #app[data-scr="swipe"] .scr.split,body.cdesk #app[data-scr="twin"] .scr.split{grid-template-columns:fit-content(380px) 520px}}
 @media (min-width:1280px){body.cdesk .shead{min-width:220px;max-width:380px}}
+
+@media (min-width:1280px){
+.dwrap.split{grid-template-columns:minmax(460px,var(--dsp,52%)) 9px minmax(340px,1fr)}
+.dsplit{cursor:col-resize;position:relative;background:var(--paper);border-left:1px solid var(--soft);border-right:1px solid var(--soft);touch-action:none;user-select:none;z-index:4}
+.dsplit i{position:absolute;left:50%;top:50%;width:3px;height:44px;transform:translate(-50%,-50%);border-left:1px solid #b5b5b0;border-right:1px solid #b5b5b0}
+.dsplit:hover,.dsplit.on{background:var(--fog)}.dsplit:hover i,.dsplit.on i{border-color:var(--ink)}
+body.dsplitting{cursor:col-resize;user-select:none}body.dsplitting iframe,body.dsplitting img{pointer-events:none}
+.dwrap.split .dwork{border-right:0}
+}
+
+@media (min-width:1280px){
+body.cdesk #app:not([data-scr="land"]) .scr.split{display:flex!important;flex-direction:column;align-items:center;gap:26px;max-width:none;padding-top:8px}
+body.cdesk .shead{position:static!important;width:100%;max-width:1040px!important;min-width:0!important;align-items:center;text-align:center;gap:14px}
+body.cdesk .shead .ttl{font-size:44px!important}body.cdesk .shead .txt{max-width:560px;margin:0 auto}
+body.cdesk .shead .steps-nav{flex-direction:row!important;justify-content:center;gap:22px;border-left:0!important;border-bottom:1px solid var(--hair)!important;padding:0 0 4px!important;width:100%}
+body.cdesk .shead .steps-nav span.cur{text-decoration:none;box-shadow:0 1px 0 var(--ink)}
+body.cdesk .sbody{width:100%;max-width:1040px}
+body.cdesk #app[data-scr="swipe"] .sbody,body.cdesk #app[data-scr="twin"] .sbody{max-width:480px}
+body.cdesk #app[data-scr="swipe"] .sbody .meter{width:100%}
+body.cdesk #app[data-scr="photo"] .sbody,body.cdesk #app[data-scr="params"] .sbody,body.cdesk #app[data-scr="week"] .sbody,body.cdesk #app[data-scr="budget"] .sbody,body.cdesk #app[data-scr="colors"] .sbody,body.cdesk #app[data-scr="pay"] .sbody,body.cdesk #app[data-scr="free"] .sbody,body.cdesk #app[data-scr="status"] .sbody{max-width:820px}
+body.cdesk .sbody .deck{margin:0 auto}
+}
+@media (min-width:1700px){body.cdesk .sbody,body.cdesk .shead{max-width:1180px!important}}
+
+@media (min-width:1280px){
+body.cdesk #app[data-scr="swipe"] .sbody{max-width:780px!important}
+body.cdesk #app[data-scr="swipe"] .deck{height:min(72vh,720px);max-width:560px;margin:0 auto}
+body.cdesk #app[data-scr="swipe"] .card{inset:0;padding:18px 18px 22px}
+body.cdesk #app[data-scr="swipe"] .card img:not(.iph){height:calc(min(72vh,720px) - 130px);max-height:none}
+body.cdesk #app[data-scr="swipe"] .card .nm{font-size:14px}
+body.cdesk #app[data-scr="swipe"] .icard .iph{height:calc(min(72vh,720px) - 200px)}
+body.cdesk #app[data-scr="swipe"] .pair{gap:16px}body.cdesk #app[data-scr="swipe"] .pair img{height:min(52vh,460px)}body.cdesk #app[data-scr="swipe"] .pair button{padding:18px 12px;font-size:13px}
+body.cdesk #app[data-scr="swipe"] .ttl+div,body.cdesk #app[data-scr="swipe"] .sbody>div>p{text-align:center}
+}
+
+@media (min-width:1280px){
+body.cdesk #app[data-scr="swipe"] .sbody:has(.grid){max-width:1040px!important}
+body.cdesk #app[data-scr="swipe"] .sbody .grid{--cols:5!important;gap:22px 16px}
+body.cdesk #app[data-scr="swipe"] .sbody .grid img{height:260px!important;max-height:none;width:100%;object-fit:contain}
+body.cdesk #app[data-scr="swipe"] .sbody .grid .nm,body.cdesk #app[data-scr="swipe"] .sbody .grid span{font-size:11.5px}
+body.cdesk #app[data-scr="swipe"] .sbody .sum{max-width:760px;margin:0 auto;width:100%}
+body.cdesk #app[data-scr="swipe"] .sbody .big-txt{text-align:center;font-size:26px}
+}
+@media (min-width:1700px){body.cdesk #app[data-scr="swipe"] .sbody:has(.grid){max-width:1180px!important}body.cdesk #app[data-scr="swipe"] .sbody .grid img{height:300px!important}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
@@ -917,7 +964,7 @@ async function genCore(){const g=S.g,key=genKey(),like=S.swipe.like,no=S.swipe.n
  const base=(S.base||[]).map(b=>b.toLowerCase().slice(0,5));
  let h=0;for(const ch of key)h=(h*31+ch.charCodeAt(0))>>>0;const jit=id=>{let x=h;for(const ch of id)x=(x*33+ch.charCodeAt(0))>>>0;return (x%1000)/1000*8};
  const C=cands(g).filter(x=>!no.includes(x.id)&&!(x.col&&never.includes(x.col)));
- const sc=x=>{const kd=KIND(x.n,x.cc),n=x.n.toLowerCase();let v=styleSc(x.n,g)*10+seasonSc(x.n)*8+(like.includes(x.id)?60:0)+(x.t.some(t=>st.includes(t))?x.t.filter(t=>st.includes(t)).length*30:st.length?-15:0)-x.t.filter(t=>anti.includes(t)).length*14+x.r*2-(GSEEN[x.id]||0)*22+(x.col&&love.includes(x.col)?14:0)
+ const sc=x=>{const kd=KIND(x.n,x.cc),n=x.n.toLowerCase();let v=styleSc(x.n,g)*10+seasonSc(x.n)*8+(like.includes(x.id)?60:0)+(x.t.some(t=>st.includes(t))?x.t.filter(t=>st.includes(t)).length*30:st.length?-15:0)-x.t.filter(t=>anti.includes(t)).length*14+x.r*2-(GSEEN[x.id]||0)*22-((GSEEN[x.id]||0)>=.5&&!like.includes(x.id)?400:0)+(x.col&&love.includes(x.col)?14:0)
   -Math.abs(x.p-tgt)/tgt*10-(x.p>tgt*2.2?25:0)+jit(x.id);
   if(/Офис/.test(wk)&&(kd==='jacket'||/рубашк|блуз|брюк/.test(n)))v+=S.office==='Строгий'?18:10;
   if(/Вечер|Мероприят/.test(wk)&&(kd==='dress'||x.t.includes('Вечер')))v+=12;
@@ -931,13 +978,15 @@ async function genCore(){const g=S.g,key=genKey(),like=S.swipe.like,no=S.swipe.n
   {const z=(POOL[x.id]||{}).z;if(z&&z.length&&kd!=='bag'){const w=kd==='shoes'?[String(S.shoe)]:kd==='bottom'?S.bsizes:kd==='dress'?[...S.sizes,...S.bsizes]:S.sizes;if(w.length&&!w.some(q=>[q,...((SZMAP[S.g]||{})[q]||[])].some(m=>z.includes(m))))v-=60}}
   if(base.some(b=>b.length>3&&n.startsWith(b)))v-=18;return v};
  const S2=C.map(x=>({...x,v:sc(x)}));
+ const LIKED=like.filter(k=>CAT[k]&&!S2.some(x=>x.id===k)).map(k=>{const c=CAT[k];return {id:k,n:c.n,cc:c.cc,c:c.cc,p:c.p||0,b:c.s,t:c.t||[],col:null,r:0,v:999}});S2.push(...LIKED);
+ const LK=new Set(like);
  const shT=used=>used.filter(u=>KIND((CAT[u]||POOL[u]||{}).n,(CAT[u]||{}).cc||(POOL[u]||{}).c)==='shoes').map(u=>SHT((CAT[u]||POOL[u]).n));
  const brc=used=>{const c={};used.forEach(u=>{const b=(POOL[u]||CAT[u]||{}).b;if(b)c[b]=(c[b]||0)+1});return c};
  const pick=(kinds,used)=>{const st=shT(used),bc=brc(used),ok=x=>!(x.b&&(bc[x.b]||0)>=3);const r=pick0(kinds,used,st,ok);return r||pick0(kinds,used,st,()=>true)};
  const pick0=(kinds,used,st,ok)=>{return S2.filter(x=>ok(x)&&kinds.includes(KIND(x.n,x.cc))&&!used.includes(x.id)&&!used.some(u=>(CAT[u]||POOL[u]||{}).n===x.n)&&!(KIND(x.n,x.cc)==='shoes'&&st.includes(SHT(x.n)))).sort((a,b)=>b.v-a.v)[0]};
  const plan=g==='f'?[['outer'],['top'],['top'],['jacket'],['bottom'],['bottom'],['dress','bottom'],['shoes'],['shoes']]:[['outer'],['jacket','outer'],['top'],['top'],['top'],['bottom'],['bottom'],['shoes'],['shoes']];
- const items=[];plan.forEach(kd=>{const x=pick(kd,items);if(x)items.push(x.id)});
- const PR=Object.fromEntries(S2.map(x=>[x.id,x])),capB=S.budget;for(let g2=0;g2<40;g2++){const sum=items.reduce((a,k)=>a+PR[k].p,0);if(sum<=capB)break;let done=false;const prf=(S.pref||{}),keep=(old,alt)=>{const kd=KIND(old.n,old.cc);if(kd==='shoes'&&(prf.shoes||[]).length)return !(prf.shoes.includes(SHT(old.n))&&!prf.shoes.includes(SHT(alt.n)));if(kd==='bottom'&&(prf.jeans||[]).length)return !(prf.jeans.includes(JT(old.n))&&!prf.jeans.includes(JT(alt.n)));return true};for(const strict of [1,0]){if(done)break;for(const j of items.map((k,i)=>i).sort((a,b)=>PR[items[b]].p-PR[items[a]].p)){const old=PR[items[j]],kd=KIND(old.n,old.cc),oth=kd==='shoes'?items.filter((k,i2)=>i2!==j&&KIND(PR[k].n,PR[k].cc)==='shoes').map(k=>SHT(PR[k].n)):[],alt=S2.filter(x=>KIND(x.n,x.cc)===kd&&x.p<old.p&&!items.includes(x.id)&&!items.some(q=>PR[q].n===x.n)&&!(kd==='shoes'&&oth.includes(SHT(x.n)))&&(!strict||keep(old,x))).sort((a,b)=>b.v-a.v)[0];if(alt){items[j]=alt.id;done=true;break}}}if(!done)break}
+ const items=[],likeQ=like.filter(k=>CAT[k]&&S2.some(x=>x.id===k));plan.forEach(kd=>{const lk=likeQ.find(k=>!items.includes(k)&&kd.includes(KIND(CAT[k].n,CAT[k].cc)));if(lk){items.push(lk);return}const x=pick(kd,items);if(x)items.push(x.id)});
+ const PR=Object.fromEntries(S2.map(x=>[x.id,x])),capB=S.budget;for(let g2=0;g2<40;g2++){const sum=items.reduce((a,k)=>a+PR[k].p,0);if(sum<=capB)break;let done=false;const prf=(S.pref||{}),keep=(old,alt)=>{const kd=KIND(old.n,old.cc);if(kd==='shoes'&&(prf.shoes||[]).length)return !(prf.shoes.includes(SHT(old.n))&&!prf.shoes.includes(SHT(alt.n)));if(kd==='bottom'&&(prf.jeans||[]).length)return !(prf.jeans.includes(JT(old.n))&&!prf.jeans.includes(JT(alt.n)));return true};for(const strict of [1,0]){if(done)break;for(const j of items.map((k,i)=>i).filter(i=>!LK.has(items[i])).sort((a,b)=>PR[items[b]].p-PR[items[a]].p)){const old=PR[items[j]],kd=KIND(old.n,old.cc),oth=kd==='shoes'?items.filter((k,i2)=>i2!==j&&KIND(PR[k].n,PR[k].cc)==='shoes').map(k=>SHT(PR[k].n)):[],alt=S2.filter(x=>KIND(x.n,x.cc)===kd&&x.p<old.p&&!items.includes(x.id)&&!items.some(q=>PR[q].n===x.n)&&!(kd==='shoes'&&oth.includes(SHT(x.n)))&&(!strict||keep(old,x))).sort((a,b)=>b.v-a.v)[0];if(alt){items[j]=alt.id;done=true;break}}}if(!done)break}
  await Promise.all(items.map(regP));if(g!==S.g)return;
  const by=kd=>items.filter(k=>kd.includes(KIND(CAT[k].n,CAT[k].cc)));const tops=by(['top','vest']),bots=by(['bottom']),outs=by(['outer','jacket']),shoesL=by(['shoes']),shoes=shoesL[0],dress=by(['dress'])[0];
  const COL={};C.forEach(x=>COL[x.id]=x.col),NEU=['#111110','#f2efe8','#8a8f96','#c8b39a','#25365c'],prn=k=>/принт|клетк|полоск|горош|горох|леопард|узор|жаккард|цветоч/.test(CAT[k].n.toLowerCase());
@@ -949,7 +998,7 @@ async function genCore(){const g=S.g,key=genKey(),like=S.swipe.like,no=S.swipe.n
   const t=st[i%st.length]||'Минимализм',a=CAT[ks[0]],b=ks[1]&&CAT[ks[1]];const fw=figWhy(ks,fseen);why.push([HOOKS[g][i],`${a?a.n:''}${b?' и '+b.n.toLowerCase():''} — ${REASON[t]||'просто и точно'}.${fw?' '+fw:''}${shoes&&ks.includes(shoes)?' '+CAT[shoes].n+' держат образ целиком.':''}`])}
  items.forEach(k=>{delete CAT[k].szSel;delete CAT[k].sz});gSeen(items);S.y.items=items;S.y.ok={};S.y.looksOk={};S.y.why={};S.genWhy=why;LOOKS.length=0;looks.forEach(l=>LOOKS.push(l));
  items.forEach((k,i)=>ROLE[k]=['outer','jacket'].includes(KIND(CAT[k].n,CAT[k].cc))&&i<2?'a':i===2||i===5?'t':'b');
- const f0=looks[0][1];S.free=[f0,null];S.freeq=`«${f0.map((k,j)=>j?CAT[k].n.toLowerCase():CAT[k].n).join(', ').replace(/, ([^,]*)$/,' и $1')} — это ты на работе, только ${G('собранная','собранный')}». — Яна`;
+ const fi=looks.map((l,j)=>[j,l[1].filter(k=>LK.has(k)).length]).sort((a,b)=>b[1]-a[1]||a[0]-b[0])[0][0],f0=looks[fi][1];S.free=[f0,null];S.freeq=`«${f0.map((k,j)=>j?CAT[k].n.toLowerCase():CAT[k].n).join(', ').replace(/, ([^,]*)$/,' и $1')} — это ты на работе, только ${G('собранная','собранный')}». — Яна`;
  S.genFor=key}
 function taste(){const c={};S.swipe.like.forEach(k=>CAT[k].t.forEach(t=>c[t]=(c[t]||0)+1));return Object.entries(c).sort((a,b)=>b[1]-a[1]).map(x=>x.at(0)).slice(0,2)}
 function styles(){const t=taste();return t.length?t:['Город','Минимализм']}
@@ -1025,7 +1074,7 @@ let RESTORING=false;function render(){if(RESTORING)return;persist();
    `<span class="lbl">Капсула от 2 490 ₽ · готово до 24 часов · правка — до 12 часов</span>`];
   bar(`<button class="btn" data-act="next">Начать бесплатно</button>`)}
  else if(c==='vibe'){const V=VIBES[S.g],sel=S.vibe||[];p=[`<span class="lbl">|Шаг 1 · Стиль| <span class="free">бесплатно</span></span>`,`<h2 class="ttl">Какой стиль тебе сейчас ближе?</h2>`,`<p class="txt">Выбери до трёх. Это не навсегда — просто с чего начать.</p>`,
-  `<div class="vibes">${V.map(([k,t,d])=>`<button class="vibe" data-act="vibe" data-v="${k}" aria-pressed="${sel.includes(k)}"><img src="styles/${S.g}_${k}.jpg" alt="${t}" loading="lazy"><b>${t}</b><span>${d}</span></button>`).join('')}</div>`,
+  `<div class="vibes ${sel.length?'has':''}">${V.map(([k,t,d])=>`<button class="vibe" data-act="vibe" data-v="${k}" aria-pressed="${sel.includes(k)}"><span class="vph"><img src="styles/${S.g}_${k}.jpg" alt="${t}" loading="lazy">${sel.includes(k)?`<i class="vno">${sel.indexOf(k)+1}</i>`:''}</span><b>${t}</b><span>${d}</span></button>`).join('')}</div>`,
   `<span class="lbl">Фото из Pinterest — для примера</span>`];bar(nav(sel.length>0,sel.length?'Далее · '+sel.length:'Выбери стиль'))}
  else if(c==='swipe'&&!S.deckReady){newDeck();p=[`<span class="lbl">|Шаг 1 · Тест вкуса|</span>`,`<h2 class="ttl">Нравится?</h2>`,`<p class="lbl">Подбираем свежие вещи сезона…</p>`];bar(null)}
  else if(c==='swipe'){const sw=S.swipe,done=sw.pos>=DECK.length;
@@ -1257,7 +1306,7 @@ function citSheet(id){const x=CATL.find(z=>z.id===id),on=S.board.layers.some(z=>
  ${x.comp?`<div class="q"><span class="lbl">|Состав|</span><p class="txt" style="text-transform:none">${x.comp}</p></div>`:''}
  ${x.d?`<p class="txt" style="text-transform:none;color:var(--mute)">${x.d}</p>`:''}
  <a class="lbl" href="${affU(x.b,x.u)}" target="_blank" rel="noopener" style="text-decoration:underline">Открыть в магазине ↗︎</a>
- <div class="yacts" style="width:auto">${forK?`<button data-act="crepl" data-v="${id}">Заменить «${CAT[forK].n.toLowerCase()}»</button>`:`<button data-act="ccap" data-v="${id}" aria-pressed="${inCap}">${inCap?'✓ В капсуле':'В капсулу '+NM().g}</button>`}${x.cx?`<button data-act="cadd" data-v="${id}" aria-pressed="${on}">${on?'✓ На двойнике':'На двойника'}</button>`:''}</div>
+ ${(()=>{if(forK||!DESK()||S.y.open!==0)return '';const g0=CAT[id]?dGroup(id):({'верхняя одежда':'layer','жакеты и жилеты':'layer','брюки':'bottom','джинсы':'bottom','юбки':'bottom','шорты':'bottom','обувь':'shoes','сумки':'bag','платья':'dress'}[x.c]||'base'),L=(LOOKS[S.dl||0]||['',[]])[1].filter(k=>CAT[k]&&k!==id&&dGroup(k)===g0);return L.length?`<div class="yacts" style="width:auto">${L.map(k=>`<button class="p" data-act="dreplk" data-k="${k}" data-v="${id}" style="background:var(--ink);color:var(--paper)">Заменить в образе ${n2((S.dl||0)+1)}: ${CAT[k].n.toLowerCase()}</button>`).join('')}</div>`:''})()}<div class="yacts" style="width:auto">${forK?`<button data-act="crepl" data-v="${id}">Заменить «${CAT[forK].n.toLowerCase()}»</button>`:`<button data-act="ccap" data-v="${id}" aria-pressed="${inCap}">${inCap?'✓ В капсуле':'В капсулу '+NM().g}</button>`}${x.cx?`<button data-act="cadd" data-v="${id}" aria-pressed="${on}">${on?'✓ На двойнике':'На двойника'}</button>`:''}</div>
  <button class="btn line" style="width:100%" data-act="close">Закрыть</button></div></div>`;
  if(x.cx)regA(id).then(c=>{const e=$('#cutpv');if(e&&c&&c.cut)e.src=c.cut})}
 // ---------- черновик образа: вырезки поверх двойника (бесплатно), генерация — только финал ----------
@@ -1305,10 +1354,10 @@ function dWork(){const y=S.y,i=Math.min(S.dl||0,LOOKS.length-1);S.dl=i;const L=L
  const tools=`<div class="dtools"><div class="dseg"><button data-act="dm" data-v="side" aria-pressed="${(S.dm||'side')==='side'}">Рядом</button><button data-act="dm" data-v="mb" aria-pressed="${S.dm==='mb'}">Мудборд</button></div>
   <div class="dlooks">${LOOKS.map((l,j)=>`<button data-act="dl" data-v="${j}" aria-pressed="${j===i}" title="${l[0]}">${n2(j+1)}${y.looksOk[j]?' ✓':''}</button>`).join('')}</div><span class="lbl dlt">${L[0]||''}</span>
   ${S.dm==='mb'||Object.keys((S.dfree||{})[i]||{}).length?`<button class="dbtn" data-act="dreset" title="Разложить заново">↺ Разложить</button>`:''}${S.dm==='mb'?'':`<button class="dbtn" data-act="dslotadd">+ Слот</button>`}</div>`;
- if(S.dm==='on')S.dm='mb';const fr=(S.dfree||{})[i]||{},mb=S.dm==='mb',MD=S.photo.full||IMG+AV;
+ if(S.dm==='on')S.dm='mb';const fr={},mb=S.dm==='mb',MD=S.photo.full||IMG+AV;
  const canvas=mb
   ?`<div class="dcomp mb" id="dcomp" data-drop="look"><img class="dmodel" src="${MD}" alt="Двойник ${NM().g}" draggable="false">${(()=>{const P=dMbPos(i,ks);return ks.map(k=>`<img class="dmi" data-mv="${k}" src="${src(k)}" alt="${CAT[k].n}" title="${CAT[k].n}" draggable="false" style="left:${P[k][0]}%;top:${P[k][1]}%;width:${P[k][2]}%;z-index:${P[k][3]||2}">`).join('')})()}</div><span class="dhint2 lbl">Мудборд: тяни вещи мышью, колесо — размер. ↺ — разложить заново. Этот кадр уходит в Nano Banana как есть.</span>`
-  :`<div class="dcomp" id="dcomp" data-drop="look"><div class="dav"><img src="${MD}" alt="Двойник ${NM().g}" draggable="false"></div><div class="dslots">${sl.map(([g,t,c,arr])=>arr.length?arr.map(k=>fr[k]?`<button class="dslot out" data-act="dback" data-v="${k}" title="Вернуть в квадрат"><span class="dk">${t}</span><span class="dbk">у модели<br>⤺ вернуть</span></button>`:`<div class="dslot f" data-drop="look" title="${CAT[k].n}"><button class="dsim" data-act="dswap" data-v="${k}" aria-label="Заменить: ${CAT[k].n}" title="Заменить — откроется каталог справа"><img src="${src(k)}" alt="" draggable="false" data-mv="${k}"></button><span class="dk">${t}</span><button class="dx" data-act="ddel" data-v="${k}" aria-label="Убрать из образа">×</button></div>`).join(''):`<button class="dslot e" data-act="dslot" data-v="${c}" data-drop="look"><span class="dk">${t}</span>+</button>`).join('')}</div>${ks.filter(k=>fr[k]).map(k=>`<img class="dfr" data-mv="${k}" src="${src(k)}" alt="${CAT[k].n}" title="${CAT[k].n} · двойной клик — обратно в квадрат" draggable="false" style="left:${fr[k][0]}%;top:${fr[k][1]}%;width:${fr[k][2]}%">`).join('')}</div><span class="dhint2 lbl">Вытащи вещь из квадрата мышью и поставь рядом с моделью · двойной клик — обратно · колесо — размер. Кадр уходит в Nano Banana как есть.</span>`;
+  :`<div class="dcomp" id="dcomp" data-drop="look"><div class="dav"><img src="${MD}" alt="Двойник ${NM().g}" draggable="false"></div><div class="dslots">${sl.map(([g,t,c,arr])=>arr.length?arr.map(k=>fr[k]?`<button class="dslot out" data-act="dback" data-v="${k}" title="Вернуть в квадрат"><span class="dk">${t}</span><span class="dbk">у модели<br>⤺ вернуть</span></button>`:`<div class="dslot f" data-drop="look" title="${CAT[k].n}"><button class="dsim" data-act="dswap" data-v="${k}" aria-label="Заменить: ${CAT[k].n}" title="Заменить — откроется каталог справа"><img src="${src(k)}" alt="" draggable="false"></button><span class="dk">${t}</span><button class="dx" data-act="ddel" data-v="${k}" aria-label="Убрать из образа">×</button></div>`).join(''):`<button class="dslot e" data-act="dslot" data-v="${c}" data-drop="look"><span class="dk">${t}</span>+</button>`).join('')}</div>${ks.filter(k=>fr[k]).map(k=>`<img class="dfr" data-mv="${k}" src="${src(k)}" alt="${CAT[k].n}" title="${CAT[k].n} · двойной клик — обратно в квадрат" draggable="false" style="left:${fr[k][0]}%;top:${fr[k][1]}%;width:${fr[k][2]}%">`).join('')}</div><span class="dhint2 lbl">Нажми на вещь — справа откроется замена. Перетащи вещь из каталога в квадрат. Двигать вещи — в «Мудборде».</span>`;
  const under=`<div class="dunder"><div class="dlist"><div class="dlh"><span>Вещи образа ${n2(i+1)}</span><span class="lbl">Итого · <b>${rub(tot)}</b></span></div>${ks.map(k=>`<div class="dli"><img src="${src(k)}" alt=""><span>${CAT[k].n}<small>${CAT[k].s} · ${CAT[k].sz||ySel(k).join(' / ')}</small></span><b>${rub(price(k))}</b></div>`).join('')||'<span class="lbl">Образ пустой — перетащи вещи из каталога</span>'}</div>
   <div class="dbtns"><button class="dbtn p" data-act="dgen">Сгенерировать фото</button><button class="dbtn" data-act="dframe">Скачать кадр</button><button class="dbtn" data-act="lookok" data-v="${i}" aria-pressed="${!!y.looksOk[i]}">${y.looksOk[i]?'✓ Образ готов':'Образ готов'}</button>
    <button class="dbtn ${rec?'rec':''}" data-act="dlrec" data-v="${i}">${rec?'■ Стоп':v?'↻ Голосовое':'● Голосовое'}</button><span class="lbl" id="dvt">${rec||v?'0:'+n2(v||0):''}</span></div></div>`;
@@ -1341,11 +1390,11 @@ function deskView(){const y=S.y;if(S.yv==='cat'||S.yv==='board'){if(y.open==null
   <div class="dsc">${dt==='cat'?catView():dt==='cap'?dCapsule():dt==='anq'?dAnketa():dMsgs()}</div></aside>`
   :'';
  const work=open&&y.open!=='ask'?dWork():yana();
- return top+`<div class="dwrap ${side?'':'one'}"><section class="dwork ${open?'':'list'}">${work}</section>${side}</div>`}
+ return top+`<div class="dwrap ${side?'split':'one'}" style="${side&&S.dsplit?`--dsp:${(S.dsplit*100).toFixed(2)}%`:''}"><section class="dwork ${open?'':'list'}">${work}</section>${side?`<div class="dsplit" role="separator" aria-orientation="vertical" aria-label="Ширина рабочего поля и каталога" title="Тяни, чтобы изменить ширину · двойной клик — как было"><i></i></div>`:''}${side}</div>`}
 async function dLookAdd(id){const i=S.dl||0;await regA(id);if(!CAT[id]){toast('Не удалось загрузить вещь');return}if(!S.y.items.includes(id)){if(S.y.items.length>=10){toast('В капсуле уже 10 вещей — убери одну');return}S.y.items.push(id);S.y.ok[id]=true}
  lookAdd(LOOKS[i][1],id);delete S.y.looksOk[i];if(!S.y.why[i])S.y.stale=Object.assign(S.y.stale||{},{[i]:1});autoCut(id).catch(()=>{});S.still=true;render();toast('В образ '+n2(i+1)+': '+CAT[id].n)}
 // мудборд: модель слева (≈36% ширины), вещи справа по ролям; ручные сдвиги — S.dmb[образ][вещь]=[x,y,w,z]
-const MBP={layer:[[47,5,23,4]],base:[[71,4,20,3]],dress:[[71,4,21,3]],bottom:[[70,40,18,2]],shoes:[[47,74,16,5],[62,79,12,5]],bag:[[89,62,14,6]],acc:[[49,52,10,7],[90,40,9,7]]};
+const MBP={layer:[[52,5,23,4]],base:[[75,4,20,3]],dress:[[75,4,21,3]],bottom:[[74,40,18,2]],shoes:[[52,74,16,5],[66,79,12,5]],bag:[[91,62,13,6]],acc:[[54,52,10,7],[92,40,8,7]]};
 function dMbPos(i,ks){const o=((S.dmb||{})[i])||{},cnt={},P={};ks.forEach(k=>{const g=dGroup(k),n=cnt[g]=(cnt[g]||0)+1,L=MBP[g]||MBP.acc,b=L[Math.min(n-1,L.length-1)],sh=n>L.length?(n-L.length)*5:0;P[k]=o[k]||[b[0]-sh,b[1]+sh,b[2],b[3]]});return P}
 function dCompDrag(){const c=$('#dcomp');if(!c)return;const i=S.dl||0;let d=null,nclick=false;
  const save=(k,x,y,w)=>{if(S.dm==='mb'){S.dmb=S.dmb||{};const o=S.dmb[i]=S.dmb[i]||{};const z=(o[k]||[])[3]||9;o[k]=[x,y,w,z]}else{S.dfree=S.dfree||{};(S.dfree[i]=S.dfree[i]||{})[k]=[x,y,w]}persist()};
@@ -1431,6 +1480,12 @@ async function dFrame(){const i=S.dl||0,mb=S.dm==='mb',ks=(LOOKS[i]||['',[]])[1]
   const blob=await new Promise((ok,no)=>{try{cv.toBlob(b=>b?ok(b):no(new Error('blob')),'image/png')}catch(err){no(err)}});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`yana_${NM().n}_look${n2(i+1)}_${mb?'moodboard':'ryadom'}.png`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);toast('Кадр сохранён: модель + '+n+' '+plural(n,'вещь','вещи','вещей'))}
  catch(e){toast('Не удалось собрать кадр: фото вещей из магазинов не отдаются браузеру. Сделаем на сервере.')}}
 document.addEventListener('input',e=>{if(e.target&&e.target.id==='dwish'){const i=S.dl||0;S.dwish=S.dwish||{};S.dwish[i]=e.target.value;persist();const t=$('#dprm');if(t)t.value=dPrompt(i).en;const ok=$('#dwok');if(ok)ok.textContent=wishNote(e.target.value,i);clearTimeout(window.__dwt);window.__dwt=setTimeout(()=>{const ta=$('#dwish');if(!ta)return;const pos=ta.selectionStart;dGenSheet();const t2=$('#dwish');if(t2){t2.focus();t2.selectionStart=t2.selectionEnd=pos}},700)}});
+// разделитель рабочего поля и каталога
+document.addEventListener('pointerdown',e=>{const h=e.target.closest&&e.target.closest('.dsplit');if(!h||e.button!==0)return;e.preventDefault();const w=h.parentElement,R=w.getBoundingClientRect();h.classList.add('on');document.body.classList.add('dsplitting');h.setPointerCapture(e.pointerId);
+ const mv=ev=>{const f=Math.max(.3,Math.min(.78,(ev.clientX-R.left)/R.width));S.dsplit=+f.toFixed(4);w.style.setProperty('--dsp',(f*100).toFixed(2)+'%')};
+ const up=()=>{h.classList.remove('on');document.body.classList.remove('dsplitting');h.removeEventListener('pointermove',mv);h.removeEventListener('pointerup',up);h.removeEventListener('pointercancel',up);persist()};
+ h.addEventListener('pointermove',mv);h.addEventListener('pointerup',up);h.addEventListener('pointercancel',up)});
+document.addEventListener('dblclick',e=>{const h=e.target.closest&&e.target.closest('.dsplit');if(!h)return;S.dsplit=null;h.parentElement.style.removeProperty('--dsp');persist()});
 let DK=matchMedia('(min-width:1280px)').matches;addEventListener('resize',()=>{const d=matchMedia('(min-width:1280px)').matches;if(S.mode==='client')document.body.classList.toggle('cdesk',d);if(d!==DK&&S.mode==='yana'){S.still=true;render()}DK=d});
 document.addEventListener('dragstart',e=>{const t=e.target.closest&&e.target.closest('[data-drag]');if(!t||!DESK())return;e.dataTransfer.setData('text/plain',t.dataset.drag);e.dataTransfer.effectAllowed='copy';t.classList.add('drg')});
 document.addEventListener('dragend',e=>{document.querySelectorAll('.drg,.dover').forEach(z=>z.classList.remove('drg','dover'))});
@@ -1662,7 +1717,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'menu':S.menu=!S.menu;break;
  case'goto':S.menu=false;S.mode='client';$('#overlay').innerHTML='';S.i=+v;if(S.i>SEQ.indexOf('vibe')&&!(S.vibe||[]).length)S.vibe=[VIBES[S.g][0][0]];break;
  case'g_menu':break;
- case'mode':S.mode=v;S.menu=false;S.playing=false;if(v==='client')bar(null);break;
+ case'mode':S.mode=v;S.menu=false;S.playing=false;if(v==='client')bar(null);if(v==='yana'){S.y.open=null;S.yv='req';S.y.stage='items';S.cfor=null;S.lookFor=null;$('#overlay').innerHTML='';scrollTo(0,0)}break;
  case'next':if(cur()==='vibe'){S.deckReady=false;newDeck()}if(cur()==='colors')S.wish=($('#wish')||{}).value||'';if(cur()==='pay')S.slots.taken=Math.min(S.slots.total,S.slots.taken+1);S.i=Math.min(SEQ.length-1,S.i+1);break;
  case'back':S.i=Math.max(0,S.i-1);break;
  case'vote':vote(v);return;
@@ -1696,7 +1751,8 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'asksend':S.ask.answer=S.ask.pick;S.ask.note=(($('#asknote')||{}).value||'').trim();S.ask.status='done';toast('Ответ у '+NM().g);break;
  case'slot':S.slots.total=Math.max(S.slots.taken,Math.min(30,S.slots.total+(+v)));break;
  case'sample':S.photo.full=IMG+AV;S.photo.face=IMG+FACE;break;
- case'sampleown':S.own=P().sampleown.map(([k,l])=>({src:src(k),l}));break;
+ case'sampleown':{(async()=>{await loadPool();const C0=cands(S.g),pickK=kd=>{const l=C0.filter(x=>KIND(x.n,x.cc)===kd);return l[Math.floor(Math.random()*l.length)]};const ks=['top','bottom','shoes','outer'].map(pickK).filter(Boolean);await Promise.all(ks.map(x=>regP(x.id)));
+  S.own=ks.filter(x=>CAT[x.id]).map(x=>({src:CAT[x.id].cut||src(x.id),l:x.n.split(/\s+/)[0]+(x.col?' · '+((COLORS.find(c=>c[0]===x.col)||[])[1]||''):'')}));S.still=true;render()})();return}
  case'delown':S.own.splice(+v,1);break;
  case'set':S[t.dataset.k]=t.dataset.k==='budget'?+v:v;break;
  case'arr':tog(S[t.dataset.k],v);break;
@@ -1737,6 +1793,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'dhome':$('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in dconf" role="alertdialog" aria-label="Покинуть кабинет"><h2 class="ttl" style="font-size:26px">Вы уверены, что хотите покинуть раздел?</h2><p class="txt">Всё сохранено: заявки, образы, мудборды и голосовые останутся на месте. Вернуться — «Кабинет Яны» в меню.</p><div style="display:flex;gap:8px"><button class="dbtn" data-act="close" style="flex:1">Остаться</button><button class="dbtn p" data-act="dhomego" style="flex:1">Выйти на главную</button></div></div></div>`;return;
  case'dhomego':persist();S.mode='client';S.i=0;S.menu=false;$('#overlay').innerHTML='';document.body.classList.remove('desk');document.body.classList.toggle('cdesk',matchMedia('(min-width:1280px)').matches);scrollTo(0,0);break;
  case'dswap':{const i=S.y.items.indexOf(v);if(i<0){toast('Вещи нет в капсуле');return}S.cfor=i;S.cforOpen=S.y.open??0;S.dt='cat';const k=v;CF.g='';CF.c=CAT[k].cc||'all';{const tot=S.y.items.reduce((a,q)=>a+CAT[q].p,0),left=CAP()-(tot-CAT[k].p);CF.pmax=Math.max(0,left)}{const kd=KIND(CAT[k].n,CAT[k].cc);CF.szs=kd==='shoes'?[String(S.shoe)]:[...new Set(wantSz(k))]}CF.br=[];CF.q='';CF.lim=40;if(!CATL)loadCat();$('#overlay').innerHTML='';S.still=true;render();const sc=$('.dsc');if(sc)sc.scrollTop=0;return}
+ case'dreplk':{const old=t.dataset.k;regA(v).then(()=>{const j=S.y.items.indexOf(old);if(j>-1)doPick(j,v);else{const l=LOOKS[S.dl||0][1],q=l.indexOf(old);if(q>-1)l[q]=v;if(!S.y.items.includes(v)){S.y.items.push(v);S.y.ok[v]=true}toast('Заменено: '+CAT[v].n)}delete S.y.looksOk[S.dl||0];$('#overlay').innerHTML='';S.still=true;render()});return}
  case'dslotadd':S.dx=(S.dx||0)+1;break;
  case'dback':{const o=(S.dfree||{})[S.dl||0];if(o)delete o[v];break}
  case'dreset':{const i=S.dl||0;if(S.dm==='mb'){if(S.dmb)delete S.dmb[i]}else if(S.dfree)delete S.dfree[i];break}
