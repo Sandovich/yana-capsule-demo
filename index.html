@@ -487,6 +487,38 @@ body.desk .sheet{align-items:center}body.desk .sheet .in{max-width:600px;max-hei
 .dmsg{background:#fff;border:1px solid #e9e9e6;padding:12px;margin-bottom:8px;font-size:11.5px}.dmsg b{font-weight:500}.dmsg p{margin:6px 0;text-transform:none;letter-spacing:0;font-size:12.5px;line-height:1.45}
 }
 @media (min-width:1700px){.dwrap{grid-template-columns:minmax(760px,52%) 1fr}.dslots{grid-template-columns:repeat(3,170px)}.dsc .cards{--cols:4!important}}
+
+/* ---------- ДЕСКТОП ДЛЯ КЛИЕНТКИ (≥1280px) ---------- */
+@media (min-width:1280px){
+body.cdesk{padding-left:40px;padding-right:40px}
+body.cdesk .app{max-width:1180px;padding-block:0 120px}
+body.cdesk .hdr{height:64px}body.cdesk .hdr-r{gap:22px;font-size:12px}
+body.cdesk .menu .in{max-width:1180px}
+body.cdesk .bar .in{max-width:1180px;justify-content:flex-end}body.cdesk .bar .btn{flex:0 0 auto;min-width:300px;padding:0 28px}body.cdesk .bar .btn.line{min-width:0}
+body.cdesk .sheet{align-items:center}body.cdesk .sheet .in{max-width:620px;max-height:88vh}body.cdesk .sheet .in::before{display:none}
+/* главная: две колонки */
+body.cdesk #app[data-scr="land"] .scr{display:grid;grid-template-columns:minmax(440px,1fr) minmax(0,520px);column-gap:72px;row-gap:20px;align-items:start;justify-content:space-between;padding-top:8px}
+body.cdesk #app[data-scr="land"] .scr>div{grid-column:2}
+body.cdesk #app[data-scr="land"] .scr>div:nth-child(1){grid-column:2;grid-row:1}
+body.cdesk #app[data-scr="land"] .scr>div:nth-child(2){grid-column:1;grid-row:1/span 9;position:sticky;top:80px}
+body.cdesk #app[data-scr="land"] .gsw{justify-content:flex-start}
+body.cdesk #app[data-scr="land"] .hero{margin-top:0;align-items:flex-start}
+body.cdesk #app[data-scr="land"] .hero .logo{font-size:clamp(150px,15vw,210px);left:0;right:0;text-align:center}
+body.cdesk #app[data-scr="land"] .hero img{height:min(74vh,720px);margin-top:calc(clamp(150px,15vw,210px)*.74);margin-bottom:0}
+body.cdesk #app[data-scr="land"] .big-txt{font-size:34px;line-height:1.12;margin-top:30px}
+body.cdesk #app[data-scr="land"] .txt{font-size:14px;max-width:460px}
+/* остальные шаги: широкая колонка по центру */
+body.cdesk #app:not([data-scr="land"]) .scr{max-width:760px;margin:0 auto;gap:26px}
+body.cdesk #app:not([data-scr="land"]) .ttl{font-size:44px}
+body.cdesk .vibes{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+body.cdesk .cards{--cols:4!important}
+body.cdesk .ya{grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 16px}
+body.cdesk .deck{height:520px;max-width:440px;margin:0 auto;width:100%}
+body.cdesk .pics{grid-template-columns:repeat(4,minmax(0,1fr))}
+body.cdesk .look{flex:0 0 46%}
+body.cdesk .avbox{height:560px}
+body.cdesk .steps-nav{font-size:12px;gap:22px}
+}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
@@ -939,7 +971,7 @@ let RESTORING=false;function render(){if(RESTORING)return;persist();
  clearInterval(timerId);clearInterval(reelId);
  const a=$('#app');a.classList.toggle('still',S.still);S.still=false;$('#overlay').innerHTML=S.menu?menu():'';
  if(S.mode==='yana'){document.body.classList.toggle('desk',DESK());if(DESK()){const sc=$('.dsc'),sw=$('.dwork'),st=[sc?sc.scrollTop:0,sw?sw.scrollTop:0];a.innerHTML=deskView();bar(null);dCompDrag();const sc2=$('.dsc'),sw2=$('.dwork');if(sc2&&st[0])sc2.scrollTop=st[0];if(sw2&&st[1])sw2.scrollTop=st[1];return}a.innerHTML=hdr()+yana();boardDrag();return}
- document.body.classList.remove('desk');
+ document.body.classList.remove('desk');document.body.classList.toggle('cdesk',matchMedia('(min-width:1280px)').matches);a.dataset.scr=cur();
  const c=cur();let p=[];
  if(['free','status','capsule'].includes(c)&&!S.y.sent&&S.genFor!==genKey()){if(!GENP)genCapsule().then(()=>{S.still=true;render()});a.innerHTML=hdr()+scr([`<span class="lbl">|Яна собирает образы под твои ответы…|</span>`,`<div class="avbox"><i class="scan"></i></div>`]);bar(null);return}
  if(c==='land'){
@@ -1300,7 +1332,7 @@ async function dFrame(){const c=$('#dcomp');if(!c){toast('Открой обра�
   g.globalCompositeOperation='source-over';
   const blob=await new Promise((ok,no)=>{try{cv.toBlob(b=>b?ok(b):no(new Error('blob')),'image/png')}catch(err){no(err)}});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`yana_${NM().n}_look${n2((S.dl||0)+1)}_${S.dm==='mb'?'moodboard':'ryadom'}.png`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);toast('Кадр сохранён: модель + '+n+' '+plural(n,'вещь','вещи','вещей'))}
  catch(e){toast('Не удалось собрать кадр: фото вещей из магазинов не отдаются браузеру. Сделаем на сервере.')}}
-let DK=matchMedia('(min-width:1280px)').matches;addEventListener('resize',()=>{const d=matchMedia('(min-width:1280px)').matches;if(d!==DK&&S.mode==='yana'){S.still=true;render()}DK=d});
+let DK=matchMedia('(min-width:1280px)').matches;addEventListener('resize',()=>{const d=matchMedia('(min-width:1280px)').matches;if(S.mode==='client')document.body.classList.toggle('cdesk',d);if(d!==DK&&S.mode==='yana'){S.still=true;render()}DK=d});
 document.addEventListener('dragstart',e=>{const t=e.target.closest&&e.target.closest('[data-drag]');if(!t||!DESK())return;e.dataTransfer.setData('text/plain',t.dataset.drag);e.dataTransfer.effectAllowed='copy';t.classList.add('drg')});
 document.addEventListener('dragend',e=>{document.querySelectorAll('.drg,.dover').forEach(z=>z.classList.remove('drg','dover'))});
 document.addEventListener('dragover',e=>{const t=e.target.closest&&e.target.closest('[data-drop]');if(!t)return;e.preventDefault();e.dataTransfer.dropEffect='copy';t.classList.add('dover')});
@@ -1604,7 +1636,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'dlook':dLookAdd(v);return;
  case'dslot':S.dt='cat';CF.c=v;CF.q='';CF.lim=40;if(!CATL)loadCat();break;
  case'dhome':$('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in dconf" role="alertdialog" aria-label="Покинуть кабинет"><h2 class="ttl" style="font-size:26px">Вы уверены, что хотите покинуть раздел?</h2><p class="txt">Всё сохранено: заявки, образы, мудборды и голосовые останутся на месте. Вернуться — «Кабинет Яны» в меню.</p><div style="display:flex;gap:8px"><button class="dbtn" data-act="close" style="flex:1">Остаться</button><button class="dbtn p" data-act="dhomego" style="flex:1">Выйти на главную</button></div></div></div>`;return;
- case'dhomego':persist();S.mode='client';S.i=0;S.menu=false;$('#overlay').innerHTML='';document.body.classList.remove('desk');scrollTo(0,0);break;
+ case'dhomego':persist();S.mode='client';S.i=0;S.menu=false;$('#overlay').innerHTML='';document.body.classList.remove('desk');document.body.classList.toggle('cdesk',matchMedia('(min-width:1280px)').matches);scrollTo(0,0);break;
  case'dslotadd':S.dx=(S.dx||0)+1;break;
  case'dback':{const o=(S.dfree||{})[S.dl||0];if(o)delete o[v];break}
  case'dreset':{const i=S.dl||0;if(S.dm==='mb'){if(S.dmb)delete S.dmb[i]}else if(S.dfree)delete S.dfree[i];break}
