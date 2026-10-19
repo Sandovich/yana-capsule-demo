@@ -1368,22 +1368,39 @@ const WORD={base:'Base layer, worn directly on the body',dress:'Dress, worn dire
 const WORDRU={base:'на тело',dress:'платье на тело',bottom:'низ',layer:'верхний слой поверх',shoes:'обувь',bag:'сумка',acc:'аксессуар'};
 const DORD=['base','dress','bottom','layer','shoes','bag','acc'],FORD=['layer','base','dress','bottom','shoes','bag','acc'];
 function dFrameOrder(ks){return ks.slice().sort((x,y)=>FORD.indexOf(dGroup(x))-FORD.indexOf(dGroup(y)))}
+// пожелания Яны → английские инструкции (типовые приёмы); остальное — дословно
+const WISH=[[/заправ\S*\s+(только\s+)?спереди|французск\S*\s+заправк/i,'french tuck: the top is tucked into the bottom only at the front, the back hangs loose',['base']],
+ [/навыпуск/i,'the top is worn untucked',['base']],
+ [/заправ\S*\s+в\s+сапог|в\s+сапоги\s+заправ/i,'trousers tucked into the boots',['bottom']],
+ [/заправ/i,'the top is fully tucked in',['base']],
+ [/закат\S*\s+рукав|рукава?\s+\S*\s*закат|подверн\S*\s+рукав|рукава?\s+подверн/i,'sleeves pushed up / rolled to the forearm',['layer','base']],
+ [/накин\S*\s+на\s+плеч|на\s+плечи\s+накин/i,'draped over the shoulders, arms not in the sleeves',['layer']],
+ [/расст[её]гн/i,'worn open, unbuttoned',['layer']],[/заст[её]гн/i,'fully buttoned / zipped',['layer']],
+ [/воротник\S*\s+подн|подн\S*\s+воротник/i,'collar turned up',['layer','base']],
+ [/на\s+бант|бантом/i,'belt tied in a bow at the waist',['layer','base','dress']],[/пояс\S*\s+завяз|завяз\S*\s+пояс/i,'belt tied at the waist',['layer','base','dress']],[/без\s+пояса|пояс\S*\s+сня/i,'worn without its belt',['layer','base','dress']],
+ [/подверн\S*\s+(брюк|джинс|штан)|(брюк|джинс|штан)\S*\s+подверн/i,'hems cuffed / rolled once above the ankle',['bottom']],
+ [/сумк\S*\s+в\s+рук|в\s+руке\s+сумк/i,'bag carried in the hand',['bag']],[/сумк\S*\s+на\s+плеч|на\s+плече\s+сумк/i,'bag worn on the shoulder',['bag']],[/через\s+плеч|кросс?-?боди/i,'bag worn crossbody',['bag']],
+ [/рук\S*\s+в\s+карман/i,'one hand in a pocket',[]],[/шарф\S*\s+(узл|завяз)/i,'scarf knotted at the neck',['acc']]];
+const WCHIPS=[['заправить спереди','верх заправить только спереди'],['навыпуск','верх навыпуск'],['закатать рукава','закатать рукава'],['накинуть на плечи','верхний слой накинуть на плечи'],['поднять воротник','воротник поднять'],['пояс бантом','пояс завязать на бант'],['подвернуть брюки','подвернуть брюки'],['брюки в сапоги','брюки заправить в сапоги'],['сумка в руке','сумка в руке'],['сумка на плече','сумка на плече']];
+function wishParse(t,ks){const out=[],used=new Set();(t||'').split(/[,.;\n]+/).map(x=>x.trim()).filter(Boolean).forEach(fr=>{const w=WISH.find(([re])=>re.test(fr));if(!w)return;
+  const fl=fr.toLowerCase();const ADJ=/^(притал|свобод|удлин|укороч|прямые|прямой|широк|узкие|шерст|кашем|смесов|натура|из|с|на|для|длинн|корот|объём|объем|oversize|оверса|классич|базов|мягк|тонк|плотн|теплы|утепл|вязан|трикот)/;let k=ks.find(q=>CAT[q].n.toLowerCase().split(/[\s-]+/).filter(x=>x.length>4&&!ADJ.test(x)).some(x=>fl.includes(x.slice(0,5))));if(!k)for(const g of w[2]){k=ks.find(q=>dGroup(q)===g);if(k)break}const key=w[1]+(k||'');if(used.has(key))return;used.add(key);out.push([k,w[1]])});return out}
+function wishNote(t,i){const n=wishParse(t,(LOOKS[i]||['',[]])[1].filter(k=>CAT[k])).length;return (t||'').trim()?`Понято приёмов: ${n} · остальное передаём нейросети дословно`:'Пусто — нейросеть оденет по порядку выше'}
 function dPrompt(i){const ks=(LOOKS[i]||['',[]])[1].filter(k=>CAT[k]),fo=dFrameOrder(ks),num=k=>fo.indexOf(k)+1,wo=ks.slice().sort((x,y)=>DORD.indexOf(dGroup(x))-DORD.indexOf(dGroup(y)));
  const hasB=wo.some(k=>dGroup(k)==='base'),hasL=wo.some(k=>dGroup(k)==='layer'),hasBot=wo.some(k=>dGroup(k)==='bottom');
  const lines=wo.map((k,j)=>{const g=dGroup(k),c=CAT[k];const W=(S.dwear||{})[i]||{};let how='';if(g==='base'&&hasBot)how=W.tuck==='in'?' Tucked INTO the bottom.':' Worn untucked, over the waistband of the bottom.';if(g==='layer')how=W.open==='closed'?' Fully closed/buttoned.'+(hasB?' Only the collar of the base layer may show.':''):' Worn open'+(hasB?', the base layer visible underneath.':'.');if(g==='bottom'&&hasB)how=W.tuck==='in'?' The base layer is tucked into it.':' Its waistband is covered by the base layer.';if(g==='shoes')how=' Last step.';
-  return `${j+1}. ${WORD[g]} — item ${num(k)} on the board («${c.n}»).${how}`});
+  const pwc=wishParse((S.dwish||{})[i],ks).map(x=>x[1]).join(' ');if((g==='base'||g==='bottom')&&/tuck/.test(pwc))how='';if(g==='layer'&&/open|buttoned|draped/.test(pwc))how='';return `${j+1}. ${WORD[g]} — item ${num(k)} on the board («${c.n}»).${how}`});
  const en=`Image 1 is a reference board: the woman on the left, numbered clothing items on the right.
 Change only her clothes. Keep her face, hair, skin, body shape and proportions exactly as on the left. Do not slim her or redraw her.
 Dress her in this order, from the body outward:
 ${lines.join('\n')}
-Each garment must look exactly like its photo on the board: same color, pattern, texture, length and fit. Nothing else added.
+${(()=>{const t=((S.dwish||{})[i]||'').trim();if(!t)return '';const pw=wishParse(t,ks),NL=String.fromCharCode(10);return (pw.length?'Styling details from the stylist (these override the defaults above):'+NL+pw.map(([k,e])=>'- '+(k?'item '+num(k)+' («'+CAT[k].n+'»): ':'')+e).join(NL)+NL:'')+'Stylist\'s own words (Russian), follow them exactly: «'+t.replace(/[«»]/g,'"')+'»'+NL})()}Each garment must look exactly like its photo on the board: same color, pattern, texture, length and fit. Nothing else added.
 Full-length photo, plain light studio background, same pose and soft front light.`;
  const Wr=(S.dwear||{})[i]||{},ru=wo.map((k,j)=>{const g=dGroup(k);return `${j+1}) ${WORDRU[g]}: ${CAT[k].n.toLowerCase()} (№${num(k)} на кадре)${g==='base'&&hasBot?(Wr.tuck==='in'?', заправлен':', навыпуск'):''}${g==='layer'?(Wr.open==='closed'?', застёгнут':', расстёгнут'):''}`}).join(' → ');
  return {en,ru,n:ks.length,hasB:hasB&&hasBot,hasL}}
 function dGenSheet(){const i=S.dl||0,P0=dPrompt(i);if(!P0.n){toast('Образ пустой — добавь вещи');return}
  $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Промпт для генерации" style="gap:12px;display:flex;flex-direction:column"><span class="lbl">|Образ ${n2(i+1)} · Nano Banana|</span><h2 class="ttl" style="font-size:26px">Порядок надевания</h2>
  <p class="txt" style="text-transform:none">${P0.ru}</p>${(()=>{const W=(S.dwear||{})[i]||{};return `<div style="display:flex;gap:10px;flex-wrap:wrap">${P0.hasB?`<div class="dseg"><button data-act="dwear" data-k="tuck" data-v="out" aria-pressed="${W.tuck!=='in'}">Верх навыпуск</button><button data-act="dwear" data-k="tuck" data-v="in" aria-pressed="${W.tuck==='in'}">Заправлен</button></div>`:''}${P0.hasL?`<div class="dseg"><button data-act="dwear" data-k="open" data-v="open" aria-pressed="${W.open!=='closed'}">Верхний слой расстёгнут</button><button data-act="dwear" data-k="open" data-v="closed" aria-pressed="${W.open==='closed'}">Застёгнут</button></div>`:''}</div>`})()}
- <span class="lbl">Промпт · вставь вместе со «Скачать кадр» (на кадре вещи пронумерованы)</span><textarea id="dprm" readonly style="width:100%;height:230px;font:12px/1.45 ui-monospace,Consolas,monospace;text-transform:none;letter-spacing:0;border:1px solid var(--soft);padding:10px;resize:vertical">${P0.en.replace(/</g,'&lt;')}</textarea>
+ <span class="lbl">|Как надеть — своими словами|</span><textarea id="dwish" placeholder="Например: кардиган заправить только спереди, рукава куртки закатать, сумку на плечо" style="width:100%;height:76px;font:13px/1.45 var(--f-ui);text-transform:none;letter-spacing:0;border:1px solid var(--ink);padding:10px;resize:vertical">${((S.dwish||{})[i]||'').replace(/</g,'&lt;')}</textarea><div class="tags" style="gap:6px">${WCHIPS.map(([t,ph])=>`<button class="tag" data-act="dwchip" data-v="${ph}" style="padding:5px 8px;font-size:10.5px">+ ${t}</button>`).join('')}</div><span class="lbl" id="dwok">${wishNote((S.dwish||{})[i],i)}</span><span class="lbl">Промпт · вставь вместе со «Скачать кадр» (на кадре вещи пронумерованы)</span><textarea id="dprm" readonly style="width:100%;height:230px;font:12px/1.45 ui-monospace,Consolas,monospace;text-transform:none;letter-spacing:0;border:1px solid var(--soft);padding:10px;resize:vertical">${P0.en.replace(/</g,'&lt;')}</textarea>
  <div style="display:flex;gap:8px"><button class="dbtn p" data-act="dcopy" style="flex:1">Скопировать промпт</button><button class="dbtn" data-act="dframe" style="flex:1">Скачать кадр</button></div>
  <span class="lbl">Автоматическая генерация включится после теста двойника. Цена и «да» — до каждого запуска.</span><button class="dbtn" data-act="close">Закрыть</button></div></div>`}
 async function dFrame(){const i=S.dl||0,mb=S.dm==='mb',ks=(LOOKS[i]||['',[]])[1].filter(k=>CAT[k]),W=2400,H=1600,M=90,cv=document.createElement('canvas');cv.width=W;cv.height=H;const g=cv.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);
@@ -1401,6 +1418,7 @@ async function dFrame(){const i=S.dl||0,mb=S.dm==='mb',ks=(LOOKS[i]||['',[]])[1]
    const bw=bx1-bx0,bh=by1-by0,k=Math.min((W-2*M)/bw,(H-2*M)/bh),ox=(W-bw*k)/2-bx0*k,oy=(H-bh*k)/2-by0*k;L.forEach(([im,x,y,w,h,mul])=>{fitDraw(im,ox+x*k,oy+y*k,w*k,h*k,mul);if(mul)n++})}
   const blob=await new Promise((ok,no)=>{try{cv.toBlob(b=>b?ok(b):no(new Error('blob')),'image/png')}catch(err){no(err)}});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`yana_${NM().n}_look${n2(i+1)}_${mb?'moodboard':'ryadom'}.png`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),5000);toast('Кадр сохранён: модель + '+n+' '+plural(n,'вещь','вещи','вещей'))}
  catch(e){toast('Не удалось собрать кадр: фото вещей из магазинов не отдаются браузеру. Сделаем на сервере.')}}
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='dwish'){const i=S.dl||0;S.dwish=S.dwish||{};S.dwish[i]=e.target.value;const t=$('#dprm');if(t)t.value=dPrompt(i).en;const ok=$('#dwok');if(ok)ok.textContent=wishNote(e.target.value,i)}});
 let DK=matchMedia('(min-width:1280px)').matches;addEventListener('resize',()=>{const d=matchMedia('(min-width:1280px)').matches;if(S.mode==='client')document.body.classList.toggle('cdesk',d);if(d!==DK&&S.mode==='yana'){S.still=true;render()}DK=d});
 document.addEventListener('dragstart',e=>{const t=e.target.closest&&e.target.closest('[data-drag]');if(!t||!DESK())return;e.dataTransfer.setData('text/plain',t.dataset.drag);e.dataTransfer.effectAllowed='copy';t.classList.add('drg')});
 document.addEventListener('dragend',e=>{document.querySelectorAll('.drg,.dover').forEach(z=>z.classList.remove('drg','dover'))});
@@ -1714,6 +1732,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'dok':S.y.ok[v]?delete S.y.ok[v]:S.y.ok[v]=true;break;
  case'dlrec':{const i=+v;if(S.y.lrec===i){S.y.lrec=null;toast('Голосовое к образу сохранено')}else{S.y.lrec=i;S.y.lookVoice[i]=0}break}
  case'dgen':dGenSheet();return;
+ case'dwchip':{const i=S.dl||0,e=$('#dwish');S.dwish=S.dwish||{};const cur=(e?e.value:S.dwish[i]||'').trim();S.dwish[i]=(cur?cur.replace(/[,.\s]+$/,'')+', ':'')+v;persist();dGenSheet();const e2=$('#dwish');if(e2){e2.focus();e2.selectionStart=e2.selectionEnd=e2.value.length}return}
  case'dwear':{const i=S.dl||0;S.dwear=S.dwear||{};(S.dwear[i]=S.dwear[i]||{})[t.dataset.k]=v;persist();dGenSheet();return}
  case'dcopy':{const t=$('#dprm');if(t){t.select();(navigator.clipboard?navigator.clipboard.writeText(t.value):Promise.reject()).then(()=>toast('Промпт скопирован'),()=>{document.execCommand('copy');toast('Промпт скопирован')})}return}
  case'dframe':dFrame();return;
