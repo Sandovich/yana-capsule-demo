@@ -624,6 +624,18 @@ body.desk .dwork.list .scr>div{animation:none!important}
 .dgb{position:absolute;left:6px;bottom:6px;background:#fff;color:var(--mute);font-weight:400;font-size:9px;letter-spacing:.06em;padding:2px 6px;border:1px solid var(--soft)}.dgb.ok{background:var(--ink);color:#fff;border-color:var(--ink)}.dpad .dcapf{position:static;margin-top:12px}
 .dlk .dom{aspect-ratio:3/4}
 }
+
+@media (min-width:1280px){
+body.cdesk .swh{display:block;width:100%}
+body.cdesk .pics{display:flex!important;flex-wrap:wrap;justify-content:center;gap:10px}
+body.cdesk .pics>*{flex:0 0 calc((100% - 30px)/4);min-width:0}
+body.cdesk .pics:has(>:nth-child(9):last-child)>*{flex-basis:calc((100% - 40px)/5)}
+body.cdesk .sws{display:grid!important;grid-template-columns:repeat(6,1fr);gap:14px 10px;justify-items:center}
+body.cdesk #app[data-scr="wardrobe"] .sbody{max-width:820px}
+body.cdesk #app[data-scr="wardrobe"] .grid{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:10px}
+body.cdesk #app[data-scr="wardrobe"] .grid>*{width:auto!important;height:auto!important;aspect-ratio:3/4}
+body.cdesk .honest .txt,body.cdesk #app[data-scr="free"] .sbody .txt{max-width:62ch!important}
+}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
@@ -823,6 +835,10 @@ const PR={
 let DECK,SINGLES,PAIRS,DROP,DEMO_AXES,FIGS,LOOKS,AV,FACE;
 const P=()=>PR[S.g];const NM=()=>P().nm;const G=(f,m)=>S.g==='m'?m:f;
 const PAID=['Параметры','Неделя','Шкаф','Бюджет','Пожелания','Оплата'];
+
+addEventListener('keydown',e=>{if(!document.body.classList.contains('cdesk')||S.mode!=='client'||SEQ[S.i]!=='swipe')return;if(e.target.closest&&e.target.closest('input,textarea'))return;
+ if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;const pr=document.querySelectorAll('.pair button');
+ const b=pr.length?pr[e.key==='ArrowLeft'?0:1]:document.querySelector(`[data-act=vote][data-v=${e.key==='ArrowLeft'?'no':'yes'}]`);if(b){e.preventDefault();b.click()}});
 const SEQ=['land','vibe','swipe','prefs','photo','twin','free','params','week','wardrobe','budget','colors','pay','status','capsule'];
 const S={g:'f',mode:'client',i:0,menu:false,still:false,photo:{full:null,face:null},swipe:{pos:0,like:[],no:[],axes:{}},ctab:'looks',bta:'all',watch:false,fit:{},votes:{},fi:0,hero:false,slots:{taken:8,total:12},
  ask:{link:'',item:null,status:null,answer:null,note:'',pick:null},gift:{tier:'cap',to:'',from:'',occ:'День рождения',g:'f'},
@@ -1111,11 +1127,11 @@ let RESTORING=false;function render(){if(RESTORING)return;persist();
    if(typeof k==='string')p.push(
     `<div class="deck">${nx?`<div class="card under">${typeof nx==='string'?`<img src="${src(nx)}" alt="">`:''}</div>`:''}<div class="card top" id="card"><span class="stamp yes">Моё</span><span class="stamp no">Не моё</span><img src="${src(k)}" alt="${CAT[k].n}"><span class="nm">${CAT[k].n}</span><span class="lbl">${n2(sw.pos+1)} / ${DECK.length}</span></div></div>`,
     `<div class="sbtns"><button class="sbtn" data-act="vote" data-v="no" aria-label="Не моё">✕</button><button class="sbtn" data-act="vote" data-v="yes" aria-label="Моё">♥</button></div>`,
-    `<span class="lbl" style="text-align:center">Свайп вправо — моё, влево — не моё</span>`);
+    `<span class="lbl swh" style="text-align:center">${document.body.classList.contains('cdesk')?'Кнопки или стрелки на клавиатуре: ← не моё · моё →':'Свайп вправо — моё, влево — не моё'}</span>`);
    else if(k.ic!=null){const ic=P().icons[k.ic];p.push(
     (()=>{const ph=P().iconPh[k.ic];return `<div class="deck"><div class="card top icard ${ph?'hasph':''}" id="card"><span class="stamp yes">Моё</span><span class="stamp no">Не моё</span>${ph?`<img class="iph" src="icons/${ph}.jpg" alt="${ic[0]}">`:''}<span class="lbl">Икона стиля</span><b class="iname">${ic[0]}</b><span class="txt">${ic[1]}</span>${ph?`<span class="icr">Фото из открытых источников — для примера</span>`:''}<span class="lbl">${n2(sw.pos+1)} / ${DECK.length}</span></div></div>`})(),
     `<div class="sbtns"><button class="sbtn" data-act="vote" data-v="no" aria-label="Не моё">✕</button><button class="sbtn" data-act="vote" data-v="yes" aria-label="Моё">♥</button></div>`,
-    `<span class="lbl" style="text-align:center">Чей стиль тебе ближе? Свайп вправо — моё</span>`)}
+    `<span class="lbl swh" style="text-align:center">${document.body.classList.contains('cdesk')?'Чей стиль тебе ближе? Нажми на образ или ← →':'Чей стиль тебе ближе? Свайп вправо — моё'}</span>`)}
    else{const pr=PAIRS.at(k.p);p.push(`<p class="big-txt">${pr.ax}: что тебе ближе?</p>`,
     `<div class="pair">${pr.o.map(([kk,l],j)=>`<button data-act="pair" data-v="${j}"><img src="${src(kk)}" alt=""><span>${l}</span></button>`).join('')}</div>`,
     `<span class="lbl" style="text-align:center">${n2(sw.pos+1)} / ${DECK.length} · выбери одно</span>`)}
