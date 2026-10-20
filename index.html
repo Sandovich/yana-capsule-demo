@@ -693,6 +693,45 @@ body.desk .dwork .mood{background:#efeeec}
 .dstep2{margin:0 0 12px;font-size:12px;text-transform:none}
 .dcl2.need{box-shadow:0 0 0 2px var(--ink)}
 .dgb.wk{background:#fff4d6;color:var(--ink)}
+
+.hdr{box-shadow:0 0 0 100vmax var(--paper);clip-path:inset(0 -100vmax)}
+.lknav{display:flex;align-items:center;gap:8px;margin:0 0 10px}
+.lka{width:40px;height:40px;border:1px solid var(--ink);display:grid;place-items:center;font-size:20px;line-height:1;background:var(--paper)}
+.lka:hover{background:var(--ink);color:#fff}
+.lkn{font-size:12px;letter-spacing:.08em;min-width:64px;text-align:center}
+.lkpdf{margin-left:auto;height:40px;padding:0 14px;border:1px solid var(--ink);font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:var(--paper)}
+.lkpdf:hover{background:var(--ink);color:#fff}
+#dots i[data-act]{cursor:pointer}
+.looks.cl .look{flex-basis:92%}
+body.cdesk .looks.cl .look{flex-basis:100%}
+.clk{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:10px;align-items:stretch}
+.clm{position:relative;background:var(--fog);aspect-ratio:3/4;overflow:hidden}
+.clm .stage.tw{position:absolute;inset:0;height:100%;padding:0;background:var(--fog)}.clm .stage.tw .avw{top:3%;bottom:3%}
+.clm .clg{width:100%;height:100%;object-fit:cover;object-position:top}
+.cli{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-content:start}
+.clt{display:flex;flex-direction:column;gap:3px;min-width:0;font-size:10.5px;line-height:1.3}
+.clt .ph{display:block;aspect-ratio:1/1;background:#fff;border:1px solid var(--soft);overflow:hidden;position:relative}
+.clt .ph img{width:100%;height:100%;object-fit:contain;padding:6%}
+.clt .nm{overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.clt small{color:var(--mute);font-size:10px}
+.clt.own .ph{display:grid;place-items:center;text-align:center;padding:8px;color:var(--mute);border-style:dashed}
+body.cdesk .cli{grid-template-columns:repeat(3,minmax(0,1fr))}
+body.cdesk .clm{aspect-ratio:auto;min-height:520px}
+@media (max-width:560px){.clk{grid-template-columns:1fr}.clm{aspect-ratio:4/5}.cli{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.pdfbox{position:fixed;left:-20000px;top:0;z-index:-1}
+.pdfp{width:1123px;height:794px;background:#fff;color:#2b2926;padding:40px 48px;box-sizing:border-box;display:flex;flex-direction:column;gap:14px;font-family:var(--f-ui);text-transform:none;letter-spacing:0}
+.pdfh{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#76726c;border-bottom:1px solid #2b2926;padding-bottom:10px}
+.pdfp h2{font:400 34px/1.1 var(--f-logo);margin:4px 0 0}
+.pdfb{display:grid;grid-template-columns:300px 1fr;gap:24px;flex:1;min-height:0}
+.pdfm{position:relative;background:#f5f5f3;overflow:hidden}.pdfm img{width:100%;height:100%;object-fit:cover;object-position:top}
+.pdfm .stage.tw{position:absolute;inset:0;height:100%;padding:0}.pdfm .stage.tw .avw{top:3%;bottom:3%}
+.pdfi{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-content:start}
+.pdfi>div{display:flex;flex-direction:column;gap:4px;font-size:12px;line-height:1.3}
+.pdfi .ph{display:block;height:150px;border:1px solid #e9e9e6}.pdfi .ph img{width:100%;height:100%;object-fit:contain;padding:8px;box-sizing:border-box}
+.pdfi small{color:#76726c}
+.pdfw{font-size:13px;line-height:1.45;margin:0}
+.pdff{font-size:13px;text-align:right;border-top:1px solid #e9e9e6;padding-top:8px}
+.pdft{width:100%;border-collapse:collapse;font-size:13px}.pdft td{padding:8px 6px;border-bottom:1px solid #e9e9e6}.pdft td:last-child{text-align:right;white-space:nowrap}.pdft .tot td{font-weight:600;border-top:1px solid #2b2926}
 .mood{isolation:isolate}
 .tipx{position:fixed;left:0;top:0;z-index:9999;max-width:260px;padding:7px 10px;background:var(--ink);color:var(--paper);font-size:11.5px;line-height:1.35;letter-spacing:.01em;text-transform:none;pointer-events:none;opacity:0;transition:opacity .12s;box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .tipx.on{opacity:1}
@@ -913,7 +952,7 @@ const TIPS={allok:'Отметить все вещи как проверенны�
  crepl:'Поставить эту вещь вместо старой — в капсуле и во всех образах',ctab:'Переключить раздел',cutit:'Вырезать вещь из фона',cutagain:'Вырезать вещь из фона заново',cutok:'Оставить вырезку как есть',
  dadd:'Открыть каталог и добавить вещь в капсулу',dcopy:'Скопировать промпт для генерации',dframe:'Скачать кадр образа картинкой',dgen:'Фото клиентки в этом образе. Перед запуском — цена и подтверждение',dgo:'Запустить генерацию фото (после подтверждения цены)',dhome:'Выйти из кабинета на главную',dhomego:'Выйти на главную — всё сохранено',
  dl:e=>'Открыть образ '+String(+e.dataset.v+1).padStart(2,'0'),dlook:'Добавить вещь в текущий образ',dm:e=>e.dataset.v==='mb'?'Мудборд: вещи свободно, двигать мышью, колесо — размер':'Рядом: модель слева, вещи по слотам',dnav:e=>e.dataset.v==='ym'?'Ваши мудборды и образы по стилям':'Список заявок клиентов',
- drefs:'Скачать фото вещей и клиентки для генерации',drem:'Убрать вещь из капсулы и из всех образов',dreplk:'Поставить эту вещь вместо выбранной в образе',dreset:'Разложить вещи заново автоматически',mreset:'Разложить мудборд заново',dslot:'Подобрать вещь в этот слот из каталога',dslotadd:'Добавить ещё один пустой слот',dswap:'Подобрать замену этой вещи в каталоге',dfoc:'Показать вещь справа, в списке «Вещи»',dcndraft:'Подставить черновик письма — потом поправь своими словами',dgenl:'Одеть клиентку в этот образ: как надеть и запуск генерации',
+ drefs:'Скачать фото вещей и клиентки для генерации',drem:'Убрать вещь из капсулы и из всех образов',dreplk:'Поставить эту вещь вместо выбранной в образе',dreset:'Разложить вещи заново автоматически',mreset:'Разложить мудборд заново',dslot:'Подобрать вещь в этот слот из каталога',dslotadd:'Добавить ещё один пустой слот',dswap:'Подобрать замену этой вещи в каталоге',dfoc:'Показать вещь справа, в списке «Вещи»',dcndraft:'Подставить черновик письма — потом поправь своими словами',dgenl:'Одеть клиентку в этот образ: как надеть и запуск генерации',lkgo:'Перелистнуть образ',lkpdf:'Скачать все образы и список покупок одним PDF',
  dt:e=>({cat:'Каталог магазинов: найти и добавить вещь',cap:'Вещи капсулы: размеры, замена, удаление',caps:'Образы капсулы, утверждение и отправка клиентке',anq:'Анкета клиентки: параметры, вкус, бюджет',msg:'Переписка с клиенткой'})[e.dataset.v]||'',
  dwchip:'Добавить пожелание к генерации',dwear:'Как вещь сидит на фото: заправлена, навыпуск, застёгнута',exgo:'Начать тест вкуса',next:'Перейти к следующему шагу',friend:'Спросить мнение подруги',fvote:'Голос подруги за образ',gift:'Подарить капсулу сертификатом',giftpay:'Перейти к оплате сертификата',goto:'Перейти к этому шагу',
  lkcat:'Добавить в образ вещь из каталога',lookok:e=>e.getAttribute('aria-pressed')==='true'?'Снять утверждение с образа':'Утвердить образ — он уйдёт клиентке в капсуле',lrec:'Записать голосовое к образу',menu:'Открыть меню',mode:e=>e.dataset.v==='client'?'Посмотреть сайт глазами клиентки':'Вернуться в кабинет Яны',
@@ -938,6 +977,23 @@ function capDraft(){const y=S.y,ks=y.items.filter(k=>CAT[k]),top=ks.slice().sort
 
 // фото на клиентке: готово (y.gen) или запущено (y.genq)
 const genOf=j=>!!((S.y.gen||{})[j]||(S.y.genq||{})[j]),genDone=()=>LOOKS.filter((l,j)=>genOf(j)).length;
+
+// карточка образа у клиентки: слева она в образе, справа каждая вещь
+function clientLook(ks,i,own){ks=ks.filter(k=>CAT[k]);const g=(S.y.gen||{})[i],cut=ks.filter(k=>CAT[k].cut);
+ return `<div class="clk"><div class="clm">${g?`<img class="clg" src="${g}" alt="Образ ${n2(i+1)} на тебе">`:`<span class="stage tw">${twin(cut)}</span><b class="dgb">черновик · фото от Яны скоро</b>`}</div><div class="cli">${ks.map(k=>`<div class="clt"><span class="ph"><img src="${CAT[k].hi||src(k)}" alt="" loading="lazy"></span><span class="nm">${CAT[k].n}</span><small>${CAT[k].s} · ${rub(price(k))}</small></div>`).join('')}${own?`<div class="clt own"><span class="ph"><span>${own}</span></span><span class="nm">${own}</span><small>есть у тебя</small></div>`:''}</div></div>`}
+function lkGo(v){const lk=$('#looks');if(!lk||!lk.firstElementChild)return;const w=lk.firstElementChild.offsetWidth+10,cur=Math.round(lk.scrollLeft/w);
+ const i=String(v).startsWith('=')?+String(v).slice(1):Math.max(0,Math.min(LOOKS.length-1,cur+(+v)));lk.scrollTo({left:i*w,behavior:'smooth'})}
+// PDF: страница на образ + список покупок
+const loadJs=u=>new Promise((ok,no)=>{if(document.querySelector(`script[src="${u}"]`))return ok();const e=document.createElement('script');e.src=u;e.onload=ok;e.onerror=no;document.head.appendChild(e)});
+async function lookPdf(){toast('Собираем PDF…');
+ try{await loadJs('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');await loadJs('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js')}catch(e){toast('Не удалось загрузить PDF-модуль — проверь интернет');return}
+ const box=document.createElement('div');box.className='pdfbox';document.body.appendChild(box);const nm=NM().n,all=[...new Set(LOOKS.flatMap(l=>l[1]))].filter(k=>CAT[k]);
+ const pages=LOOKS.map(([t,ks],i)=>{ks=ks.filter(k=>CAT[k]);const w=S.y.why[i]||(S.genWhy||[])[i]||P().why[i];return `<div class="pdfp"><div class="pdfh"><span>Капсула от Яны · ${nm}</span><span>Образ ${n2(i+1)} / ${n2(LOOKS.length)}</span></div><h2>${t}</h2><div class="pdfb"><div class="pdfm">${(S.y.gen||{})[i]?`<img src="${S.y.gen[i]}" crossorigin="anonymous">`:`<span class="stage tw">${twin(ks.filter(k=>CAT[k].cut))}</span>`}</div><div class="pdfi">${ks.map(k=>`<div><span class="ph"><img src="${CAT[k].hi||src(k)}" crossorigin="anonymous"></span><b>${CAT[k].n}</b><small>${CAT[k].s} · ${rub(price(k))}</small></div>`).join('')}</div></div>${w?`<p class="pdfw"><b>${w[0]}.</b> ${w[1]}</p>`:''}<div class="pdff">Итого образ · ${rub(ks.reduce((a,k)=>a+price(k),0))}</div></div>`});
+ pages.push(`<div class="pdfp"><div class="pdfh"><span>Капсула от Яны · ${nm}</span><span>Список покупок</span></div><h2>Все вещи капсулы</h2><table class="pdft">${all.map((k,j)=>`<tr><td>${j+1}</td><td>${CAT[k].n}</td><td>${CAT[k].s}</td><td>${(CAT[k].sz||ySel(k).join(' / ')||'')}</td><td>${rub(price(k))}</td></tr>`).join('')}<tr class="tot"><td></td><td>Итого</td><td></td><td></td><td>${rub(all.reduce((a,k)=>a+price(k),0))}</td></tr></table></div>`);
+ box.innerHTML=pages.join('');await Promise.all([...box.querySelectorAll('img')].map(im=>im.complete?0:new Promise(r=>{im.onload=im.onerror=r;setTimeout(r,6000)})));
+ const {jsPDF}=window.jspdf,doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});const ps=[...box.children];
+ for(let j=0;j<ps.length;j++){const c=await html2canvas(ps[j],{scale:2,useCORS:true,backgroundColor:'#ffffff',logging:false});if(j)doc.addPage();doc.addImage(c.toDataURL('image/jpeg',.88),'JPEG',0,0,297,210)}
+ box.remove();doc.save(`Капсула от Яны — ${nm}.pdf`);toast('PDF скачан')}
 const SEQ=['land','vibe','swipe','prefs','photo','twin','free','params','week','wardrobe','budget','colors','pay','status','capsule'];
 const S={g:'f',mode:'client',i:0,menu:false,still:false,photo:{full:null,face:null},swipe:{pos:0,like:[],no:[],axes:{}},ctab:'looks',bta:'all',watch:false,fit:{},votes:{},fi:0,hero:false,slots:{taken:8,total:12},
  ask:{link:'',item:null,status:null,answer:null,note:'',pick:null},gift:{tier:'cap',to:'',from:'',occ:'День рождения',g:'f'},
@@ -1325,8 +1381,8 @@ let RESTORING=false;function render(){if(RESTORING)return;persist();
   if(tab==='looks')p.push(
   `<div class="voice ${S.playing?'on':''}"><button class="play" data-act="play" aria-label="${S.playing?'Пауза':'Слушать'}">${S.playing?'❚❚':'▶'}</button><div class="wave">${[6,12,20,9,24,16,8,22,14,26,10,18,7,21,13,25,9,17,11,6].map((h,i)=>`<i style="height:${h}px;animation-delay:${i*45}ms"></i>`).join('')}</div><span class="t">0:42</span></div>`,
   `<p class="quote">${P().capq}</p>`,
-  `<div><div class="looks" id="looks">${LOOKS.map(([t,ks,own],i)=>`<div class="look"><div style="display:flex;justify-content:space-between;font-size:11px"><span><span class="n">${n2(i+1)}</span>${t}${S.y.lookVoice[i]?`<button class="lvoice" data-act="toast" data-v="Голосовое Яны к образу ${n2(i+1)}">▶ 0:${n2(S.y.lookVoice[i])}</button>`:''}</span><span class="lbl">${ks.reduce((s,k)=>s+price(k),0).toLocaleString('ru-RU')} ₽</span></div>${mood(ks,i,{own})}${(()=>{const w=S.y.why[i]||(S.genWhy||[])[i]||P().why[i];return w?`<p class="why"><b>${w[0]}</b>${w[1]}</p>`:''})()}</div>`).join('')}</div>
-   <div class="dots" id="dots" style="margin-top:12px">${LOOKS.map((_,i)=>`<i class="${i===S.look?'on':''}"></i>`).join('')}</div></div>`,
+  `<div><div class="lknav"><button class="lka" data-act="lkgo" data-v="-1" aria-label="Предыдущий образ">‹</button><span class="lkn" id="lkn">${n2((S.look||0)+1)} / ${n2(LOOKS.length)}</span><button class="lka" data-act="lkgo" data-v="1" aria-label="Следующий образ">›</button><button class="lkpdf" data-act="lkpdf">Скачать образы · PDF</button></div><div class="looks cl" id="looks">${LOOKS.map(([t,ks,own],i)=>`<div class="look"><div style="display:flex;justify-content:space-between;font-size:11px"><span><span class="n">${n2(i+1)}</span>${t}${S.y.lookVoice[i]?`<button class="lvoice" data-act="toast" data-v="Голосовое Яны к образу ${n2(i+1)}">▶ 0:${n2(S.y.lookVoice[i])}</button>`:''}</span><span class="lbl">${ks.reduce((s,k)=>s+price(k),0).toLocaleString('ru-RU')} ₽</span></div>${clientLook(ks,i,own)}${(()=>{const w=S.y.why[i]||(S.genWhy||[])[i]||P().why[i];return w?`<p class="why"><b>${w[0]}</b>${w[1]}</p>`:''})()}</div>`).join('')}</div>
+   <div class="dots" id="dots" style="margin-top:12px">${LOOKS.map((_,i)=>`<i class="${i===(S.look||0)?'on':''}" data-act="lkgo" data-v="=${i}" role="button" aria-label="Образ ${n2(i+1)}"></i>`).join('')}</div></div>`,
   ymBlock('Образы Яны в твоём стиле'),
   `<div class="tools"><button class="tool" data-act="reel"><span>▶ Переодевашка</span><small>Рилс из твоих 6 образов — монтаж бесплатно</small></button><button class="tool" data-act="friend"><span>${G('Спросить подругу','Спросить друга')}</span><small>Ссылка без регистрации: ♥ или ✕ на каждый образ</small></button></div>`,
   giftBox(G('Подари такую же','Подари такую же'),G('Подруге, маме, мужу, брату — пройдут тот же путь: тест, двойник и капсула от Яны под свою фигуру и бюджет.','Жене, маме, другу, брату — пройдут тот же путь: тест, двойник и капсула от Яны под свою фигуру и бюджет.'),'Сертификат на год · от 2 990 ₽'));
@@ -1356,7 +1412,7 @@ let RESTORING=false;function render(){if(RESTORING)return;persist();
    :`<button class="btn line" data-act="toast" data-v="Откроем чат с Яной в Telegram">Написать Яне</button><button class="btn" data-act="story" data-v="${S.look}">↗︎ Поделиться образом</button>`)}
  a.innerHTML=hdr()+scr(p);
  if(c==='status'){const end=Date.now()+86399000;const tick=()=>{const e=$('#timer');if(!e)return;const s=Math.max(0,Math.floor((end-Date.now())/1000));e.textContent=[Math.floor(s/3600),Math.floor(s%3600/60),s%60].map(n2).join(':')};tick();timerId=setInterval(tick,1000)}
- const lk=$('#looks');if(lk)lk.addEventListener('scroll',()=>{const i=Math.round(lk.scrollLeft/(lk.firstElementChild.offsetWidth+10));if(i!==S.look){S.look=i;document.querySelectorAll('#dots i').forEach((d,j)=>d.classList.toggle('on',j===i))}},{passive:true});
+ const lk=$('#looks');if(lk)lk.addEventListener('scroll',()=>{const i=Math.round(lk.scrollLeft/(lk.firstElementChild.offsetWidth+10));if(i!==S.look){S.look=i;document.querySelectorAll('#dots i').forEach((d,j)=>d.classList.toggle('on',j===i));const n=$('#lkn');if(n)n.textContent=n2(i+1)+' / '+n2(LOOKS.length)}},{passive:true});
  const card=$('#card');if(card)drag(card);
  const sn=$('.steps-nav'),cs=$('.steps-nav .cur');if(sn&&cs)sn.scrollLeft=Math.max(0,cs.offsetLeft-sn.clientWidth/2+cs.offsetWidth/2)}
 
@@ -1982,6 +2038,8 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'dnav':S.y.open=null;S.yv=v;S.y.stage='items';S.cfor=null;S.lookFor=null;if(v==='cat'&&!CATL)loadCat();break;
  case'dlook':dLookAdd(v);return;
  case'dfoc':dFocus(v);return;
+ case'lkgo':lkGo(v);return;
+ case'lkpdf':lookPdf();return;
  case'dgenl':S.dl=+v;S.still=true;render();dGenSheet();return;
  case'dcndraft':S.y.capNote=capDraft();persist();break;
  case'dslot':S.dt='cat';CF.c=v;CF.q='';CF.lim=40;if(!CATL)loadCat();break;
