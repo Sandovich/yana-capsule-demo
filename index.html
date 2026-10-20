@@ -673,6 +673,9 @@ body.desk .dwork .mood{background:#efeeec}
 
 #wish{border:1px solid var(--ink);background:var(--card);padding:12px 14px;min-height:110px}
 #wish:focus-visible{outline:2px solid var(--ink);outline-offset:0}
+
+.twfix{margin-top:14px}.twfix textarea{border:1px solid var(--ink);background:var(--card);padding:10px 12px;min-height:76px;margin-top:10px}
+.btn:disabled{opacity:.35;cursor:default}
 .mood{isolation:isolate}
 .tipx{position:fixed;left:0;top:0;z-index:9999;max-width:260px;padding:7px 10px;background:var(--ink);color:var(--paper);font-size:11.5px;line-height:1.35;letter-spacing:.01em;text-transform:none;pointer-events:none;opacity:0;transition:opacity .12s;box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .tipx.on{opacity:1}
@@ -897,7 +900,7 @@ const TIPS={allok:'Отметить все вещи как проверенны�
  dt:e=>({cat:'Каталог магазинов: найти и добавить вещь',cap:'Вещи капсулы: размеры, замена, удаление',caps:'Образы капсулы, утверждение и отправка клиентке',anq:'Анкета клиентки: параметры, вкус, бюджет',msg:'Переписка с клиенткой'})[e.dataset.v]||'',
  dwchip:'Добавить пожелание к генерации',dwear:'Как вещь сидит на фото: заправлена, навыпуск, застёгнута',exgo:'Начать тест вкуса',next:'Перейти к следующему шагу',friend:'Спросить мнение подруги',fvote:'Голос подруги за образ',gift:'Подарить капсулу сертификатом',giftpay:'Перейти к оплате сертификата',goto:'Перейти к этому шагу',
  lkcat:'Добавить в образ вещь из каталога',lookok:e=>e.getAttribute('aria-pressed')==='true'?'Снять утверждение с образа':'Утвердить образ — он уйдёт клиентке в капсуле',lrec:'Записать голосовое к образу',menu:'Открыть меню',mode:e=>e.dataset.v==='client'?'Посмотреть сайт глазами клиентки':'Вернуться в кабинет Яны',
- openask:'Открыть вопрос клиентки',openreq:'Открыть заявку',pair:'Выбрать образ, который ближе',pick:'Поставить эту вещь вместо прежней',play:'Прослушать голосовое Яны',pref:'Отметить, что носишь',rec:'Записать голосовое',redo:'Двойник не похож — переделать',reel:'Посмотреть рилс-переодевашку',
+ openask:'Открыть вопрос клиентки',openreq:'Открыть заявку',pair:'Выбрать образ, который ближе',pick:'Поставить эту вещь вместо прежней',play:'Прослушать голосовое Яны',pref:'Отметить, что носишь',rec:'Записать голосовое',redo:'Двойник не похож — отметить, что не так, и отправить Яне',twinsend:'Яна поправит двойника вручную до 24 часов',twinx:'Не отправлять, оставить как есть',reel:'Посмотреть рилс-переодевашку',
  rev:'Попросить правку: отметить вещи на замену',revdone:'Отправить исправленную капсулу клиентке',revsend:'Отправить правку Яне',revtog:'Отметить вещь на замену',send:'Отправить капсулу клиентке',slot:'Изменить число мест в неделю',story:'Поделиться образом',swap:'Подобрать похожие на замену — покажем и то, что дороже бюджета, с пометкой',
  tocap:'Вернуться к капсуле',twin:'Посмотреть образ на двойнике',vibe:'Выбрать стиль (до трёх)',vote:e=>e.dataset.v==='yes'?'Моё — Яна учтёт в капсуле':'Не моё — такого в капсуле не будет',watch:'Следить за снижением цены',yitem:'Открыть вещь: размеры, двойник, замена',ylook:'Перейти к образу',ylookok:'Утвердить образ',ymdel:'Удалить образ',ysz:'Выбрать размер для клиентки',zoom:'Увеличить фото'};
 (()=>{if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;const tip=document.createElement('div');tip.className='tipx';tip.setAttribute('role','tooltip');document.body.appendChild(tip);let cur=null,tm=0,mx=0,my=0;
@@ -1235,8 +1238,11 @@ let RESTORING=false;function render(){if(RESTORING)return;persist();
   `<button class="tag" data-act="sample">Подставить пример</button>`];bar(nav(S.photo.full&&S.photo.face,'Создать двойника'))}
  else if(c==='twin'){p=[`<span class="lbl">|Шаг 3 · Это ты?|</span>`,`<h2 class="ttl">Это ты?</h2>`,
   `<div class="avbox">${S.avatarOk?`<img src="${IMG}${AV}" alt="Твой цифровой двойник">`:`<i class="scan"></i><span class="lbl">Строим двойника…</span>`}</div>`,
-  `<div class="honest"><b>Честное зеркало</b><span class="txt">Мы не делаем фигуру стройнее и не меняем лицо. Если не похоже — переделаем, пока не будет похож.</span></div>`];
-  bar(S.avatarOk?`<button class="btn line" data-act="redo">Не похоже</button><button class="btn" data-act="next">Да, это я</button>`:null);
+  `<div class="honest"><b>Честное зеркало</b><span class="txt">Мы не делаем фигуру стройнее и не меняем лицо. Если не похоже — отправь Яне, она доведёт двойника вручную.</span></div>`];
+  S.twinBad=S.twinBad||[];
+  if(S.avatarOk&&S.twinFix==='open')p.push(`<div class="q twfix"><span class="lbl">|Что не так?|</span><div class="tags">${['Лицо','Фигура','Рост','Волосы','Цвет кожи'].map(v=>`<button class="tag" data-act="arr" data-k="twinBad" data-v="${v}" aria-pressed="${S.twinBad.includes(v)}">${v}</button>`).join('')}</div><textarea id="twnote" placeholder="Например: лицо шире, волосы короче, я ниже ростом">${(S.twinNote||'').replace(/</g,'&lt;')}</textarea></div>`);
+  if(S.twinFix==='sent')p.push(`<div class="honest twsent"><b>Отправлено Яне</b><span class="txt">Яна поправит двойника вручную до 24 часов и пришлёт уведомление. Пока можно идти дальше — образы примерим уже на исправленного двойника.</span></div>`);
+  bar(!S.avatarOk?null:S.twinFix==='open'?`<button class="btn line" data-act="twinx">Отмена</button><button class="btn" data-act="twinsend" ${S.twinBad.length?'':'disabled'}>Отправить Яне на доработку</button>`:S.twinFix==='sent'?`<button class="btn" data-act="next">Дальше</button>`:`<button class="btn line" data-act="redo">Не похоже</button><button class="btn" data-act="next">Да, это я</button>`);
   if(!S.avatarOk)setTimeout(()=>{S.avatarOk=true;if(cur()==='twin'&&S.mode==='client')render()},2000)}
  else if(c==='free'){const t=styles();p=[`<span class="lbl">|Подарок от Яны · ${t.join(' + ')}|</span>`,`<h2 class="ttl">Твой первый образ</h2>`,
   `<div class="look solo">${mood((S.free||P().free)[0],0,{own:(S.free||P().free)[1]})}</div>`,
@@ -1908,7 +1914,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
   S.own=ks.filter(x=>CAT[x.id]).map(x=>({src:CAT[x.id].cut||src(x.id),l:x.n.split(/\s+/)[0]+(x.col?' · '+((COLORS.find(c=>c[0]===x.col)||[])[1]||''):'')}));S.still=true;render()})();return}
  case'delown':S.own.splice(+v,1);break;
  case'set':S[t.dataset.k]=t.dataset.k==='budget'?+v:v;break;
- case'arr':tog(S[t.dataset.k],v);break;
+ case'arr':if(t.dataset.k==='twinBad')S.twinNote=($('#twnote')||{}).value||'';tog(S[t.dataset.k],v);break;
  case'pref':tog(S.pref[t.dataset.k],v);break;
  case'tsz':tog(S.sizes,v,2);if(!S.sizes.length)S.sizes=[v];S.sizes.sort((a,b)=>P().sizes.indexOf(a)-P().sizes.indexOf(b));S.size=S.sizes[0];if(!S.bsTouched)S.bsizes=[...S.sizes];break;
  case'lsz':S.bsTouched=true;tog(S.bsizes,v,2);if(!S.bsizes.length)S.bsizes=[v];S.bsizes.sort((a,b)=>P().sizes.indexOf(a)-P().sizes.indexOf(b));break;
@@ -1922,7 +1928,9 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'col':{const o=['','love','never'];S.colors[v]=o[(o.indexOf(S.colors[v]||'')+1)%3];break}
  case'cols':S.cols=+v;break;
  case'play':S.playing=!S.playing;break;
- case'redo':S.avatarOk=false;toast('Переделываем двойника');break;
+ case'redo':if(S.twinFix==='sent'){toast('Уже у Яны на доработке');return}S.twinFix='open';S.twinBad=S.twinBad||[];break;
+ case'twinx':S.twinNote=($('#twnote')||{}).value||'';S.twinFix=null;break;
+ case'twinsend':S.twinNote=($('#twnote')||{}).value||'';if(!(S.twinBad||[]).length){toast('Отметь, что не так');return}S.twinFix='sent';toast('Отправлено Яне на доработку');break;
  case'story':storySheet(v);return;
  case'toast':toast(v);return;
  case'openreq':if(v!=='0'){toast('В демо открыта только заявка '+NM().g);return}S.y.open=0;break;
@@ -2014,7 +2022,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'lookok':{if(S.y.looksOk[v])delete S.y.looksOk[v];else{S.y.looksOk[v]=true;if(DESK()&&S.y.open===0){const nx=LOOKS.findIndex((l,j)=>j!==+v&&!S.y.looksOk[j]);if(nx>-1){S.dl=nx;toast('Образ '+n2(+v+1)+' утверждён · дальше '+n2(nx+1))}else{S.dt='caps';toast('Все образы утверждены — проверь капсулу и отправь')}}}break}
  case'rec':if(S.y.rec){S.y.rec=false;toast('Голосовое сохранено')}else{S.y.rec=true;S.y.voice=0}break;
  case'send':S.y.sent=true;S.capReady=true;if(S.i<SEQ.indexOf('status'))S.i=SEQ.indexOf('status');toast('Капсула у '+NM().g+' — в кабинете клиента готово');break}
- const keep=['vibe','sample','redo','yv','cfg','cfc','cfs','cfx','cfr','crepl','ccancel','cboardclr','bsel','bsz','bz','bdel','bsave','icat','delown','sampleown','ok','arr','set','col','allok','pick','lookok','cols','play','rec','pair','pref','tsz','lsz','ysz','cfbr','cfsale2','ymst','ymdel','ctab','bta','watch','fit','asksample','askgo','askyana','askreset','answer','slot'].includes(a),sy=window.scrollY;
+ const keep=['vibe','sample','redo','twinx','twinsend','yv','cfg','cfc','cfs','cfx','cfr','crepl','ccancel','cboardclr','bsel','bsz','bz','bdel','bsave','icat','delown','sampleown','ok','arr','set','col','allok','pick','lookok','cols','play','rec','pair','pref','tsz','lsz','ysz','cfbr','cfsale2','ymst','ymdel','ctab','bta','watch','fit','asksample','askgo','askyana','askreset','answer','slot'].includes(a),sy=window.scrollY;
  S.still=keep;render();window.scrollTo(0,keep?sy:0)});
 document.addEventListener('input',e=>{if(e.target.id==='cq'){CF.q=e.target.value;CF.lim=40;const r=$('#cres');if(r)r.innerHTML=catResults();return}
  if(e.target.dataset.why!=null){const i=+e.target.dataset.why,w=S.y.why[i]||[...((S.genWhy||[])[i]||P().why[i])];w[1]=e.target.value;S.y.why[i]=w;if(S.y.stale)delete S.y.stale[i];return}
