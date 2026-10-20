@@ -1193,7 +1193,7 @@ let RESTORING=false;function render(){if(RESTORING)return;persist();
    `<span class="lbl">Капсула от 2 990 ₽ · готово до 24 часов · правка — до 12 часов</span>`];
   bar(`<button class="btn" data-act="next">Начать бесплатно</button>`)}
  else if(c==='vibe'){const V=VIBES[S.g],sel=S.vibe||[];p=[`<span class="lbl">|Шаг 1 · Стиль| <span class="free">бесплатно</span></span>`,`<h2 class="ttl">Какой стиль тебе сейчас ближе?</h2>`,`<p class="txt">Выбери до трёх. Это не навсегда — просто с чего начать.</p>`,
-  `<div class="vibes ${sel.length?'has':''}">${V.map(([k,t,d])=>`<button class="vibe" data-act="vibe" data-v="${k}" aria-pressed="${sel.includes(k)}"><span class="vph"><img src="styles/${S.g}_${k}.jpg" alt="${t}" loading="lazy">${sel.includes(k)?`<i class="vno">${sel.indexOf(k)+1}</i>`:''}</span><b>${t}</b><span>${d}</span></button>`).join('')}</div>`,
+  `<div class="vibes ${sel.length>=3?'has':''}">${V.map(([k,t,d])=>`<button class="vibe" data-act="vibe" data-v="${k}" aria-pressed="${sel.includes(k)}"><span class="vph"><img src="styles/${S.g}_${k}.jpg" alt="${t}" loading="lazy">${sel.includes(k)?`<i class="vno">${sel.indexOf(k)+1}</i>`:''}</span><b>${t}</b><span>${d}</span></button>`).join('')}</div>`,
   `<span class="lbl">Фото из Pinterest — для примера</span>`];bar(nav(sel.length>0,sel.length?'Далее · '+sel.length:'Выбери стиль'))}
  else if(c==='swipe'&&!S.deckReady){newDeck();p=[`<span class="lbl">|Шаг 1 · Тест вкуса|</span>`,`<h2 class="ttl">Нравится?</h2>`,`<p class="lbl">Подбираем свежие вещи сезона…</p>`];bar(null)}
  else if(c==='swipe'){const sw=S.swipe,done=sw.pos>=DECK.length;
@@ -1868,7 +1868,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'goto':S.menu=false;S.mode='client';$('#overlay').innerHTML='';S.i=+v;if(S.i>SEQ.indexOf('vibe')&&!(S.vibe||[]).length)S.vibe=[VIBES[S.g][0][0]];break;
  case'g_menu':break;
  case'mode':S.mode=v;S.menu=false;S.playing=false;if(v==='client')bar(null);if(v==='yana'){S.y.open=null;S.yv='req';S.y.stage='items';S.cfor=null;S.lookFor=null;$('#overlay').innerHTML='';scrollTo(0,0)}break;
- case'next':if(cur()==='vibe'){S.deckReady=false;newDeck()}if(cur()==='colors')S.wish=($('#wish')||{}).value||'';if(cur()==='pay')S.slots.taken=Math.min(S.slots.total,S.slots.taken+1);S.i=Math.min(SEQ.length-1,S.i+1);break;
+ case'next':if(cur()==='land'){S.vibe=[];S.deckReady=false;S.genFor=null;S.swipe={pos:0,like:[],no:[],axes:{},icons:{}}}if(cur()==='vibe'){S.deckReady=false;newDeck()}if(cur()==='colors')S.wish=($('#wish')||{}).value||'';if(cur()==='pay')S.slots.taken=Math.min(S.slots.total,S.slots.taken+1);S.i=Math.min(SEQ.length-1,S.i+1);break;
  case'back':S.i=Math.max(0,S.i-1);break;
  case'vote':vote(v);return;
  case'vibe':{S.deckReady=false;S.genFor=null;S.swipe={pos:0,like:[],no:[],axes:{},icons:{}};const a=S.vibe||(S.vibe=[]),j=a.indexOf(v);if(j>-1)a.splice(j,1);else{if(a.length>=3)a.shift();a.push(v)}S.still=true;break}
