@@ -907,7 +907,7 @@ const SEQ=['land','vibe','swipe','prefs','photo','twin','free','params','week','
 const S={g:'f',mode:'client',i:0,menu:false,still:false,photo:{full:null,face:null},swipe:{pos:0,like:[],no:[],axes:{}},ctab:'looks',bta:'all',watch:false,fit:{},votes:{},fi:0,hero:false,slots:{taken:8,total:12},
  ask:{link:'',item:null,status:null,answer:null,note:'',pick:null},gift:{tier:'cap',to:'',from:'',occ:'День рождения',g:'f'},
  height:168,size:'M',sizes:['M'],bsizes:['M'],bsTouched:false,pref:{shoes:[],jeans:[],tex:[]},shoe:'38',fig:'hour',accent:['Талию'],hide:[],week:['Офис','Город'],office:'Расслабленный',occasion:'Каждый день',
- base:['Чёрные джинсы','Белая рубашка','Лоферы'],own:[],budget:80000,
+ base:[],own:[],budget:80000,
  colors:{'#111110':'love','#f2efe8':'love','#7a1f2b':'love','#c9a227':'never','#e76fa3':'never'},wish:'',tier:'cap',club:false,
  avatarOk:false,cols:2,look:0,playing:false,rev:{left:2,pending:null,newKeys:[],ver:1},
  y:{open:null,items:[],ok:{},looksOk:{},stage:'items',sent:false,voice:0,rec:false}};
@@ -922,7 +922,7 @@ function figSvg(sh,wa,hi,k){const c=15,round=k==='apple'||k==='oval',body=round?
 const COLORS=[['#111110','чёрный'],['#f2efe8','молочный'],['#8a8f96','серый'],['#c8b39a','беж'],['#5a3b2a','шоколад'],['#7a1f2b','бордо'],['#25365c','синий'],['#4f5b3a','хаки'],['#c9a227','горчица'],['#e76fa3','розовый'],['#d7261e','красный'],['#7fa7c9','голубой']];
 const TIERS=[['cap','Капсула','8–10 вещей · 6 образов · размеры · голосовое Яны · 2 правки',2990],['plus','Капсула+','То же + 10 образов вместо 6 · созвон с Яной 15 минут · разбор шкафа по фото',4990],['me','Лично с Яной','Капсула+ и онлайн-сопровождение Яны в Telegram или Max',9990]];
 function setG(g){S.g=g;const p=PR[g];DECK=[...p.deck];[3,8,13,18].forEach((at,i)=>DECK.splice(at,0,{ic:i}));SINGLES=DECK.filter(x=>typeof x==='string').length;PAIRS=p.pairs;DROP=p.drop;DEMO_AXES=p.axes;FIGS=p.figs;LOOKS=p.looks.map(l=>[l[0],[...l[1]],l[2]]);AV=p.av;FACE=p.face;S.deckReady=false;S.genFor=null;S.vibe=[];
- Object.assign(S,{height:p.h[2],size:p.size,sizes:[p.size],bsizes:[p.size],bsTouched:false,pref:{shoes:[],jeans:[],tex:[]},shoe:p.shoe,fig:p.fig,accent:[...p.accent],hide:[],base:[...p.base],own:[],colors:{...p.colors},wish:'',photo:{full:null,face:null},avatarOk:false,capReady:false,
+ Object.assign(S,{height:p.h[2],size:p.size,sizes:[p.size],bsizes:[p.size],bsTouched:false,pref:{shoes:[],jeans:[],tex:[]},shoe:p.shoe,fig:p.fig,accent:[...p.accent],hide:[],base:[],own:[],colors:{...p.colors},wish:'',photo:{full:null,face:null},avatarOk:false,capReady:false,
   swipe:{pos:0,like:[],no:[],axes:{},icons:{}},fit:{},votes:{},watch:false,bta:'all',ctab:'looks',look:0,rev:{left:2,pending:null,newKeys:[],ver:1},ask:{link:'',item:null,status:null,answer:null,note:'',pick:null}});
  S.gift.g=g;S.gift.occ='День рождения';S.free=null;S.freeq=null;S.genWhy=null;S.genFor=null;S.y.items=[...p.items];S.y.ok={};S.y.looksOk={};S.y.lookVoice={};S.y.lrec=null;S.y.why={};S.board={layers:[],sel:null};S.y.stage='items';S.y.sent=false;S.y.voice=0;S.y.open=null}
 setG('f');
@@ -1901,7 +1901,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'asksend':S.ask.answer=S.ask.pick;S.ask.note=(($('#asknote')||{}).value||'').trim();S.ask.status='done';toast('Ответ у '+NM().g);break;
  case'slot':S.slots.total=Math.max(S.slots.taken,Math.min(30,S.slots.total+(+v)));break;
  case'sample':S.photo.full=IMG+AV;S.photo.face=IMG+FACE;break;
- case'sampleown':{(async()=>{await loadPool();const C0=cands(S.g),pickK=kd=>{const l=C0.filter(x=>KIND(x.n,x.cc)===kd);return l[Math.floor(Math.random()*l.length)]};const ks=['top','bottom','shoes','outer'].map(pickK).filter(Boolean);await Promise.all(ks.map(x=>regP(x.id)));
+ case'sampleown':{if(!S.base.length)S.base=[...P().base];(async()=>{await loadPool();const C0=cands(S.g),pickK=kd=>{const l=C0.filter(x=>KIND(x.n,x.cc)===kd);return l[Math.floor(Math.random()*l.length)]};const ks=['top','bottom','shoes','outer'].map(pickK).filter(Boolean);await Promise.all(ks.map(x=>regP(x.id)));
   S.own=ks.filter(x=>CAT[x.id]).map(x=>({src:CAT[x.id].cut||src(x.id),l:x.n.split(/\s+/)[0]+(x.col?' · '+((COLORS.find(c=>c[0]===x.col)||[])[1]||''):'')}));S.still=true;render()})();return}
  case'delown':S.own.splice(+v,1);break;
  case'set':S[t.dataset.k]=t.dataset.k==='budget'?+v:v;break;
