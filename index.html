@@ -1041,6 +1041,32 @@ body.cdesk #app[data-scr="swipe"] .sbody .passport.p916{aspect-ratio:9/16;width:
 body.cdesk #app[data-scr="swipe"] .sbody .passport.p916 .ppf{margin-top:auto}
 #rql,#cll{border-top:0!important}
 .mhow{margin-top:8px;font-size:12px}.mhow summary{cursor:pointer;color:var(--mute);text-decoration:underline;text-underline-offset:3px}.mhow .txt{margin-top:6px;font-size:13px}
+
+.rdy{display:flex;flex-direction:column;gap:22px}
+.rdy .ppwrap{order:2}
+.rdm{display:flex;flex-direction:column;gap:16px}
+.rdh{display:flex;flex-direction:column;gap:4px;border-left:3px solid var(--ink);padding:4px 0 4px 14px}.rdh b{font:400 24px/1.15 var(--f-logo)}.rdh span{font-size:12px;color:var(--mute)}
+.rds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--hair)}
+.rds>div{padding:12px 10px 12px 0;display:flex;flex-direction:column;gap:4px}.rds b{font:400 26px/1 var(--f-logo)}.rds span{font-size:11.5px;color:var(--mute)}
+.rdl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.rdl button{display:flex;flex-direction:column;gap:6px;text-align:left;padding:0;background:none;border:0;cursor:pointer}
+.rdl .ph{position:relative;aspect-ratio:3/4;background:var(--fog);overflow:hidden;display:block;transition:transform .25s var(--ease,ease)}
+.rdl .ph img{width:100%;height:100%;object-fit:cover;object-position:top}
+.rdl .ph .mood{position:absolute;inset:0;width:100%;height:100%;max-height:none;aspect-ratio:auto;margin:0}
+.rdl button:hover .ph{transform:translateY(-2px)}
+.rdl small{font-size:11px;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rdq{margin:0;padding:16px 18px;background:var(--fog);font:italic 400 17px/1.45 var(--f-logo)}.rdq cite{display:block;margin-top:8px;font:400 12px var(--f-ui);color:var(--mute);font-style:normal}
+.rdgo{width:100%;min-height:52px;display:none;align-items:center;justify-content:center}body.cdesk .rdgo{display:flex}
+.rdt{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:11.5px;color:var(--mute)}
+body.cdesk #app[data-scr="status"] .scr.split .sbody:has(.rdy){display:block!important;width:100%;max-width:1320px;margin:0 auto}
+body.cdesk #app[data-scr="status"] .scr.split .sbody:has(.rdy)>div{width:100%;align-self:stretch}
+body.cdesk #app[data-scr="status"] .rdy{width:100%}
+body.cdesk #app[data-scr="status"] .rdy{display:grid;grid-template-columns:minmax(300px,380px) minmax(0,1fr);column-gap:clamp(40px,4vw,72px);align-items:start}
+body.cdesk #app[data-scr="status"] .rdy .ppwrap{order:0;position:sticky;top:76px}
+body.cdesk #app[data-scr="status"] .rdy .passport{width:100%;aspect-ratio:auto}
+body.cdesk #app[data-scr="status"] .rdy .passport .ppf{margin-top:8px}
+body.cdesk #app[data-scr="status"] .rdl{grid-template-columns:repeat(6,minmax(0,1fr))}
+body.cdesk #app[data-scr="status"] .rdgo{width:auto;align-self:flex-start;padding-left:48px;padding-right:48px}
 .mood{isolation:isolate}
 .tipx{position:fixed;left:0;top:0;z-index:9999;max-width:260px;padding:7px 10px;background:var(--ink);color:var(--paper);font-size:11.5px;line-height:1.35;letter-spacing:.01em;text-transform:none;pointer-events:none;opacity:0;transition:opacity .12s;box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .tipx.on{opacity:1}
@@ -1267,7 +1293,7 @@ const TIPS={allok:'Отметить все вещи как проверенны�
  lkcat:'Добавить в образ вещь из каталога',lookok:e=>e.getAttribute('aria-pressed')==='true'?'Снять утверждение с образа':'Утвердить образ — он уйдёт клиентке в капсуле',lrec:'Записать голосовое к образу',menu:'Открыть меню',mode:e=>e.dataset.v==='client'?'Посмотреть сайт глазами клиентки':'Вернуться в кабинет Яны',
  openask:'Открыть вопрос клиентки',openreq:'Открыть заявку',pair:'Выбрать образ, который ближе',pick:'Поставить эту вещь вместо прежней',play:'Прослушать голосовое Яны',pref:'Отметить, что носишь',rec:'Записать голосовое',pfp:'Следующая часть',rqf:'Показать заявки с этим статусом',clopen:'Открыть карточку клиентки',clback:'Ко всем клиенткам',clf:'Показать клиенток с этим признаком',clmsg:'Готовое сообщение клиентке о новом сезоне',clpush:'Перенести напоминание',clcopy:'Скопировать сообщение',ulink:'Добавить вещь из любого магазина: ссылка, фото, цена',uladd:'Сохранить вещь',cfind:'Добавить вещь в находки — для поста или сторис',ffmt:'Формат карточки',fmv:'Переставить вещь',frm:'Убрать из находок',fclr:'Очистить находки',fpng:'Скачать карточку PNG для поста или сторис',fcap:'Скопировать подпись с ценами и твоими ссылками',prof:'Профиль: имя, ссылка, твои партнёрские коды',csel:'Выбрать образ (ещё раз — снять выбор)',capprove:'Одобрить образы',cselx:'Снять выбор со всех образов',dtpl:'Сохранить образ как шаблон или собрать из шаблона',tplsave:'Сохранить текущий образ шаблоном',tplapply:'Заменить вещи образа вещами из шаблона (можно вернуть)',tpldel:'Удалить шаблон',dkeys:'Горячие клавиши',dstock:'Сверить вещи капсулы с сегодняшним фидом магазинов',dnotes:'Личные заметки о клиентке — она их не видит',freesave:'Скачать образ картинкой — с подписью «собрала Яна»',pforce:'Отправить фото, даже если проверка нашла недочёты',ppsave:'Скачать карточку стиля, чтобы выложить в сторис',swgrid:'Переключить: по одной карточке или сеткой',gdone:'Учесть отмеченные и продолжить тест',gv:'Отметить вещь',pfskip:'Пропустить детали вкуса — Яна подберёт по тесту',figunk:'Яна определит тип фигуры по твоим фото',redo:'Двойник не похож — отметить, что не так, и отправить Яне',twinsend:'Яна поправит двойника вручную до 24 часов',twinx:'Не отправлять, оставить как есть',reel:'Посмотреть рилс-переодевашку',
  rev:'Попросить правку: отметить вещи на замену',revdone:'Отправить исправленную капсулу клиентке',revsend:'Отправить правку Яне',revtog:'Отметить вещь на замену',send:'Отправить капсулу клиентке',slot:'Изменить число мест в неделю',story:'Поделиться образом',swap:'Подобрать похожие на замену — покажем и то, что дороже бюджета, с пометкой',
- tocap:'Вернуться к капсуле',twin:'Посмотреть образ на двойнике',vibe:'Выбрать стиль (до трёх)',vote:e=>e.dataset.v==='yes'?'Моё — Яна учтёт в капсуле':'Не моё — такого в капсуле не будет',watch:'Следить за снижением цены',yitem:'Открыть вещь: размеры, двойник, замена',ylook:'Перейти к образу',ylookok:'Утвердить образ',ymdel:'Удалить образ',ysz:'Выбрать размер для клиентки',zoom:'Увеличить фото'};
+ tocap:'Вернуться к капсуле',twin:'Посмотреть образ на двойнике',vibe:'Выбрать стиль (до трёх)',vote:e=>e.dataset.v==='yes'?'Моё — Яна учтёт в капсуле':'Не моё — такого в капсуле не будет',watch:'Следить за снижением цены',yitem:'Открыть вещь: размеры, двойник, замена',ylook:'Перейти к образу',ylookok:'Утвердить образ',rdlook:'Открыть этот образ',ymdel:'Удалить образ',ysz:'Выбрать размер для клиентки',zoom:'Увеличить фото'};
 (()=>{if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;const tip=document.createElement('div');tip.className='tipx';tip.setAttribute('role','tooltip');document.body.appendChild(tip);let cur=null,tm=0,mx=0,my=0;
  const txt=e=>{if(e.dataset.tip)return e.dataset.tip;const t=TIPS[e.dataset.act];return typeof t==='function'?t(e):t||''};
  const place=()=>{const w=tip.offsetWidth,h=tip.offsetHeight;let x=mx+16,y=my+18;if(x+w>innerWidth-8)x=mx-w-12;if(y+h>innerHeight-8)y=my-h-12;tip.style.transform=`translate(${Math.max(8,x)}px,${Math.max(8,y)}px)`};
@@ -1387,8 +1413,23 @@ const rqH=r=>{const m=/осталось (\d+) ч/.exec(r[2]);return m?+m[1]:999}
 const rqSort=(a,b)=>{const o={new:0,work:1,done:2};return o[rqGrp(a[3])]-o[rqGrp(b[3])]||rqH(a)-rqH(b)};
 // этапы заявки в шапке
 function dStages(){const y=S.y,lo=Object.keys(y.looksOk).length,gd=typeof genDone==='function'?genDone():0,txt=(y.capNote||'').trim().length>=20||y.voice>0;
- const st=[['Вещи',`${y.items.length}/10`,y.items.length>=8,'cap'],['Образы',`${lo}/${LOOKS.length}`,lo>=LOOKS.length,'cap'],['Фото',`${gd}/${LOOKS.length}`,gd>=LOOKS.length,'caps'],['Письмо',txt?'✓':'—',txt,'caps'],['Отправлено',y.sent?'✓':'',!!y.sent,'caps']];
- const cur=st.findIndex(x=>!x[2]);return `<div class="dstg">${st.map(([t,c,d,tab],j)=>`<button data-act="dt" data-v="${tab}" class="${d?'done':''} ${j===cur?'cur':''}">${d?'✓ ':''}${t}${c&&!d?` · ${c}`:''}</button>`).join('<i>›</i>')}</div>`}
+ const st=[['Вещи',`${y.items.length}/10`,y.items.length>=8,'cap'],['Образы',`${lo}/${LOOKS.length}`,lo>=LOOKS.length,'cap'],['Фото',`${gd}/${LOOKS.length}`,gd>=LOOKS.length,'caps'],['Письмо',txt?'черновик':'—',txt,'caps'],['Отправлено',y.sent?'✓':'',!!y.sent,'caps']];
+ for(let j=1;j<st.length;j++)if(!st[j-1][2])st[j][2]=false;const cur=st.findIndex(x=>!x[2]);return `<div class="dstg">${st.map(([t,c,d,tab],j)=>`<button data-act="dt" data-v="${tab}" class="${d?'done':''} ${j===cur?'cur':''}">${d?'✓ ':''}${t}${c&&!d?` · ${c}`:''}</button>`).join('<i>›</i>')}</div>`}
+
+// все образы утверждены → одеваем двойника: первый образ без фото, сразу «Как надеть»
+function dressNext(){const y=S.y,j=LOOKS.findIndex((l,i)=>!(y.gen||{})[i]&&!(y.genq||{})[i]);S.dt='caps';S.still=true;
+ if(j<0){render();toast('Все образы утверждены, фото по всем в работе');return}S.dl=j;render();toast('Все образы утверждены — одеваем '+NM().v+': образ '+n2(j+1));dGenSheet()}
+
+// готовая капсула у клиентки: паспорт + раскрытие
+function readyView(){const y=S.y,ks=y.items.filter(k=>CAT[k]),tot=ks.reduce((a,k)=>a+price(k),0),st=((S.prof||{}).name||'Яна').trim(),note=(y.capNote||'').trim();
+ return `<div class="rdy">${passport()}<div class="rdm">
+  <div class="rdh"><b>${st} отправила капсулу</b><span>Копия — в Telegram и на почту</span></div>
+  <div class="rds"><div><b>${LOOKS.length}</b><span>${plural(LOOKS.length,'образ','образа','образов')} на неделю</span></div><div><b>${ks.length}</b><span>${plural(ks.length,'вещь','вещи','вещей')} с размерами</span></div><div><b>${rub(tot)}</b><span>если купить всё</span></div></div>
+  <div class="rdl">${LOOKS.map(([t,lk],i)=>`<button data-act="rdlook" data-v="${i}" aria-label="Открыть образ ${n2(i+1)}"><span class="ph">${(y.gen||{})[i]?`<img src="${y.gen[i]}" alt="">`:mood(lk.filter(k=>CAT[k]),i,{mini:1,flat:1})}</span><small>${n2(i+1)} · ${t}</small></button>`).join('')}</div>
+  <blockquote class="rdq">${note?note.replace(/</g,'&lt;'):P().capq}<cite>— ${st}, стилист</cite></blockquote>
+  <button class="btn rdgo" data-act="next">Смотреть капсулу</button>
+  <div class="rdt">${['Тест вкуса','Анкета','Вещи','Образы на тебе','Капсула у тебя'].map(t=>`<span>✓ ${t}</span>`).join('')}</div>
+ </div></div>`}
 // тост с «Вернуть»
 function toastUndo(t,fn){document.querySelectorAll('.toast').forEach(x=>x.remove());const d=document.createElement('div');d.className='toast undo';d.innerHTML=`<span></span><button type="button">Вернуть</button>`;d.firstChild.textContent=t;d.lastChild.onclick=()=>{d.remove();fn()};document.body.appendChild(d);setTimeout(()=>d.remove(),6000)}
 const dSnap=()=>JSON.stringify({items:S.y.items,looks:LOOKS.map(l=>l[1]),ok:S.y.looksOk});
@@ -1937,8 +1978,8 @@ let RESTORING=false;function render(){if(RESTORING)return;setTimeout(capLbl,0);p
   `<div class="paym">${['СБП','Мир','Visa','Mastercard','Чек на почту'].map(x=>`<span>${x}</span>`).join('')}</div><span class="lbl">Оплата через ЮKassa · подписки без твоей галочки нет · цены — пример</span>`];
   bar(nav(true,`Оплатить ${rub(tr.at(3)+(S.club?790:0))}`))}
  else if(c==='status'){const rd=S.capReady;p=[`<span class="lbl">|Заявка 014 · оплачено ✓|</span>`,`<h2 class="ttl">${rd?'Капсула готова':'Яна собирает твою капсулу'}</h2>`,
-  rd?`<div class="banner"><b>Яна отправила капсулу</b><span>Шесть образов, размеры и голосовое. Дублируем в Telegram и на почту.</span></div>`:`<div class="live">${[['Яна открыла твою заявку','только что'],['Смотрит твой тест вкуса и фото','сейчас'],['Подберёт вещи и оденет двойника','дальше']].map(([t,w],i)=>`<div class="${i<2?'on':''}"><i></i><span>${t}</span><small>${w}</small></div>`).join('')}</div><span class="lbl">Готово не позже чем через <b id="timer">23:59:59</b></span>`,
-  `<div class="tl">${[['done','Тест вкуса и двойник'],['done','Анкета и шкаф'],[rd?'done':'now','Яна подбирает вещи'],[rd?'done':'wait','Образы на двойнике'],[rd?'done':'wait','Голосовое от Яны и капсула у тебя']].map(([s,t])=>`<div class="${s}"><i class="d"></i>${t}</div>`).join('')}</div>`,
+  rd?readyView():`<div class="live">${[['Яна открыла твою заявку','только что'],['Смотрит твой тест вкуса и фото','сейчас'],['Подберёт вещи и оденет двойника','дальше']].map(([t,w],i)=>`<div class="${i<2?'on':''}"><i></i><span>${t}</span><small>${w}</small></div>`).join('')}</div><span class="lbl">Готово не позже чем через <b id="timer">23:59:59</b></span>`,
+  rd?'':`<div class="tl">${[['done','Тест вкуса и двойник'],['done','Анкета и шкаф'],[rd?'done':'now','Яна подбирает вещи'],[rd?'done':'wait','Образы на двойнике'],[rd?'done':'wait','Голосовое от Яны и капсула у тебя']].map(([s,t])=>`<div class="${s}"><i class="d"></i>${t}</div>`).join('')}</div>`,
   rd?'':`<p class="txt">Как только будет готово — пришлём в Telegram и на почту. Вопрос Яне можно задать в Telegram.</p>`];
   bar(rd?`<button class="btn" data-act="next">Смотреть капсулу</button>`:`<button class="btn line" data-act="next">Демо: пропустить ожидание</button>`)}
  else if(c==='capsule'){const rv=S.rev,pend=rv.pending,tab=S.ctab,items=S.y.items,cnt={b:0,t:0,a:0};items.forEach(k=>cnt[ROLE[k]||'b']++);
@@ -2635,7 +2676,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'dnotes':notesSheet();return;
  case'csel':{const j=+v;S.csel=S.csel||[];if(S.y.looksOk[j]){delete S.y.looksOk[j];toast('Образ '+n2(j+1)+' снова на проверке');break}const q=S.csel.indexOf(j);if(q>-1)S.csel.splice(q,1);else S.csel.push(j);break}
  case'cselx':S.csel=[];break;
- case'capprove':{const L=v==='all'?LOOKS.map((l,j)=>j):(S.csel||[]);L.forEach(j=>S.y.looksOk[j]=true);S.csel=[];const lo=Object.keys(S.y.looksOk).length;toast(lo>=LOOKS.length?'Все образы одобрены — теперь фото на '+NM().d:'Одобрено: '+L.length+' · всего '+lo+' из '+LOOKS.length);break}
+ case'capprove':{const L=v==='all'?LOOKS.map((l,j)=>j):(S.csel||[]);L.forEach(j=>S.y.looksOk[j]=true);S.csel=[];const lo=Object.keys(S.y.looksOk).length;if(lo>=LOOKS.length&&DESK()&&S.y.open===0){dressNext();return}toast('Одобрено: '+L.length+' · всего '+lo+' из '+LOOKS.length);break}
  case'cfind':{const F=FINDS();if(F.items.includes(v)){F.items=F.items.filter(k=>k!==v);toast('Убрано из находок');S.still=true;persist();{const sc=$('.dsc'),st=sc?sc.scrollTop:0;render();const sc2=$('.dsc');if(sc2)sc2.scrollTop=st}return}if(F.items.length>=6){toast('В находках уже 6 вещей — хватит на одну карточку');return}regA(v).then(()=>{F.items.push(v);persist();toast('В находках · '+F.items.length+' — открой «Находки» в меню');S.still=true;const sc=$('.dsc'),st=sc?sc.scrollTop:0;render();const sc2=$('.dsc');if(sc2)sc2.scrollTop=st});return}
  case'ffmt':FINDS().fmt=v;S.still=true;break;
  case'fmv':{const F=FINDS(),i=+v,j=i+(+t.dataset.d);if(j<0||j>=F.items.length)return;[F.items[i],F.items[j]]=[F.items[j],F.items[i]];S.still=true;break}
@@ -2655,6 +2696,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'dfoc':dFocus(v);return;
  case'lkgo':lkGo(v);return;
  case'lkpdf':lookPdf();return;
+ case'rdlook':S.look=+v;S.ctab='looks';S.i=SEQ.indexOf('capsule');S.still=true;render();scrollTo(0,0);setTimeout(()=>lkGo('='+v),60);return;
  case'dgenl':S.dl=+v;S.still=true;render();dGenSheet();return;
  case'dcndraft':S.y.capNote=capDraft();persist();break;
  case'dslot':S.dt='cat';CF.c=v;CF.q='';CF.lim=40;if(!CATL)loadCat();break;
@@ -2726,7 +2768,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'revdone':{const pd=S.rev.pending;S.rev.newKeys=Object.values(pd.repl);S.rev.ver++;S.rev.pending=null;S.y.sent=true;S.capReady=true;break}
  case'close':clearInterval(reelId);S.y.lrec=null;$('#overlay').innerHTML='';if((cur()==='capsule'&&S.mode==='client')||S.mode==='yana'){S.still=true;const sy=window.scrollY;render();window.scrollTo(0,sy)}return;
  case'stage':S.y.stage=v;break;
- case'lookok':{if(S.y.looksOk[v])delete S.y.looksOk[v];else{S.y.looksOk[v]=true;if(DESK()&&S.y.open===0){const nx=LOOKS.findIndex((l,j)=>j!==+v&&!S.y.looksOk[j]);if(nx>-1){S.dl=nx;toast('Образ '+n2(+v+1)+' утверждён · дальше '+n2(nx+1))}else{S.dt='caps';toast('Все образы утверждены — теперь фото на '+NM().d+': нажми на образ')}}}break}
+ case'lookok':{if(S.y.looksOk[v])delete S.y.looksOk[v];else{S.y.looksOk[v]=true;if(DESK()&&S.y.open===0){const nx=LOOKS.findIndex((l,j)=>j!==+v&&!S.y.looksOk[j]);S.dt='caps';if(nx>-1){S.dl=nx;toast('Образ '+n2(+v+1)+' утверждён · дальше '+n2(nx+1))}else{dressNext();return}}}break}
  case'rec':if(S.y.rec){S.y.rec=false;toast('Голосовое сохранено')}else{S.y.rec=true;S.y.voice=0}break;
  case'send':if(DESK()&&!S.rev.pending&&genDone()<LOOKS.length){toast('Сначала фото на '+NM().d+' по всем образам');return}S.y.sent=true;S.capReady=true;if(S.i<SEQ.indexOf('status'))S.i=SEQ.indexOf('status');toast('Капсула у '+NM().g+' — в кабинете клиента готово');break}
  const keep=['cfind','ffmt','fmv','frm','fclr','csel','cselx','capprove','rqf','twinyes','gv','dcndraft','vibe','sample','redo','twinx','twinsend','yv','cfg','cfc','cfs','cfx','cfr','crepl','ccancel','cboardclr','bsel','bsz','bz','bdel','bsave','icat','delown','sampleown','ok','arr','set','col','allok','pick','lookok','cols','play','rec','pair','pref','tsz','lsz','ysz','cfbr','cfsale2','ymst','ymdel','ctab','bta','watch','fit','asksample','askgo','askyana','askreset','answer','slot'].includes(a),sy=window.scrollY;
