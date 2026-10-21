@@ -974,6 +974,25 @@ button,.opt,.tag,.btn,.dbtn,.vibe,.tier,.pic,.sbtn,.swgi,.cweek button,.req,.how
 .meas input{width:56px;border:0;border-bottom:1px solid var(--ink);font:14px var(--f-ui);text-align:right;background:transparent;padding:2px 0}.meas i{font-style:normal;color:var(--mute);font-size:11px}
 .hm2.fin small{font-size:11px;color:var(--mute);text-transform:none;letter-spacing:0}
 @media (max-width:560px){.meas{grid-template-columns:1fr 1fr}.ul2{grid-template-columns:1fr}}
+
+.clav{width:40px;height:40px;border-radius:50%;background:var(--fog);border:1px solid var(--soft);display:grid;place-items:center;font:400 18px/1 var(--f-logo);flex:none}
+.req img.clavb,.clavb{width:64px;height:64px;font-size:28px}img.clavb{border-radius:50%;object-fit:cover;object-position:top}
+.req .t small.clrt{color:var(--ink);margin-top:4px}
+.clback{align-self:flex-start;margin-bottom:6px}
+.clh{display:flex;gap:16px;align-items:center;margin:4px 0 10px}.clh .ttl{margin:0}
+.hm2 small{font-size:11px;color:var(--mute)}
+.clremr{display:grid;grid-template-columns:auto 1fr;gap:8px;margin:6px 0}.clremr input[type=date]{border:1px solid var(--ink);padding:8px 10px;font:13px var(--f-ui);background:#fff}
+.clrem.late .clrl{color:var(--alert)}
+.clfit{margin:6px 0 0;padding:12px 14px 12px 30px;background:var(--fog);font-size:13px;line-height:1.55;display:flex;flex-direction:column;gap:4px}
+.cll{border-top:1px solid var(--hair)}
+.cli{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--hair);font-size:12.5px}
+.cli small{display:block;color:var(--mute);font-size:11px;margin-top:2px}.cli b{font-weight:400}.cli i{font-style:normal;font-size:11px}
+.cli i.st{padding:4px 8px}.cli i.st.new{background:var(--ink);color:#fff}.cli i.st.done{color:var(--mute);background:none;border:1px solid var(--soft)}
+.clg .q{margin-top:22px}
+.cli.nf{grid-template-columns:1fr auto}.cli.nf i{color:var(--mute)}
+.clg{display:grid;gap:0 32px}.clg>div{min-width:0}
+@media (min-width:900px){.clg{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.clremr{grid-template-columns:1fr}}
 .mood{isolation:isolate}
 .tipx{position:fixed;left:0;top:0;z-index:9999;max-width:260px;padding:7px 10px;background:var(--ink);color:var(--paper);font-size:11.5px;line-height:1.35;letter-spacing:.01em;text-transform:none;pointer-events:none;opacity:0;transition:opacity .12s;box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .tipx.on{opacity:1}
@@ -1198,7 +1217,7 @@ const TIPS={allok:'Отметить все вещи как проверенны�
  dt:e=>({cat:'Каталог магазинов: найти и добавить вещь',cap:'Вещи капсулы: размеры, замена, удаление',caps:'Образы капсулы, утверждение и отправка клиентке',anq:'Анкета клиентки: параметры, вкус, бюджет',msg:'Переписка с клиенткой'})[e.dataset.v]||'',
  dwchip:'Добавить пожелание к генерации',dwear:'Как вещь сидит на фото: заправлена, навыпуск, застёгнута',exgo:'Начать тест вкуса',next:'Перейти к следующему шагу',friend:'Спросить мнение подруги',fvote:'Голос подруги за образ',gift:'Подарить капсулу сертификатом',giftpay:'Перейти к оплате сертификата',goto:'Перейти к этому шагу',
  lkcat:'Добавить в образ вещь из каталога',lookok:e=>e.getAttribute('aria-pressed')==='true'?'Снять утверждение с образа':'Утвердить образ — он уйдёт клиентке в капсуле',lrec:'Записать голосовое к образу',menu:'Открыть меню',mode:e=>e.dataset.v==='client'?'Посмотреть сайт глазами клиентки':'Вернуться в кабинет Яны',
- openask:'Открыть вопрос клиентки',openreq:'Открыть заявку',pair:'Выбрать образ, который ближе',pick:'Поставить эту вещь вместо прежней',play:'Прослушать голосовое Яны',pref:'Отметить, что носишь',rec:'Записать голосовое',pfp:'Следующая часть',rqf:'Показать заявки с этим статусом',ulink:'Добавить вещь из любого магазина: ссылка, фото, цена',uladd:'Сохранить вещь',cfind:'Добавить вещь в находки — для поста или сторис',ffmt:'Формат карточки',fmv:'Переставить вещь',frm:'Убрать из находок',fclr:'Очистить находки',fpng:'Скачать карточку PNG для поста или сторис',fcap:'Скопировать подпись с ценами и твоими ссылками',prof:'Профиль: имя, ссылка, твои партнёрские коды',csel:'Выбрать образ (ещё раз — снять выбор)',capprove:'Одобрить образы',cselx:'Снять выбор со всех образов',dtpl:'Сохранить образ как шаблон или собрать из шаблона',tplsave:'Сохранить текущий образ шаблоном',tplapply:'Заменить вещи образа вещами из шаблона (можно вернуть)',tpldel:'Удалить шаблон',dkeys:'Горячие клавиши',dstock:'Сверить вещи капсулы с сегодняшним фидом магазинов',dnotes:'Личные заметки о клиентке — она их не видит',freesave:'Скачать образ картинкой — с подписью «собрала Яна»',pforce:'Отправить фото, даже если проверка нашла недочёты',ppsave:'Скачать карточку стиля, чтобы выложить в сторис',swgrid:'Переключить: по одной карточке или сеткой',gdone:'Учесть отмеченные и продолжить тест',gv:'Отметить вещь',pfskip:'Пропустить детали вкуса — Яна подберёт по тесту',figunk:'Яна определит тип фигуры по твоим фото',redo:'Двойник не похож — отметить, что не так, и отправить Яне',twinsend:'Яна поправит двойника вручную до 24 часов',twinx:'Не отправлять, оставить как есть',reel:'Посмотреть рилс-переодевашку',
+ openask:'Открыть вопрос клиентки',openreq:'Открыть заявку',pair:'Выбрать образ, который ближе',pick:'Поставить эту вещь вместо прежней',play:'Прослушать голосовое Яны',pref:'Отметить, что носишь',rec:'Записать голосовое',pfp:'Следующая часть',rqf:'Показать заявки с этим статусом',clopen:'Открыть карточку клиентки',clback:'Ко всем клиенткам',clf:'Показать клиенток с этим признаком',clmsg:'Готовое сообщение клиентке о новом сезоне',clpush:'Перенести напоминание',clcopy:'Скопировать сообщение',ulink:'Добавить вещь из любого магазина: ссылка, фото, цена',uladd:'Сохранить вещь',cfind:'Добавить вещь в находки — для поста или сторис',ffmt:'Формат карточки',fmv:'Переставить вещь',frm:'Убрать из находок',fclr:'Очистить находки',fpng:'Скачать карточку PNG для поста или сторис',fcap:'Скопировать подпись с ценами и твоими ссылками',prof:'Профиль: имя, ссылка, твои партнёрские коды',csel:'Выбрать образ (ещё раз — снять выбор)',capprove:'Одобрить образы',cselx:'Снять выбор со всех образов',dtpl:'Сохранить образ как шаблон или собрать из шаблона',tplsave:'Сохранить текущий образ шаблоном',tplapply:'Заменить вещи образа вещами из шаблона (можно вернуть)',tpldel:'Удалить шаблон',dkeys:'Горячие клавиши',dstock:'Сверить вещи капсулы с сегодняшним фидом магазинов',dnotes:'Личные заметки о клиентке — она их не видит',freesave:'Скачать образ картинкой — с подписью «собрала Яна»',pforce:'Отправить фото, даже если проверка нашла недочёты',ppsave:'Скачать карточку стиля, чтобы выложить в сторис',swgrid:'Переключить: по одной карточке или сеткой',gdone:'Учесть отмеченные и продолжить тест',gv:'Отметить вещь',pfskip:'Пропустить детали вкуса — Яна подберёт по тесту',figunk:'Яна определит тип фигуры по твоим фото',redo:'Двойник не похож — отметить, что не так, и отправить Яне',twinsend:'Яна поправит двойника вручную до 24 часов',twinx:'Не отправлять, оставить как есть',reel:'Посмотреть рилс-переодевашку',
  rev:'Попросить правку: отметить вещи на замену',revdone:'Отправить исправленную капсулу клиентке',revsend:'Отправить правку Яне',revtog:'Отметить вещь на замену',send:'Отправить капсулу клиентке',slot:'Изменить число мест в неделю',story:'Поделиться образом',swap:'Подобрать похожие на замену — покажем и то, что дороже бюджета, с пометкой',
  tocap:'Вернуться к капсуле',twin:'Посмотреть образ на двойнике',vibe:'Выбрать стиль (до трёх)',vote:e=>e.dataset.v==='yes'?'Моё — Яна учтёт в капсуле':'Не моё — такого в капсуле не будет',watch:'Следить за снижением цены',yitem:'Открыть вещь: размеры, двойник, замена',ylook:'Перейти к образу',ylookok:'Утвердить образ',ymdel:'Удалить образ',ysz:'Выбрать размер для клиентки',zoom:'Увеличить фото'};
 (()=>{if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;const tip=document.createElement('div');tip.className='tipx';tip.setAttribute('role','tooltip');document.body.appendChild(tip);let cur=null,tm=0,mx=0,my=0;
@@ -1363,7 +1382,7 @@ function homeView(){bar(null);const nm=(S.prof||{}).name||'Яна',sent=S.y.sent
  const M=[['Капсул за месяц',`${7+sent}`,'из них 5 Капсула, 2 Капсула+'],['Доход за месяц',rub(7*3490+2*2500),'без партнёрских'],['Покупки по ссылкам',rub(41800),'4 клиентки купили 11 вещей'],['Комиссия с покупок',rub(2930),'по твоим ссылкам'],['Среднее время на капсулу','1 ч 40 мин','было ~4 ч без каталога'],['Находок опубликовано',`${fin?1:0}`,'карточек за неделю']];
  return scr([ynav(),`<h2 class="ttl">Привет, ${nm}</h2>`,`<p class="txt">Сводка за октябрь. Цифры — пример: в рабочей версии считаются по твоим заявкам и покупкам.</p>`,
   `<div class="hm">${M.map(([t,v,d])=>`<div><span>${t}</span><b>${v}</b><small>${d}</small></div>`).join('')}</div>`,
-  `<div class="q"><span class="lbl">|Что сейчас|</span><div class="hnow">${[['Маша, 29 — новая заявка','осталось 21 ч','req'],['Находки недели — не опубликованы','пятница','finds'],['Клуб: 3 образа на неделю','воскресенье','ym']].map(([t,w,v])=>`<button data-act="dnav" data-v="${v}"><span>${t}</span><small>${w}</small><i>›</i></button>`).join('')}</div></div>`,
+  `<div class="q"><span class="lbl">|Что сейчас|</span><div class="hnow">${[...clSoon(),['Маша, 29 — новая заявка','осталось 21 ч','req'],['Находки недели — не опубликованы','пятница','finds'],['Клуб: 3 образа на неделю','воскресенье','ym']].map(([t,w,v])=>`<button data-act="dnav" data-v="${v}"><span>${t}</span><small>${w}</small><i>›</i></button>`).join('')}</div></div>`,
   `<div class="q"><span class="lbl">|Финансы|</span><div class="hm2 fin"><div><span>К выплате</span><b>${rub(26500)}</b><small>выплата по вторникам</small></div><div><span>Счёт генерации</span><b>184 кр.</b><small>≈ 12 капсул</small></div><div><span>Комиссии ждут подтверждения</span><b>${rub(1140)}</b><small>магазин подтверждает за 14–30 дней</small></div></div><div class="tags"><button class="tag" data-act="toast" data-v="Пополнение счёта подключим вместе с сервером и оплатой">Пополнить счёт генерации</button><button class="tag" data-act="toast" data-v="История выплат появится в рабочей версии">История выплат</button></div></div>`,
   `<div class="q"><span class="lbl">|Что приносит деньги|</span><div class="hm2">${[['Капсулы','72 %'],['Партнёрские комиссии','11 %'],['Клуб','17 %']].map(([t,v])=>`<div><span>${t}</span><b>${v}</b></div>`).join('')}</div></div>`])}
 
@@ -1380,6 +1399,102 @@ function ulAdd(){const n=$('#ul_n').value.trim(),st=($('#ul_s').value||'').trim(
  CAT[id]={_r:'U',_u:1,g:S.g,n,s:st,p:pr,c:'верх',cc:'другое',t:[],sz:'',szs:null,img:S.ulImg,cut:null,u};ROLE[id]='b';const to=S.ulTo;S.ulImg=null;$('#overlay').innerHTML='';
  if(to==='finds'){FINDS().items.push(id);S.yv='finds'}else if(to==='look'){const i=S.dl||0;LOOKS[i][1].push(id);if(!S.y.items.includes(id))S.y.items.push(id);delete S.y.looksOk[i]}else{if(S.y.items.length>=10){toast('В капсуле уже 10 вещей — замени одну');return}S.y.items.push(id);S.y.ok[id]=true;ROLE[id]=to||'b';S.dt='cap'}
  persist();toast('Добавлено: '+n);S.still=true;render()}
+
+// ---------- картотека клиенток ----------
+// капсула: [месяц, повод, тариф, цена, статус]; купила: [вещь, магазин, цена, месяц]; не село: [вещь, магазин, размер, что не так, что сделала, вывод на будущее]
+const CLD={f:[
+ {id:'ol',n:'Оля',age:34,tg:'@olya.vlasova',since:'марта 2026',tier:'Капсула+',sz:'S · 42',shoe:38,h:165,fig:'песочные часы',pk:19,meas:{bust:86,waist:66,hips:94,sleeve:59,inseam:78,shoulder:38},
+  caps:[['Октябрь 2026','Осень · офис и город','Капсула+',5990,'work'],['Март 2026','Весна · выход на работу после декрета','Капсула',3490,'done']],
+  bought:[['Тренч хлопковый, бежевый','Lime',9999,'март'],['Брюки прямые со стрелками','12 Storeez',8900,'март'],['Рубашка оверсайз, белая','Love Republic',3499,'март'],['Лоферы кожаные','Zarina',6999,'апрель']],
+  nofit:[['Джинсы прямые','Zarina','M','велики в талии','вернула','Zarina — брать S, даже джинсы'],['Жакет двубортный','Lime','S','узкий в плечах','вернула','Жакеты Lime — на размер больше или оверсайз']],
+  avoid:['каблук выше 4 см','чёрный у лица','мини'],remIn:11,remT:'Зима: пуховик и тёплые ботинки — просила напомнить в ноябре',
+  notes:'Двое детей, утром 10 минут на сборы — образы без сложных сочетаний. Любит беж и молочный, чёрный её «старит». Отвечает вечером после 21:00.'},
+ {id:'ka',n:'Катя',age:41,tg:'@k.morozova',since:'ноября 2025',tier:'Лично',sz:'M · 46',shoe:39,h:172,fig:'прямоугольник',pk:31,meas:{bust:96,waist:80,hips:102,sleeve:62,inseam:82,shoulder:41},
+  caps:[['Сентябрь 2026','Осень · переговоры и командировки','Лично',14900,'done'],['Апрель 2026','Весна-лето · конференции','Капсула+',5990,'done'],['Ноябрь 2025','Зима · новая должность','Капсула+',5990,'done']],
+  bought:[['Костюм брючный, графит','Аскент',24990,'сентябрь'],['Пальто из шерсти, кэмел','12 Storeez',32900,'ноябрь'],['Сумка Max Mara, ресейл','The Cultt',41000,'сентябрь'],['Водолазка кашемировая','Sela',5999,'ноябрь'],['Ботинки челси','Zarina',8999,'ноябрь'],['Рубашка шёлковая','Love Republic',4999,'апрель'],['Брюки широкие, молочные','Lime',6999,'апрель']],
+  nofit:[['Платье-футляр','Love Republic','M','короткое при её росте','вернула','Love Republic — только миди, длина от 105 см']],
+  avoid:['синтетика у тела','яркий принт'],remIn:33,remT:'Зима: пальто сменить на пуховое — она мёрзнет в командировках',
+  notes:'Директор по развитию. Вещи должны работать и в костюме, и по отдельности. Покупает в первый же день — ссылки слать сразу. Любит ресейл брендов на The Cultt.'},
+ {id:'ks',n:'Ксения',age:28,tg:'@ksu.art',since:'июня 2026',tier:'Клуб 790 ₽/мес',sz:'S · 42',shoe:37,h:168,fig:'груша',pk:14,meas:{bust:84,waist:64,hips:98,sleeve:60,inseam:80},
+  caps:[['Сентябрь 2026','Осень · клуб, образы на неделю','Клуб',790,'done'],['Июнь 2026','Лето · отпуск и город','Капсула',3490,'done']],
+  bought:[['Платье миди в цветок','2Mood',4990,'июнь'],['Кеды белые','Befree',2999,'июнь'],['Юбка-трапеция','Idol',3999,'сентябрь']],
+  nofit:[['Джинсы skinny','Befree','S','тянут на бёдрах','вернула','Брюки и джинсы — только прямые и широкие, мерить по бёдрам']],
+  avoid:['облегающий низ'],remIn:5,remT:'Клуб: 3 образа на неделю — до воскресенья',
+  notes:'Иллюстратор, работает из дома. Хочет яркое, но аккуратно — один акцент на образ.'},
+ {id:'ir',n:'Ира',age:37,tg:'@irina_sh',since:'февраля 2026',tier:'Капсула+',sz:'L · 48',shoe:40,h:178,fig:'перевёрнутый треугольник',pk:20,meas:{bust:104,waist:84,hips:100,sleeve:64,inseam:86,shoulder:44},
+  caps:[['Август 2026','Осень · после переезда','Капсула+',5990,'done'],['Февраль 2026','Весна · свидания и выходные','Капсула',3490,'done']],
+  bought:[['Брюки палаццо','12 Storeez',9900,'август'],['Блуза с V-вырезом','Sela',3299,'август'],['Куртка-рубашка','Lime',7999,'февраль']],
+  nofit:[['Брюки палаццо','12 Storeez','L','длинные, нужна подшивка','оставила, подшила','12 Storeez — брюки сразу в ателье, −4 см'],['Свитер с объёмным рукавом','Zarina','L','расширяет плечи','вернула','Без объёма в плечах: реглан, V-вырез']],
+  avoid:['объём в плечах','лодочка-вырез'],remIn:22,remT:'Новый год: образ на корпоратив',
+  notes:'Высокая, любит, когда это подчёркивают. Новый город — пока мало подруг, ей важно, чтобы я писала первой.'},
+ {id:'le',n:'Лена',age:26,tg:'@lenaa.p',since:'августа 2026',tier:'Капсула',sz:'XS · 40',shoe:37,h:160,fig:'',pk:9,meas:{},
+  caps:[['Август 2026','Первая работа · офис','Капсула',3490,'done']],
+  bought:[['Жакет укороченный','Befree',3999,'август']],
+  nofit:[],avoid:[],remIn:-3,remT:'Спросить, как носится капсула, и предложить клуб 790 ₽',
+  notes:'Капсула вышла дороже, чем ждала: купила 1 вещь из 9. В следующий раз бюджет до 15 000 ₽ — Befree и 2Mood в приоритете.'},
+ {id:'da',n:'Даша',age:31,tg:'',since:'мая 2026',tier:'Подарок',sz:'M · 44',shoe:38,h:166,fig:'',pk:10,meas:{bust:90,waist:72,hips:98},
+  caps:[['Май 2026','Подарок мужа на день рождения','Капсула',3490,'done']],
+  bought:[['Сарафан льняной','Lime',5999,'май'],['Сандалии','Zarina',4999,'май']],
+  nofit:[],avoid:[],remIn:58,remT:'День рождения 20 декабря — муж в прошлом году дарил сертификат',
+  notes:'Связь через мужа, Антона, — сама пока не писала. Узнать, понравилось ли.'}],
+ m:[
+ {id:'ig',n:'Игорь',age:40,tg:'@igor.lev',since:'января 2026',tier:'Лично',sz:'L · 52',shoe:43,h:184,fig:'',pk:22,meas:{bust:108,waist:92,hips:104,sleeve:66,inseam:84,shoulder:48},
+  caps:[['Октябрь 2026','Осень · созвон в 19:00','Лично',14900,'done'],['Январь 2026','Зима · новая работа','Капсула+',5990,'done']],
+  bought:[['Пиджак из шерсти, синий','Аскент',19990,'январь'],['Брюки чинос','Lime',5999,'январь'],['Дерби кожаные','Zarina',8999,'октябрь']],
+  nofit:[['Рубашка slim','MadeMan','L','узкая в груди','вернул','MadeMan — рубашки только regular']],
+  avoid:['узкие брюки'],remIn:19,remT:'Новый год: образ на корпоратив и подарки жене',notes:'Решения принимает быстро, ненавидит магазины. Присылать готовый список «купи это».'},
+ {id:'ar',n:'Артём',age:35,tg:'@artem_k',since:'апреля 2026',tier:'Капсула+',sz:'M · 50',shoe:42,h:178,fig:'',pk:16,meas:{bust:100,waist:84,sleeve:64,inseam:82},
+  caps:[['Апрель 2026','Весна · свидания','Капсула+',5990,'done']],
+  bought:[['Овершот в клетку','Befree',4999,'апрель'],['Джинсы прямые','Lime',5999,'апрель']],
+  nofit:[],avoid:[],remIn:-6,remT:'Осень: куртка и ботинки — не ответил на прошлое сообщение',notes:'Пишет коротко. Не любит, когда много текста.'}]};
+const CLS=()=>S.cl=S.cl||{notes:{},meas:{},rem:{}};
+const MEASK=[['bust','Грудь'],['waist','Талия'],['hips','Бёдра'],['sleeve','Рукав'],['inseam','Шаг'],['shoulder','Плечи']];
+const CLST={work:'В работе',done:'Готово',new:'Новая'};
+function clAll(){const y=S.y,nm=NM(),ag=+((nm.age.match(/\d+/)||[0])[0]);
+ const cur={id:'cur',n:nm.n,age:ag,tg:'',since:'октября 2026',tier:'Новая заявка',sz:(S.sizes||[S.size]).join(' / '),shoe:S.shoe,h:S.height,fig:'',pk:y.items.length,meas:y.meas||{},av:AV,
+  caps:[['Октябрь 2026','Первая капсула · до '+rub(S.budget),'Капсула',0,y.sent?'done':'new']],bought:[],nofit:[],avoid:[],remIn:null,remT:'',notes:''};
+ return [cur,...CLD[S.g]]}
+const clGet=id=>clAll().find(c=>c.id===id);
+function clRem(c){const r=CLS().rem[c.id];if(r)return r;if(c.remIn==null)return null;const d=new Date();d.setDate(d.getDate()+c.remIn);return {d:d.toISOString().slice(0,10),t:c.remT}}
+const clDays=ds=>Math.round((new Date(ds+'T12:00')-new Date(new Date().setHours(12,0,0,0)))/864e5);
+const clDl=n=>n<0?`просрочено на ${-n} ${plural(-n,'день','дня','дней')}`:n===0?'сегодня':n===1?'завтра':`через ${n} ${plural(n,'день','дня','дней')}`;
+const clSpent=c=>c.bought.reduce((a,b)=>a+b[2],0);
+const clMeas=c=>c.id==='cur'?(S.y.meas||{}):Object.assign({},c.meas,CLS().meas[c.id]||{});
+const clAv=(c,big)=>c.av?`<img class="${big?'clavb':''}" src="${IMG}${c.av}" alt="">`:`<span class="clav ${big?'clavb':''}" aria-hidden="true">${c.n[0]}</span>`;
+function clSoon(){return clAll().map(c=>[c,clRem(c)]).filter(([,r])=>r&&clDays(r.d)<=14).sort((a,b)=>clDays(a[1].d)-clDays(b[1].d)).slice(0,2).map(([c,r])=>[`Напомнить: ${c.n} — ${r.t.split(/[:—]/)[0].trim().toLowerCase()}`,clDl(clDays(r.d)),'cl:'+c.id])}
+function clientsView(){bar(null);if(S.clOpen&&clGet(S.clOpen))return clCard(clGet(S.clOpen));
+ const f=S.clf||'all',L=clAll().map(c=>{const r=clRem(c);return {c,r,n:r?clDays(r.d):null}}),
+  ok=({c,n})=>f==='soon'?n!=null&&n<=30:f==='reg'?c.caps.length>=2:f==='one'?c.caps.length===1:true,
+  rows=L.filter(ok).sort((a,b)=>(a.n==null?1e9:a.n)-(b.n==null?1e9:b.n)),soon=L.filter(x=>x.n!=null&&x.n<=14).length;
+ return scr([ynav(),`<h2 class="ttl">${G('Клиентки','Клиенты')}</h2>`,`<p class="txt">Карточка на каждую: капсулы, мерки, что купила, что не село, заметки и когда написать про новый сезон. Кроме текущей заявки — пример.</p>`,
+  `<div class="hm2"><div><span>Всего</span><b>${L.length}</b></div><div><span>Постоянные · 2+ капсулы</span><b>${L.filter(x=>x.c.caps.length>=2).length}</b></div><div><span>Написать в ближайшие 2 недели</span><b>${soon}</b></div></div>`,
+  `<div class="rqbar"><input id="clq" type="search" placeholder="Поиск по имени, магазину, заметке" value="${(S.clq||'').replace(/"/g,'&quot;')}" aria-label="Поиск по клиенткам"><div class="dseg">${[['all','Все'],['soon','Скоро напомнить'],['reg','Постоянные'],['one','Одна капсула']].map(([k,t])=>`<button data-act="clf" data-v="${k}" aria-pressed="${f===k}">${t}</button>`).join('')}</div><span class="lbl">Сначала те, кому писать раньше</span></div>`,
+  `<div id="cll" style="border-top:1px solid var(--hair)">${rows.map(({c,r,n})=>{const sp=clSpent(c),k=c.caps.length;return `<button class="req clr" data-act="clopen" data-v="${c.id}" data-q="${[c.n,c.tg,c.notes,...c.bought.map(b=>b[1]),...c.nofit.map(b=>b[1])].join(' ').toLowerCase().replace(/"/g,'')}">${clAv(c)}<span class="t">${c.n}, ${c.age}<small>${k} ${plural(k,'капсула','капсулы','капсул')} · последняя — ${c.caps[0][0].toLowerCase()} · ${c.tier}${sp?' · покупки на '+rub(sp):''}</small>${r?`<small class="clrt">${r.t}</small>`:''}</span><span class="st ${n!=null&&n<=7?'new':''}">${r?clDl(n):c.id==='cur'?'заявка':'—'}</span></button>`}).join('')||'<span class="lbl" style="display:block;padding:14px 0">Никого с таким фильтром</span>'}</div>`])}
+function clCard(c){const r=clRem(c),n=r?clDays(r.d):null,M=clMeas(c),sp=clSpent(c),note=CLS().notes[c.id]??c.notes,k=c.caps.length,
+  esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'),
+  lst=(a,f)=>a.length?`<div class="cll">${a.map(f).join('')}</div>`:'';
+ return scr([ynav(),`<button class="tag clback" data-act="clback">‹ ${G('Все клиентки','Все клиенты')}</button>`,
+  `<div class="clh">${clAv(c,1)}<div><h2 class="ttl">${c.n}, ${c.age}</h2><span class="lbl">${[c.tier,'с нами с '+c.since,c.tg].filter(Boolean).join(' · ')}</span></div></div>`,
+  `<div class="tags"><button class="tag" data-act="clmsg">Написать о новом сезоне</button>${c.id==='cur'?`<button class="tag" data-act="openreq" data-v="0">Открыть заявку</button>`:`<button class="tag" data-act="toast" data-v="В рабочей версии создаст заявку ${c.n} — с мерками, размерами и тем, что не село">Новая капсула</button>`}</div>`,
+  `<div class="hm2"><div><span>Капсул</span><b>${k}</b><small>${c.caps.filter(x=>x[3]).length?'оплачено '+rub(c.caps.reduce((a,x)=>a+x[3],0)):'первая в работе'}</small></div><div><span>Куплено по ссылкам</span><b>${sp?rub(sp):'—'}</b><small>${c.bought.length} ${plural(c.bought.length,'вещь','вещи','вещей')}</small></div><div><span>Из подобранного куплено</span><b>${c.pk?Math.round(c.bought.length/c.pk*100)+' %':'—'}</b><small>${c.pk?c.bought.length+' из '+c.pk:'пока нечего считать'}</small></div></div>`,
+  `<div class="q clrem ${n!=null&&n<0?'late':''}"><span class="lbl">|Напоминание о новом сезоне|</span><div class="clremr"><input type="date" id="clrd" value="${r?r.d:''}" aria-label="Когда напомнить"><input id="clrt" class="finp" value="${esc(r?r.t:'')}" placeholder="О чём: зима, пуховик и ботинки" aria-label="О чём напомнить"></div><span class="lbl clrl">${r?clDl(n):'Не задано — выбери дату'}</span><div class="tags"><button class="tag" data-act="clpush" data-v="30">Отложить на месяц</button><button class="tag" data-act="clpush" data-v="90">Написала ✓ · следующее через 3 месяца</button></div></div>`,
+  (c.nofit.length||c.avoid.length)?`<div class="q"><span class="lbl">|Учесть при подборе|</span><ul class="clfit">${c.nofit.map(x=>`<li>${x[5]}</li>`).join('')}${c.avoid.length?`<li>Не предлагать: ${c.avoid.join(', ')}</li>`:''}</ul></div>`:'',
+  `<div class="clg"><div>`+
+  `<div class="q"><span class="lbl">|Мерки и размеры|</span><div class="sum rq"><div><span>Одежда</span><b>${c.sz||'—'}</b></div><div><span>Обувь</span><b>${c.shoe||'—'}</b></div><div><span>Рост</span><b>${c.h?c.h+' см':'—'}</b></div>${c.fig?`<div><span>Фигура</span><b>${c.fig}</b></div>`:''}</div><div class="meas" style="margin-top:10px">${MEASK.map(([kk,t])=>`<label><span>${t}</span><input type="number" inputmode="decimal" min="30" max="200" data-clm="${kk}" value="${M[kk]||''}" placeholder="—"><i>см</i></label>`).join('')}</div></div>`+
+  `<div class="q"><span class="lbl">|Капсулы · ${k}|</span>${lst(c.caps,x=>`<div class="cli"><span>${x[1]}<small>${x[0]} · ${x[2]}</small></span><b>${x[3]?rub(x[3]):'—'}</b><i class="st ${x[4]==='new'?'new':x[4]==='done'?'done':''}">${CLST[x[4]]}</i></div>`)}</div>`+
+  `<div class="q"><span class="lbl">|Заметки · видишь только ты|</span><textarea id="clnote" class="finp" rows="4" placeholder="Что важно помнить: работа, ритм, что любит, как ${G('ей','ему')} удобнее общаться">${esc(note)}</textarea></div>`+
+  `</div><div>`+
+  `<div class="q"><span class="lbl">|${G('Купила','Купил')} · ${sp?rub(sp):'пока ничего'}|</span>${lst(c.bought,x=>`<div class="cli"><span>${x[0]}<small>${x[1]} · ${x[3]}</small></span><b>${rub(x[2])}</b></div>`)||`<span class="lbl">Покупки по твоим ссылкам появятся здесь сами</span>`}</div>`+
+  `<div class="q"><span class="lbl">|${G('Не село или вернула','Не село или вернул')}|</span>${lst(c.nofit,x=>`<div class="cli nf"><span>${x[0]}<small>${x[1]} · размер ${x[2]} · ${x[3]}</small></span><i>${x[4]}</i></div>`)||`<span class="lbl">Ничего — всё подошло</span>`}</div>`+
+  `</div></div>`])}
+function clMsgSheet(){const c=clGet(S.clOpen);if(!c)return;const r=clRem(c),st=((S.prof||{}).name||'Яна').trim(),lc=t=>t.charAt(0).toLowerCase()+t.slice(1),b=c.bought.slice(0,3).map(x=>lc(x[0].split(',')[0])),nf=c.nofit[0];
+ const t=[`${c.n}, привет! Это ${st}.`,r&&/:/.test(r.t)?`Пишу, как договаривались: ${lc(r.t.split(':')[0].trim())} — ${r.t.split(':')[1].split(' — ')[0].trim()}.`:'Как носится капсула? Начинается новый сезон — самое время её продолжить.',b.length?`Соберу продолжение под то, что у тебя уже есть: ${b.join(', ')}.`:'',nf?`Помню, что ${lc(nf[0])} ${nf[1]} ${nf[3]} — учту.`:'','Пришлю 3 образа и список того, чего не хватает. Начнём на этой неделе?'].filter(Boolean).join(' ');
+ $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Сообщение клиентке" style="display:flex;flex-direction:column;gap:12px"><span class="lbl">|${c.n}${c.tg?' · '+c.tg:''}|</span><h2 class="ttl" style="font-size:26px">Сообщение о новом сезоне</h2>
+ <p class="txt">Собрано из карточки: о чём просила, что уже купила, что не село. Поправь под себя и отправь в Telegram.</p>
+ <textarea id="clmt" class="finp" rows="7">${t.replace(/</g,'&lt;')}</textarea>
+ <div class="fbtns"><button class="dbtn p" data-act="clcopy">Скопировать</button><button class="dbtn" data-act="close">Закрыть</button></div></div></div>`}
+function clPush(d){const c=clGet(S.clOpen);if(!c)return;const r=clRem(c),base=d===90||!r?new Date():new Date(r.d+'T12:00');base.setDate(base.getDate()+d);
+ CLS().rem[c.id]={d:base.toISOString().slice(0,10),t:d===90?'Следующий сезон: спросить, что носится, и предложить продолжение':(r?r.t:'')};persist();toast(d===90?'Отметила. Следующее напоминание через 3 месяца':'Перенесла на месяц');S.still=true;render()}
 const SEQ=['land','vibe','swipe','prefs','photo','twin','free','params','week','wardrobe','budget','colors','pay','status','capsule'];
 const S={g:'f',mode:'client',i:0,menu:false,still:false,photo:{full:null,face:null},swipe:{pos:0,like:[],no:[],axes:{}},ctab:'looks',bta:'all',watch:false,fit:{},votes:{},fi:0,hero:false,slots:{taken:8,total:12},
  ask:{link:'',item:null,status:null,answer:null,note:'',pick:null},gift:{tier:'cap',to:'',from:'',occ:'День рождения',g:'f'},
@@ -1839,7 +1954,7 @@ function ymView(){bar(null);const st=S.ymst||VIBES[S.g][0][0],key=S.g+'_'+st,a=Y
   `<div class="tags">${VIBES[S.g].map(([k,t])=>`<button class="tag" data-act="ymst" data-v="${k}" aria-pressed="${st===k}">${t}${(YM[S.g+'_'+k]||[]).length?' · '+YM[S.g+'_'+k].length:''}</button>`).join('')}</div>`,
   `<div class="ymg">${a.map((u,j)=>`<div class="y"><img src="${u}" alt="Мудборд ${j+1}"><button data-act="ymdel" data-v="${j}" aria-label="Удалить">×</button></div>`).join('')}<label class="up" for="f_ym" style="aspect-ratio:3/4"><span class="pl">+</span><span>Добавить</span><input id="f_ym" type="file" accept="image/*" multiple hidden data-ymood="${key}"></label></div>`,
   `<span class="lbl">В прототипе картинки хранятся на этом устройстве. В рабочей версии — на сервере, и клиенты получают их с любого телефона</span>`])}
-function ynav(){return `<nav class="ctabs ynav" aria-label="Кабинет Яны">${[['home','Кабинет'],['req','Заявки'],['finds','Находки'+((S.finds&&S.finds.items.length)?' · '+S.finds.items.length:'')],['ym','Мои образы'],['cat','Каталог'],['board','Черновик образа'+(S.board.layers.length?' · '+S.board.layers.length:'')]].map(([k,t])=>`<button data-act="yv" data-v="${k}" aria-pressed="${(S.yv||'req')===k}">${t}</button>`).join('')}</nav>`}
+function ynav(){return `<nav class="ctabs ynav" aria-label="Кабинет Яны">${[['home','Кабинет'],['req','Заявки'],['cl',G('Клиентки','Клиенты')],['finds','Находки'+((S.finds&&S.finds.items.length)?' · '+S.finds.items.length:'')],['ym','Мои образы'],['cat','Каталог'],['board','Черновик образа'+(S.board.layers.length?' · '+S.board.layers.length:'')]].map(([k,t])=>`<button data-act="yv" data-v="${k}" aria-pressed="${(S.yv||'req')===k}">${t}</button>`).join('')}</nav>`}
 // ---------- каталог Яны: реальные вещи магазинов ----------
 let CATL=null;const CF={g:'',c:'all',q:'',br:[],pmax:0,szs:[],sale:false,sort:'pop',lim:40,cols:2,clr:[],mat:[],cap:null};
 const CGROUP={'верхняя одежда':'верхняя одежда','жакеты и жилеты':'верх','рубашки и блузы':'верх','трикотаж':'верх','футболки и лонгсливы':'верх','топы и боди':'верх','толстовки':'верх','брюки':'низ','джинсы':'низ','юбки':'низ','шорты':'низ','платья':'платье','костюмы':'платье','обувь':'обувь','сумки':'аксессуар','аксессуары':'аксессуар'};
@@ -2030,7 +2145,7 @@ function dMsgs(){const pd=S.rev.pending,a=S.ask;const items=[];if(pd)items.push(
  return `<div class="dpad">${items.length?items.map(([h,t,m])=>`<div class="dmsg"><b>${h}</b><p>${t}</p>${m?`<span class="lbl">${m}</span>`:''}</div>`).join(''):'<span class="lbl">Сообщений пока нет. Правки и вопросы клиентки появятся здесь.</span>'}${a.status?`<button class="dbtn" data-act="openask" style="margin-top:12px">Открыть вопрос</button>`:''}</div>`}
 function dReqs(){const y=S.y;return `<div class="dpad">${yana()}</div>`}
 function deskView(){const y=S.y;if(S.yv==='cat'||S.yv==='board'){if(y.open==null&&S.cforOpen!=null)y.open=S.cforOpen;if(y.open==null&&(S.cfor!=null||S.lookFor!=null))y.open=0;S.yv='req';S.dt='cat';if(!CATL)loadCat()}const open=y.open===0,dt=S.dt||'cat';if(y.open===0&&!y.sent&&S.genFor!==genKey()){if(!GENP)genCapsule().then(()=>{S.still=true;render()});return `<div class="desk"><div class="dpad"><span class="lbl">|Собираем капсулу по ответам клиента…|</span></div></div>`}
- const top=`<header class="dtop"><button class="dlogo" data-act="dhome" title="На главную">Yana</button><nav><button data-act="dnav" data-v="home" aria-pressed="${S.yv==='home'&&!open}">Кабинет</button><button data-act="dnav" data-v="req" aria-pressed="${(S.yv||'req')==='req'||open}">Заявки<span class="cnt">${1+P().reqs.length}</span></button><button data-act="dnav" data-v="ym" aria-pressed="${S.yv==='ym'&&!open}">Мои образы</button><button data-act="dnav" data-v="finds" aria-pressed="${S.yv==='finds'&&!open}">Находки${(S.finds&&S.finds.items.length)?`<span class="cnt">${S.finds.items.length}</span>`:''}</button></nav><span class="sp"></span>
+ const top=`<header class="dtop"><button class="dlogo" data-act="dhome" title="На главную">Yana</button><nav><button data-act="dnav" data-v="home" aria-pressed="${S.yv==='home'&&!open}">Кабинет</button><button data-act="dnav" data-v="req" aria-pressed="${(S.yv||'req')==='req'||open}">Заявки<span class="cnt">${1+P().reqs.length}</span></button><button data-act="dnav" data-v="cl" aria-pressed="${S.yv==='cl'&&!open}">${G('Клиентки','Клиенты')}</button><button data-act="dnav" data-v="ym" aria-pressed="${S.yv==='ym'&&!open}">Мои образы</button><button data-act="dnav" data-v="finds" aria-pressed="${S.yv==='finds'&&!open}">Находки${(S.finds&&S.finds.items.length)?`<span class="cnt">${S.finds.items.length}</span>`:''}</button></nav><span class="sp"></span>
   <span class="lbl">Прототип · вещи, цены, двойник и голос — примеры</span><button class="dbtn" data-act="mode" data-v="client">Глазами ${G('клиентки','клиента')} ↗︎</button><button class="dme" data-act="prof" aria-label="Профиль стилиста">${((S.prof||{}).name||'Я').trim().slice(0,1).toUpperCase()}</button></header>`;
  const tot=capSum(),cap=CAP();
  const side=open?`<aside class="dside"><div class="dbudg ${tot>cap?'over':''}"><div class="dlh"><span>Капсула ${NM().g} · ${y.items.length} ${plural(y.items.length,'вещь','вещи','вещей')}</span><b>${rub(tot)}</b></div><div class="bar"><i style="width:${Math.min(100,tot/cap*100)}%"></i></div><div class="dlh lbl"><span>из ${rub(cap)}</span><span>${tot>cap?'перебор '+rub(tot-cap):'осталось '+rub(cap-tot)}</span></div></div>
@@ -2145,6 +2260,7 @@ function yana(){const y=S.y;clearInterval(recId);
  if(y.open===null&&S.yv==='ym')return ymView();
  if(y.open===null&&S.yv==='finds')return findsView();
  if(y.open===null&&S.yv==='home')return homeView();
+ if(y.open===null&&S.yv==='cl')return clientsView();
  if(y.open===null&&S.yv==='cat')return catView();
  if(y.open===null&&S.yv==='board')return boardView();
  if(y.open===null){bar(null);return scr([ynav(),`<h2 class="ttl">Заявки</h2>`,
@@ -2441,7 +2557,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'dt':S.dt=v;break;
  case'dl':S.dl=+v;break;
  case'dm':S.dm=v;break;
- case'dnav':S.y.open=null;S.yv=v;S.y.stage='items';S.cfor=null;S.lookFor=null;if(v==='cat'&&!CATL)loadCat();break;
+ case'dnav':if(/^cl:/.test(v)){S.y.open=null;S.yv='cl';S.clOpen=v.slice(3);break}S.clOpen=null;S.y.open=null;S.yv=v;S.y.stage='items';S.cfor=null;S.lookFor=null;if(v==='cat'&&!CATL)loadCat();break;
  case'dlook':dLookAdd(v);return;
  case'figunk':S.figUnk=!S.figUnk;ansFirst('fig');if(S.figUnk)S.ans.fig=true;break;
  case'pfp':{const pp=S.prefPart||0,d=+v;if(d<0&&pp===0){S.i=Math.max(0,S.i-1);break}if(d>0&&pp===2){S.prefPart=0;S.i++;break}S.prefPart=pp+d;break}
@@ -2473,6 +2589,12 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'fpng':findsPng();return;
  case'fcap':{const txt=findsCaption();(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast('Подпись скопирована'),()=>{const t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();toast('Подпись скопирована')});return}
  case'prof':profSheet();return;
+ case'clopen':S.clOpen=v;scrollTo(0,0);break;
+ case'clback':S.clOpen=null;break;
+ case'clf':S.clf=v;break;
+ case'clmsg':clMsgSheet();return;
+ case'clpush':clPush(+v);return;
+ case'clcopy':{const t=($('#clmt')||{}).value||'';(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast('Скопировано — вставь в Telegram'),()=>{$('#clmt').select();toast('Выдели текст и скопируй')});return}
  case'ulink':ulinkSheet(v);return;
  case'uladd':ulAdd();return;
  case'dfoc':dFocus(v);return;
@@ -2500,7 +2622,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'dframe':dFrame();return;
  case'drefs':dRefs();return;
  case'dgo':{const t=$('#dwish'),i=S.dl||0;if(t){S.dwish=S.dwish||{};S.dwish[i]=t.value}S.y.genq=S.y.genq||{};S.y.genq[i]=true;persist();$('#overlay').innerHTML='';const nx=LOOKS.findIndex((l,j)=>!genOf(j));S.dt='caps';if(nx>-1){S.dl=nx;toast('Образ '+n2(i+1)+' — фото в работе · дальше '+n2(nx+1))}else toast('Фото по всем образам в работе — напиши письмо и отправь');S.still=true;render();return}
- case'yv':if((S.yv||'req')!==v)S.yvPrev=S.yv||'req';S.yv=v;S.y.open=null;S.menu=false;$('#overlay').innerHTML='';if(v==='cat'&&!CATL)loadCat();break;
+ case'yv':S.clOpen=null;if((S.yv||'req')!==v)S.yvPrev=S.yv||'req';S.yv=v;S.y.open=null;S.menu=false;$('#overlay').innerHTML='';if(v==='cat'&&!CATL)loadCat();break;
  case'cfg':CF.g=v;CF.c='all';CF.br=[];CF.szs=[];CF.lim=40;break;
  case'cfc':CF.c=v;CF.lim=40;break;
  case'cff':filterSheet();return;
@@ -2554,7 +2676,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'send':if(DESK()&&!S.rev.pending&&genDone()<LOOKS.length){toast('Сначала фото на '+NM().d+' по всем образам');return}S.y.sent=true;S.capReady=true;if(S.i<SEQ.indexOf('status'))S.i=SEQ.indexOf('status');toast('Капсула у '+NM().g+' — в кабинете клиента готово');break}
  const keep=['cfind','ffmt','fmv','frm','fclr','csel','cselx','capprove','rqf','twinyes','gv','dcndraft','vibe','sample','redo','twinx','twinsend','yv','cfg','cfc','cfs','cfx','cfr','crepl','ccancel','cboardclr','bsel','bsz','bz','bdel','bsave','icat','delown','sampleown','ok','arr','set','col','allok','pick','lookok','cols','play','rec','pair','pref','tsz','lsz','ysz','cfbr','cfsale2','ymst','ymdel','ctab','bta','watch','fit','asksample','askgo','askyana','askreset','answer','slot'].includes(a),sy=window.scrollY;
  S.still=keep;if(!keep&&S.mode==='client'&&document.startViewTransition&&!matchMedia('(prefers-reduced-motion:reduce)').matches){document.startViewTransition(()=>{render();window.scrollTo(0,0)})}else{render();window.scrollTo(0,keep?sy:0)}});
-document.addEventListener('input',e=>{if(/^ul_/.test(e.target.id||'')){ulCheck();return}if(e.target.dataset.meas){S.y.meas=S.y.meas||{};S.y.meas[e.target.dataset.meas]=+e.target.value||'';persist();return}if(e.target.id==='ftitle'||e.target.id==='fnote'){const F=FINDS();F[e.target.id==='ftitle'?'title':'note']=e.target.value;persist();const c=$('#fcard');if(c&&e.target.id==='ftitle'){const t=c.querySelector('.fct');if(t)t.textContent=e.target.value;else if(e.target.value){const b=document.createElement('b');b.className='fct';b.textContent=e.target.value;c.querySelector('.fch').after(b)}}const pr=$('.fpre');if(pr)pr.textContent=findsCaption();return}if(e.target.dataset.prof){S.prof=S.prof||{};S.prof[e.target.dataset.prof]=e.target.value;persist();return}if(e.target.dataset.paff){S.prof=S.prof||{};S.prof.aff=S.prof.aff||{};S.prof.aff[e.target.dataset.paff]=e.target.value;persist();return}if(e.target.id==='rqq'){S.rqq=e.target.value;const q=S.rqq.trim().toLowerCase();document.querySelectorAll('#rql .req').forEach(b=>{b.hidden=!!q&&!b.textContent.toLowerCase().includes(q)});return}if(e.target.id==='ynote'){S.y.note=e.target.value;persist();return}if(e.target.id==='cq'){CF.q=e.target.value;CF.lim=40;const r=$('#cres');if(r)r.innerHTML=catResults();return}
+document.addEventListener('input',e=>{if(/^ul_/.test(e.target.id||'')){ulCheck();return}if(e.target.id==='clq'){S.clq=e.target.value;const q=S.clq.trim().toLowerCase();document.querySelectorAll('#cll .req').forEach(b=>{b.hidden=!!q&&!(b.textContent.toLowerCase()+' '+(b.dataset.q||'')).includes(q)});return}if(e.target.dataset.clm&&S.clOpen){const k=e.target.dataset.clm,v=+e.target.value||'';if(S.clOpen==='cur'){S.y.meas=S.y.meas||{};S.y.meas[k]=v}else{const m=CLS().meas;m[S.clOpen]=m[S.clOpen]||{};m[S.clOpen][k]=v}persist();return}if(e.target.id==='clnote'&&S.clOpen){CLS().notes[S.clOpen]=e.target.value;persist();return}if((e.target.id==='clrd'||e.target.id==='clrt')&&S.clOpen){const c=clGet(S.clOpen),r=clRem(c)||{d:'',t:''},d=$('#clrd').value,t=$('#clrt').value;CLS().rem[S.clOpen]={d:d||r.d,t};const l=$('.clrl');if(l&&d)l.textContent=clDl(clDays(d));persist();return}if(e.target.dataset.meas){S.y.meas=S.y.meas||{};S.y.meas[e.target.dataset.meas]=+e.target.value||'';persist();return}if(e.target.id==='ftitle'||e.target.id==='fnote'){const F=FINDS();F[e.target.id==='ftitle'?'title':'note']=e.target.value;persist();const c=$('#fcard');if(c&&e.target.id==='ftitle'){const t=c.querySelector('.fct');if(t)t.textContent=e.target.value;else if(e.target.value){const b=document.createElement('b');b.className='fct';b.textContent=e.target.value;c.querySelector('.fch').after(b)}}const pr=$('.fpre');if(pr)pr.textContent=findsCaption();return}if(e.target.dataset.prof){S.prof=S.prof||{};S.prof[e.target.dataset.prof]=e.target.value;persist();return}if(e.target.dataset.paff){S.prof=S.prof||{};S.prof.aff=S.prof.aff||{};S.prof.aff[e.target.dataset.paff]=e.target.value;persist();return}if(e.target.id==='rqq'){S.rqq=e.target.value;const q=S.rqq.trim().toLowerCase();document.querySelectorAll('#rql .req').forEach(b=>{b.hidden=!!q&&!b.textContent.toLowerCase().includes(q)});return}if(e.target.id==='ynote'){S.y.note=e.target.value;persist();return}if(e.target.id==='cq'){CF.q=e.target.value;CF.lim=40;const r=$('#cres');if(r)r.innerHTML=catResults();return}
  if(e.target.dataset.why!=null){const i=+e.target.dataset.why,w=S.y.why[i]||[...((S.genWhy||[])[i]||P().why[i])];w[1]=e.target.value;S.y.why[i]=w;if(S.y.stale)delete S.y.stale[i];return}
  if(e.target.id==='h'){S.height=+e.target.value;$('#ho').textContent=S.height+' см'}
  if(e.target.id==='asklink')S.ask.link=e.target.value;
