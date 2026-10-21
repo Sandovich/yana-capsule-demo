@@ -1106,6 +1106,9 @@ body.desk .dwork.list .scr.rlist{max-width:1360px;grid-template-columns:minmax(0
 .mtabs button i{font-style:normal;color:#a5a5a5;margin-left:4px;font-size:10px}
 .manq .dph{display:none}.manq .dpad{padding-top:4px}
 body.desk .mtabs{display:none}
+.cpass{display:flex;flex-direction:column;gap:12px;align-items:flex-start;border-top:1px solid var(--hair);padding-top:22px;margin-top:8px}
+.cpass .ppwrap{align-items:flex-start;width:100%}.cpass .txt{max-width:420px;color:var(--mute)}
+body.cdesk #app[data-scr="capsule"] .cpass{flex-direction:row;flex-wrap:wrap;gap:16px 40px;align-items:flex-start}body.cdesk #app[data-scr="capsule"] .cpass .lbl{width:100%}body.cdesk #app[data-scr="capsule"] .cpass .ppwrap{width:auto}
 .mood{isolation:isolate}
 .tipx{position:fixed;left:0;top:0;z-index:9999;max-width:260px;padding:7px 10px;background:var(--ink);color:var(--paper);font-size:11.5px;line-height:1.35;letter-spacing:.01em;text-transform:none;pointer-events:none;opacity:0;transition:opacity .12s;box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .tipx.on{opacity:1}
@@ -1332,7 +1335,7 @@ const TIPS={allok:'Отметить все вещи как проверенны�
  lkcat:'Добавить в образ вещь из каталога',lookok:e=>e.getAttribute('aria-pressed')==='true'?'Снять утверждение с образа':'Утвердить образ — он уйдёт клиентке в капсуле',lrec:'Записать голосовое к образу',menu:'Открыть меню',mode:e=>e.dataset.v==='client'?'Посмотреть сайт глазами клиентки':'Вернуться в кабинет Яны',
  openask:'Открыть вопрос клиентки',openreq:'Открыть заявку',pair:'Выбрать образ, который ближе',pick:'Поставить эту вещь вместо прежней',play:'Прослушать голосовое Яны',pref:'Отметить, что носишь',rec:'Записать голосовое',pfp:'Следующая часть',rqf:'Показать заявки с этим статусом',clopen:'Открыть карточку клиентки',clback:'Ко всем клиенткам',clf:'Показать клиенток с этим признаком',clmsg:'Готовое сообщение клиентке о новом сезоне',clpush:'Перенести напоминание',clcopy:'Скопировать сообщение',ulink:'Добавить вещь из любого магазина: ссылка, фото, цена',uladd:'Сохранить вещь',cfind:'Добавить вещь в находки — для поста или сторис',ffmt:'Формат карточки',fmv:'Переставить вещь',frm:'Убрать из находок',fclr:'Очистить находки',fpng:'Скачать карточку PNG для поста или сторис',fcap:'Скопировать подпись с ценами и твоими ссылками',prof:'Профиль: имя, ссылка, твои партнёрские коды',csel:'Выбрать образ (ещё раз — снять выбор)',capprove:'Одобрить образы',cselx:'Снять выбор со всех образов',dtpl:'Сохранить образ как шаблон или собрать из шаблона',tplsave:'Сохранить текущий образ шаблоном',tplapply:'Заменить вещи образа вещами из шаблона (можно вернуть)',tpldel:'Удалить шаблон',dkeys:'Горячие клавиши',dstock:'Сверить вещи капсулы с сегодняшним фидом магазинов',dnotes:'Личные заметки о клиентке — она их не видит',freesave:'Скачать образ картинкой — с подписью «собрала Яна»',pforce:'Отправить фото, даже если проверка нашла недочёты',ppsave:'Скачать карточку стиля, чтобы выложить в сторис',swgrid:'Переключить: по одной карточке или сеткой',gdone:'Учесть отмеченные и продолжить тест',gv:'Отметить вещь',pfskip:'Пропустить детали вкуса — Яна подберёт по тесту',figunk:'Яна определит тип фигуры по твоим фото',redo:'Двойник не похож — отметить, что не так, и отправить Яне',twinsend:'Яна поправит двойника вручную до 24 часов',twinx:'Не отправлять, оставить как есть',reel:'Посмотреть рилс-переодевашку',
  rev:'Попросить правку: отметить вещи на замену',revdone:'Отправить исправленную капсулу клиентке',revsend:'Отправить правку Яне',revtog:'Отметить вещь на замену',send:'Отправить капсулу клиентке',slot:'Изменить число мест в неделю',story:'Поделиться образом',swap:'Подобрать похожие на замену — покажем и то, что дороже бюджета, с пометкой',
- tocap:'Вернуться к капсуле',twin:'Посмотреть образ на двойнике',vibe:'Выбрать стиль (до трёх)',vote:e=>e.dataset.v==='yes'?'Моё — Яна учтёт в капсуле':'Не моё — такого в капсуле не будет',watch:'Следить за снижением цены',yitem:'Открыть вещь: размеры, двойник, замена',ylook:'Перейти к образу',ylookok:'Утвердить образ',mdt:'Раздел заявки',mcat:'Каталог — подобрать вещь в капсулу',rdlook:'Открыть этот образ',ymdel:'Удалить образ',ysz:'Выбрать размер для клиентки',zoom:'Увеличить фото'};
+ tocap:'Вернуться к капсуле',twin:'Посмотреть образ на двойнике',vibe:'Выбрать стиль (до трёх)',vote:e=>e.dataset.v==='yes'?'Моё — Яна учтёт в капсуле':'Не моё — такого в капсуле не будет',watch:'Следить за снижением цены',yitem:'Открыть вещь: размеры, двойник, замена',ylook:'Перейти к образу',ylookok:'Утвердить образ',pfedit:'Поменять детали вкуса — потом вернёмся сюда',mdt:'Раздел заявки',mcat:'Каталог — подобрать вещь в капсулу',rdlook:'Открыть этот образ',ymdel:'Удалить образ',ysz:'Выбрать размер для клиентки',zoom:'Увеличить фото'};
 (()=>{if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;const tip=document.createElement('div');tip.className='tipx';tip.setAttribute('role','tooltip');document.body.appendChild(tip);let cur=null,tm=0,mx=0,my=0;
  const txt=e=>{if(e.dataset.tip)return e.dataset.tip;const t=TIPS[e.dataset.act];return typeof t==='function'?t(e):t||''};
  const place=()=>{const w=tip.offsetWidth,h=tip.offsetHeight;let x=mx+16,y=my+18;if(x+w>innerWidth-8)x=mx-w-12;if(y+h>innerHeight-8)y=my-h-12;tip.style.transform=`translate(${Math.max(8,x)}px,${Math.max(8,y)}px)`};
@@ -1845,7 +1848,7 @@ async function genCore(){const g=S.g,key=genKey(),like=S.swipe.like,no=S.swipe.n
   const t=st[i%st.length]||'Минимализм',a=CAT[ks[0]],b=ks[1]&&CAT[ks[1]];const fw=figWhy(ks,fseen);why.push([HOOKS[g][i],`${a?a.n:''}${b?' и '+b.n.toLowerCase():''} — ${REASON[t]||'просто и точно'}.${fw?' '+fw:''}${shoes&&ks.includes(shoes)?' '+CAT[shoes].n+' держат образ целиком.':''}`])}
  items.forEach(k=>{delete CAT[k].szSel;delete CAT[k].sz});gSeen(items);S.y.items=items;S.y.ok={};S.y.looksOk={};S.y.why={};S.genWhy=why;LOOKS.length=0;looks.forEach(l=>LOOKS.push(l));
  items.forEach((k,i)=>ROLE[k]=['outer','jacket'].includes(KIND(CAT[k].n,CAT[k].cc))&&i<2?'a':i===2||i===5?'t':'b');
- await Promise.all(looks.flatMap(l=>l[1]).map(bgCheck));const fi=looks.map((l,j)=>[j,l[1].filter(k=>LK.has(k)).length,l[1].every(cleanK)?1:0]).sort((a,b)=>b[2]-a[2]||b[1]-a[1]||a[0]-b[0])[0][0],f0=looks[fi][1];S.free=[f0,null];S.freeq=`«${f0.map((k,j)=>j?CAT[k].n.toLowerCase():CAT[k].n).join(', ').replace(/, ([^,]*)$/,' и $1')} — это ты на работе, только ${G('собранная','собранный')}». — Яна`;
+ await Promise.all(looks.flatMap(l=>l[1]).map(bgCheck));const fi=looks.map((l,j)=>[j,l[1].filter(k=>LK.has(k)).length,l[1].every(cleanK)?1:0]).sort((a,b)=>b[2]-a[2]||b[1]-a[1]||a[0]-b[0])[0][0],f0=looks[fi][1];if(!(S.free&&S.free[0]&&S.free[0].every(k=>CAT[k]))){S.free=[f0,null];S.freeq=`«${f0.map((k,j)=>j?CAT[k].n.toLowerCase():CAT[k].n).join(', ').replace(/, ([^,]*)$/,' и $1')} — это ты на работе, только ${G('собранная','собранный')}». — Яна`}
  S.genFor=key}
 function taste(){const c={};S.swipe.like.forEach(k=>CAT[k].t.forEach(t=>c[t]=(c[t]||0)+1));return Object.entries(c).sort((a,b)=>b[1]-a[1]).map(x=>x.at(0)).slice(0,2)}
 function styles(){const t=taste();return t.length?t:['Город','Минимализм']}
@@ -1958,8 +1961,8 @@ let RESTORING=false;function render(){if(RESTORING)return;setTimeout(capLbl,0);p
    pp===1&&`<div class="q"><span class="lbl">|${G('Джинсы и брюки · какой крой нравится','Джинсы и брюки · какой крой нравится')}|</span><div class="pics">${JEANO[S.g].map(v=>pic('jeans',v,jeanSvg(v))).join('')}</div></div>`,
    pp===2&&`<div class="q"><span class="lbl">|Фактуры · что приятно носить|</span><div class="pics">${TEXT.filter(([v])=>!(AW&&v==='Лён')).map(([v])=>{const st=prefPic('tex',v);return pic('tex',v,`<span class="im" style="${st||''}"></span>`)}).join('')}</div></div>`,
    pp===2&&`<div class="q"><span class="lbl">|Цвета · 1 нажатие — люблю, 2 — никогда, 3 — сброс|</span><div class="sws">${COLORS.map(([cc,nm])=>`<div class="swb"><button class="sw" data-act="col" data-v="${cc}" data-s="${ANS('colors')?S.colors[cc]||'':''}" style="background:${cc}" aria-label="${nm}"></button>${nm}</div>`).join('')}</div></div>`,
-   `<button class="skip" data-act="pfskip">Пропустить детали — к фото</button>`];
-  bar(`<button class="btn line" data-act="pfp" data-v="-1" aria-label="Назад">←</button><button class="btn" data-act="pfp" data-v="1">${pp<2?'Дальше':'Дальше — фото для двойника'}</button>`)}
+   S.retTo!=null?'':`<button class="skip" data-act="pfskip">Пропустить детали — к фото</button>`];
+  bar(`<button class="btn line" data-act="pfp" data-v="-1" aria-label="Назад">←</button><button class="btn" data-act="pfp" data-v="1">${pp<2?'Дальше':S.retTo!=null?'Готово — к пожеланиям':'Дальше — фото для двойника'}</button>`)}
  else if(c==='photo'){p=[stepBar(),`<h2 class="ttl">Два фото</h2>`,
   `<label class="check pcons" for="pcons"><input id="pcons" type="checkbox" ${S.pconsent?'checked':''} data-pcons="1"><span><b>Согласна, чтобы Яна сделала по моим фото цифрового двойника с помощью генеративного ИИ.</b> Фото видит только Яна. Хранятся в России, удаляются через 30 дней, на них не учат нейросети.</span></label>`,
   `<div class="pex">${PEX.map(([ok,t,svg])=>`<div class="${ok?'g':'b'}">${svg}<b>${ok?'✓':'✕'} ${t}</b></div>`).join('')}</div>`,
@@ -2006,7 +2009,7 @@ let RESTORING=false;function render(){if(RESTORING)return;setTimeout(capLbl,0);p
   `<p class="txt" style="color:var(--mute)">Это деньги на сами вещи, если решишь их купить. Покупать ничего не обязательно — я покажу, что брать в первую очередь.</p>`];bar(nav(ANS('budget'),ANS('budget')?'Далее':'Выбери бюджет'))}
  else if(c==='colors'){const lv=ANS('colors')?COLORS.filter(([cc])=>S.colors[cc]==='love'):[],nv=ANS('colors')?COLORS.filter(([cc])=>S.colors[cc]==='never'):[];p=[stepBar(),`<h2 class="ttl">Пожелания</h2>`,
   `<div class="sum"><div><span>Люблю цвета</span><b>${lv.map(c=>c[1]).join(', ')||'—'}</b></div><div><span>Никогда</span><b>${nv.map(c=>c[1]).join(', ')||'—'}</b></div><div><span>Обувь</span><b>${S.pref.shoes.join(', ')||'любая'}</b></div><div><span>Крой джинсов</span><b>${S.pref.jeans.join(', ')||'любой'}</b></div><div><span>Фактуры</span><b>${S.pref.tex.join(', ')||'любые'}</b></div></div>`,
-  `<button class="tag" data-act="goto" data-v="${SEQ.indexOf('prefs')}">Поменять детали вкуса</button>`,
+  `<button class="tag" data-act="pfedit">Поменять детали вкуса</button>`,
   `<div class="q"><label class="lbl" for="wish">|Пожелания Яне|</label><textarea id="wish" placeholder="${P().wishPh}">${S.wish}</textarea></div>`];bar(nav())}
  else if(c==='pay'){const tr=TIERS.find(x=>x.at(0)===S.tier);p=[stepBar(),`<h2 class="ttl">Выбери формат</h2>`,
   `<div class="tiers">${TIERS.map(([k,t,s,pr])=>`<button class="tier" data-act="set" data-k="tier" data-v="${k}" aria-pressed="${S.tier===k}">${k==='plus'?'<span class="pop">Чаще выбирают</span>':''}<b class="tn">${t}</b><span class="tp">${rub(pr)}</span><ul>${s.split(' · ').map(x=>`<li>${x}</li>`).join('')}</ul><span class="tsel">${S.tier===k?'✓ Выбрано':'Выбрать'}</span></button>`).join('')}</div>`,
@@ -2032,6 +2035,7 @@ let RESTORING=false;function render(){if(RESTORING)return;setTimeout(capLbl,0);p
   `<p class="quote">${P().capq}</p>`,
   `<div><div class="lknav"><button class="lka" data-act="lkgo" data-v="-1" aria-label="Предыдущий образ">‹</button><span class="lkn" id="lkn">${n2((S.look||0)+1)} / ${n2(LOOKS.length)}</span><button class="lka" data-act="lkgo" data-v="1" aria-label="Следующий образ">›</button><button class="lkpdf" data-act="lkpdf">Скачать образы · PDF</button></div><div class="looks cl" id="looks">${LOOKS.map(([t,ks,own],i)=>`<div class="look"><div style="display:flex;justify-content:space-between;font-size:11px"><span><span class="n">${n2(i+1)}</span>${t}${S.y.lookVoice[i]?`<button class="lvoice" data-act="toast" data-v="Голосовое Яны к образу ${n2(i+1)}">▶ 0:${n2(S.y.lookVoice[i])}</button>`:''}</span><span class="lbl">${ks.reduce((s,k)=>s+price(k),0).toLocaleString('ru-RU')} ₽</span></div>${clientLook(ks,i,own)}${(()=>{const w=S.y.why[i]||(S.genWhy||[])[i]||P().why[i];return w?`<p class="why"><b>${w[0]}</b>${w[1]}</p>`:''})()}</div>`).join('')}</div>
    <div class="dots" id="dots" style="margin-top:12px">${LOOKS.map((_,i)=>`<i class="${i===(S.look||0)?'on':''}" data-act="lkgo" data-v="=${i}" role="button" aria-label="Образ ${n2(i+1)}"></i>`).join('')}</div></div>`,
+  `<div class="cpass"><span class="lbl">|Твой стилевой паспорт · по тесту вкуса|</span>${passport().replace('Капсулу под этот вкус соберёт Яна','Капсула под этот вкус — от Яны')}<p class="txt">Капсула собрана под этот вкус. Паспорт можно сохранить в сторис или показать подруге.</p></div>`,
   twinAsk(),capWeek(),capWorth(),capShop(),
   ymBlock('Образы Яны в твоём стиле'),
   `<div class="tools"><button class="tool" data-act="friend"><span>${G('Спросить подругу','Спросить друга')}</span><small>Ссылка без регистрации: ♥ или ✕ на каждый образ</small></button></div>`,
@@ -2580,7 +2584,7 @@ function friendSheet(){const i=S.fi,l=LOOKS.at(i),vt=S.votes[i]||[0,0];
  <button class="btn line" data-act="close">Готово</button></div></div>`}
 const giftBox=(h,t,cta)=>`<button class="giftb" data-act="gift"><span class="gl">Yana</span><span class="gt"><b>${h}</b><span>${t}</span><span class="gc">${cta} →</span></span></button>`;
 function exSheet(n){const pp=P(),dk=pp.deck.filter(x=>typeof x==='string'&&CAT[x]),ic=pp.icons[0],iph=pp.iconPh&&pp.iconPh[0],L0=LOOKS[0],items=[...new Set(LOOKS.flatMap(l=>l[1]))].filter(k=>CAT[k]).slice(0,8);
- const her=G('ей','ему'),T=[
+ const her=G('ей','ему'),TT=[
  ['Тест вкуса','Листаешь карточки: вещи, стили, иконы стиля. Нравится — вправо, нет — влево. Минута, и Яна видит твой вкус — даже то, что словами не объяснить.',
   `<div class="exrow"><div class="xc"><img src="${src(dk[0])}" alt=""><span class="xs">♥ моё</span></div><div class="xc"><img src="${src(dk[1])}" alt=""><span class="xs no">✕ не моё</span></div><div class="xc">${iph?`<img src="icons/${iph}.jpg" alt="${ic[0]}" style="object-fit:cover">`:''}<span class="xs">♥ ${ic[0]}</span></div></div>`,
   ['20 карточек — вещи сезона из реальных магазинов','Яна увидит и то, что понравилось, и то, что нет','Бесплатно, без регистрации']],
@@ -2595,10 +2599,10 @@ function exSheet(n){const pp=P(),dk=pp.deck.filter(x=>typeof x==='string'&&CAT[x
   ['Твои вещи из шкафа тоже идут в образы — докупать только недостающее','Сумма под твой бюджет, покупать ничего не обязательно','Две правки входят в цену']],
  ['Голосовое от Яны','К капсуле Яна записывает голосовое: почему именно эти вещи, что с чем носить, что купить первым. Как будто она рядом в примерочной.',
   `<div class="voice"><button class="play" data-act="toast" data-v="В рабочей версии — живой голос Яны" aria-label="Слушать">▶</button><div class="wave">${[6,12,20,9,24,16,8,22,14,26,10,18,7,21,13,25,9,17,11,6].map(h=>`<i style="height:${h}px"></i>`).join('')}</div><span class="t">0:42</span></div><p class="quote">${pp.capq}</p>`,
-  ['Это то, что отличает Яну от любого ИИ','Вопрос по капсуле — в Telegram']]][n];
- $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="${T[0]}"><span class="lbl">|Шаг ${n2(n+1)} из 05 · пример|</span><h2 class="ttl" style="font-size:28px">${T[0]}</h2><p class="txt">${T[1]}</p>${T[2]}<div class="expts">${T[3].map(t=>`<span>${t}</span>`).join('')}</div>
- <div class="exnav" style="display:flex;gap:8px">${n>0?`<button class="btn line" data-act="ex" data-v="${n-1}" style="flex:none;width:56px" aria-label="Предыдущий шаг">←</button>`:''}${n<4?`<button class="btn line" data-act="ex" data-v="${n+1}" style="flex:1">Дальше: ${['Двойник','Первый образ','Капсула','Голосовое'][n]} →</button>`:''}</div>
- <button class="btn" data-act="exgo">Начать бесплатно</button><button class="btn line" data-act="close">Закрыть</button></div></div>`}
+  ['Это то, что отличает Яну от любого ИИ','Вопрос по капсуле — в Telegram']]],inq=S.mode==='client'&&S.i>0,T=TT[inq?3:n];
+ $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="${T[0]}"><span class="lbl">|${inq?'Пример готовой капсулы':`Шаг ${n2(n+1)} из 05 · пример`}|</span><h2 class="ttl" style="font-size:28px">${T[0]}</h2><p class="txt">${T[1]}</p>${T[2]}<div class="expts">${T[3].map(t=>`<span>${t}</span>`).join('')}</div>${inq?`<span class="lbl" style="display:block;margin-top:22px">|Голосовое от Яны — идёт с каждой капсулой|</span><p class="txt">${TT[4][1]}</p>${TT[4][2]}`:''}
+ ${inq?'':`<div class="exnav" style="display:flex;gap:8px">${n>0?`<button class="btn line" data-act="ex" data-v="${n-1}" style="flex:none;width:56px" aria-label="Предыдущий шаг">←</button>`:''}${n<4?`<button class="btn line" data-act="ex" data-v="${n+1}" style="flex:1">Дальше: ${['Двойник','Первый образ','Капсула','Голосовое'][n]} →</button>`:''}</div>`}
+ ${inq?`<button class="btn" data-act="close">← Вернуться${cur()==='pay'?' к выбору формата':''}</button>`:`<button class="btn" data-act="exgo">Начать бесплатно</button><button class="btn line" data-act="close">Закрыть</button>`}</div></div>`}
 function giftSheet(){const g=S.gift,tr=TIERS.find(x=>x.at(0)===g.tier),esc=t=>t.replace(/[<>&"]/g,'');
  $('#overlay').innerHTML=`<div class="sheet" data-act="close"><div class="in" role="dialog" aria-label="Подарить капсулу"><span class="lbl">|Подарок|</span><h2 class="ttl" style="font-size:28px">Подарить капсулу</h2>
  <div class="gseg">${[['f','Ей'],['m','Ему']].map(([k,t])=>`<button data-act="giftg" data-v="${k}" aria-pressed="${g.g===k}">${t}</button>`).join('')}</div>
@@ -2618,14 +2622,14 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  if(a==='close'&&e.target!==t&&!t.matches('button'))return;
  switch(a){
  case'menu':S.menu=!S.menu;break;
- case'goto':S.menu=false;S.mode='client';$('#overlay').innerHTML='';S.i=+v;if(S.i>SEQ.indexOf('vibe')&&!(S.vibe||[]).length)S.vibe=[VIBES[S.g][0][0]];break;
+ case'goto':S.menu=false;S.mode='client';$('#overlay').innerHTML='';S.i=+v;S.retTo=null;if(S.i>SEQ.indexOf('vibe')&&!(S.vibe||[]).length)S.vibe=[VIBES[S.g][0][0]];break;
  case'g_menu':break;
  case'mode':S.mode=v;S.menu=false;S.playing=false;if(v==='client')bar(null);if(v==='yana'){S.y.open=null;S.yv='req';S.y.stage='items';S.cfor=null;S.lookFor=null;$('#overlay').innerHTML='';scrollTo(0,0)}break;
- case'next':if(cur()==='land'){S.vibe=[];S.deckReady=false;S.genFor=null;S.swipe={pos:0,like:[],no:[],axes:{},icons:{}}}if(cur()==='vibe'){S.deckReady=false;newDeck()}if(cur()==='colors')S.wish=($('#wish')||{}).value||'';if(cur()==='pay')S.slots.taken=Math.min(S.slots.total,S.slots.taken+1);S.i=Math.min(SEQ.length-1,S.i+1);break;
+ case'next':if(cur()==='land'){S.vibe=[];S.deckReady=false;S.genFor=null;S.free=null;S.swipe={pos:0,like:[],no:[],axes:{},icons:{}}}if(cur()==='vibe'){S.deckReady=false;newDeck()}if(cur()==='colors')S.wish=($('#wish')||{}).value||'';if(cur()==='pay')S.slots.taken=Math.min(S.slots.total,S.slots.taken+1);S.i=Math.min(SEQ.length-1,S.i+1);break;
  case'back':S.i=Math.max(0,S.i-1);break;
  case'vote':vote(v);return;
- case'vibe':{S.deckReady=false;S.genFor=null;S.swipe={pos:0,like:[],no:[],axes:{},icons:{}};const a=S.vibe||(S.vibe=[]),j=a.indexOf(v);if(j>-1)a.splice(j,1);else{if(a.length>=3)a.shift();a.push(v)}S.still=true;break}
- case'reswipe':S.swipe={pos:0,like:[],no:[],axes:{},icons:{}};S.deckReady=false;S.genFor=null;break;
+ case'vibe':{S.deckReady=false;S.genFor=null;S.free=null;S.swipe={pos:0,like:[],no:[],axes:{},icons:{}};const a=S.vibe||(S.vibe=[]),j=a.indexOf(v);if(j>-1)a.splice(j,1);else{if(a.length>=3)a.shift();a.push(v)}S.still=true;break}
+ case'reswipe':S.swipe={pos:0,like:[],no:[],axes:{},icons:{}};S.deckReady=false;S.genFor=null;S.free=null;break;
  case'pair':{const e=DECK.at(S.swipe.pos),pr=PAIRS.at(e.p);S.swipe.axes=S.swipe.axes||{};S.swipe.axes[pr.ax]=pr.o.at(+v).at(1);S.swipe.pos++;break}
  case'ctab':S.ctab=v;break;
  case'bta':S.bta=v;break;
@@ -2698,8 +2702,9 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-act]');if(
  case'dnav':if(/^cl:/.test(v)){S.y.open=null;S.yv='cl';S.clOpen=v.slice(3);break}S.clOpen=null;S.y.open=null;S.yv=v;S.y.stage='items';S.cfor=null;S.lookFor=null;if(v==='cat'&&!CATL)loadCat();break;
  case'dlook':dLookAdd(v);return;
  case'figunk':S.figUnk=!S.figUnk;ansFirst('fig');if(S.figUnk)S.ans.fig=true;break;
- case'pfp':{const pp=S.prefPart||0,d=+v;if(d<0&&pp===0){S.i=Math.max(0,S.i-1);break}if(d>0&&pp===2){S.prefPart=0;S.i++;break}S.prefPart=pp+d;break}
- case'pfskip':S.prefPart=0;S.i=SEQ.indexOf('photo');break;
+ case'pfp':{const pp=S.prefPart||0,d=+v;if(d<0&&pp===0){if(S.retTo!=null){S.i=S.retTo;S.retTo=null;break}S.i=Math.max(0,S.i-1);break}if(d>0&&pp===2){S.prefPart=0;if(S.retTo!=null){S.i=S.retTo;S.retTo=null;toast('Детали вкуса обновлены')}else S.i++;break}S.prefPart=pp+d;scrollTo(0,0);break}
+ case'pfskip':S.prefPart=0;S.i=S.retTo!=null?S.retTo:SEQ.indexOf('photo');S.retTo=null;break;
+ case'pfedit':S.retTo=S.i;S.prefPart=0;S.i=SEQ.indexOf('prefs');scrollTo(0,0);break;
  case'ppsave':ppSave();return;
  case'swgrid':S.swGrid=!S.swGrid;S.gridv=S.gridv||{};break;
  case'gv':{S.gridv=S.gridv||{};const st=t.dataset.s;S.gridv[v]=S.gridv[v]===st?undefined:st;if(!S.gridv[v])delete S.gridv[v];S.still=true;break}
