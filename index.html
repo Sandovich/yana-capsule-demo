@@ -995,28 +995,6 @@ button,.opt,.tag,.btn,.dbtn,.vibe,.tier,.pic,.sbtn,.swgi,.cweek button,.req,.how
 @media (max-width:560px){.clremr{grid-template-columns:1fr}}
 
 .scr>div:has(>.lc),.lc{display:contents}
-body.cdesk #app[data-scr="land"] .scr>div:has(>.lc){display:block}
-body.cdesk #app[data-scr="land"] .lc{display:flex;flex-direction:column;gap:18px}
-body.cdesk #app[data-scr="land"] .scr:has(.lcA){grid-template-columns:minmax(400px,.95fr) minmax(0,1fr) minmax(0,1fr);column-gap:clamp(40px,4vw,80px);row-gap:22px;max-width:1760px;padding:4px clamp(32px,3.5vw,64px) 120px;justify-content:stretch}
-body.cdesk #app[data-scr="land"] .scr:has(.lcA)>div:nth-child(1){grid-column:2;grid-row:1}
-body.cdesk #app[data-scr="land"] .scr:has(.lcA)>div:nth-child(2){grid-column:1;grid-row:1/span 3;position:sticky;top:64px;align-self:start}
-body.cdesk #app[data-scr="land"] .scr:has(.lcA)>div:nth-child(3){grid-column:2;grid-row:2;align-self:start}
-body.cdesk #app[data-scr="land"] .scr:has(.lcA)>div:nth-child(4){grid-column:3;grid-row:1/span 2;align-self:start}
-body.cdesk #app[data-scr="land"] .scr:has(.lcA)>div:nth-child(5){grid-column:2/span 2;grid-row:3}
-body.cdesk #app[data-scr="land"] .scr:has(.lcA) .hero{justify-content:center}
-body.cdesk #app[data-scr="land"] .scr:has(.lcA) .hero .logo{font-size:clamp(130px,10.5vw,200px)}
-body.cdesk #app[data-scr="land"] .scr:has(.lcA) .hero img{height:min(calc(100vh - 150px - clamp(130px,10.5vw,200px)*.74),780px);margin-top:calc(clamp(130px,10.5vw,200px)*.74)}
-body.cdesk #app[data-scr="land"] .lcA .scene{margin:0}
-body.cdesk #app[data-scr="land"] .lcA .big-txt{font-size:clamp(28px,2.3vw,40px);margin-top:6px}
-body.cdesk #app[data-scr="land"] .lcB{padding-top:2px}
-body.cdesk #app[data-scr="land"] .lcB .howto button{padding-top:11px;padding-bottom:11px}
-body.cdesk #app[data-scr="land"] .lcB .q{margin:0}
-body.cdesk #app[data-scr="land"] .lrest{display:grid;grid-template-columns:1fr 1fr;gap:28px 48px;border-top:1px solid var(--hair);padding-top:36px;margin-top:24px;align-items:stretch}
-body.cdesk #app[data-scr="land"] .lrest>*{margin:0;min-width:0}
-body.cdesk #app[data-scr="land"] .lrest>:nth-child(1),body.cdesk #app[data-scr="land"] .lrest>:nth-child(4),body.cdesk #app[data-scr="land"] .lrest>:nth-child(5){grid-column:1/-1}
-body.cdesk #app[data-scr="land"] .lrest>:nth-child(2){display:flex;flex-direction:column;gap:10px}
-body.cdesk #app[data-scr="land"] .lrest>:nth-child(2) .rev0{flex:1}
-body.cdesk #app[data-scr="land"] .lrest .faq{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
 body.cdesk #app[data-scr="swipe"] .card img{height:auto!important;flex:1 1 0;min-height:0;max-height:none}
 body.cdesk #app[data-scr="swipe"] .card>*{flex-shrink:0}body.cdesk #app[data-scr="swipe"] .card>img{flex-shrink:1}
 body.cdesk #app[data-scr="swipe"] .sbody:has(.ppwrap){display:grid;grid-template-columns:minmax(320px,410px) minmax(0,1fr);column-gap:clamp(40px,4vw,72px);row-gap:18px;width:100%;max-width:1440px;align-items:start}
@@ -1067,6 +1045,60 @@ body.cdesk #app[data-scr="status"] .rdy .passport{width:100%;aspect-ratio:auto}
 body.cdesk #app[data-scr="status"] .rdy .passport .ppf{margin-top:8px}
 body.cdesk #app[data-scr="status"] .rdl{grid-template-columns:repeat(6,minmax(0,1fr))}
 body.cdesk #app[data-scr="status"] .rdgo{width:auto;align-self:flex-start;padding-left:48px;padding-right:48px}
+
+/* главная на ПК */
+body.cdesk #app[data-scr="land"] .scr>div:has(>.lc){display:block}
+body.cdesk #app[data-scr="land"] .lc{display:flex;flex-direction:column;gap:18px}
+body.cdesk #app[data-scr="land"] .scr:has(.lcA){display:grid;grid-template-columns:minmax(380px,42%) minmax(0,1fr);column-gap:clamp(48px,5vw,96px);row-gap:14px;grid-template-rows:auto 1fr auto auto;max-width:1360px;margin:0 auto;padding:4px 48px 80px;justify-content:stretch;align-items:start}
+body.cdesk #app[data-scr="land"] .scr:has(.lcA)>div:nth-child(1){grid-column:2;grid-row:1}
+body.cdesk #app[data-scr="land"] .scr:has(.lcA)>div:nth-child(2){grid-column:1;grid-row:1/span 2;position:static}
+body.cdesk #app[data-scr="land"] .scr:has(.lcA)>div:nth-child(3){grid-column:2;grid-row:2;align-self:center;padding-bottom:40px}
+body.cdesk #app[data-scr="land"] .scr:has(.lcA)>div:nth-child(4){grid-column:1/-1;grid-row:3;margin-top:44px}
+body.cdesk #app[data-scr="land"] .scr:has(.lcA)>div:nth-child(5){grid-column:1/-1;grid-row:4;margin-top:8px}
+body.cdesk #app[data-scr="land"] .scr:has(.lcA) .hero{justify-content:center}
+body.cdesk #app[data-scr="land"] .scr:has(.lcA) .hero .logo{font-size:clamp(150px,13vw,230px)}
+body.cdesk #app[data-scr="land"] .scr:has(.lcA) .hero img{height:min(calc(100vh - 170px),760px);margin-top:calc(clamp(150px,13vw,230px)*.74)}
+body.cdesk #app[data-scr="land"] .lcA{gap:20px;max-width:640px}
+body.cdesk #app[data-scr="land"] .lcA .scene{margin:0;font-size:26px;color:var(--mute)}
+body.cdesk #app[data-scr="land"] .lcA .big-txt{font-size:clamp(34px,2.9vw,48px);line-height:1.1;margin:0}
+body.cdesk #app[data-scr="land"] .lcA .txt{font-size:15px;max-width:560px}
+body.cdesk #app[data-scr="land"] .lcA .yslot{max-width:560px}
+.lcta{display:none}body.cdesk #app[data-scr="land"] .lcta{display:flex;gap:16px;align-items:center;margin-top:6px}
+body.cdesk #app[data-scr="land"] .lcta .btn{flex:0 0 auto!important;width:auto!important;min-width:0!important;display:inline-flex;padding:0 40px;height:54px;font-size:12.5px}
+body.cdesk #app[data-scr="land"]~#bar{display:none}
+body.cdesk #app[data-scr="land"] .lrest .lcta2{grid-column:1/-1;justify-content:flex-start;margin-top:8px}
+body.cdesk #app[data-scr="land"] .lcA .q{margin:0;max-width:560px}
+body.cdesk #app[data-scr="land"] .lcB{gap:34px}
+body.cdesk #app[data-scr="land"] .lcB .howto{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;border:0}
+body.cdesk #app[data-scr="land"] .lcB .howto button{flex-direction:column;align-items:flex-start;gap:10px;padding:18px 16px 16px;border:1px solid var(--soft);background:#fff;min-height:138px;border-bottom:1px solid var(--soft)}
+body.cdesk #app[data-scr="land"] .lcB .howto .n{font:400 24px/1 var(--f-logo);color:var(--ink)}
+body.cdesk #app[data-scr="land"] .lcB .howto .ht{flex:0 0 auto;font-size:12px;line-height:1.4}
+body.cdesk #app[data-scr="land"] .lcB .howto .free{margin-top:auto}
+body.cdesk #app[data-scr="land"] .lcB .howto .go{display:none}
+body.cdesk #app[data-scr="land"] .lcB>span.lbl{margin-bottom:-22px}
+body.cdesk #app[data-scr="land"] .lcB .gets{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+body.cdesk #app[data-scr="land"] .lcB .gets>div{padding:18px}
+body.cdesk #app[data-scr="land"] .lrest{display:grid;grid-template-columns:1fr 1fr;gap:34px 48px;border-top:1px solid var(--hair);padding-top:40px;margin-top:24px;align-items:stretch}
+body.cdesk #app[data-scr="land"] .lrest>*{margin:0;min-width:0}
+body.cdesk #app[data-scr="land"] .lrest>:nth-child(1),body.cdesk #app[data-scr="land"] .lrest>:nth-child(4),body.cdesk #app[data-scr="land"] .lrest>:nth-child(5),body.cdesk #app[data-scr="land"] .lrest>:nth-child(6){grid-column:1/-1}
+body.cdesk #app[data-scr="land"] .lrest>:nth-child(2){display:flex;flex-direction:column;gap:10px}
+body.cdesk #app[data-scr="land"] .lrest>:nth-child(2) .rev0{flex:1}
+body.cdesk #app[data-scr="land"] .lrest .faq{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+/* кабинет на ПК: единый каркас */
+body.desk .dwork.list .scr.rlist{max-width:1360px;grid-template-columns:minmax(0,1fr) 380px;column-gap:64px;padding-top:28px}
+.rmain .ttl{font-size:40px}
+.rmain>div:has(>.txt){max-width:640px}
+.rmain>div:has(>.ttl)+div{margin-top:-8px}
+.rside .hm{grid-template-columns:1fr 1fr;gap:16px 18px}
+.rside .hm2{grid-template-columns:1fr;gap:8px}
+.rside .tags{flex-direction:column;align-items:stretch;gap:6px}.rside .tags .tag{text-align:left}
+.rside .gseg{margin-top:6px}
+.rmain .ymg{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.rmain .hnow button{font-size:15px;padding:16px 0}
+.rmain .hm2.fin>div{padding:16px}
+.req img.clavi{width:40px;height:40px;border-radius:50%;object-fit:cover;object-position:top;background:var(--fog)}
+.rmain .req img.clavi{width:56px!important;height:56px!important}.rmain .clav{width:56px;height:56px;font-size:24px}
+.fhow{margin:8px 0 0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:13px;line-height:1.45}
 .mood{isolation:isolate}
 .tipx{position:fixed;left:0;top:0;z-index:9999;max-width:260px;padding:7px 10px;background:var(--ink);color:var(--paper);font-size:11.5px;line-height:1.35;letter-spacing:.01em;text-transform:none;pointer-events:none;opacity:0;transition:opacity .12s;box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .tipx.on{opacity:1}
@@ -1469,7 +1501,7 @@ function findsView(){const F=FINDS(),ks=F.items.filter(k=>CAT[k]);bar(null);
    <div class="fbtns"><button class="dbtn p" data-act="fpng">Скачать картинку</button><button class="dbtn" data-act="fcap">Скопировать подпись</button><button class="dbtn" data-act="fclr">Очистить</button></div>
    <details class="fcapd"><summary class="lbl">Подпись к посту</summary><pre class="fpre">${findsCaption().replace(/</g,'&lt;')}</pre></details>
   </div><div class="fprev">${findsCard(ks,F)}</div></div>`
-  :`<div class="honest"><b>Пока пусто</b><span class="txt">Открой каталог и нажми «В находки» у вещей, которые хочешь показать. До 6 вещей на одну карточку.</span></div><button class="dbtn p" data-act="yv" data-v="cat" style="align-self:flex-start">Открыть каталог</button>`])}
+  :`<div class="honest"><b>Пока пусто</b><span class="txt">Открой каталог и нажми «В находки» у вещей, которые хочешь показать. До 6 вещей на одну карточку.</span></div><button class="dbtn p" data-act="yv" data-v="cat" style="align-self:flex-start">Открыть каталог</button>`,'<!--aside-->',`<div class="q"><span class="lbl">|Как это работает|</span><ol class="fhow"><li>Выбираешь в каталоге до 6 вещей — «В находки»</li><li>Заголовок, формат (пост 4:5 или сторис 9:16), цены на картинке</li><li>Скачиваешь картинку и копируешь подпись — в ней твои партнёрские ссылки</li></ol></div>`,`<span class="lbl">Свои коды магазинов — в профиле (буква в правом верхнем углу)</span>`])}
 function findsCard(ks,F){const st=F.fmt==='story',n=ks.length,pn=((S.prof||{}).handle||'').trim();
  return `<div class="fcard ${st?'story':'post'} n${n}" id="fcard"><div class="fch"><span class="fcl">${((S.prof||{}).name||'Yana').trim()||'Yana'}</span>${pn?`<span class="fcu">${pn}</span>`:''}</div>${F.title?`<b class="fct">${F.title.replace(/</g,'&lt;')}</b>`:''}<div class="fcg">${ks.map((k,i)=>`<div class="fci"><span class="fcn">${n2(i+1)}</span><img src="${CAT[k].hi||src(k)}" alt="" crossorigin="anonymous"><span class="fcs">${BRN[CAT[k].s]||CAT[k].s}${F.prices?` · ${rub(price(k))}`:''}</span></div>`).join('')}</div><span class="fcf">ссылки в описании${st?' · свайп вверх':''}</span></div>`}
 function findsCaption(){const F=FINDS(),ks=F.items.filter(k=>CAT[k]);return [F.title,F.note,...ks.map((k,i)=>`${i+1}. ${CAT[k].n} — ${BRN[CAT[k].s]||CAT[k].s}, ${rub(price(k))}${CAT[k].u?'\n'+affU(CAT[k].s,CAT[k].u):''}`),'#капсулаотяны'].filter(x=>x&&String(x).trim()).join('\n\n')}
@@ -1485,10 +1517,10 @@ function profSheet(){const P0=S.prof||{},shops=[...new Set([...Object.keys(AFF),
 // ---------- кабинет: сводка ----------
 function homeView(){bar(null);const nm=(S.prof||{}).name||'Яна',sent=S.y.sent?1:0,fin=(S.finds&&S.finds.items.length)||0;
  const M=[['Капсул за месяц',`${7+sent}`,'из них 5 Капсула, 2 Капсула+'],['Доход за месяц',rub(7*3490+2*2500),'без партнёрских'],['Покупки по ссылкам',rub(41800),'4 клиентки купили 11 вещей'],['Комиссия с покупок',rub(2930),'по твоим ссылкам'],['Среднее время на капсулу','1 ч 40 мин','было ~4 ч без каталога'],['Находок опубликовано',`${fin?1:0}`,'карточек за неделю']];
- return scr([ynav(),`<h2 class="ttl">Привет, ${nm}</h2>`,`<p class="txt">Сводка за октябрь. Цифры — пример: в рабочей версии считаются по твоим заявкам и покупкам.</p>`,
-  `<div class="hm">${M.map(([t,v,d])=>`<div><span>${t}</span><b>${v}</b><small>${d}</small></div>`).join('')}</div>`,
+ return scr([ynav(),`<h2 class="ttl">Привет, ${nm}</h2>`,`<p class="txt">Октябрь. Что сделать сегодня — слева, цифры месяца — справа. Цифры пока пример: в рабочей версии считаются по твоим заявкам и покупкам.</p>`,
   `<div class="q"><span class="lbl">|Что сейчас|</span><div class="hnow">${[...clSoon(),['Маша, 29 — новая заявка','осталось 21 ч','req'],['Находки недели — не опубликованы','пятница','finds'],['Клуб: 3 образа на неделю','воскресенье','ym']].map(([t,w,v])=>`<button data-act="dnav" data-v="${v}"><span>${t}</span><small>${w}</small><i>›</i></button>`).join('')}</div></div>`,
   `<div class="q"><span class="lbl">|Финансы|</span><div class="hm2 fin"><div><span>К выплате</span><b>${rub(26500)}</b><small>выплата по вторникам</small></div><div><span>Счёт генерации</span><b>184 кр.</b><small>≈ 12 капсул</small></div><div><span>Комиссии ждут подтверждения</span><b>${rub(1140)}</b><small>магазин подтверждает за 14–30 дней</small></div></div><div class="tags"><button class="tag" data-act="toast" data-v="Пополнение счёта подключим вместе с сервером и оплатой">Пополнить счёт генерации</button><button class="tag" data-act="toast" data-v="История выплат появится в рабочей версии">История выплат</button></div></div>`,
+  '<!--aside-->',`<div class="q"><span class="lbl">|Октябрь в цифрах|</span><div class="hm">${M.map(([t,v,d])=>`<div><span>${t}</span><b>${v}</b><small>${d}</small></div>`).join('')}</div></div>`,
   `<div class="q"><span class="lbl">|Что приносит деньги|</span><div class="hm2">${[['Капсулы','72 %'],['Партнёрские комиссии','11 %'],['Клуб','17 %']].map(([t,v])=>`<div><span>${t}</span><b>${v}</b></div>`).join('')}</div></div>`])}
 
 // ---------- вещь по ссылке: любой магазин ----------
@@ -1565,16 +1597,15 @@ const clDays=ds=>Math.round((new Date(ds+'T12:00')-new Date(new Date().setHours(
 const clDl=n=>n<0?`просрочено на ${-n} ${plural(-n,'день','дня','дней')}`:n===0?'сегодня':n===1?'завтра':`через ${n} ${plural(n,'день','дня','дней')}`;
 const clSpent=c=>c.bought.reduce((a,b)=>a+b[2],0);
 const clMeas=c=>c.id==='cur'?(S.y.meas||{}):Object.assign({},c.meas,CLS().meas[c.id]||{});
-const clAv=(c,big)=>c.av?`<img class="${big?'clavb':''}" src="${IMG}${c.av}" alt="">`:`<span class="clav ${big?'clavb':''}" aria-hidden="true">${c.n[0]}</span>`;
+const clAv=(c,big)=>c.av?`<img class="${big?'clavb':'clavi'}" src="${IMG}${c.av}" alt="">`:`<span class="clav ${big?'clavb':''}" aria-hidden="true">${c.n[0]}</span>`;
 function clSoon(){return clAll().map(c=>[c,clRem(c)]).filter(([,r])=>r&&clDays(r.d)<=14).sort((a,b)=>clDays(a[1].d)-clDays(b[1].d)).slice(0,2).map(([c,r])=>[`Напомнить: ${c.n} — ${r.t.split(/[:—]/)[0].trim().toLowerCase()}`,clDl(clDays(r.d)),'cl:'+c.id])}
 function clientsView(){bar(null);if(S.clOpen&&clGet(S.clOpen))return clCard(clGet(S.clOpen));
  const f=S.clf||'all',L=clAll().map(c=>{const r=clRem(c);return {c,r,n:r?clDays(r.d):null}}),
   ok=({c,n})=>f==='soon'?n!=null&&n<=30:f==='reg'?c.caps.length>=2:f==='one'?c.caps.length===1:true,
   rows=L.filter(ok).sort((a,b)=>(a.n==null?1e9:a.n)-(b.n==null?1e9:b.n)),soon=L.filter(x=>x.n!=null&&x.n<=14).length;
  return scr([ynav(),`<h2 class="ttl">${G('Клиентки','Клиенты')}</h2>`,`<p class="txt">Карточка на каждую: капсулы, мерки, что купила, что не село, заметки и когда написать про новый сезон. Кроме текущей заявки — пример.</p>`,
-  `<div class="hm2"><div><span>Всего</span><b>${L.length}</b></div><div><span>Постоянные · 2+ капсулы</span><b>${L.filter(x=>x.c.caps.length>=2).length}</b></div><div><span>Написать в ближайшие 2 недели</span><b>${soon}</b></div></div>`,
   `<div class="rqbar"><input id="clq" type="search" placeholder="Поиск по имени, магазину, заметке" value="${(S.clq||'').replace(/"/g,'&quot;')}" aria-label="Поиск по клиенткам"><div class="dseg">${[['all','Все'],['soon','Скоро напомнить'],['reg','Постоянные'],['one','Одна капсула']].map(([k,t])=>`<button data-act="clf" data-v="${k}" aria-pressed="${f===k}">${t}</button>`).join('')}</div><span class="lbl">Сначала те, кому писать раньше</span></div>`,
-  `<div id="cll" style="border-top:1px solid var(--hair)">${rows.map(({c,r,n})=>{const sp=clSpent(c),k=c.caps.length;return `<button class="req clr" data-act="clopen" data-v="${c.id}" data-q="${[c.n,c.tg,c.notes,...c.bought.map(b=>b[1]),...c.nofit.map(b=>b[1])].join(' ').toLowerCase().replace(/"/g,'')}">${clAv(c)}<span class="t">${c.n}, ${c.age}<small>${k} ${plural(k,'капсула','капсулы','капсул')} · последняя — ${c.caps[0][0].toLowerCase()} · ${c.tier}${sp?' · покупки на '+rub(sp):''}</small>${r?`<small class="clrt">${r.t}</small>`:''}</span><span class="st ${n!=null&&n<=7?'new':''}">${r?clDl(n):c.id==='cur'?'заявка':'—'}</span></button>`}).join('')||'<span class="lbl" style="display:block;padding:14px 0">Никого с таким фильтром</span>'}</div>`])}
+  `<div id="cll" style="border-top:1px solid var(--hair)">${rows.map(({c,r,n})=>{const sp=clSpent(c),k=c.caps.length;return `<button class="req clr" data-act="clopen" data-v="${c.id}" data-q="${[c.n,c.tg,c.notes,...c.bought.map(b=>b[1]),...c.nofit.map(b=>b[1])].join(' ').toLowerCase().replace(/"/g,'')}">${clAv(c)}<span class="t">${c.n}, ${c.age}<small>${k} ${plural(k,'капсула','капсулы','капсул')} · последняя — ${c.caps[0][0].toLowerCase()} · ${c.tier}${sp?' · покупки на '+rub(sp):''}</small>${r?`<small class="clrt">${r.t}</small>`:''}</span><span class="st ${n!=null&&n<=7?'new':''}">${r?clDl(n):c.id==='cur'?'заявка':'—'}</span></button>`}).join('')||'<span class="lbl" style="display:block;padding:14px 0">Никого с таким фильтром</span>'}</div>`,'<!--aside-->',`<div class="q"><span class="lbl">|Картотека в цифрах|</span><div class="hm2"><div><span>Всего</span><b>${L.length}</b></div><div><span>Постоянные · 2+ капсулы</span><b>${L.filter(x=>x.c.caps.length>=2).length}</b></div><div><span>Написать в ближайшие 2 недели</span><b>${soon}</b></div></div></div>`,`<span class="lbl">Карточка открывается по клику. Мерки и заметки сохраняются сами.</span>`])}
 function clCard(c){const r=clRem(c),n=r?clDays(r.d):null,M=clMeas(c),sp=clSpent(c),note=CLS().notes[c.id]??c.notes,k=c.caps.length,
   esc=t=>String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;'),
   lst=(a,f)=>a.length?`<div class="cclst">${a.map(f).join('')}</div>`:'';
@@ -1829,6 +1860,7 @@ function paidNav(){const k=PAID.indexOf({params:'Параметры',week:'Не�
  return `<nav class="steps-nav" aria-label="Шаги">${PAID.map((t,i)=>`<span class="${i<k?'done':''} ${i===k?'cur':''}"><span class="n">${n2(i+1)}</span>${t}</span>`).join('')}</nav>`}
 const nav=(ok=true,label='Далее')=>`<button class="btn line" data-act="back" aria-label="Назад">←</button><button class="btn" data-act="next" ${ok?'':'disabled'}>${label}</button>`;
 function scr(parts){parts=parts.filter(Boolean);const W=(p,i)=>`<div style="--i:${i}">${p}</div>`;
+ const am=parts.indexOf('<!--aside-->');if(am>-1){if(S.mode==='yana'&&DESK()&&S.y.open==null)return `<div class="scr rlist"><div class="rmain">${parts.slice(0,am).map(W).join('')}</div><aside class="rside">${parts.slice(am+1).map((p,i)=>W(p,i+am)).join('')}</aside></div>`;parts=parts.filter(x=>x!=='<!--aside-->')}
  if(S.mode==='yana'&&DESK()&&S.y.open==null&&(S.yv||'req')==='req'){const k=parts.findIndex(x=>x.includes('class="slots"'));if(k>0)return `<div class="scr rlist"><div class="rmain">${parts.slice(0,k).map(W).join('')}</div><aside class="rside">${parts.slice(k).map((p,i)=>W(p,i+k)).join('')}</aside></div>`}
  if(S.mode==='client'&&matchMedia('(min-width:1280px)').matches&&cur()!=='land'){let n=0;while(n<parts.length&&/^\s*<(span class="lbl|h2 class="ttl|p class="txt|p class="lbl|nav class="steps-nav|div class="stepbar)/.test(parts[n]))n++;
   if(n&&n<parts.length)return `<div class="scr split"><aside class="shead">${parts.slice(0,n).map(W).join('')}</aside><div class="sbody">${parts.slice(n).map((p,i)=>W(p,i+n)).join('')}</div></div>`}
@@ -1881,9 +1913,9 @@ let RESTORING=false;function render(){if(RESTORING)return;setTimeout(capLbl,0);p
  if(c==='land'){
   p=[`<nav class="ctabs gsw" aria-label="Для кого">${[['f','Для неё'],['m','Для него']].map(([k,t])=>`<button data-act="g" data-v="${k}" aria-pressed="${S.g===k}">${t}</button>`).join('')}</nav>`,
    `<div class="hero"><h1 class="logo">Yana</h1><img src="${IMG}${AV}" alt="Пример цифрового двойника в образе"></div>`,
-   `<div class="lc lcA">`+`<p class="scene">${G('8:40. Шкаф забит, а надеть нечего.','8:40. Шкаф забит, а надеть нечего.')}</p>`+`<p class="big-txt">Это можешь быть ты — в образе, который собрала стилист, а не алгоритм.</p>`+`<p class="txt">${G('Загружаешь два фото — Яна сама делает твоего двойника. Честного: без «постройнения», по твоему росту и размеру. И сама решает, что на нём будет.','Два фото и пять вопросов — дальше всё делает Яна. Ты получаешь список: что купить, какой размер, где. По магазинам ходить не надо.')}</p>`+`<div class="yslot"><span class="yph" aria-hidden="true"><span>Фото Яны</span></span><span class="yq"><b>Привет, я Яна.</b> ${G('Я сама смотрю твой тест, фото и неделю и собираю капсулу руками. Не алгоритм — я.','Я сама смотрю твой тест, фото и неделю и собираю капсулу руками. Не алгоритм — я.')}</span></div>`+`</div>`,
-   `<div class="lc lcB">`+`<span class="lbl">|Как это работает · нажми на шаг — покажем пример|</span>`+`<div class="howto">${[[`Тест вкуса — ${SINGLES+4} карточек, пара минут`,1],['Твой двойник по двум фото',1],['Первый образ от Яны в подарок',1],['Капсула: 8–10 вещей, 6 образов, размеры',0],['Голосовое от Яны — почему именно так',0]].map(([t,f],i)=>`<button data-act="ex" data-v="${i}"><span class="n">${n2(i+1)}</span><span class="ht">${t}</span>${f?'<span class="free">бесплатно</span>':''}<span class="go" aria-hidden="true">›</span></button>`).join('')}</div>`+`<div class="q"><div class="slots"><span>Мест на этой неделе</span>${slotsBar()}<b style="font-weight:500">${S.slots.total-S.slots.taken} из ${S.slots.total}</b></div><span class="lbl">Яна смотрит каждую капсулу сама — поэтому мест мало</span></div>`+`<div class="q"><span class="lbl">|Что ты получишь|</span><div class="gets">${[['6 образов на тебе','Ты в каждом образе — на своём двойнике, по росту и размеру'],['Список покупок','Вещи, размеры и ссылки — по магазинам, одним PDF'],['Голосовое от Яны','Почему именно эти вещи и как их носить'],['Размер в каждом бренде','Я знаю, где Lime маломерит, а где Zarina шире в бёдрах']].map(([t,d])=>`<div><b>${t}</b><span>${d}</span></div>`).join('')}</div></div>`+`</div>`,
-   `<div class="lc lrest">`+`<div class="q"><span class="lbl">|Отзывы|</span><div class="revs">${[1,2,3].map(()=>`<div class="rev0"><span>Место под отзыв клиентки с фото</span></div>`).join('')}</div><span class="lbl">Появятся после первых капсул</span></div>`+`<div class="q"><span class="lbl">|${G('Героиня','Герой')} недели|</span><div class="rev0 wide"><span>Было → капсула → на ${G('ней','нём')}. История голосом Яны — с согласия ${G('клиентки','клиента')}</span></div></div>`+giftBox('Подарить капсулу','Одежду дарить страшно — не угадаешь размер. Здесь угадывать не надо: фото загрузит тот, кому даришь, а Яна соберёт капсулу. Подаришь — получишь образ от Яны в подарок.','Сертификат на год · от 3 490 ₽')+`<div class="q"><span class="lbl">|Частые вопросы|</span><div class="faq">${[['Если вещь не подойдёт по размеру?','Я подбираю размер под каждый бренд по твоим меркам и отметкам других клиенток. Если всё же не село — напиши, заменю вещь в рамках правки.'],['Что будет с моими фото?','Их видит только Яна. Хранятся в России, удаляются через 30 дней, на них не учат нейросети.'],['Обязательно что-то покупать?','Нет. Капсула — это план: что купить, где и какой размер. Покупать или нет — решаешь ты.'],['Чем это лучше ИИ-стилиста в приложении?','Капсулу собираю я, живой стилист: смотрю на фигуру, неделю и бюджет и объясняю голосом, почему так. Нейросеть только помогает показать образ на тебе.']].map(([q,a])=>`<details><summary>${q}</summary><p class="txt">${a}</p></details>`).join('')}</div></div>`+`<span class="lbl">Капсула от 3 490 ₽ · готово до 24 часов · правка — до 12 часов</span>`+`</div>`];
+   `<div class="lc lcA">`+`<p class="scene">${G('8:40. Шкаф забит, а надеть нечего.','8:40. Шкаф забит, а надеть нечего.')}</p>`+`<p class="big-txt">Это можешь быть ты — в образе, который собрала стилист, а не алгоритм.</p>`+`<p class="txt">${G('Загружаешь два фото — Яна сама делает твоего двойника. Честного: без «постройнения», по твоему росту и размеру. И сама решает, что на нём будет.','Два фото и пять вопросов — дальше всё делает Яна. Ты получаешь список: что купить, какой размер, где. По магазинам ходить не надо.')}</p>`+`<div class="yslot"><span class="yph" aria-hidden="true"><span>Фото Яны</span></span><span class="yq"><b>Привет, я Яна.</b> ${G('Я сама смотрю твой тест, фото и неделю и собираю капсулу руками. Не алгоритм — я.','Я сама смотрю твой тест, фото и неделю и собираю капсулу руками. Не алгоритм — я.')}</span></div>`+`<div class="lcta"><button class="btn" data-act="next">Пройти тест вкуса — бесплатно</button></div>`+`<div class="q"><div class="slots"><span>Мест на этой неделе</span>${slotsBar()}<b style="font-weight:500">${S.slots.total-S.slots.taken} из ${S.slots.total}</b></div><span class="lbl">Яна смотрит каждую капсулу сама — поэтому мест мало</span></div>`+`</div>`,
+   `<div class="lc lcB">`+`<span class="lbl">|Как это работает · нажми на шаг — покажем пример|</span>`+`<div class="howto">${[[`Тест вкуса — ${SINGLES+4} карточек, пара минут`,1],['Твой двойник по двум фото',1],['Первый образ от Яны в подарок',1],['Капсула: 8–10 вещей, 6 образов, размеры',0],['Голосовое от Яны — почему именно так',0]].map(([t,f],i)=>`<button data-act="ex" data-v="${i}"><span class="n">${n2(i+1)}</span><span class="ht">${t}</span>${f?'<span class="free">бесплатно</span>':''}<span class="go" aria-hidden="true">›</span></button>`).join('')}</div>`+`<div class="q"><span class="lbl">|Что ты получишь|</span><div class="gets">${[['6 образов на тебе','Ты в каждом образе — на своём двойнике, по росту и размеру'],['Список покупок','Вещи, размеры и ссылки — по магазинам, одним PDF'],['Голосовое от Яны','Почему именно эти вещи и как их носить'],['Размер в каждом бренде','Я знаю, где Lime маломерит, а где Zarina шире в бёдрах']].map(([t,d])=>`<div><b>${t}</b><span>${d}</span></div>`).join('')}</div></div>`+`</div>`,
+   `<div class="lc lrest">`+`<div class="q"><span class="lbl">|Отзывы|</span><div class="revs">${[1,2,3].map(()=>`<div class="rev0"><span>Место под отзыв клиентки с фото</span></div>`).join('')}</div><span class="lbl">Появятся после первых капсул</span></div>`+`<div class="q"><span class="lbl">|${G('Героиня','Герой')} недели|</span><div class="rev0 wide"><span>Было → капсула → на ${G('ней','нём')}. История голосом Яны — с согласия ${G('клиентки','клиента')}</span></div></div>`+giftBox('Подарить капсулу','Одежду дарить страшно — не угадаешь размер. Здесь угадывать не надо: фото загрузит тот, кому даришь, а Яна соберёт капсулу. Подаришь — получишь образ от Яны в подарок.','Сертификат на год · от 3 490 ₽')+`<div class="q"><span class="lbl">|Частые вопросы|</span><div class="faq">${[['Если вещь не подойдёт по размеру?','Я подбираю размер под каждый бренд по твоим меркам и отметкам других клиенток. Если всё же не село — напиши, заменю вещь в рамках правки.'],['Что будет с моими фото?','Их видит только Яна. Хранятся в России, удаляются через 30 дней, на них не учат нейросети.'],['Обязательно что-то покупать?','Нет. Капсула — это план: что купить, где и какой размер. Покупать или нет — решаешь ты.'],['Чем это лучше ИИ-стилиста в приложении?','Капсулу собираю я, живой стилист: смотрю на фигуру, неделю и бюджет и объясняю голосом, почему так. Нейросеть только помогает показать образ на тебе.']].map(([q,a])=>`<details><summary>${q}</summary><p class="txt">${a}</p></details>`).join('')}</div></div>`+`<span class="lbl">Капсула от 3 490 ₽ · готово до 24 часов · правка — до 12 часов</span>`+`<div class="lcta lcta2"><button class="btn" data-act="next">Пройти тест вкуса — бесплатно</button></div>`+`</div>`];
   bar(`<button class="btn" data-act="next">Пройти тест вкуса — бесплатно</button>`)}
  else if(c==='vibe'){const V=VIBES[S.g],sel=S.vibe||[];p=[stepBar(),`<h2 class="ttl">Какой стиль тебе сейчас ближе?</h2>`,`<p class="txt">Выбери до трёх. Это не навсегда — просто с чего начать.</p>`,
   `<div class="vibes ${sel.length>=3?'has':''}">${V.map(([k,t,d])=>`<button class="vibe" data-act="vibe" data-v="${k}" aria-pressed="${sel.includes(k)}"><span class="vph"><img src="styles/${S.g}_${k}.jpg" alt="${t}" loading="lazy">${sel.includes(k)?`<i class="vno">${sel.indexOf(k)+1}</i>`:''}</span><b>${t}</b><span>${d}</span>${sel.includes(k)&&YV[k]?`<em class="yv">Яна: ${YV[k]}</em>`:''}</button>`).join('')}</div>`,
@@ -2046,10 +2078,8 @@ const ymFor=()=>(S.vibe||[]).flatMap(k=>(YM[S.g+'_'+k]||[]).map(u=>[k,u]));
 function ymBlock(t){const l=ymFor();if(!l.length)return '';const nm=[...new Set(l.map(z=>z[0]))].map(k=>(VIBES[S.g].find(v=>v[0]===k)||[])[1]).join(' + ');return `<div class="q"><span class="lbl">|${t} · ${nm}|</span><div class="ymrow">${l.map(([,u])=>`<img src="${u}" alt="Образ Яны" loading="lazy">`).join('')}</div></div>`}
 function ymView(){bar(null);const st=S.ymst||VIBES[S.g][0][0],key=S.g+'_'+st,a=YM[key]||[];
  return scr([ynav(),`<h2 class="ttl">Мои образы</h2>`,`<p class="txt">Загрузи свои мудборды и образы для каждого стиля. ${G('Клиентке','Клиенту')}, ${G('которая выбрала','который выбрал')} этот стиль, они придут сами: на шаге «Первый образ» и в капсуле.</p>`,
-  `<div class="gseg">${[['f','Для неё'],['m','Для него']].map(([k,t])=>`<button data-act="g" data-v="${k}" aria-pressed="${S.g===k}">${t}</button>`).join('')}</div>`,
-  `<div class="tags">${VIBES[S.g].map(([k,t])=>`<button class="tag" data-act="ymst" data-v="${k}" aria-pressed="${st===k}">${t}${(YM[S.g+'_'+k]||[]).length?' · '+YM[S.g+'_'+k].length:''}</button>`).join('')}</div>`,
   `<div class="ymg">${a.map((u,j)=>`<div class="y"><img src="${u}" alt="Мудборд ${j+1}"><button data-act="ymdel" data-v="${j}" aria-label="Удалить">×</button></div>`).join('')}<label class="up" for="f_ym" style="aspect-ratio:3/4"><span class="pl">+</span><span>Добавить</span><input id="f_ym" type="file" accept="image/*" multiple hidden data-ymood="${key}"></label></div>`,
-  `<span class="lbl">В прототипе картинки хранятся на этом устройстве. В рабочей версии — на сервере, и клиенты получают их с любого телефона</span>`])}
+  `<span class="lbl">В прототипе картинки хранятся на этом устройстве. В рабочей версии — на сервере, и клиенты получают их с любого телефона</span>`,'<!--aside-->',`<div class="q"><span class="lbl">|Для кого|</span>`+`<div class="gseg">${[['f','Для неё'],['m','Для него']].map(([k,t])=>`<button data-act="g" data-v="${k}" aria-pressed="${S.g===k}">${t}</button>`).join('')}</div>`+`</div>`,`<div class="q"><span class="lbl">|Стиль|</span>`+`<div class="tags">${VIBES[S.g].map(([k,t])=>`<button class="tag" data-act="ymst" data-v="${k}" aria-pressed="${st===k}">${t}${(YM[S.g+'_'+k]||[]).length?' · '+YM[S.g+'_'+k].length:''}</button>`).join('')}</div>`+`</div>`])}
 function ynav(){return `<nav class="ctabs ynav" aria-label="Кабинет Яны">${[['home','Кабинет'],['req','Заявки'],['cl',G('Клиентки','Клиенты')],['finds','Находки'+((S.finds&&S.finds.items.length)?' · '+S.finds.items.length:'')],['ym','Мои образы'],['cat','Каталог'],['board','Черновик образа'+(S.board.layers.length?' · '+S.board.layers.length:'')]].map(([k,t])=>`<button data-act="yv" data-v="${k}" aria-pressed="${(S.yv||'req')===k}">${t}</button>`).join('')}</nav>`}
 // ---------- каталог Яны: реальные вещи магазинов ----------
 let CATL=null;const CF={g:'',c:'all',q:'',br:[],pmax:0,szs:[],sale:false,sort:'pop',lim:40,cols:2,clr:[],mat:[],cap:null};
